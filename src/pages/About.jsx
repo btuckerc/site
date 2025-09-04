@@ -1,27 +1,36 @@
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import AboutCard from '../components/AboutCard'
-import CloseButton from '../components/CloseButton'
 import { LABELS, bracketed, decorativeBorder } from '../constants/symbols'
 
 const About = () => {
+  const navigate = useNavigate()
+  
+  const handleBackgroundClick = (e) => {
+    // Only navigate if the click was on the background, not on the card or its children
+    if (e.target === e.currentTarget) {
+      navigate('/')
+    }
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 pt-16">
-      <div className="w-full max-w-lg">
+    <div 
+      className="min-h-screen flex items-center justify-center px-4 pt-16 cursor-pointer" 
+      onClick={handleBackgroundClick}
+    >
+      <div className="w-full max-w-lg pointer-events-none">
         {/* Page header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 relative"
+          className="text-center mb-8"
         >
-          <div className="absolute top-0 right-0">
-            <CloseButton />
-          </div>
           <h1 className="text-2xl md:text-3xl font-bold text-fg mb-3 font-mono">
             {bracketed(LABELS.ABOUT_FILE)}
           </h1>
           <p className="text-muted text-sm font-mono">
-            click card to reveal more information
+            click card to reveal more · click outside to return home
           </p>
         </motion.div>
 

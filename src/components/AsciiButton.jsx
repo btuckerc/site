@@ -47,50 +47,27 @@ const AsciiButton = forwardRef(({
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       {...props}
     >
-      {/* Left bracket */}
-      <span 
-        className="
-          absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1
-          font-mono text-muted group-hover:text-accent group-focus-visible:text-accent
-          opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100
-          transition-all duration-200
-          pointer-events-none
-        "
-        aria-hidden="true"
-      >
-        [
-      </span>
+      {/* Bracket hover effect lines */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
+        {/* Left bracket */}
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-accent" />
+        <div className="absolute left-0 top-0 w-[10px] h-px bg-accent" />
+        <div className="absolute left-0 bottom-0 w-[10px] h-px bg-accent" />
+        
+        {/* Right bracket */}
+        <div className="absolute right-0 top-0 bottom-0 w-px bg-accent" />
+        <div className="absolute top-0 right-0 w-[10px] h-px bg-accent" />
+        <div className="absolute bottom-0 right-0 w-[10px] h-px bg-accent" />
+      </div>
 
-      {/* Right bracket */}
-      <span 
-        className="
-          absolute right-0 top-1/2 -translate-y-1/2 translate-x-1
-          font-mono text-muted group-hover:text-accent group-focus-visible:text-accent
-          opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100
-          transition-all duration-200
-          pointer-events-none
-        "
-        aria-hidden="true"
-      >
-        ]
-      </span>
-
-      {/* Inner container with outline */}
+      {/* Inner container */}
       <div 
         className={`
-          relative rounded-xl
-          border border-line group-hover:border-accent/50 group-focus-visible:border-accent/50
-          transition-all duration-200
+          relative border border-line bg-card-bg hover:bg-hover-bg
+          transition-colors duration-200 z-10
           ${sizeClasses[size]}
-          ${variantClasses[variant]}
+          ${variant === 'accent' ? 'bg-accent text-bg hover:bg-accent/90' : ''}
         `}
-        style={{
-          background: variant === 'accent' ? 'var(--accent)' : `
-            linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
-            linear-gradient(var(--line), var(--line)) border-box
-          `,
-          borderRadius: '14px'
-        }}
       >
         <span className="relative z-10">
           {children}

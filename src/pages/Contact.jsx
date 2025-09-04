@@ -60,9 +60,9 @@ const Contact = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Contact Methods */}
           <motion.section
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
             className="space-y-6"
             aria-labelledby="contact-methods-heading"
           >
@@ -78,14 +78,14 @@ const Contact = () => {
                 {contactMethods.map((method, index) => (
                   <motion.li
                     key={method.title}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+                    transition={{ delay: 0.3 + index * 0.05, duration: 0.3, ease: "easeOut" }}
                   >
                     <div className="card p-4 hover:bg-accent/5 transition-colors">
                       <div className="flex items-start gap-4">
                         <div 
-                          className="p-2 rounded-full bg-accent/10 border border-accent/20 text-accent flex-shrink-0"
+                          className="p-2 bg-accent/10 border border-accent/20 text-accent flex-shrink-0"
                           aria-hidden="true"
                         >
                           {method.icon}
@@ -103,9 +103,9 @@ const Contact = () => {
             </nav>
 
             <motion.aside
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
+              transition={{ delay: 0.5, duration: 0.3, ease: "easeOut" }}
               className="card p-6"
               aria-labelledby="response-time-heading"
             >
@@ -124,9 +124,9 @@ const Contact = () => {
 
           {/* Contact Form */}
           <motion.section
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
             className="lg:col-span-2"
             aria-labelledby="contact-form-heading"
           >
@@ -144,7 +144,7 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
+          transition={{ delay: 0.6, duration: 0.4, ease: "easeOut" }}
           className="text-center mt-16"
         >
           <div className="card p-8">

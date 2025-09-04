@@ -25,14 +25,14 @@ const ProjectCard = ({ project }) => {
 
   return (
     <motion.div
-      className="bg-card-bg border border-line p-6"
+      className="bg-card-bg p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
     >
       <button
         onClick={toggleMain}
-        className="w-full text-left focus-visible"
+        className="w-full text-left focus-visible hover:bg-hover-bg transition-colors duration-200 p-0"
         aria-expanded={isMainExpanded}
       >
         <div className="flex items-start justify-between mb-4">
@@ -46,7 +46,7 @@ const ProjectCard = ({ project }) => {
               {project.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 text-xs bg-accent/10 border border-accent/20 text-accent font-mono"
+                  className="px-2 py-1 text-xs bg-accent/10 text-accent font-mono"
                 >
                   {tag}
                 </span>
@@ -67,26 +67,20 @@ const ProjectCard = ({ project }) => {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden border-t border-border pt-4"
+            className="overflow-hidden pt-4"
           >
-            <div className="space-y-2">
+            <div className="space-y-0">
               {sections.map((section) => (
-                <motion.div key={section.id} className="border border-border/50">
+                <motion.div key={section.id} className="">
                   <button
                     onClick={() => toggleSection(section.id)}
                     className="w-full px-4 py-3 text-left hover:bg-accent/5 transition-colors flex items-center justify-between focus-visible"
                     aria-expanded={expandedSection === section.id}
                   >
                     <span className="text-sm font-medium text-fg">{section.label}</span>
-                    <motion.div
-                      animate={{ rotate: expandedSection === section.id ? 90 : 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-accent"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </motion.div>
+                    <div className="text-accent font-mono text-sm">
+                      {expandedSection === section.id ? '▼' : '▶'}
+                    </div>
                   </button>
 
                   <AnimatePresence>
@@ -96,15 +90,15 @@ const ProjectCard = ({ project }) => {
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="overflow-hidden border-t border-border/50"
+                        className="overflow-hidden"
                       >
-                        <div className="p-4 bg-card-bg/30">
+                        <div className="p-4">
                           {section.id === 'stack' && Array.isArray(section.content) ? (
                             <div className="flex flex-wrap gap-1">
                               {section.content.map((tech, index) => (
                                 <span
                                   key={index}
-                                  className="px-2 py-1 text-xs bg-accent/10 border border-accent/20 text-accent font-mono"
+                                  className="px-2 py-1 text-xs bg-accent/10 text-accent font-mono"
                                 >
                                   {tech}
                                 </span>
@@ -127,12 +121,10 @@ const ProjectCard = ({ project }) => {
                                   href={url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 px-3 py-1 text-sm bg-accent/10 border border-accent/20 text-accent rounded hover:bg-accent/20 transition-colors focus-visible"
+                                  className="inline-flex items-center gap-2 px-3 py-1 text-sm bg-accent/10 text-accent hover:bg-accent/20 transition-colors focus-visible"
                                 >
                                   <span className="capitalize">{key}</span>
-                                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                  </svg>
+                                  <span className="font-mono text-xs">↗</span>
                                 </a>
                               ))}
                             </div>

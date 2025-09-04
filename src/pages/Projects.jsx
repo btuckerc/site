@@ -63,12 +63,7 @@ const Projects = () => {
     <div className="min-h-screen pt-20 pb-12 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8 relative"
-        >
+        <div className="text-center mb-8 relative">
           <div className="absolute top-0 right-4">
             <CloseButton />
           </div>
@@ -78,7 +73,7 @@ const Projects = () => {
           <p className="text-muted max-w-2xl mx-auto text-sm font-mono">
             A collection of projects I've built. Use search to filter or browse all.
           </p>
-        </motion.div>
+        </div>
 
         {/* Search Bar */}
         <motion.div

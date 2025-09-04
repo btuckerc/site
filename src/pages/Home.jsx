@@ -107,24 +107,14 @@ const Home = () => {
         </div>
 
         {/* Command hint */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.4, ease: "easeOut" }}
-          className="text-muted text-sm font-mono mb-8"
-        >
+        <div className="text-muted text-sm font-mono mb-8">
           type <kbd className="px-2 py-1 bg-line text-accent">{SYMBOLS.COMMAND_PREFIX}</kbd> for commands
-        </motion.div>
+        </div>
 
         {/* Bottom decorative element */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.4, ease: "easeOut" }}
-          className="text-muted text-xs font-mono"
-        >
+        <div className="text-muted text-xs font-mono">
           {decorativeBorder(LABELS.WELCOME_TEXT)}
-        </motion.div>
+        </div>
       </div>
     </div>
   )

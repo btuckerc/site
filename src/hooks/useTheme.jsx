@@ -11,34 +11,42 @@ export const useTheme = () => {
 }
 
 export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
+  const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme-mode')
-    return saved ? saved === 'dark' : true // Default to dark
+    return saved || 'dark' // Default to dark
   })
 
   useEffect(() => {
     const root = document.documentElement
     
-    // Remove all theme classes and apply only light mode if needed
-    root.classList.remove('light')
+    // Remove all theme classes
+    root.classList.remove('light', 'amber')
     
-    // Apply light mode
-    if (!isDark) {
+    // Apply theme class if not dark (dark is default)
+    if (theme === 'light') {
       root.classList.add('light')
+    } else if (theme === 'amber') {
+      root.classList.add('amber')
     }
     
     // Persist to localStorage
-    localStorage.setItem('theme-mode', isDark ? 'dark' : 'light')
-  }, [isDark])
+    localStorage.setItem('theme-mode', theme)
+  }, [theme])
 
-  const toggleMode = () => {
-    setIsDark(!isDark)
+  const cycleTheme = () => {
+    const themes = ['dark', 'light', 'amber']
+    const currentIndex = themes.indexOf(theme)
+    const nextIndex = (currentIndex + 1) % themes.length
+    setTheme(themes[nextIndex])
   }
 
   return (
     <ThemeContext.Provider value={{
-      isDark,
-      toggleMode
+      theme,
+      isDark: theme === 'dark',
+      cycleTheme,
+      // Backwards compatibility
+      toggleMode: cycleTheme
     }}>
       {children}
     </ThemeContext.Provider>

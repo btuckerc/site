@@ -196,12 +196,12 @@ const CommandPalette = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            className="fixed top-1/4 left-1/2 -translate-x-1/2 w-full max-w-lg z-50"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-50"
             role="dialog"
             aria-modal="true"
             aria-labelledby="command-palette-title"
           >
-            <div className="mx-4 bg-card-bg border border-line rounded-xl shadow-2xl overflow-hidden">
+            <div className="mx-4 bg-card-bg border border-line shadow-2xl overflow-hidden">
               <div className="p-4 border-b border-line">
                 <h2 id="command-palette-title" className="sr-only">
                   Command Palette

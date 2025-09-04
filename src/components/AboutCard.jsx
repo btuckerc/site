@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import aboutData from '../../data/about.json'
+import CloseButton from './CloseButton'
 import { SYMBOLS, LABELS, bracketed, treeItem } from '../constants/symbols'
 
 const AboutCard = ({ onFlip }) => {
@@ -21,7 +22,7 @@ const AboutCard = ({ onFlip }) => {
   return (
     <div className="flex justify-center">
       <motion.div 
-        className="relative w-96 h-[32rem] perspective-1000 cursor-pointer focus-visible"
+        className="relative w-96 h-[32rem] perspective-1000 cursor-pointer focus-visible pointer-events-auto"
         onClick={handleFlip}
         onKeyDown={handleKeyDown}
         tabIndex={0}
@@ -40,6 +41,11 @@ const AboutCard = ({ onFlip }) => {
             className="absolute inset-0 w-full h-full backface-hidden bg-card-bg border border-line p-8 flex flex-col items-center justify-center"
             style={{ transform: 'rotateY(0deg)' }}
           >
+            {/* Close button */}
+            <div className="absolute top-4 right-4">
+              <CloseButton />
+            </div>
+            
             {/* Avatar */}
             <div className="mb-6">
               <div className="w-20 h-20 mx-auto mb-4 border border-accent bg-bg-elev flex items-center justify-center">
@@ -79,12 +85,17 @@ const AboutCard = ({ onFlip }) => {
             className="absolute inset-0 w-full h-full backface-hidden bg-card-bg border border-line p-7"
             style={{ transform: 'rotateY(180deg)' }}
           >
+            {/* Close button */}
+            <div className="absolute top-4 right-4">
+              <CloseButton />
+            </div>
+            
             <div className="h-full flex flex-col">
               <h3 className="text-lg font-bold text-accent mb-4 text-center font-mono">
                 {bracketed(LABELS.ABOUT_ME_FILE)}
               </h3>
               
-              <div className="flex-1 space-y-5 overflow-y-auto">
+              <div className="flex-1 space-y-5 overflow-y-auto ascii-scrollbar">
                 {/* Bio */}
                 <div className="text-fg text-sm leading-relaxed font-mono">
                   {aboutData.back.bio}
