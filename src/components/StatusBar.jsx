@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme.jsx'
+import { SYMBOLS, LABELS, bracketed } from '../constants/symbols'
 
 const StatusBar = () => {
-  const { isDark, toggleMode, cycleVariant, themeVariant } = useTheme()
+  const navigate = useNavigate()
+  const { isDark, toggleMode } = useTheme()
 
   return (
     <motion.nav 
@@ -17,15 +20,16 @@ const StatusBar = () => {
         <div className="flex items-center justify-between text-sm">
           {/* Site branding */}
           <div className="flex items-center gap-3">
-            <span 
-              className="font-mono text-accent font-bold"
-              role="img" 
-              aria-label="Site initials"
+            <button
+              onClick={() => navigate('/')}
+              className="font-mono text-accent font-bold hover:text-fg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 px-1"
+              aria-label="Go to homepage"
+              title="Return to homepage"
             >
-              [TC]
-            </span>
+              {bracketed(LABELS.SITE_INITIALS)}
+            </button>
             <span className="text-muted" aria-label="Full name">
-              tucker craig
+              {LABELS.SITE_NAME}
             </span>
           </div>
 
@@ -34,29 +38,18 @@ const StatusBar = () => {
             className="absolute left-1/2 -translate-x-1/2 font-mono text-muted text-xs hidden sm:block"
             aria-label="Keyboard shortcut hint"
           >
-            type <kbd 
-              className="px-1 bg-line rounded"
+type <kbd 
+              className="px-1 bg-line"
               aria-label="colon key"
-            >:</kbd> for commands
+            >{SYMBOLS.COMMAND_PREFIX}</kbd> for commands
           </div>
           
           {/* Theme controls */}
           <div className="flex items-center gap-2" role="group" aria-label="Theme controls">
-            {/* Theme variant indicator */}
-            <button
-              onClick={cycleVariant}
-              className="font-mono text-xs text-muted hover:text-accent transition-colors px-1
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 rounded"
-              aria-label={`Current theme variant: ${themeVariant}. Click to cycle to next variant.`}
-              title={`Theme: ${themeVariant} (click to cycle)`}
-            >
-              {themeVariant.charAt(0).toUpperCase()}
-            </button>
-            
             {/* Mode toggle */}
             <button
               onClick={toggleMode}
-              className="p-1 rounded text-muted hover:text-accent transition-colors
+              className="p-1 text-muted hover:text-accent transition-colors
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
               aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
               title={`Switch to ${isDark ? 'light' : 'dark'} mode`}

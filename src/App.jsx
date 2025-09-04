@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { lazy, Suspense, useState } from 'react'
 import { ThemeProvider } from './hooks/useTheme.jsx'
@@ -27,6 +27,8 @@ const PageLoader = () => (
 function AppContent() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
   const { topRef, bottomRef, scrollToTop, scrollToBottom } = useScrollTargets()
+  const navigate = useNavigate()
+  const location = useLocation()
 
   // Set up global hotkeys
   useHotkeys({
@@ -45,6 +47,9 @@ function AppContent() {
     onEscape: () => {
       if (isCommandPaletteOpen) {
         setIsCommandPaletteOpen(false)
+      } else if (location.pathname !== '/') {
+        // Navigate back to home when ESC is pressed on modal pages
+        navigate('/')
       }
     }
   })

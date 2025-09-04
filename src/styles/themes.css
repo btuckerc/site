@@ -1,7 +1,7 @@
-/* Theme System - Three color variants with automatic light mode derivation */
+/* ASCII Theme System - Neutral monochrome palette */
 
 :root {
-  /* Neutral Graphite (default) */
+  /* Neutral theme - dark mode (default) */
   --bg: #0f1115;
   --bg-elev: #171a1f;
   --fg: #e7e9ec;
@@ -20,26 +20,7 @@
   --active-bg: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
-/* Theme variants */
-.theme-warm {
-  --bg: #111110;
-  --bg-elev: #181716;
-  --fg: #ece7e1;
-  --muted: #a8a29e;
-  --accent: #d6d3d1;
-  --line: #2a2725;
-}
-
-.theme-cool {
-  --bg: #0c0f14;
-  --bg-elev: #141a21;
-  --fg: #e6edf3;
-  --muted: #9fb0bf;
-  --accent: #c8d0d6;
-  --line: #24303b;
-}
-
-/* Light mode - auto-derived with contrast adjustments */
+/* Light mode - neutral theme light variant */
 .light {
   --bg: #fafbfc;
   --bg-elev: #f1f3f5;
@@ -47,24 +28,6 @@
   --muted: #4a5568;
   --accent: #2d3748;
   --line: #e2e8f0;
-}
-
-.light.theme-warm {
-  --bg: #fdfcfc;
-  --bg-elev: #f7f5f4;
-  --fg: #1c1917;
-  --muted: #57534e;
-  --accent: #292524;
-  --line: #e7e5e4;
-}
-
-.light.theme-cool {
-  --bg: #f8fafc;
-  --bg-elev: #f1f5f9;
-  --fg: #0f172a;
-  --muted: #475569;
-  --accent: #334155;
-  --line: #cbd5e1;
 }
 
 /* Ensure proper contrast ratios */

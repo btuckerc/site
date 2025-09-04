@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import AboutCard from '../components/AboutCard'
+import CloseButton from '../components/CloseButton'
+import { LABELS, bracketed, decorativeBorder } from '../constants/symbols'
 
 const About = () => {
   return (
@@ -10,10 +12,13 @@ const About = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="text-center mb-8 relative"
         >
+          <div className="absolute top-0 right-0">
+            <CloseButton />
+          </div>
           <h1 className="text-2xl md:text-3xl font-bold text-fg mb-3 font-mono">
-            <span className="text-accent">[</span> about.json <span className="text-accent">]</span>
+            {bracketed(LABELS.ABOUT_FILE)}
           </h1>
           <p className="text-muted text-sm font-mono">
             click card to reveal more information
@@ -37,7 +42,7 @@ const About = () => {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="text-center mt-8 text-muted text-xs font-mono"
         >
-          <span className="text-accent">└─</span> interactive profile card <span className="text-accent">─┘</span>
+          {decorativeBorder(LABELS.PROFILE_CARD_TEXT)}
         </motion.div>
       </div>
     </div>

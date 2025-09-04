@@ -10,71 +10,35 @@ export const useTheme = () => {
   return context
 }
 
-export const themes = {
-  neutral: 'Neutral Graphite',
-  warm: 'Warm Gray', 
-  cool: 'Cool Slate'
-}
-
 export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem('theme-mode')
     return saved ? saved === 'dark' : true // Default to dark
   })
-  
-  const [themeVariant, setThemeVariant] = useState(() => {
-    const saved = localStorage.getItem('theme-variant')
-    return saved || 'neutral' // Default to neutral
-  })
 
   useEffect(() => {
     const root = document.documentElement
     
-    // Remove all theme classes
-    root.classList.remove('light', 'theme-warm', 'theme-cool')
+    // Remove all theme classes and apply only light mode if needed
+    root.classList.remove('light')
     
-    // Apply mode
+    // Apply light mode
     if (!isDark) {
       root.classList.add('light')
     }
     
-    // Apply variant
-    if (themeVariant === 'warm') {
-      root.classList.add('theme-warm')
-    } else if (themeVariant === 'cool') {
-      root.classList.add('theme-cool')
-    }
-    
     // Persist to localStorage
     localStorage.setItem('theme-mode', isDark ? 'dark' : 'light')
-    localStorage.setItem('theme-variant', themeVariant)
-  }, [isDark, themeVariant])
+  }, [isDark])
 
   const toggleMode = () => {
     setIsDark(!isDark)
   }
 
-  const setVariant = (variant) => {
-    if (Object.keys(themes).includes(variant)) {
-      setThemeVariant(variant)
-    }
-  }
-
-  const cycleVariant = () => {
-    const variants = Object.keys(themes)
-    const currentIndex = variants.indexOf(themeVariant)
-    const nextIndex = (currentIndex + 1) % variants.length
-    setThemeVariant(variants[nextIndex])
-  }
-
   return (
     <ThemeContext.Provider value={{
       isDark,
-      themeVariant,
-      themeName: themes[themeVariant],
-      toggleMode,
-      setVariant,
-      cycleVariant
+      toggleMode
     }}>
       {children}
     </ThemeContext.Provider>

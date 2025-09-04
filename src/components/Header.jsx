@@ -42,10 +42,39 @@ const Header = () => {
                 {item.name}
                 {location.pathname === item.path && (
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-px bg-accent"
+                    className="absolute inset-0 pointer-events-none"
                     layoutId="nav-indicator"
                     initial={false}
-                  />
+                  >
+                    {/* Bottom line */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-px bg-accent"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    />
+                    {/* Left vertical line */}
+                    <motion.div
+                      className="absolute left-0 bottom-0 w-px bg-accent"
+                      initial={{ height: 0 }}
+                      animate={{ height: "100%" }}
+                      transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
+                    />
+                    {/* Right vertical line */}
+                    <motion.div
+                      className="absolute right-0 bottom-0 w-px bg-accent"
+                      initial={{ height: 0 }}
+                      animate={{ height: "100%" }}
+                      transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
+                    />
+                    {/* Top line */}
+                    <motion.div
+                      className="absolute top-0 left-0 right-0 h-px bg-accent"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
+                    />
+                  </motion.div>
                 )}
               </Link>
             ))}

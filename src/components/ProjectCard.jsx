@@ -25,7 +25,7 @@ const ProjectCard = ({ project }) => {
 
   return (
     <motion.div
-      className="ascii-frame ascii-frame-bottom card p-6"
+      className="bg-card-bg border border-line p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
@@ -46,7 +46,7 @@ const ProjectCard = ({ project }) => {
               {project.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 text-xs bg-accent/10 border border-accent/20 text-accent rounded font-mono"
+                  className="px-2 py-1 text-xs bg-accent/10 border border-accent/20 text-accent font-mono"
                 >
                   {tag}
                 </span>
@@ -54,15 +54,9 @@ const ProjectCard = ({ project }) => {
             </div>
           </div>
           
-          <motion.div
-            className="ml-4 text-accent flex-shrink-0"
-            animate={{ rotate: isMainExpanded ? 90 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </motion.div>
+          <div className="ml-4 text-accent flex-shrink-0 font-mono text-lg">
+            {isMainExpanded ? '▼' : '▶'}
+          </div>
         </div>
       </button>
 
@@ -77,7 +71,7 @@ const ProjectCard = ({ project }) => {
           >
             <div className="space-y-2">
               {sections.map((section) => (
-                <motion.div key={section.id} className="border border-border/50 rounded-lg">
+                <motion.div key={section.id} className="border border-border/50">
                   <button
                     onClick={() => toggleSection(section.id)}
                     className="w-full px-4 py-3 text-left hover:bg-accent/5 transition-colors flex items-center justify-between focus-visible"
@@ -110,7 +104,7 @@ const ProjectCard = ({ project }) => {
                               {section.content.map((tech, index) => (
                                 <span
                                   key={index}
-                                  className="px-2 py-1 text-xs bg-accent/10 border border-accent/20 text-accent rounded font-mono"
+                                  className="px-2 py-1 text-xs bg-accent/10 border border-accent/20 text-accent font-mono"
                                 >
                                   {tech}
                                 </span>
