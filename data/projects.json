@@ -1,0 +1,93 @@
+[
+  {
+    "id": "bootleg-dino-game-wrapper",
+    "title": "Bootleg Dino Game Wrapper",
+    "year": "2024",
+    "blurb": "Enhanced Chrome dinosaur game with custom features and styling",
+    "tags": ["JavaScript", "Game Development", "Web APIs"],
+    "links": {
+      "github": "https://github.com/tuckercraig/bootleg-dino-game",
+      "demo": "https://tuckercraig.github.io/bootleg-dino-game"
+    },
+    "overview": "Created an enhanced version of Chrome's offline dinosaur game with additional features, custom graphics, and improved gameplay mechanics.",
+    "stack": ["Vanilla JavaScript", "HTML5 Canvas", "CSS3", "GitHub Pages"],
+    "features": [
+      "Custom sprite animations",
+      "Enhanced collision detection", 
+      "Power-up system",
+      "Progressive difficulty scaling"
+    ]
+  },
+  {
+    "id": "angl",
+    "title": "ANGL",
+    "year": "2023",
+    "blurb": "Angular-based web application for data visualization and analytics",
+    "tags": ["Angular", "TypeScript", "Data Visualization"],
+    "links": {
+      "github": "https://github.com/tuckercraig/angl"
+    },
+    "overview": "Built a comprehensive data analytics dashboard using Angular with real-time data processing and interactive visualizations.",
+    "stack": ["Angular 15", "TypeScript", "RxJS", "Chart.js", "Material UI"],
+    "features": [
+      "Real-time data streaming",
+      "Interactive charts and graphs",
+      "Responsive design",
+      "Export functionality"
+    ]
+  },
+  {
+    "id": "spotify-preference-analyst",
+    "title": "Spotify Preference Analyst",
+    "year": "2023",
+    "blurb": "Music analytics tool using Spotify Web API for personalized insights",
+    "tags": ["Python", "Spotify API", "Data Analysis"],
+    "links": {
+      "github": "https://github.com/tuckercraig/spotify-analyst"
+    },
+    "overview": "Developed a Python application that analyzes Spotify listening habits and provides personalized music recommendations.",
+    "stack": ["Python", "Spotipy", "Pandas", "Matplotlib", "Flask"],
+    "features": [
+      "Listening history analysis",
+      "Genre preference mapping",
+      "Recommendation engine",
+      "Data export capabilities"
+    ]
+  },
+  {
+    "id": "box-rss-twitter-bot",
+    "title": "Box RSS Twitter Bot",
+    "year": "2023",
+    "blurb": "Automated social media bot for company RSS feed integration",
+    "tags": ["Node.js", "Twitter API", "RSS"],
+    "links": {
+      "github": "https://github.com/tuckercraig/box-rss-bot"
+    },
+    "overview": "Built an automated Twitter bot that monitors Box company RSS feeds and posts relevant updates with smart filtering.",
+    "stack": ["Node.js", "Twitter API v2", "RSS Parser", "Cron Jobs"],
+    "features": [
+      "RSS feed monitoring",
+      "Content filtering algorithms",
+      "Automated posting schedule",
+      "Error handling and logging"
+    ]
+  },
+  {
+    "id": "davidson-class-addon",
+    "title": "Davidson Class Add/Drop Notifier",
+    "year": "2020",
+    "blurb": "Chrome extension for Davidson College course registration notifications",
+    "tags": ["JavaScript", "Chrome Extension", "Web Scraping"],
+    "links": {
+      "github": "https://github.com/tuckercraig/davidson-class-notifier"
+    },
+    "overview": "Created a Chrome extension to notify Davidson College students when spots open in desired classes during registration periods.",
+    "stack": ["JavaScript", "Chrome Extension API", "HTML/CSS", "Web Notifications"],
+    "features": [
+      "Real-time class availability monitoring",
+      "Desktop notifications",
+      "Multiple class tracking",
+      "Registration portal integration"
+    ]
+  }
+]

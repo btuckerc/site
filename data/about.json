@@ -1,0 +1,70 @@
+{
+  "name": "Tucker Craig",
+  "role": "FinOps Engineer @ Box",
+  "education": "Davidson College '20",
+  "location": "San Francisco, CA",
+  "front": {
+    "avatar": {
+      "type": "icon",
+      "icon": "terminal"
+    },
+    "stats": [
+      {
+        "label": "Experience",
+        "value": "4+ Years",
+        "description": "Cloud & FinOps"
+      },
+      {
+        "label": "Projects", 
+        "value": "15+",
+        "description": "Built & Shipped"
+      },
+      {
+        "label": "Coffee",
+        "value": "∞",
+        "description": "Cups Consumed"
+      }
+    ]
+  },
+  "back": {
+    "bio": "FinOps engineer passionate about cloud cost optimization and data-driven decision making. I help organizations maximize their cloud investments through strategic analysis, automation, and clear communication of financial impact.",
+    "skills": [
+      {
+        "category": "Cloud & FinOps",
+        "items": ["AWS", "Cloud Cost Optimization", "Financial Analysis", "Data Visualization"]
+      },
+      {
+        "category": "Development",
+        "items": ["Python", "JavaScript", "React", "Node.js", "SQL"]
+      },
+      {
+        "category": "Tools & Platforms", 
+        "items": ["Docker", "Git", "Tableau", "Jupyter", "Linux"]
+      }
+    ],
+    "badges": [
+      {
+        "name": "AWS Certified",
+        "type": "certification",
+        "year": "2023"
+      },
+      {
+        "name": "FinOps Certified Practitioner",
+        "type": "certification", 
+        "year": "2022"
+      },
+      {
+        "name": "Computer Science",
+        "type": "education",
+        "year": "2020"
+      }
+    ],
+    "interests": [
+      "Open source contributing",
+      "Data visualization", 
+      "Terminal-based workflows",
+      "Minimalist design",
+      "Cost optimization strategies"
+    ]
+  }
+}

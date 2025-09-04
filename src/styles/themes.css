@@ -1,0 +1,83 @@
+/* Theme System - Three color variants with automatic light mode derivation */
+
+:root {
+  /* Neutral Graphite (default) */
+  --bg: #0f1115;
+  --bg-elev: #171a1f;
+  --fg: #e7e9ec;
+  --muted: #9aa3ad;
+  --accent: #c9cdd2;
+  --line: #2a2f36;
+  
+  /* Derived semantic tokens */
+  --border: var(--line);
+  --card-bg: var(--bg-elev);
+  --glass-bg: color-mix(in srgb, var(--bg-elev) 80%, transparent);
+  
+  /* Focus and interaction */
+  --focus-ring: var(--accent);
+  --hover-bg: color-mix(in srgb, var(--accent) 8%, transparent);
+  --active-bg: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* Theme variants */
+.theme-warm {
+  --bg: #111110;
+  --bg-elev: #181716;
+  --fg: #ece7e1;
+  --muted: #a8a29e;
+  --accent: #d6d3d1;
+  --line: #2a2725;
+}
+
+.theme-cool {
+  --bg: #0c0f14;
+  --bg-elev: #141a21;
+  --fg: #e6edf3;
+  --muted: #9fb0bf;
+  --accent: #c8d0d6;
+  --line: #24303b;
+}
+
+/* Light mode - auto-derived with contrast adjustments */
+.light {
+  --bg: #fafbfc;
+  --bg-elev: #f1f3f5;
+  --fg: #1a1d20;
+  --muted: #4a5568;
+  --accent: #2d3748;
+  --line: #e2e8f0;
+}
+
+.light.theme-warm {
+  --bg: #fdfcfc;
+  --bg-elev: #f7f5f4;
+  --fg: #1c1917;
+  --muted: #57534e;
+  --accent: #292524;
+  --line: #e7e5e4;
+}
+
+.light.theme-cool {
+  --bg: #f8fafc;
+  --bg-elev: #f1f5f9;
+  --fg: #0f172a;
+  --muted: #475569;
+  --accent: #334155;
+  --line: #cbd5e1;
+}
+
+/* Ensure proper contrast ratios */
+@media (prefers-contrast: high) {
+  :root {
+    --fg: #ffffff;
+    --accent: #ffffff;
+    --line: #666666;
+  }
+  
+  .light {
+    --fg: #000000;
+    --accent: #000000;
+    --line: #999999;
+  }
+}
