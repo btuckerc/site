@@ -7,6 +7,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef()
+  const selectedItemRef = useRef(null)
   const navigate = useNavigate()
   const { toggleMode, cycleVariant, themeName } = useTheme()
 
@@ -124,11 +125,20 @@ const CommandPalette = ({ isOpen, onClose }) => {
     }
   }, [isOpen])
 
+  // Scroll selected item into view
+  useEffect(() => {
+    if (selectedItemRef.current) {
+      selectedItemRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
+      })
+    }
+  }, [selectedIndex])
+
   // Handle keyboard navigation
   const handleKeyDown = (e) => {
     switch (e.key) {
       case 'ArrowDown':
-      case 'j':
         e.preventDefault()
         setSelectedIndex(prev => 
           prev < filteredCommands.length - 1 ? prev + 1 : 0
@@ -136,7 +146,6 @@ const CommandPalette = ({ isOpen, onClose }) => {
         break
       
       case 'ArrowUp':
-      case 'k':
         e.preventDefault()
         setSelectedIndex(prev => 
           prev > 0 ? prev - 1 : filteredCommands.length - 1
@@ -186,22 +195,24 @@ const CommandPalette = ({ isOpen, onClose }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
             onClick={onClose}
-            className="fixed inset-0 bg-bg/80 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-bg/90 backdrop-blur-sm z-50"
           />
           
           {/* Palette */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-50"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="command-palette-title"
-          >
-            <div className="mx-4 bg-card-bg border border-line shadow-2xl overflow-hidden">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
+              className="w-full max-w-lg pointer-events-auto"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="command-palette-title"
+            >
+              <div className="bg-card-bg border border-line shadow-2xl overflow-hidden">
               <div className="p-4 border-b border-line">
                 <h2 id="command-palette-title" className="sr-only">
                   Command Palette
@@ -212,55 +223,54 @@ const CommandPalette = ({ isOpen, onClose }) => {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Type a command..."
-                  className="w-full bg-transparent border-none outline-none text-fg placeholder-muted text-lg"
+                  placeholder="type command..."
+                  className="w-full bg-transparent border-none outline-none text-fg placeholder-muted text-base font-mono"
                 />
               </div>
               
               <div className="max-h-80 overflow-y-auto">
                 {filteredCommands.length > 0 ? (
                   filteredCommands.map((command, index) => (
-                    <motion.button
+                    <button
                       key={command.id}
+                      ref={index === selectedIndex ? selectedItemRef : null}
                       onClick={() => executeCommand(command)}
                       className={`
-                        w-full text-left px-4 py-3 border-none bg-transparent
+                        w-full text-left px-4 py-3 border-none bg-transparent font-mono
                         hover:bg-hover-bg transition-colors
                         ${index === selectedIndex ? 'bg-active-bg' : ''}
                       `}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="font-mono text-accent">
+                        <div className="text-accent text-sm">
                           {index === selectedIndex ? '▸' : ' '}
                         </div>
                         <div className="flex-1">
-                          <div className="text-fg font-medium">
+                          <div className="text-fg font-medium text-sm">
                             {command.title}
                           </div>
-                          <div className="text-muted text-sm">
+                          <div className="text-muted text-xs">
                             {command.description}
                           </div>
                         </div>
                       </div>
-                    </motion.button>
+                    </button>
                   ))
                 ) : (
-                  <div className="px-4 py-8 text-center text-muted">
-                    No commands found
+                  <div className="px-4 py-8 text-center text-muted font-mono text-sm">
+                    no commands found
                   </div>
                 )}
               </div>
               
-              <div className="px-4 py-3 border-t border-line text-xs text-muted flex gap-4">
+              <div className="px-4 py-3 border-t border-line text-xs text-muted flex gap-4 font-mono">
                 <span><kbd>↑↓</kbd> navigate</span>
                 <span><kbd>↵</kbd> select</span>
                 <span><kbd>esc</kbd> close</span>
               </div>
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>

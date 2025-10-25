@@ -3,6 +3,15 @@
   "role": "FinOps Engineer @ Box",
   "education": "Davidson College '20",
   "location": "San Francisco, CA",
+  "startDate": "2018-06-01",
+  "terminalStartDate": "2011-06-01",
+  "githubUsername": "btuckerc",
+  "githubRepos": [
+    "btuckerc/boilerplate",
+    "btuckerc/angl-note",
+    "btuckerc/audioreader",
+    "btuckerc/ComicScanner"
+  ],
   "front": {
     "avatar": {
       "type": "icon",
@@ -10,19 +19,31 @@
     },
     "stats": [
       {
-        "label": "Experience",
-        "value": "4+ Years",
-        "description": "Cloud & FinOps"
+        "label": "experience",
+        "value": "auto-years",
+        "suffix": "years"
       },
       {
-        "label": "Projects", 
-        "value": "15+",
-        "description": "Built & Shipped"
+        "label": "cost saved",
+        "value": "$2.3M"
       },
       {
-        "label": "Coffee",
-        "value": "∞",
-        "description": "Cups Consumed"
+        "label": "lines written",
+        "value": "auto-github",
+        "suffix": "lines"
+      },
+      {
+        "label": "terminal hours",
+        "value": "auto-terminal",
+        "suffix": "hours"
+      },
+      {
+        "label": "projects",
+        "value": "auto-repos"
+      },
+      {
+        "label": "prod incidents",
+        "value": "1"
       }
     ]
   },

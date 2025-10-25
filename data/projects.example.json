@@ -1,0 +1,48 @@
+[
+  {
+    "id": "example-full-project",
+    "title": "Example Full Project",
+    "year": "2024",
+    "date": "2024-11-08",
+    "featured": 10,
+    "blurb": "This is an example project with all possible fields filled in",
+    "tags": ["React", "TypeScript", "Node.js", "PostgreSQL", "Docker"],
+    "links": {
+      "github": "https://github.com/username/project",
+      "demo": "https://demo.example.com",
+      "docs": "https://docs.example.com"
+    },
+    "overview": "This is where you describe what your project does in detail. You can explain the problem it solves, the approach you took, and the impact it had.",
+    "stack": ["React 18", "TypeScript", "Node.js", "Express", "PostgreSQL", "Redis", "Docker", "AWS"],
+    "features": [
+      "Real-time data synchronization across clients",
+      "Comprehensive admin dashboard",
+      "Role-based access control",
+      "RESTful API with OpenAPI documentation",
+      "Automated deployment pipeline"
+    ]
+  },
+  {
+    "id": "example-minimal-project",
+    "title": "Example Minimal Project",
+    "year": "2024",
+    "blurb": "This is a minimal project with only required fields",
+    "tags": ["Python", "Flask"]
+  },
+  {
+    "id": "example-medium-project",
+    "title": "Example Medium Project",
+    "year": "2023",
+    "blurb": "A project with some optional fields but not all",
+    "tags": ["Vue.js", "Tailwind CSS", "Supabase"],
+    "links": {
+      "github": "https://github.com/username/project"
+    },
+    "stack": ["Vue 3", "Tailwind CSS", "Supabase", "Vercel"],
+    "features": [
+      "Responsive design",
+      "Dark mode support",
+      "Real-time updates"
+    ]
+  }
+]

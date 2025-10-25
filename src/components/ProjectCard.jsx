@@ -1,147 +1,100 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 const ProjectCard = ({ project }) => {
-  const [expandedSection, setExpandedSection] = useState(null)
-  const [isMainExpanded, setIsMainExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
 
-  const sections = [
-    { id: 'overview', label: 'Overview', content: project.overview },
-    { id: 'stack', label: 'Tech Stack', content: project.stack },
-    { id: 'features', label: 'Key Features', content: project.features },
-    { id: 'links', label: 'Links', content: project.links }
-  ]
-
-  const toggleMain = () => {
-    setIsMainExpanded(!isMainExpanded)
-    if (isMainExpanded) {
-      setExpandedSection(null)
-    }
-  }
-
-  const toggleSection = (sectionId) => {
-    setExpandedSection(expandedSection === sectionId ? null : sectionId)
-  }
+  // Show expandable arrow only if there's additional content
+  const hasExpandableContent = 
+    project.overview || 
+    (project.stack && project.stack.length > 0) || 
+    (project.features && project.features.length > 0) || 
+    (project.links && Object.keys(project.links).length > 0)
 
   return (
-    <motion.div
-      className="bg-card-bg p-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.02 }}
-    >
+    <div className="border border-line bg-card-bg p-5 font-mono">
+      {/* Header - always visible */}
       <button
-        onClick={toggleMain}
-        className="w-full text-left focus-visible hover:bg-hover-bg transition-colors duration-200 p-0"
-        aria-expanded={isMainExpanded}
+        onClick={() => hasExpandableContent && setIsExpanded(!isExpanded)}
+        className="w-full text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+        disabled={!hasExpandableContent}
       >
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <h3 className="text-lg font-bold text-fg">{project.title}</h3>
-              <span className="text-accent font-mono text-sm">{project.year}</span>
-            </div>
-            <p className="text-muted text-sm mb-3 leading-relaxed">{project.blurb}</p>
-            <div className="flex flex-wrap gap-1">
-              {project.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 text-xs bg-accent/10 text-accent font-mono"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <h3 className="text-lg font-bold text-fg flex-1">{project.title}</h3>
+          <span className="text-sm text-accent shrink-0">{project.year}</span>
+        </div>
+        {project.blurb && (
+          <p className="text-sm text-muted leading-relaxed mb-3">{project.blurb}</p>
+        )}
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-muted">
+            {project.tags && project.tags.length > 0 ? (
+              <>
+                {project.tags.slice(0, 3).join(' · ')}
+                {project.tags.length > 3 && ` · +${project.tags.length - 3}`}
+              </>
+            ) : (
+              <span className="text-muted/50">no tags</span>
+            )}
           </div>
-          
-          <div className="ml-4 text-accent flex-shrink-0 font-mono text-lg">
-            {isMainExpanded ? '▼' : '▶'}
-          </div>
+          {hasExpandableContent && (
+            <span className="text-accent text-sm ml-2">{isExpanded ? '▼' : '▶'}</span>
+          )}
         </div>
       </button>
 
-      <AnimatePresence>
-        {isMainExpanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden pt-4"
-          >
-            <div className="space-y-0">
-              {sections.map((section) => (
-                <motion.div key={section.id} className="">
-                  <button
-                    onClick={() => toggleSection(section.id)}
-                    className="w-full px-4 py-3 text-left hover:bg-accent/5 transition-colors flex items-center justify-between focus-visible"
-                    aria-expanded={expandedSection === section.id}
-                  >
-                    <span className="text-sm font-medium text-fg">{section.label}</span>
-                    <div className="text-accent font-mono text-sm">
-                      {expandedSection === section.id ? '▼' : '▶'}
-                    </div>
-                  </button>
-
-                  <AnimatePresence>
-                    {expandedSection === section.id && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="p-4">
-                          {section.id === 'stack' && Array.isArray(section.content) ? (
-                            <div className="flex flex-wrap gap-1">
-                              {section.content.map((tech, index) => (
-                                <span
-                                  key={index}
-                                  className="px-2 py-1 text-xs bg-accent/10 text-accent font-mono"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          ) : section.id === 'features' && Array.isArray(section.content) ? (
-                            <ul className="space-y-1">
-                              {section.content.map((feature, index) => (
-                                <li key={index} className="text-muted text-sm flex items-start">
-                                  <span className="text-accent mr-2 mt-1">▸</span>
-                                  {feature}
-                                </li>
-                              ))}
-                            </ul>
-                          ) : section.id === 'links' && typeof section.content === 'object' ? (
-                            <div className="space-y-2">
-                              {Object.entries(section.content).map(([key, url]) => (
-                                <a
-                                  key={key}
-                                  href={url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 px-3 py-1 text-sm bg-accent/10 text-accent hover:bg-accent/20 transition-colors focus-visible"
-                                >
-                                  <span className="capitalize">{key}</span>
-                                  <span className="font-mono text-xs">↗</span>
-                                </a>
-                              ))}
-                            </div>
-                          ) : (
-                            <p className="text-muted text-sm leading-relaxed">{section.content}</p>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
+      {/* Expanded content */}
+      {isExpanded && (
+        <div className="mt-4 pt-4 border-t border-line space-y-4 text-sm">
+          {/* Overview */}
+          {project.overview && (
+            <div>
+              <div className="text-accent mb-2 font-semibold">▸ overview</div>
+              <div className="text-muted pl-3 leading-relaxed">{project.overview}</div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+          )}
+
+          {/* Tech Stack */}
+          {project.stack && project.stack.length > 0 && (
+            <div>
+              <div className="text-accent mb-2 font-semibold">▸ stack</div>
+              <div className="text-muted pl-3">{project.stack.join(', ')}</div>
+            </div>
+          )}
+
+          {/* Features */}
+          {project.features && project.features.length > 0 && (
+            <div>
+              <div className="text-accent mb-2 font-semibold">▸ features</div>
+              <div className="pl-3 space-y-1">
+                {project.features.map((feature, idx) => (
+                  <div key={idx} className="text-muted">· {feature}</div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Links - more prominent */}
+          {project.links && Object.keys(project.links).length > 0 && (
+            <div className="border-t border-line pt-4 mt-4">
+              <div className="text-accent mb-3 font-semibold">▸ links</div>
+              <div className="pl-3 flex flex-wrap gap-3">
+                {Object.entries(project.links).map(([key, url]) => (
+                  <a
+                    key={key}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent hover:text-bg transition-colors font-medium"
+                  >
+                    {key} →
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   )
 }
 

@@ -48,57 +48,36 @@ const StatusBar = () => {
       role="navigation"
       aria-label="Site header and theme controls"
     >
-      <div className="container mx-auto px-4 py-2">
-        <div className="flex items-center justify-between text-sm">
-          {/* Site branding */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => navigate('/')}
-              className="font-mono text-accent font-bold hover:text-fg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 px-1"
-              aria-label="Go to homepage"
-              title="Return to homepage"
-            >
-              {bracketed(LABELS.SITE_INITIALS)}
-            </button>
-            <span className="text-muted" aria-label="Full name">
-              {LABELS.SITE_NAME}
-            </span>
-          </div>
-
-          {/* Center hint */}
-          <div 
-            className="absolute left-1/2 -translate-x-1/2 font-mono text-muted text-xs hidden sm:block"
-            aria-label="Keyboard shortcut hint"
+      <div className="flex items-center justify-between text-sm px-3 py-2">
+        {/* Site branding - top left */}
+        <button
+          onClick={() => navigate('/')}
+          className="font-mono text-accent font-bold hover:text-fg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+          aria-label="Go to homepage"
+          title="Return to homepage"
+        >
+          {bracketed(LABELS.SITE_INITIALS)}
+        </button>
+        
+        {/* Theme controls - top right */}
+        <button
+          onClick={cycleTheme}
+          className="p-1 text-muted hover:text-accent transition-colors
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+          aria-label={`Switch to ${getNextThemeLabel()} theme`}
+          title={`Switch to ${getNextThemeLabel()} theme`}
+        >
+          <motion.div 
+            className="w-4 h-4" 
+            aria-hidden="true"
+            key={theme}
+            initial={{ rotate: -90, opacity: 0, scale: 0.8 }}
+            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
           >
-type <kbd 
-              className="px-1 bg-line"
-              aria-label="colon key"
-            >{SYMBOLS.COMMAND_PREFIX}</kbd> for commands
-          </div>
-          
-          {/* Theme controls */}
-          <div className="flex items-center gap-2" role="group" aria-label="Theme controls">
-            {/* Theme toggle */}
-            <button
-              onClick={cycleTheme}
-              className="p-1 text-muted hover:text-accent transition-colors
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-              aria-label={`Switch to ${getNextThemeLabel()} theme`}
-              title={`Switch to ${getNextThemeLabel()} theme`}
-            >
-              <motion.div 
-                className="w-4 h-4" 
-                aria-hidden="true"
-                key={theme}
-                initial={{ rotate: -90, opacity: 0, scale: 0.8 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-              >
-                {getThemeIcon()}
-              </motion.div>
-            </button>
-          </div>
-        </div>
+            {getThemeIcon()}
+          </motion.div>
+        </button>
       </div>
     </nav>
   )

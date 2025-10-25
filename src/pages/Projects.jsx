@@ -8,6 +8,7 @@ import projectsData from '../../data/projects.json'
 const Projects = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [sortBy, setSortBy] = useState('featured')
 
   // Fuzzy search implementation
   const fuzzyMatch = (text, query) => {
@@ -29,22 +30,54 @@ const Projects = () => {
     return queryIndex === queryLower.length ? score : 0
   }
 
-  // Filter projects based on search query
+  // Filter and sort projects
   const filteredProjects = useMemo(() => {
-    if (!searchQuery.trim()) return projectsData
+    let projects = projectsData
     
-    return projectsData
-      .map(project => ({
-        ...project,
-        score: Math.max(
-          fuzzyMatch(project.title, searchQuery),
-          fuzzyMatch(project.blurb, searchQuery),
-          ...project.tags.map(tag => fuzzyMatch(tag, searchQuery))
-        )
-      }))
-      .filter(project => project.score > 0)
-      .sort((a, b) => b.score - a.score)
-  }, [searchQuery])
+    // Apply search filter if query exists
+    if (searchQuery.trim()) {
+      projects = projectsData
+        .map(project => ({
+          ...project,
+          score: Math.max(
+            fuzzyMatch(project.title, searchQuery),
+            fuzzyMatch(project.blurb, searchQuery),
+            ...project.tags.map(tag => fuzzyMatch(tag, searchQuery))
+          )
+        }))
+        .filter(project => project.score > 0)
+        .sort((a, b) => b.score - a.score)
+    } else {
+      // Apply sorting when no search query
+      projects = [...projectsData].sort((a, b) => {
+        switch (sortBy) {
+          case 'featured':
+            // Sort by featured value (higher first), then by date
+            const aFeatured = a.featured || 0
+            const bFeatured = b.featured || 0
+            if (aFeatured !== bFeatured) return bFeatured - aFeatured
+            // Use date if available, otherwise fall back to year
+            const aDate = a.date || `${a.year}-12-31`
+            const bDate = b.date || `${b.year}-12-31`
+            return new Date(bDate) - new Date(aDate)
+          case 'recent':
+            // Use date if available, otherwise fall back to year
+            const aRecentDate = a.date || `${a.year}-12-31`
+            const bRecentDate = b.date || `${b.year}-12-31`
+            return new Date(bRecentDate) - new Date(aRecentDate)
+          case 'oldest':
+            // Use date if available, otherwise fall back to year
+            const aOldestDate = a.date || `${a.year}-01-01`
+            const bOldestDate = b.date || `${b.year}-01-01`
+            return new Date(aOldestDate) - new Date(bOldestDate)
+          default:
+            return 0
+        }
+      })
+    }
+    
+    return projects
+  }, [searchQuery, sortBy])
 
   // Create items for roving focus
   const projectItems = useMemo(() => 
@@ -60,72 +93,93 @@ const Projects = () => {
   }, [searchQuery])
 
   return (
-    <div className="min-h-screen pt-20 pb-12 px-4">
+    <div className="projects-page min-h-screen pt-20 pb-24 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-8 relative">
-          <div className="absolute top-0 right-4">
+        <div className="mb-6 relative">
+          <div className="absolute top-0 left-0">
             <CloseButton />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-fg mb-4 font-mono">
-            <span className="text-accent">[</span> projects.json <span className="text-accent">]</span>
-          </h1>
-          <p className="text-muted max-w-2xl mx-auto text-sm font-mono">
-            A collection of projects I've built. Use search to filter or browse all.
-          </p>
+          <div className="text-center">
+            <h1 className="text-xl font-bold text-fg mb-2 font-mono">
+              <span className="text-accent">[</span> projects <span className="text-accent">]</span>
+            </h1>
+            <p className="text-muted text-xs font-mono">
+              use search to filter or browse all
+            </p>
+          </div>
         </div>
 
-        {/* Search Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-8 max-w-lg mx-auto"
-        >
-          <div className="relative">
+        {/* Search and Sort */}
+        <div className="mb-6 space-y-3">
+          {/* Search Bar */}
+          <div>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search projects..."
+              placeholder="search..."
               data-search-input
-              className="w-full px-4 py-3 bg-card-bg border border-line rounded-lg 
-                focus:border-accent focus:outline-none transition-colors
+              className="w-full px-3 py-2 bg-card-bg border border-line 
+                focus:border-accent focus:outline-none
                 text-fg placeholder-muted font-mono text-sm"
             />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
+            {searchQuery && (
+              <div className="mt-1 text-xs text-muted font-mono">
+                {filteredProjects.length} result{filteredProjects.length !== 1 ? 's' : ''}
+              </div>
+            )}
           </div>
-          {searchQuery && (
-            <div className="mt-2 text-xs text-muted font-mono text-center">
-              {filteredProjects.length} result{filteredProjects.length !== 1 ? 's' : ''} found
+
+          {/* Sort Options - only show when not searching */}
+          {!searchQuery && (
+            <div className="flex items-center gap-2 text-sm font-mono">
+              <span className="text-muted">sort:</span>
+              <button
+                onClick={() => setSortBy('featured')}
+                className={`px-2 py-1 transition-colors ${
+                  sortBy === 'featured' 
+                    ? 'text-accent border-b border-accent' 
+                    : 'text-muted hover:text-fg'
+                }`}
+              >
+                featured
+              </button>
+              <span className="text-line">|</span>
+              <button
+                onClick={() => setSortBy('recent')}
+                className={`px-2 py-1 transition-colors ${
+                  sortBy === 'recent' 
+                    ? 'text-accent border-b border-accent' 
+                    : 'text-muted hover:text-fg'
+                }`}
+              >
+                recent
+              </button>
+              <span className="text-line">|</span>
+              <button
+                onClick={() => setSortBy('oldest')}
+                className={`px-2 py-1 transition-colors ${
+                  sortBy === 'oldest' 
+                    ? 'text-accent border-b border-accent' 
+                    : 'text-muted hover:text-fg'
+                }`}
+              >
+                oldest
+              </button>
             </div>
           )}
-        </motion.div>
+        </div>
 
-        {/* Projects Grid */}
+        {/* Projects List */}
         {filteredProjects.length > 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="grid md:grid-cols-2 gap-6 mb-12"
-          >
+          <div className="space-y-3 mb-12">
             {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index, duration: 0.5 }}
-                {...getItemProps(project, index)}
-              >
+              <div key={project.id} {...getItemProps(project, index)}>
                 <ProjectCard project={project} />
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         ) : (
           <motion.div
             initial={{ opacity: 0 }}
@@ -147,48 +201,15 @@ const Projects = () => {
           </motion.div>
         )}
 
-        {/* Bottom section - only show when not searching or no results */}
+        {/* Bottom section */}
         {(!searchQuery || filteredProjects.length > 0) && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="text-center"
-          >
-            <div className="bg-card-bg border border-line rounded-lg p-6">
-              <h3 className="text-lg font-bold text-fg mb-3 font-mono">
-                <span className="text-accent">▸</span> more work
-              </h3>
-              <p className="text-muted mb-4 text-sm font-mono">
-                Additional projects and contributions available on GitHub
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a
-                  href="https://github.com/tuckercraig"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-white rounded 
-                    font-mono text-sm hover:bg-accent/90 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/50"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                  </svg>
-                  GitHub
-                </a>
-                <a
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-line text-muted 
-                    hover:text-fg hover:border-accent transition-colors rounded font-mono text-sm
-                    focus:outline-none focus:ring-2 focus:ring-accent/50"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  Contact
-                </a>
+          <div className="border-t border-line pt-6">
+            <div className="text-xs font-mono text-muted">
+              <div className="mb-2">
+                <span className="text-accent">▸</span> more work on <a href="https://github.com/tuckercraig" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-fg transition-colors">github →</a>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

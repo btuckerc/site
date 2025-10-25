@@ -1,34 +1,17 @@
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 
-const CloseButton = ({ className = '', variant = 'default' }) => {
+const CloseButton = () => {
   const navigate = useNavigate()
 
-  const handleClose = () => {
-    navigate('/')
-  }
-
   return (
-    <motion.button
-      onClick={handleClose}
-      className={`group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${className}`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      aria-label="Close and return to home (ESC)"
-      title="Close (ESC)"
+    <button
+      onClick={() => navigate('/')}
+      className="px-3 py-1 border border-line bg-card-bg hover:border-accent hover:bg-accent/10 transition-colors focus-visible font-mono text-sm text-muted hover:text-accent"
+      aria-label="Go back home"
+      title="Back (Esc)"
     >
-      {variant === 'floating' ? (
-        // Floating close button for overlay-like appearance
-        <div className="flex items-center justify-center w-8 h-8 bg-bg-elev/90 border border-line backdrop-blur-sm hover:bg-accent/10 transition-colors">
-          <span className="font-mono text-muted group-hover:text-accent text-lg leading-none">×</span>
-        </div>
-      ) : (
-        // Inline text-style close button
-        <span className="font-mono text-muted group-hover:text-accent text-sm transition-colors">
-          [×]
-        </span>
-      )}
-    </motion.button>
+      ← back
+    </button>
   )
 }
 

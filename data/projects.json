@@ -3,6 +3,8 @@
     "id": "bootleg-dino-game-wrapper",
     "title": "Bootleg Dino Game Wrapper",
     "year": "2024",
+    "date": "2024-03-15",
+    "featured": 10,
     "blurb": "Enhanced Chrome dinosaur game with custom features and styling",
     "tags": ["JavaScript", "Game Development", "Web APIs"],
     "links": {
@@ -22,6 +24,8 @@
     "id": "angl",
     "title": "ANGL",
     "year": "2023",
+    "date": "2023-08-20",
+    "featured": 8,
     "blurb": "Angular-based web application for data visualization and analytics",
     "tags": ["Angular", "TypeScript", "Data Visualization"],
     "links": {
@@ -40,6 +44,7 @@
     "id": "spotify-preference-analyst",
     "title": "Spotify Preference Analyst",
     "year": "2023",
+    "date": "2023-06-10",
     "blurb": "Music analytics tool using Spotify Web API for personalized insights",
     "tags": ["Python", "Spotify API", "Data Analysis"],
     "links": {
@@ -58,6 +63,7 @@
     "id": "box-rss-twitter-bot",
     "title": "Box RSS Twitter Bot",
     "year": "2023",
+    "date": "2023-04-15",
     "blurb": "Automated social media bot for company RSS feed integration",
     "tags": ["Node.js", "Twitter API", "RSS"],
     "links": {
@@ -76,6 +82,7 @@
     "id": "davidson-class-addon",
     "title": "Davidson Class Add/Drop Notifier",
     "year": "2020",
+    "date": "2020-01-20",
     "blurb": "Chrome extension for Davidson College course registration notifications",
     "tags": ["JavaScript", "Chrome Extension", "Web Scraping"],
     "links": {

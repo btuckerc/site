@@ -20,7 +20,7 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 pt-16">
+    <div className="min-h-screen flex items-center justify-center px-4 pt-16 pb-12">
       <div className="max-w-2xl w-full text-center" ref={(el) => el && el.focus({ preventScroll: true })}>
         {/* Hero Section */}
         <motion.div
@@ -109,11 +109,6 @@ const Home = () => {
         {/* Command hint */}
         <div className="text-muted text-sm font-mono mb-8">
           type <kbd className="px-2 py-1 bg-line text-accent">{SYMBOLS.COMMAND_PREFIX}</kbd> for commands
-        </div>
-
-        {/* Bottom decorative element */}
-        <div className="text-muted text-xs font-mono">
-          {decorativeBorder(LABELS.WELCOME_TEXT)}
         </div>
       </div>
     </div>

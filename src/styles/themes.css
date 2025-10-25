@@ -40,23 +40,3 @@
   --line: #3c3836;
 }
 
-/* Ensure proper contrast ratios */
-@media (prefers-contrast: high) {
-  :root {
-    --fg: #ffffff;
-    --accent: #ffffff;
-    --line: #666666;
-  }
-  
-  .light {
-    --fg: #000000;
-    --accent: #000000;
-    --line: #999999;
-  }
-  
-  .amber {
-    --fg: #ffffff;
-    --accent: #ffff00;
-    --line: #666666;
-  }
-}

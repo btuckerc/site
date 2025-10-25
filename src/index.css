@@ -9,18 +9,18 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg);
   color: var(--fg);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* Default scrollbar styling */
@@ -41,30 +41,45 @@ body {
   background: var(--accent);
 }
 
-/* Custom ASCII scrollbar for About card */
+/* Custom ASCII scrollbar - vertical line with solid box handle */
 .ascii-scrollbar::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
+  background: transparent;
 }
 
 .ascii-scrollbar::-webkit-scrollbar-track {
-  background: var(--line);
+  background: transparent;
+  border: none;
   border-radius: 0;
 }
 
+/* Vertical line track */
+.ascii-scrollbar::-webkit-scrollbar-track:vertical {
+  background: linear-gradient(to right, transparent 3px, rgba(255, 255, 255, 0.3) 3px, rgba(255, 255, 255, 0.3) 4px, transparent 4px);
+}
+
+/* Solid box handle */
 .ascii-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--accent);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 0;
-  border: 1px solid var(--line);
+  min-height: 30px;
+  box-shadow: none;
 }
 
 .ascii-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--fg);
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
-/* Firefox scrollbar styling for About card */
+.ascii-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Firefox scrollbar styling */
 .ascii-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent) var(--line);
+  scrollbar-color: rgba(255, 255, 255, 0.8) transparent;
 }
 
 /* Focus styles */
@@ -112,13 +127,6 @@ select:focus-visible,
   top: 6px;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --accent: #00d4ff;
-    --border: #ffffff;
-  }
-}
 
 /* Screen reader only content */
 .sr-only {
@@ -202,3 +210,5 @@ select:focus-visible,
   border: 1px solid var(--border);
   border-radius: 8px;
 }
+
+/* Remove any project card overrides */

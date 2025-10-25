@@ -48,9 +48,9 @@ function AppContent() {
   })
 
   return (
-    <div className="min-h-screen bg-bg text-fg">
+    <div className="min-h-screen bg-bg text-fg overflow-x-hidden">
       {/* Skip to main content for accessibility */}
-      <a href="#main-content" className="skip-to-main">
+      <a href="#main-content" className="skip-to-main sr-only">
         Skip to main content
       </a>
       
