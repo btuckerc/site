@@ -7,12 +7,14 @@ const Contact = () => {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-6 relative">
-          <div className="absolute top-0 right-0">
+          <div className="absolute top-0 left-0">
             <CloseButton />
           </div>
-          <h1 className="text-xl font-bold text-fg font-mono">
-            <span className="text-accent">[</span> contact <span className="text-accent">]</span>
-          </h1>
+          <div className="text-center">
+            <h1 className="text-xl font-bold text-fg font-mono">
+              <span className="text-accent">[</span> contact <span className="text-accent">]</span>
+            </h1>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">

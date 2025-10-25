@@ -23,17 +23,12 @@ const Home = () => {
     <div className="min-h-screen flex items-center justify-center px-4 pt-16 pb-12">
       <div className="max-w-2xl w-full text-center" ref={(el) => el && el.focus({ preventScroll: true })}>
         {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="mb-16"
-        >
-          {/* Terminal Icon */}
+        <div className="mb-16">
+          {/* Terminal Icon - animates in */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             className="w-24 h-24 mx-auto mb-8 border border-line bg-card-bg flex items-center justify-center"
           >
             <div className="font-mono text-2xl text-accent">
@@ -41,54 +36,51 @@ const Home = () => {
             </div>
           </motion.div>
 
-          {/* ASCII line above name */}
+          {/* ASCII line above name - animates from center */}
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ delay: 0.25, duration: 0.4, ease: "easeOut" }}
+            transition={{ delay: 0.1, duration: 0.3, ease: "easeOut" }}
             className="font-mono text-accent text-center mb-6"
           >
             {SYMBOLS.HORIZONTAL_LINE}
           </motion.div>
 
-          {/* Name and Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.4, ease: "easeOut" }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-fg mb-4 tracking-wider font-mono"
-          >
+          {/* Name - ALWAYS VISIBLE, no animation */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-fg mb-4 tracking-wider font-mono">
             TUCKER CRAIG
-          </motion.h1>
+          </h1>
 
+          {/* Job Title - fades in from name position */}
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.3 }}
             className="text-accent text-lg md:text-xl font-medium mb-2 font-mono"
           >
             FINOPS ENGINEER @ BOX
           </motion.p>
 
+          {/* Education - fades in from name position */}
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.4, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
             className="text-muted text-sm md:text-base mb-8 font-mono"
           >
             DAVIDSON COLLEGE '20
           </motion.p>
 
-          {/* ASCII line below title */}
+          {/* ASCII line below title - animates from center */}
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.4, ease: "easeOut" }}
+            transition={{ delay: 0.4, duration: 0.3, ease: "easeOut" }}
             className="font-mono text-accent text-center mb-12"
           >
             {SYMBOLS.HORIZONTAL_LINE}
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Navigation Buttons using AsciiButton */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

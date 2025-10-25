@@ -12,9 +12,13 @@ html {
   overflow-x: hidden;
 }
 
+:root {
+  --font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
+}
+
 body {
   margin: 0;
-  font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg);
@@ -209,6 +213,16 @@ select:focus-visible,
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border);
   border-radius: 8px;
+}
+
+/* TUI dithering effect for images - Terminal aesthetic */
+.tui-dither {
+  filter: 
+    contrast(1.15)
+    brightness(0.95) 
+    saturate(0.85);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 /* Remove any project card overrides */

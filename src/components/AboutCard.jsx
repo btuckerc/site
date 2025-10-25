@@ -1,14 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import aboutData from '../../data/about.json'
 import { SYMBOLS, LABELS, bracketed, treeItem } from '../constants/symbols'
-import { fetchTotalLines, fetchRepoCount, formatNumber } from '../utils/github'
 
 const AboutCard = ({ onFlip }) => {
   const [isFlipped, setIsFlipped] = useState(false)
-  const [githubLines, setGithubLines] = useState(null)
-  const [repoCount, setRepoCount] = useState(null)
-  const [isLoadingGithub, setIsLoadingGithub] = useState(true)
   
   // Calculate years of experience
   const calculateYears = () => {
@@ -30,57 +26,14 @@ const AboutCard = ({ onFlip }) => {
     return hours >= 1000 ? `${(hours / 1000).toFixed(1)}k` : hours.toString()
   }
   
-  // Fetch GitHub stats on mount
-  useEffect(() => {
-    const fetchGitHubStats = async () => {
-      // Fetch lines of code
-      if (aboutData.githubRepos && aboutData.githubRepos.length > 0) {
-        try {
-          const lines = await fetchTotalLines(aboutData.githubRepos)
-          if (lines !== null) {
-            setGithubLines(formatNumber(lines))
-          } else {
-            setGithubLines('~50k')
-          }
-        } catch {
-          setGithubLines('~50k')
-        }
-      } else {
-        setGithubLines('~50k')
-      }
-
-      // Fetch repo count
-      if (aboutData.githubUsername) {
-        try {
-          const count = await fetchRepoCount(aboutData.githubUsername)
-          if (count !== null) {
-            setRepoCount(count)
-          } else {
-            setRepoCount('15+')
-          }
-        } catch {
-          setRepoCount('15+')
-        }
-      } else {
-        setRepoCount('15+')
-      }
-
-      setIsLoadingGithub(false)
-    }
-
-    fetchGitHubStats()
-  }, [])
-  
   const getStatValue = (stat) => {
     if (stat.value === 'auto-years') return calculateYears()
     if (stat.value === 'auto-terminal') return calculateTerminalHours()
     if (stat.value === 'auto-github') {
-      if (isLoadingGithub) return '...'
-      return githubLines || '~50k'
+      return aboutData.cachedGithubStats?.totalLines || '~50k'
     }
     if (stat.value === 'auto-repos') {
-      if (isLoadingGithub) return '...'
-      return repoCount?.toString() || '15+'
+      return aboutData.cachedGithubStats?.repoCount?.toString() || '15+'
     }
     return stat.value
   }
@@ -136,9 +89,15 @@ const AboutCard = ({ onFlip }) => {
             {/* Centered content container */}
             <div className="flex-1 flex flex-col items-center justify-center">
               {/* Avatar */}
-              <div className="mb-6 sm:mb-8">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 border border-accent bg-bg-elev flex items-center justify-center">
-                  <div className="font-mono text-3xl sm:text-4xl text-accent">{SYMBOLS.TERMINAL}</div>
+              <div className="mb-6 sm:mb-7">
+                <div className="w-40 h-40 sm:w-44 sm:h-44 mx-auto border border-accent bg-bg-elev overflow-hidden">
+                  <img 
+                    src="/avatar-336.png"
+                    srcSet="/avatar-336.png 1x, /avatar-672.png 2x"
+                    alt="Tucker Craig" 
+                    className="w-full h-full object-cover tui-dither"
+                    loading="lazy"
+                  />
                 </div>
               </div>
 

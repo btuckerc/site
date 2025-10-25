@@ -52,15 +52,32 @@
     "skills": [
       {
         "category": "Cloud & FinOps",
-        "items": ["AWS", "Cloud Cost Optimization", "Financial Analysis", "Data Visualization"]
+        "items": [
+          "AWS",
+          "Cloud Cost Optimization",
+          "Financial Analysis",
+          "Data Visualization"
+        ]
       },
       {
         "category": "Development",
-        "items": ["Python", "JavaScript", "React", "Node.js", "SQL"]
+        "items": [
+          "Python",
+          "JavaScript",
+          "React",
+          "Node.js",
+          "SQL"
+        ]
       },
       {
-        "category": "Tools & Platforms", 
-        "items": ["Docker", "Git", "Tableau", "Jupyter", "Linux"]
+        "category": "Tools & Platforms",
+        "items": [
+          "Docker",
+          "Git",
+          "Tableau",
+          "Jupyter",
+          "Linux"
+        ]
       }
     ],
     "badges": [
@@ -71,7 +88,7 @@
       },
       {
         "name": "FinOps Certified Practitioner",
-        "type": "certification", 
+        "type": "certification",
         "year": "2022"
       },
       {
@@ -82,10 +99,15 @@
     ],
     "interests": [
       "Open source contributing",
-      "Data visualization", 
+      "Data visualization",
       "Terminal-based workflows",
       "Minimalist design",
       "Cost optimization strategies"
     ]
+  },
+  "cachedGithubStats": {
+    "repoCount": 19,
+    "totalLines": "11.4k",
+    "lastUpdated": "2025-10-25T03:03:56.525Z"
   }
 }

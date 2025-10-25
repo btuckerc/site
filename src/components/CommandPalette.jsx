@@ -9,75 +9,74 @@ const CommandPalette = ({ isOpen, onClose }) => {
   const inputRef = useRef()
   const selectedItemRef = useRef(null)
   const navigate = useNavigate()
-  const { toggleMode, cycleVariant, themeName } = useTheme()
+  const { cycleTheme, theme } = useTheme()
 
   // Command definitions
   const commands = [
+    // Navigation
+    {
+      id: 'home',
+      title: 'go home',
+      description: 'return to landing page',
+      action: () => navigate('/'),
+      keywords: ['home', 'landing', 'main', 'index']
+    },
     {
       id: 'about',
-      title: 'Open About',
-      description: 'View profile and background',
+      title: 'go to about',
+      description: 'view profile and background',
       action: () => navigate('/about'),
-      keywords: ['about', 'profile', 'bio', 'background']
+      keywords: ['about', 'profile', 'bio', 'background', 'info']
     },
     {
       id: 'projects',
-      title: 'Open Projects',
-      description: 'Browse project portfolio',
+      title: 'go to projects',
+      description: 'browse project portfolio',
       action: () => navigate('/projects'),
-      keywords: ['projects', 'portfolio', 'work', 'code']
+      keywords: ['projects', 'portfolio', 'work', 'code', 'repos']
     },
     {
       id: 'contact',
-      title: 'Open Contact',
-      description: 'Get in touch',
+      title: 'go to contact',
+      description: 'get in touch',
       action: () => navigate('/contact'),
-      keywords: ['contact', 'email', 'reach', 'touch']
+      keywords: ['contact', 'email', 'reach', 'message', 'form']
     },
-    {
-      id: 'home',
-      title: 'Go Home',
-      description: 'Return to landing page',
-      action: () => navigate('/'),
-      keywords: ['home', 'landing', 'main']
-    },
-    {
-      id: 'theme-toggle',
-      title: 'Toggle Theme Mode',
-      description: 'Switch between light and dark mode',
-      action: () => toggleMode(),
-      keywords: ['theme', 'dark', 'light', 'mode', 'toggle']
-    },
-    {
-      id: 'theme-cycle',
-      title: 'Cycle Theme Variant',
-      description: `Current: ${themeName}`,
-      action: () => cycleVariant(),
-      keywords: ['theme', 'variant', 'color', 'style', 'neutral', 'warm', 'cool']
-    },
+    // Actions
     {
       id: 'search',
-      title: 'Search Projects',
-      description: 'Focus project search',
+      title: 'search projects',
+      description: 'focus project search input',
       action: () => {
         navigate('/projects')
-        // Focus search input after navigation
         setTimeout(() => {
           const searchInput = document.querySelector('[data-search-input]')
           if (searchInput) searchInput.focus()
         }, 100)
       },
-      keywords: ['search', 'find', 'filter', 'projects']
+      keywords: ['search', 'find', 'filter', 'projects', 'query']
     },
     {
-      id: 'help',
-      title: 'Show Help',
-      description: 'Display keyboard shortcuts',
-      action: () => {
-        // Could show a help modal
-        console.log('Help: hjkl/arrows=navigate, Enter/Space=select, :=command, /=search, gg=top, G=bottom, Esc=close')
-      },
-      keywords: ['help', 'shortcuts', 'keys', 'commands']
+      id: 'github',
+      title: 'open github',
+      description: 'visit github profile',
+      action: () => window.open('https://github.com/btuckerc', '_blank'),
+      keywords: ['github', 'code', 'repos', 'profile', 'social']
+    },
+    {
+      id: 'linkedin',
+      title: 'open linkedin',
+      description: 'visit linkedin profile',
+      action: () => window.open('https://linkedin.com/in/tuckercraig', '_blank'),
+      keywords: ['linkedin', 'profile', 'professional', 'social']
+    },
+    // Theme
+    {
+      id: 'theme',
+      title: 'cycle theme',
+      description: `current: ${theme}`,
+      action: () => cycleTheme(),
+      keywords: ['theme', 'dark', 'light', 'amber', 'color', 'mode']
     }
   ]
 

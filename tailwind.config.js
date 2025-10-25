@@ -23,8 +23,8 @@ export default {
         'focus-ring': 'var(--focus-ring)',
       },
       fontFamily: {
-        mono: ['Monaco', 'Menlo', 'Ubuntu Mono', 'Fira Code', 'monospace'],
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['var(--font-family)', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Fira Code', 'monospace'],
+        sans: ['var(--font-family)', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',

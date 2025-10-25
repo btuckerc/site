@@ -2,6 +2,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { lazy, Suspense, useState } from 'react'
 import { ThemeProvider } from './hooks/useTheme.jsx'
+import { FontProvider } from './hooks/useFont.jsx'
 import { FocusProvider } from './hooks/useRovingFocus.jsx'
 import { useHotkeys, useScrollTargets } from './hooks/useHotkeys'
 import StatusBar from './components/StatusBar'
@@ -106,9 +107,11 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider>
-      <FocusProvider>
-        <AppContent />
-      </FocusProvider>
+      <FontProvider>
+        <FocusProvider>
+          <AppContent />
+        </FocusProvider>
+      </FontProvider>
     </ThemeProvider>
   )
 }
