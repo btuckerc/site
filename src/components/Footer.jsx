@@ -76,7 +76,7 @@ const Footer = () => {
               className="hover:text-accent transition-colors"
               title="Select font family"
             >
-              font: {fontName.toLowerCase()}
+              font{/*: {fontName.toLowerCase()} */}
             </button>
             <span className="mx-2 text-line">│</span>
             <span className="text-accent">©</span> 2025
