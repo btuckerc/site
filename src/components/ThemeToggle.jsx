@@ -53,7 +53,7 @@ const ThemeToggle = () => {
         </>
       )}
 
-      <div onContextMenu={handleRightClick}>
+      <div onContextMenu={handleRightClick} style={{ display: 'inline-block' }}>
         <motion.button
           onClick={handleClick}
           className="relative p-2 rounded-full border border-border bg-card-bg backdrop-blur-sm hover:bg-accent/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
@@ -80,6 +80,7 @@ const ThemeToggle = () => {
       </motion.div>
     </motion.button>
       </div>
+    </>
   )
 }
 

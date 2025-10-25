@@ -2,7 +2,7 @@
   "name": "Tucker Craig",
   "role": "FinOps Engineer @ Box",
   "education": "Davidson College '20",
-  "location": "San Francisco, CA",
+  "location": "Redwood City, CA",
   "startDate": "2018-06-01",
   "terminalStartDate": "2011-06-01",
   "githubUsername": "btuckerc",
@@ -28,14 +28,14 @@
         "value": "$2.3M"
       },
       {
-        "label": "lines written",
-        "value": "auto-github",
-        "suffix": "lines"
-      },
-      {
-        "label": "terminal hours",
+        "label": "time in terminal",
         "value": "auto-terminal",
         "suffix": "hours"
+      },
+      {
+        "label": "code written with AI",
+        "value": "auto-github",
+        "suffix": "lines"
       },
       {
         "label": "projects",
@@ -52,12 +52,7 @@
     "skills": [
       {
         "category": "Cloud Platforms",
-        "items": [
-          "GCP",
-          "AWS",
-          "Azure",
-          "IBM Cloud"
-        ]
+        "items": ["GCP", "AWS", "Azure", "IBM Cloud"]
       },
       {
         "category": "FinOps & Cost Management",
@@ -71,15 +66,7 @@
       },
       {
         "category": "Languages",
-        "items": [
-          "Python",
-          "JavaScript",
-          "Go",
-          "SQL",
-          "Bash",
-          "Java",
-          "C"
-        ]
+        "items": ["Python", "JavaScript", "Go", "SQL", "Bash", "Java", "C"]
       },
       {
         "category": "Tools & Platforms",
@@ -102,11 +89,6 @@
       }
     ],
     "badges": [
-      {
-        "name": "AWS Certified",
-        "type": "certification",
-        "year": "2023"
-      },
       {
         "name": "FinOps Certified Practitioner",
         "type": "certification",
