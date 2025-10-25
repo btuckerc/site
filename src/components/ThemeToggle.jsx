@@ -1,17 +1,66 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from '../hooks/useTheme'
 
 const ThemeToggle = () => {
-  const { isDark, toggleMode } = useTheme()
+  const { theme, isDark, toggleMode, setTheme, themes } = useTheme()
+  const [isPickerOpen, setIsPickerOpen] = useState(false)
+
+  const handleRightClick = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsPickerOpen(!isPickerOpen)
+  }
+
+  const handleClick = (e) => {
+    e.stopPropagation()
+    toggleMode()
+  }
+
+  const handleThemeSelect = (selectedTheme) => {
+    setTheme(selectedTheme)
+    setIsPickerOpen(false)
+  }
 
   return (
-    <motion.button
-      onClick={toggleMode}
-      className="relative p-2 rounded-full border border-border bg-card-bg backdrop-blur-sm hover:bg-accent/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-    >
+    <>
+      {/* Theme Picker Dropdown */}
+      {isPickerOpen && (
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 z-40"
+            onClick={() => setIsPickerOpen(false)}
+          />
+          
+          {/* Picker Menu */}
+          <div className="fixed top-20 right-3 z-50 border border-line bg-bg/95 backdrop-blur-sm">
+            <div className="text-xs font-mono">
+              {themes.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => handleThemeSelect(t)}
+                  className={`
+                    block w-full text-left px-4 py-2 hover:bg-accent/10 transition-colors
+                    ${theme === t ? 'text-accent' : 'text-muted'}
+                  `}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
+      <div onContextMenu={handleRightClick}>
+        <motion.button
+          onClick={handleClick}
+          className="relative p-2 rounded-full border border-border bg-card-bg backdrop-blur-sm hover:bg-accent/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+        >
       <motion.div
         key={isDark}
         initial={{ rotate: -90, opacity: 0 }}
@@ -30,6 +79,7 @@ const ThemeToggle = () => {
         )}
       </motion.div>
     </motion.button>
+      </div>
   )
 }
 

@@ -41,6 +41,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Fira+Code:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Load font preference immediately to prevent flash -->
+    <script>
+      (function() {
+        const fonts = {
+          'source-code': "'Source Code Pro', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
+          'ibm-plex': "'IBM Plex Mono', 'SF Mono', 'Menlo', 'Consolas', monospace",
+          'jetbrains': "'JetBrains Mono', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
+          'fira-code': "'Fira Code', 'SF Mono', 'Menlo', 'Consolas', monospace",
+          'montserrat': "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif",
+          'system': "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+        };
+        const savedFont = localStorage.getItem('font-family') || 'source-code';
+        document.documentElement.style.setProperty('--font-family', fonts[savedFont]);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

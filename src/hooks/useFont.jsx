@@ -12,14 +12,14 @@ export const useFont = () => {
 
 const FONTS = [
   {
-    id: 'ibm-plex',
-    name: 'IBM Plex Mono',
-    family: "'IBM Plex Mono', 'SF Mono', 'Menlo', 'Consolas', monospace"
-  },
-  {
     id: 'source-code',
     name: 'Source Code Pro',
     family: "'Source Code Pro', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
+  },
+  {
+    id: 'ibm-plex',
+    name: 'IBM Plex Mono',
+    family: "'IBM Plex Mono', 'SF Mono', 'Menlo', 'Consolas', monospace"
   },
   {
     id: 'jetbrains',
@@ -45,7 +45,7 @@ const FONTS = [
 
 export const FontProvider = ({ children }) => {
   const [fontId, setFontId] = useState(() => {
-    return localStorage.getItem('font-family') || 'ibm-plex'
+    return localStorage.getItem('font-family') || 'source-code'
   })
 
   const currentFont = FONTS.find(f => f.id === fontId) || FONTS[0]

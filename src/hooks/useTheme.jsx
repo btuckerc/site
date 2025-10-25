@@ -40,11 +40,19 @@ export const ThemeProvider = ({ children }) => {
     setTheme(themes[nextIndex])
   }
 
+  const setSpecificTheme = (newTheme) => {
+    setTheme(newTheme)
+  }
+
+  const themes = ['dark', 'light', 'amber']
+
   return (
     <ThemeContext.Provider value={{
       theme,
       isDark: theme === 'dark',
       cycleTheme,
+      setTheme: setSpecificTheme,
+      themes,
       // Backwards compatibility
       toggleMode: cycleTheme
     }}>

@@ -13,38 +13,47 @@ const AboutCard = ({ onFlip }) => {
   const backScrollRef = useRef(null)
   
   // Calculate years of experience
-  // Detect scrollable content
+  // Detect scrollable content - optimized for instant response
   useEffect(() => {
-    const checkScroll = (ref, setTopShadow, setBottomShadow) => {
+    const checkScroll = (ref, setTopShadow, setBottomShadow, isAvatar = false) => {
       if (!ref.current) return
       const { scrollTop, scrollHeight, clientHeight } = ref.current
       const isScrollable = scrollHeight > clientHeight
-      const isAtTop = scrollTop < 5
-      const isAtBottom = scrollHeight - scrollTop - clientHeight < 5
-      setTopShadow(isScrollable && !isAtTop)
+      
+      if (isAvatar) {
+        // For avatar: show shadow immediately when any scroll happens, hide when past avatar
+        const avatarHeight = 200 // approximate avatar + margins
+        const isAvatarBeingCutOff = scrollTop > 0 && scrollTop < avatarHeight
+        setTopShadow(isScrollable && isAvatarBeingCutOff)
+      } else {
+        const isAtTop = scrollTop < 1
+        setTopShadow(isScrollable && !isAtTop)
+      }
+      
+      const isAtBottom = scrollHeight - scrollTop - clientHeight < 1
       setBottomShadow(isScrollable && !isAtBottom)
     }
 
-    const handleFrontScroll = () => checkScroll(frontScrollRef, setShowFrontTopShadow, setShowFrontBottomShadow)
-    const handleBackScroll = () => checkScroll(backScrollRef, setShowBackTopShadow, setShowBackBottomShadow)
+    const handleFrontScroll = () => checkScroll(frontScrollRef, setShowFrontTopShadow, setShowFrontBottomShadow, true)
+    const handleBackScroll = () => checkScroll(backScrollRef, setShowBackTopShadow, setShowBackBottomShadow, false)
 
     const frontEl = frontScrollRef.current
     const backEl = backScrollRef.current
 
     if (frontEl) {
       handleFrontScroll()
-      frontEl.addEventListener('scroll', handleFrontScroll)
+      frontEl.addEventListener('scroll', handleFrontScroll, { passive: true })
     }
     if (backEl) {
       handleBackScroll()
-      backEl.addEventListener('scroll', handleBackScroll)
+      backEl.addEventListener('scroll', handleBackScroll, { passive: true })
     }
 
     const handleResize = () => {
       handleFrontScroll()
       handleBackScroll()
     }
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
 
     return () => {
       if (frontEl) frontEl.removeEventListener('scroll', handleFrontScroll)
@@ -136,12 +145,12 @@ const AboutCard = ({ onFlip }) => {
               </button>
             </div>
             
-            <div className="h-full flex flex-col pt-8">
+            <div className="h-full flex flex-col pt-8 relative">
+              {/* Top shadow - fixed at top of scroll area, avatar-width, accounting for scrollbar */}
+              <div className="absolute top-8 left-1/2 w-40 sm:w-44 h-8 pointer-events-none z-20 transition-opacity duration-200" style={{ background: 'linear-gradient(to bottom, var(--bg) 0%, transparent 100%)', transform: 'translateX(calc(-50% - 4px))', opacity: showFrontTopShadow ? 1 : 0 }}></div>
+              
               {/* Scrollable content anchored to top */}
-              <div ref={frontScrollRef} className="flex-1 overflow-y-auto ascii-scrollbar pr-2 relative">
-                {/* Top shadow - positioned at scroll container top, avatar-width */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 sm:w-44 h-6 pointer-events-none z-10" style={{ display: showFrontTopShadow ? 'block' : 'none', background: 'linear-gradient(to bottom, var(--bg) 0%, transparent 100%)' }}></div>
-                
+              <div ref={frontScrollRef} className="flex-1 overflow-y-auto ascii-scrollbar pr-2">
                 {/* Avatar */}
                 <div className="mb-6 sm:mb-7 flex justify-center">
                   <div className="w-40 h-40 sm:w-44 sm:h-44 border border-accent bg-bg-elev overflow-hidden">
@@ -180,7 +189,7 @@ const AboutCard = ({ onFlip }) => {
 
               {/* Flip hint at bottom */}
               <div className="relative pt-3 border-t border-line">
-                <div className="absolute bottom-full left-0 right-0 h-6 pointer-events-none" style={{ display: showFrontBottomShadow ? 'block' : 'none', background: 'linear-gradient(to top, var(--bg) 0%, transparent 100%)' }}></div>
+                <div className="absolute bottom-full left-0 right-0 h-6 pointer-events-none transition-opacity duration-200" style={{ background: 'linear-gradient(to top, var(--bg) 0%, transparent 100%)', opacity: showFrontBottomShadow ? 1 : 0 }}></div>
                 <p className="text-muted text-xs sm:text-sm text-center font-mono opacity-70">
                   click to flip
                 </p>
@@ -216,7 +225,7 @@ const AboutCard = ({ onFlip }) => {
                 <h3 className="text-base sm:text-lg font-bold text-accent font-mono">
                   {bracketed('about')}
                 </h3>
-                <div className="absolute top-full left-0 right-0 h-6 pointer-events-none" style={{ display: showBackTopShadow ? 'block' : 'none', background: 'linear-gradient(to bottom, var(--bg) 0%, transparent 100%)' }}></div>
+                <div className="absolute top-full left-0 right-0 h-6 pointer-events-none transition-opacity duration-200" style={{ background: 'linear-gradient(to bottom, var(--bg) 0%, transparent 100%)', opacity: showBackTopShadow ? 1 : 0 }}></div>
               </div>
               
               <div ref={backScrollRef} className="flex-1 space-y-5 sm:space-y-6 overflow-y-auto ascii-scrollbar pr-2 pt-5">
@@ -273,7 +282,7 @@ const AboutCard = ({ onFlip }) => {
               </div>
 
               <div className="relative pt-3 border-t border-line">
-                <div className="absolute bottom-full left-0 right-0 h-6 pointer-events-none" style={{ display: showBackBottomShadow ? 'block' : 'none', background: 'linear-gradient(to top, var(--bg) 0%, transparent 100%)' }}></div>
+                <div className="absolute bottom-full left-0 right-0 h-6 pointer-events-none transition-opacity duration-200" style={{ background: 'linear-gradient(to top, var(--bg) 0%, transparent 100%)', opacity: showBackBottomShadow ? 1 : 0 }}></div>
                 <p className="text-muted text-xs sm:text-sm text-center font-mono opacity-70">
                   click to flip back
                 </p>
