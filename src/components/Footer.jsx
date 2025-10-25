@@ -41,7 +41,7 @@ const Footer = () => {
                   `}
                 >
                   {font.name.toLowerCase()}
-                  {font.id === 'sf-mono' && <span className="ml-2 text-line">(default)</span>}
+                  {font.id === 'ibm-plex' && <span className="ml-2 text-line">(default)</span>}
                 </button>
               ))}
             </div>

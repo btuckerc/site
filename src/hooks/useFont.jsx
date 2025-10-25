@@ -12,40 +12,40 @@ export const useFont = () => {
 
 const FONTS = [
   {
-    id: 'sf-mono',
-    name: 'SF Mono',
-    family: "'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace"
+    id: 'ibm-plex',
+    name: 'IBM Plex Mono',
+    family: "'IBM Plex Mono', 'SF Mono', 'Menlo', 'Consolas', monospace"
   },
   {
-    id: 'sf-pro',
-    name: 'SF Pro',
-    family: "'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif"
+    id: 'source-code',
+    name: 'Source Code Pro',
+    family: "'Source Code Pro', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
   },
   {
-    id: 'inter',
-    name: 'Inter',
-    family: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+    id: 'jetbrains',
+    name: 'JetBrains Mono',
+    family: "'JetBrains Mono', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
+  },
+  {
+    id: 'fira-code',
+    name: 'Fira Code',
+    family: "'Fira Code', 'SF Mono', 'Menlo', 'Consolas', monospace"
+  },
+  {
+    id: 'montserrat',
+    name: 'Montserrat',
+    family: "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif"
   },
   {
     id: 'system',
     name: 'System',
-    family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif"
-  },
-  {
-    id: 'jetbrains',
-    name: 'JetBrains',
-    family: "'JetBrains Mono', 'Fira Code', 'Consolas', monospace"
-  },
-  {
-    id: 'source-code',
-    name: 'Source Code',
-    family: "'Source Code Pro', 'Monaco', monospace"
+    family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
   }
 ]
 
 export const FontProvider = ({ children }) => {
   const [fontId, setFontId] = useState(() => {
-    return localStorage.getItem('font-family') || 'sf-mono'
+    return localStorage.getItem('font-family') || 'ibm-plex'
   })
 
   const currentFont = FONTS.find(f => f.id === fontId) || FONTS[0]

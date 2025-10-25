@@ -19,7 +19,12 @@ const ProjectCard = ({ project }) => {
         disabled={!hasExpandableContent}
       >
         <div className="flex items-start justify-between gap-3 mb-3">
-          <h3 className="text-lg font-bold text-fg flex-1">{project.title}</h3>
+          <div className="flex-1">
+            <h3 className="text-lg font-bold text-fg">{project.title}</h3>
+            {project.fork && (
+              <span className="text-xs text-muted border border-line px-2 py-0.5 inline-block mt-1">forked</span>
+            )}
+          </div>
           <span className="text-sm text-accent shrink-0">{project.year}</span>
         </div>
         {project.blurb && (

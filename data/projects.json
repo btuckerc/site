@@ -1,100 +1,277 @@
 [
   {
-    "id": "bootleg-dino-game-wrapper",
-    "title": "Bootleg Dino Game Wrapper",
+    "id": "trivrdy",
+    "title": "trivrdy - Jeopardy Study Platform",
     "year": "2024",
-    "date": "2024-03-15",
+    "date": "2024-12-01",
+    "dateCreated": "2024-12-01",
+    "dateModified": "2024-12-14",
     "featured": 10,
-    "blurb": "Enhanced Chrome dinosaur game with custom features and styling",
-    "tags": ["JavaScript", "Game Development", "Web APIs"],
+    "blurb": "Modern, interactive Jeopardy study platform with authentic questions from past episodes",
+    "tags": ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "Prisma"],
     "links": {
-      "github": "https://github.com/tuckercraig/bootleg-dino-game",
-      "demo": "https://tuckercraig.github.io/bootleg-dino-game"
+      "github": "https://github.com/btuckerc/jeopardy"
     },
-    "overview": "Created an enhanced version of Chrome's offline dinosaur game with additional features, custom graphics, and improved gameplay mechanics.",
-    "stack": ["Vanilla JavaScript", "HTML5 Canvas", "CSS3", "GitHub Pages"],
+    "overview": "Full-featured trivia platform that helps users improve their Jeopardy knowledge through practice modes and full game simulations. Features smart answer validation, progress tracking, and authentic questions from the J! Archive.",
+    "stack": ["Next.js 14", "TypeScript 5", "Tailwind CSS", "PostgreSQL", "Prisma ORM", "Supabase Auth", "React Query", "Vercel"],
     "features": [
-      "Custom sprite animations",
-      "Enhanced collision detection", 
-      "Power-up system",
-      "Progressive difficulty scaling"
+      "Classic game mode with complete Jeopardy board simulation",
+      "Practice mode with spaced repetition learning",
+      "Smart answer validation with alternative acceptance",
+      "Progress tracking and performance analytics",
+      "Spoiler protection for recent episodes",
+      "Leaderboards and user profiles",
+      "Dark mode support"
     ]
   },
   {
-    "id": "angl",
-    "title": "ANGL",
-    "year": "2023",
-    "date": "2023-08-20",
+    "id": "blog",
+    "title": "Personal Blog & CMS",
+    "year": "2024",
+    "date": "2024-12-22",
+    "dateCreated": "2024-12-22",
+    "dateModified": "2024-12-23",
+    "featured": 9,
+    "blurb": "Hugo-based personal blog with automated deployment and Bluesky PDS integration",
+    "tags": ["Hugo", "DigitalOcean", "GitHub Actions", "Bluesky", "Nginx"],
+    "links": {
+      "github": "https://github.com/btuckerc/blog",
+      "demo": "https://btuckerc.com"
+    },
+    "overview": "Fully automated personal blog built with Hugo static site generator, featuring custom deployment pipeline to DigitalOcean and integration with Bluesky Protocol (Personal Data Server).",
+    "stack": ["Hugo", "Paper Theme", "GitHub Actions", "DigitalOcean", "Nginx", "Bluesky PDS"],
+    "features": [
+      "Automated CI/CD pipeline with GitHub Actions",
+      "Custom image migration scripts for Obsidian compatibility",
+      "Dark mode by default with theme customization",
+      "Full-text search functionality",
+      "SEO optimization and social link integration",
+      "Bluesky PDS instance for decentralized social identity"
+    ]
+  },
+  {
+    "id": "audioreader",
+    "title": "AudioReader - Local Audiobook Server",
+    "year": "2025",
+    "date": "2025-06-02",
+    "dateCreated": "2025-06-02",
+    "dateModified": "2025-06-02",
     "featured": 8,
-    "blurb": "Angular-based web application for data visualization and analytics",
-    "tags": ["Angular", "TypeScript", "Data Visualization"],
+    "blurb": "Self-hosted audiobook server with AI transcription using OpenAI Whisper",
+    "tags": ["Python", "Flask", "Whisper", "HTML5 Audio", "FFmpeg"],
     "links": {
-      "github": "https://github.com/tuckercraig/angl"
+      "github": "https://github.com/btuckerc/audioreader"
     },
-    "overview": "Built a comprehensive data analytics dashboard using Angular with real-time data processing and interactive visualizations.",
-    "stack": ["Angular 15", "TypeScript", "RxJS", "Chart.js", "Material UI"],
+    "overview": "Minimal self-hosted server that uses OpenAI's Whisper to generate VTT captions for local audio files. Features web interface for browsing collections, managing transcriptions, and synchronized playback with captions.",
+    "stack": ["Python 3.11", "Flask", "OpenAI Whisper", "FFmpeg", "HTML5 Audio", "pyenv"],
     "features": [
-      "Real-time data streaming",
-      "Interactive charts and graphs",
-      "Responsive design",
-      "Export functionality"
+      "Automatic VTT caption generation with word-level timestamps",
+      "Integrated HTML5 audio player with synchronized captions",
+      "Parallel transcription processing (configurable workers)",
+      "Speed testing for different Whisper models",
+      "Playlist functionality for sequential playback",
+      "Background processing with real-time progress logs"
     ]
   },
   {
-    "id": "spotify-preference-analyst",
+    "id": "boilerplate",
+    "title": "Cross-Platform Dotfiles",
+    "year": "2019",
+    "date": "2019-05-13",
+    "dateCreated": "2019-05-13",
+    "dateModified": "2025-10-24",
+    "featured": 8,
+    "blurb": "Modern dotfile management system using chezmoi and mise for macOS and Linux",
+    "tags": ["Shell", "Lua", "Chezmoi", "Mise", "Neovim"],
+    "links": {
+      "github": "https://github.com/btuckerc/boilerplate"
+    },
+    "overview": "Comprehensive cross-platform dotfile system managed with chezmoi and mise. Supports both macOS (zsh) and Linux (bash) with shared POSIX configuration. Includes full Neovim, Tmux, and terminal configurations.",
+    "stack": ["Bash/Zsh", "Chezmoi", "Mise", "Lua (Neovim)", "Starship", "Tmux"],
+    "features": [
+      "Automated one-line setup script",
+      "Cross-platform support (macOS/Linux)",
+      "Tool version management with mise",
+      "Full Neovim configuration with LSP, Treesitter, Telescope",
+      "Tmux configuration with plugin manager",
+      "Project templates for Go and Python",
+      "Optional Brewfile for additional packages"
+    ]
+  },
+  {
+    "id": "spotify-dj",
+    "title": "Spotify DJ - Smart Playlist Ordering",
+    "year": "2019",
+    "date": "2019-04-20",
+    "dateCreated": "2019-04-20",
+    "dateModified": "2025-02-15",
+    "featured": 7,
+    "blurb": "Intelligent playlist ordering based on BPM, key, and energy analysis",
+    "tags": ["Python", "Spotify API", "Music Analysis", "Spotipy"],
+    "links": {
+      "github": "https://github.com/btuckerc/spotify-dj"
+    },
+    "overview": "Python application that analyzes Spotify playlists and suggests optimal song ordering based on musical characteristics including BPM, key compatibility, danceability, and energy levels for smooth transitions.",
+    "stack": ["Python", "Spotipy", "Spotify Web API", "OAuth2"],
+    "features": [
+      "Audio feature analysis (BPM, key, energy, danceability)",
+      "Smart song ordering algorithm for seamless transitions",
+      "Support for user playlists and track libraries",
+      "OAuth authentication flow",
+      "Customizable weighting for different audio features"
+    ]
+  },
+  {
+    "id": "comic-scanner",
+    "title": "ComicScanner - Comic Book Cataloging",
+    "year": "2024",
+    "date": "2024-04-18",
+    "dateCreated": "2024-04-18",
+    "dateModified": "2024-05-30",
+    "blurb": "Image-based comic book identification and cataloging system",
+    "tags": ["Python", "Computer Vision", "Flask", "JavaScript"],
+    "links": {
+      "github": "https://github.com/btuckerc/ComicScanner"
+    },
+    "overview": "Tool for scanning and cataloging comic book collections using image recognition. Features barcode scanning, automatic metadata retrieval, and collection management through a web interface.",
+    "stack": ["Python", "Flask", "JavaScript", "Computer Vision APIs"],
+    "features": [
+      "Image-based comic identification",
+      "Automatic metadata retrieval from multiple databases",
+      "Collection management interface",
+      "Export and import functionality for backups",
+      "Support for ComicVine and Grand Comics Database"
+    ]
+  },
+  {
+    "id": "rss-summarizer",
+    "title": "RSS News Summarizer",
+    "year": "2024",
+    "date": "2024-05-02",
+    "dateCreated": "2024-05-02",
+    "dateModified": "2024-05-02",
+    "blurb": "AI-powered news feed summarization tool",
+    "tags": ["Python", "RSS", "NLP", "HTML"],
+    "links": {
+      "github": "https://github.com/btuckerc/rss-summarizer"
+    },
+    "overview": "Web application that processes RSS news feeds and generates concise summaries using natural language processing. Helps users stay informed without reading full articles.",
+    "stack": ["Python", "RSS Parser", "HTML/CSS"],
+    "features": [
+      "RSS feed parsing and aggregation",
+      "Automated content summarization",
+      "Web-based interface for viewing summaries",
+      "Support for multiple news sources",
+      "Markdown output formatting"
+    ]
+  },
+  {
+    "id": "angl-chess",
+    "title": "ANGL Chess Trainer",
+    "year": "2025",
+    "date": "2025-10-19",
+    "dateCreated": "2025-10-19",
+    "dateModified": "2025-10-19",
+    "blurb": "Pedagogy-first web-based chess training platform",
+    "tags": ["Web", "Chess", "Education"],
+    "links": {
+      "github": "https://github.com/btuckerc/angl-chess"
+    },
+    "overview": "Educational chess platform focused on teaching chess concepts and strategies through interactive lessons and practice exercises.",
+    "stack": ["JavaScript", "HTML5", "CSS3"],
+    "features": [
+      "Interactive chess board",
+      "Educational lesson structure",
+      "Practice exercises and puzzles"
+    ]
+  },
+  {
+    "id": "angl-note",
+    "title": "ANGL Note",
+    "year": "2025",
+    "date": "2025-10-12",
+    "dateCreated": "2025-10-12",
+    "dateModified": "2025-10-18",
+    "blurb": "Note-taking application with advanced organization",
+    "tags": ["Web", "Productivity", "Note-taking"],
+    "links": {
+      "github": "https://github.com/btuckerc/angl-note"
+    },
+    "overview": "Modern note-taking application designed for efficient information capture and organization.",
+    "features": [
+      "Fast note creation and editing",
+      "Advanced search and organization",
+      "Tag-based categorization"
+    ]
+  },
+  {
+    "id": "omarchy",
+    "title": "Omarchy - Arch Linux Setup",
+    "year": "2025",
+    "date": "2025-10-06",
+    "dateCreated": "2025-10-06",
+    "dateModified": "2025-10-06",
+    "fork": true,
+    "blurb": "Opinionated Arch Linux with Hyprland window manager configuration",
+    "tags": ["Linux", "Arch Linux", "Hyprland", "System Configuration"],
+    "links": {
+      "github": "https://github.com/btuckerc/omarchy"
+    },
+    "overview": "Complete Arch Linux setup with Hyprland window manager, optimized for productivity and aesthetics. Features carefully curated configurations for a tiling window manager workflow.",
+    "stack": ["Arch Linux", "Hyprland", "Wayland", "Shell Scripts"],
+    "features": [
+      "Hyprland tiling window manager setup",
+      "Custom keybindings and workspace management",
+      "Aesthetic theme and styling",
+      "Productivity-focused configuration"
+    ]
+  },
+  {
+    "id": "spotify-analyst",
     "title": "Spotify Preference Analyst",
-    "year": "2023",
-    "date": "2023-06-10",
-    "blurb": "Music analytics tool using Spotify Web API for personalized insights",
-    "tags": ["Python", "Spotify API", "Data Analysis"],
+    "year": "2019",
+    "date": "2019-10-23",
+    "dateCreated": "2019-10-23",
+    "dateModified": "2019-10-23",
+    "blurb": "Music analytics using linear algebra to analyze listening preferences",
+    "tags": ["Python", "Linear Algebra", "Spotify API", "Data Analysis"],
     "links": {
-      "github": "https://github.com/tuckercraig/spotify-analyst"
+      "github": "https://github.com/btuckerc/spotify-analyst"
     },
-    "overview": "Developed a Python application that analyzes Spotify listening habits and provides personalized music recommendations.",
-    "stack": ["Python", "Spotipy", "Pandas", "Matplotlib", "Flask"],
+    "overview": "Python application that analyzes Spotify listening habits using euclidean distance calculations to map music preferences and provide personalized recommendations based on mathematical audio feature analysis.",
+    "stack": ["Python", "Spotipy", "NumPy", "Spotify Web API"],
     "features": [
-      "Listening history analysis",
-      "Genre preference mapping",
-      "Recommendation engine",
-      "Data export capabilities"
+      "Listening history analysis with linear algebra",
+      "Euclidean distance calculations for preference mapping",
+      "Genre preference visualization",
+      "Mathematical recommendation engine",
+      "Audio feature correlation analysis"
     ]
   },
   {
-    "id": "box-rss-twitter-bot",
-    "title": "Box RSS Twitter Bot",
-    "year": "2023",
-    "date": "2023-04-15",
-    "blurb": "Automated social media bot for company RSS feed integration",
-    "tags": ["Node.js", "Twitter API", "RSS"],
+    "id": "site",
+    "title": "This Website",
+    "year": "2025",
+    "date": "2025-10-25",
+    "dateCreated": "2025-10-25",
+    "dateModified": "2025-10-25",
+    "featured": 10,
+    "blurb": "Personal portfolio website with TUI aesthetic and dynamic content",
+    "tags": ["React", "Vite", "Tailwind CSS", "Framer Motion"],
     "links": {
-      "github": "https://github.com/tuckercraig/box-rss-bot"
+      "github": "https://github.com/btuckerc/site"
     },
-    "overview": "Built an automated Twitter bot that monitors Box company RSS feeds and posts relevant updates with smart filtering.",
-    "stack": ["Node.js", "Twitter API v2", "RSS Parser", "Cron Jobs"],
+    "overview": "Modern portfolio website built with React and Vite, featuring a terminal-inspired user interface. Includes dynamic GitHub integration for stats, font switcher, command palette, and responsive design.",
+    "stack": ["React 18", "Vite", "Tailwind CSS", "Framer Motion", "React Router", "GitHub API"],
     "features": [
-      "RSS feed monitoring",
-      "Content filtering algorithms",
-      "Automated posting schedule",
-      "Error handling and logging"
-    ]
-  },
-  {
-    "id": "davidson-class-addon",
-    "title": "Davidson Class Add/Drop Notifier",
-    "year": "2020",
-    "date": "2020-01-20",
-    "blurb": "Chrome extension for Davidson College course registration notifications",
-    "tags": ["JavaScript", "Chrome Extension", "Web Scraping"],
-    "links": {
-      "github": "https://github.com/tuckercraig/davidson-class-notifier"
-    },
-    "overview": "Created a Chrome extension to notify Davidson College students when spots open in desired classes during registration periods.",
-    "stack": ["JavaScript", "Chrome Extension API", "HTML/CSS", "Web Notifications"],
-    "features": [
-      "Real-time class availability monitoring",
-      "Desktop notifications",
-      "Multiple class tracking",
-      "Registration portal integration"
+      "TUI-inspired minimal aesthetic",
+      "Command palette (⌘K) for navigation",
+      "Dynamic font switching (6 fonts available)",
+      "GitHub API integration for live stats",
+      "Animated page transitions with Framer Motion",
+      "Projects filtering and sorting",
+      "Keyboard navigation support",
+      "Responsive contact form"
     ]
   }
 ]
