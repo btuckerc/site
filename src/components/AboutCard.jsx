@@ -1,14 +1,60 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import aboutData from '../../data/about.json'
 import { SYMBOLS, LABELS, bracketed, treeItem } from '../constants/symbols'
 
 const AboutCard = ({ onFlip }) => {
   const [isFlipped, setIsFlipped] = useState(false)
+  const [showFrontTopShadow, setShowFrontTopShadow] = useState(false)
+  const [showFrontBottomShadow, setShowFrontBottomShadow] = useState(false)
+  const [showBackTopShadow, setShowBackTopShadow] = useState(false)
+  const [showBackBottomShadow, setShowBackBottomShadow] = useState(false)
+  const frontScrollRef = useRef(null)
+  const backScrollRef = useRef(null)
   
   // Calculate years of experience
+  // Detect scrollable content
+  useEffect(() => {
+    const checkScroll = (ref, setTopShadow, setBottomShadow) => {
+      if (!ref.current) return
+      const { scrollTop, scrollHeight, clientHeight } = ref.current
+      const isScrollable = scrollHeight > clientHeight
+      const isAtTop = scrollTop < 5
+      const isAtBottom = scrollHeight - scrollTop - clientHeight < 5
+      setTopShadow(isScrollable && !isAtTop)
+      setBottomShadow(isScrollable && !isAtBottom)
+    }
+
+    const handleFrontScroll = () => checkScroll(frontScrollRef, setShowFrontTopShadow, setShowFrontBottomShadow)
+    const handleBackScroll = () => checkScroll(backScrollRef, setShowBackTopShadow, setShowBackBottomShadow)
+
+    const frontEl = frontScrollRef.current
+    const backEl = backScrollRef.current
+
+    if (frontEl) {
+      handleFrontScroll()
+      frontEl.addEventListener('scroll', handleFrontScroll)
+    }
+    if (backEl) {
+      handleBackScroll()
+      backEl.addEventListener('scroll', handleBackScroll)
+    }
+
+    const handleResize = () => {
+      handleFrontScroll()
+      handleBackScroll()
+    }
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      if (frontEl) frontEl.removeEventListener('scroll', handleFrontScroll)
+      if (backEl) backEl.removeEventListener('scroll', handleBackScroll)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   const calculateYears = () => {
-    if (!aboutData.startDate) return '6.5'
+    if (!aboutData.startDate) return '6+'
     const start = new Date(aboutData.startDate)
     const now = new Date()
     const years = (now - start) / (1000 * 60 * 60 * 24 * 365.25)
@@ -51,9 +97,9 @@ const AboutCard = ({ onFlip }) => {
   }
 
   return (
-    <div className="flex justify-center w-full">
+    <div className="flex justify-center w-full py-4">
       <motion.div 
-        className="relative w-full max-w-2xl h-[42rem] sm:h-[48rem] perspective-1000 cursor-pointer focus-visible pointer-events-auto"
+        className="relative w-full max-w-2xl h-[min(48rem,calc(100vh-8rem))] perspective-1000 cursor-pointer focus-visible pointer-events-auto"
         onClick={handleFlip}
         onKeyDown={handleKeyDown}
         tabIndex={0}
@@ -69,8 +115,12 @@ const AboutCard = ({ onFlip }) => {
         >
           {/* Front of card */}
           <motion.div 
-            className="absolute inset-0 w-full h-full backface-hidden bg-card-bg border border-line p-6 sm:p-8 flex flex-col"
-            style={{ transform: 'rotateY(0deg)' }}
+            className="absolute inset-0 w-full h-full backface-hidden bg-card-bg border border-line p-6 sm:p-8"
+            style={{ 
+              transform: 'rotateY(0deg)',
+              pointerEvents: isFlipped ? 'none' : 'auto',
+              zIndex: isFlipped ? 1 : 2
+            }}
           >
             {/* Close button */}
             <div className="absolute top-4 right-4 z-10 pointer-events-auto">
@@ -86,54 +136,66 @@ const AboutCard = ({ onFlip }) => {
               </button>
             </div>
             
-            {/* Centered content container */}
-            <div className="flex-1 flex flex-col items-center justify-center">
-              {/* Avatar */}
-              <div className="mb-6 sm:mb-7">
-                <div className="w-40 h-40 sm:w-44 sm:h-44 mx-auto border border-accent bg-bg-elev overflow-hidden">
-                  <img 
-                    src="/avatar-336.png"
-                    srcSet="/avatar-336.png 1x, /avatar-672.png 2x"
-                    alt="Tucker Craig" 
-                    className="w-full h-full object-cover tui-dither"
-                    loading="lazy"
-                  />
+            <div className="h-full flex flex-col pt-8">
+              {/* Scrollable content anchored to top */}
+              <div ref={frontScrollRef} className="flex-1 overflow-y-auto ascii-scrollbar pr-2 relative">
+                {/* Top shadow - positioned at scroll container top, avatar-width */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 sm:w-44 h-6 pointer-events-none z-10" style={{ display: showFrontTopShadow ? 'block' : 'none', background: 'linear-gradient(to bottom, var(--bg) 0%, transparent 100%)' }}></div>
+                
+                {/* Avatar */}
+                <div className="mb-6 sm:mb-7 flex justify-center">
+                  <div className="w-40 h-40 sm:w-44 sm:h-44 border border-accent bg-bg-elev overflow-hidden">
+                    <img 
+                      src="/avatar-336.png"
+                      srcSet="/avatar-336.png 1x, /avatar-672.png 2x"
+                      alt="Tucker Craig" 
+                      className="w-full h-full object-cover tui-dither"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                {/* Name and Role */}
+                <h2 className="text-2xl sm:text-3xl font-bold text-fg mb-2 font-mono text-center">{aboutData.name}</h2>
+                <p className="text-accent font-medium mb-2 font-mono text-center text-base sm:text-lg">{aboutData.role}</p>
+                <p className="text-muted text-sm sm:text-base mb-8 sm:mb-10 text-center font-mono">{aboutData.education}</p>
+
+                {/* Stats - TUI list style */}
+                <div className="border border-line bg-bg-elev p-4 sm:p-5 mb-4">
+                  <div className="space-y-2 text-sm sm:text-base font-mono">
+                    {aboutData.front.stats.map((stat, index) => (
+                      <div key={index} className="flex items-baseline justify-between">
+                        <span className="text-muted">
+                          <span className="text-accent">▸</span> {stat.label}
+                        </span>
+                        <span className="text-fg font-medium">
+                          {getStatValue(stat)}
+                          {stat.suffix && <span className="text-muted text-xs ml-1">{stat.suffix}</span>}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Name and Role */}
-              <h2 className="text-2xl sm:text-3xl font-bold text-fg mb-2 font-mono">{aboutData.name}</h2>
-              <p className="text-accent font-medium mb-2 font-mono text-center text-base sm:text-lg">{aboutData.role}</p>
-              <p className="text-muted text-sm sm:text-base mb-8 sm:mb-10 text-center font-mono">{aboutData.education}</p>
-
-            {/* Stats - TUI list style */}
-            <div className="w-full border border-line bg-bg-elev p-4 sm:p-5">
-              <div className="space-y-2 text-sm sm:text-base font-mono">
-                {aboutData.front.stats.map((stat, index) => (
-                  <div key={index} className="flex items-baseline justify-between">
-                    <span className="text-muted">
-                      <span className="text-accent">▸</span> {stat.label}
-                    </span>
-                    <span className="text-fg font-medium">
-                      {getStatValue(stat)}
-                      {stat.suffix && <span className="text-muted text-xs ml-1">{stat.suffix}</span>}
-                    </span>
-                  </div>
-                ))}
+              {/* Flip hint at bottom */}
+              <div className="relative pt-3 border-t border-line">
+                <div className="absolute bottom-full left-0 right-0 h-6 pointer-events-none" style={{ display: showFrontBottomShadow ? 'block' : 'none', background: 'linear-gradient(to top, var(--bg) 0%, transparent 100%)' }}></div>
+                <p className="text-muted text-xs sm:text-sm text-center font-mono opacity-70">
+                  click to flip
+                </p>
               </div>
             </div>
-            </div>
-
-            {/* Flip hint at bottom - matches back card position */}
-            <p className="text-muted text-xs sm:text-sm text-center font-mono mt-4 pt-3 border-t border-line opacity-70">
-              click to flip
-            </p>
           </motion.div>
 
           {/* Back of card */}
           <motion.div 
             className="absolute inset-0 w-full h-full backface-hidden bg-card-bg border border-line p-6 sm:p-8"
-            style={{ transform: 'rotateY(180deg)' }}
+            style={{ 
+              transform: 'rotateY(180deg)',
+              pointerEvents: isFlipped ? 'auto' : 'none',
+              zIndex: isFlipped ? 2 : 1
+            }}
           >
             {/* Close button */}
             <div className="absolute top-4 right-4 z-10 pointer-events-auto">
@@ -150,11 +212,14 @@ const AboutCard = ({ onFlip }) => {
             </div>
             
             <div className="h-full flex flex-col">
-              <h3 className="text-base sm:text-lg font-bold text-accent mb-4 sm:mb-5 font-mono border-b border-line pb-2">
-                {bracketed('about')}
-              </h3>
+              <div className="relative border-b border-line pb-2">
+                <h3 className="text-base sm:text-lg font-bold text-accent font-mono">
+                  {bracketed('about')}
+                </h3>
+                <div className="absolute top-full left-0 right-0 h-6 pointer-events-none" style={{ display: showBackTopShadow ? 'block' : 'none', background: 'linear-gradient(to bottom, var(--bg) 0%, transparent 100%)' }}></div>
+              </div>
               
-              <div className="flex-1 space-y-5 sm:space-y-6 overflow-y-auto ascii-scrollbar pr-2">
+              <div ref={backScrollRef} className="flex-1 space-y-5 sm:space-y-6 overflow-y-auto ascii-scrollbar pr-2 pt-5">
                 {/* Bio */}
                 <div className="text-muted text-base sm:text-lg leading-relaxed font-mono">
                   {aboutData.back.bio}
@@ -199,7 +264,7 @@ const AboutCard = ({ onFlip }) => {
                   <h4 className="text-fg font-semibold mb-3 text-base sm:text-lg font-mono">
                     {treeItem('Interests')}
                   </h4>
-                  <div className="space-y-1 text-base sm:text-lg text-muted font-mono border-l-2 border-line pl-3">
+                  <div className="space-y-1 text-base sm:text-lg text-muted font-mono border-l-2 border-line pl-3 mb-4">
                     {aboutData.back.interests.map((interest, index) => (
                       <div key={index}>{interest}</div>
                     ))}
@@ -207,9 +272,12 @@ const AboutCard = ({ onFlip }) => {
                 </div>
               </div>
 
-              <p className="text-muted text-xs sm:text-sm text-center font-mono mt-4 pt-3 border-t border-line opacity-70">
-                click to flip back
-              </p>
+              <div className="relative pt-3 border-t border-line">
+                <div className="absolute bottom-full left-0 right-0 h-6 pointer-events-none" style={{ display: showBackBottomShadow ? 'block' : 'none', background: 'linear-gradient(to top, var(--bg) 0%, transparent 100%)' }}></div>
+                <p className="text-muted text-xs sm:text-sm text-center font-mono opacity-70">
+                  click to flip back
+                </p>
+              </div>
             </div>
           </motion.div>
         </motion.div>

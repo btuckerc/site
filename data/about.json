@@ -48,32 +48,53 @@
     ]
   },
   "back": {
-    "bio": "FinOps engineer passionate about cloud cost optimization and data-driven decision making. I help organizations maximize their cloud investments through strategic analysis, automation, and clear communication of financial impact.",
+    "bio": "Senior FinOps Engineer at Box, specializing in multi-cloud cost optimization and capacity planning. I own monthly forecasting for multi-million dollar infrastructure with <1% variance and deliver $2.4M+ in annual savings through data-driven optimizations.",
     "skills": [
       {
-        "category": "Cloud & FinOps",
+        "category": "Cloud Platforms",
         "items": [
+          "GCP",
           "AWS",
-          "Cloud Cost Optimization",
-          "Financial Analysis",
-          "Data Visualization"
+          "Azure",
+          "IBM Cloud"
         ]
       },
       {
-        "category": "Development",
+        "category": "FinOps & Cost Management",
+        "items": [
+          "Cloud Cost Optimization",
+          "Budget Forecasting",
+          "Cost Allocation",
+          "CUDs",
+          "FinOps Framework"
+        ]
+      },
+      {
+        "category": "Languages",
         "items": [
           "Python",
           "JavaScript",
-          "React",
-          "Node.js",
-          "SQL"
+          "Go",
+          "SQL",
+          "Bash",
+          "Java",
+          "C"
         ]
       },
       {
         "category": "Tools & Platforms",
         "items": [
+          "TypeScript",
+          "Django",
+          "React",
+          "Node.js",
+          "Flask",
           "Docker",
+          "Kubernetes",
+          "Terraform",
+          "Jenkins",
           "Git",
+          "Looker",
           "Tableau",
           "Jupyter",
           "Linux"
@@ -98,11 +119,11 @@
       }
     ],
     "interests": [
-      "Open source contributing",
-      "Data visualization",
+      "Cloud cost optimization",
+      "Data engineering",
+      "Full-stack development",
       "Terminal-based workflows",
-      "Minimalist design",
-      "Cost optimization strategies"
+      "Open source contributing"
     ]
   },
   "cachedGithubStats": {
