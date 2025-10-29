@@ -21,6 +21,11 @@ export default {
         'hover-bg': 'var(--hover-bg)',
         'active-bg': 'var(--active-bg)',
         'focus-ring': 'var(--focus-ring)',
+        'btn-bg': 'var(--button-bg)',
+        'btn-hover': 'var(--button-hover-bg)',
+        'btn-active': 'var(--button-active-bg)',
+        'btn-border': 'var(--button-border)',
+        'btn-shine': 'var(--button-shine)',
       },
       fontFamily: {
         mono: ['var(--font-family)', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Fira Code', 'monospace'],

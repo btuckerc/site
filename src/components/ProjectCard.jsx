@@ -2,6 +2,10 @@ import { useState } from 'react'
 
 const ProjectCard = ({ project }) => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isOverviewExpanded, setIsOverviewExpanded] = useState(true)
+  const [isStackExpanded, setIsStackExpanded] = useState(true)
+  const [isFeaturesExpanded, setIsFeaturesExpanded] = useState(true)
+  const [isLinksExpanded, setIsLinksExpanded] = useState(true)
 
   // Show expandable arrow only if there's additional content
   const hasExpandableContent = 
@@ -53,48 +57,80 @@ const ProjectCard = ({ project }) => {
           {/* Overview */}
           {project.overview && (
             <div>
-              <div className="text-accent mb-2 font-semibold">▸ overview</div>
-              <div className="text-muted pl-3 leading-relaxed">{project.overview}</div>
+              <button
+                onClick={() => setIsOverviewExpanded(!isOverviewExpanded)}
+                className="text-accent mb-2 font-semibold flex items-center gap-2 hover:text-fg transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+              >
+                <span>{isOverviewExpanded ? '▼' : '▶'}</span>
+                <span>overview</span>
+              </button>
+              {isOverviewExpanded && (
+                <div className="text-muted pl-3 leading-relaxed">{project.overview}</div>
+              )}
             </div>
           )}
 
           {/* Tech Stack */}
           {project.stack && project.stack.length > 0 && (
             <div>
-              <div className="text-accent mb-2 font-semibold">▸ stack</div>
-              <div className="text-muted pl-3">{project.stack.join(', ')}</div>
+              <button
+                onClick={() => setIsStackExpanded(!isStackExpanded)}
+                className="text-accent mb-2 font-semibold flex items-center gap-2 hover:text-fg transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+              >
+                <span>{isStackExpanded ? '▼' : '▶'}</span>
+                <span>stack</span>
+              </button>
+              {isStackExpanded && (
+                <div className="text-muted pl-3">{project.stack.join(', ')}</div>
+              )}
             </div>
           )}
 
           {/* Features */}
           {project.features && project.features.length > 0 && (
             <div>
-              <div className="text-accent mb-2 font-semibold">▸ features</div>
-              <div className="pl-3 space-y-1">
-                {project.features.map((feature, idx) => (
-                  <div key={idx} className="text-muted">· {feature}</div>
-                ))}
-              </div>
+              <button
+                onClick={() => setIsFeaturesExpanded(!isFeaturesExpanded)}
+                className="text-accent mb-2 font-semibold flex items-center gap-2 hover:text-fg transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+              >
+                <span>{isFeaturesExpanded ? '▼' : '▶'}</span>
+                <span>features</span>
+              </button>
+              {isFeaturesExpanded && (
+                <div className="pl-3 space-y-1">
+                  {project.features.map((feature, idx) => (
+                    <div key={idx} className="text-muted">· {feature}</div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
           {/* Links - more prominent */}
           {project.links && Object.keys(project.links).length > 0 && (
             <div className="border-t border-line pt-4 mt-4">
-              <div className="text-accent mb-3 font-semibold">▸ links</div>
-              <div className="pl-3 flex flex-wrap gap-3">
-                {Object.entries(project.links).map(([key, url]) => (
-                  <a
-                    key={key}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent hover:text-bg transition-colors font-medium"
-                  >
-                    {key} →
-                  </a>
-                ))}
-              </div>
+              <button
+                onClick={() => setIsLinksExpanded(!isLinksExpanded)}
+                className="text-accent mb-3 font-semibold flex items-center gap-2 hover:text-fg transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+              >
+                <span>{isLinksExpanded ? '▼' : '▶'}</span>
+                <span>links</span>
+              </button>
+              {isLinksExpanded && (
+                <div className="pl-3 flex flex-wrap gap-3">
+                  {Object.entries(project.links).map(([key, url]) => (
+                    <a
+                      key={key}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent hover:text-bg transition-colors font-medium"
+                    >
+                      {key} →
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -158,6 +158,8 @@ const AboutCard = ({ onFlip }) => {
                       src="/avatar-336.png"
                       srcSet="/avatar-336.png 1x, /avatar-672.png 2x"
                       alt="Tucker Craig" 
+                      width="336"
+                      height="336"
                       className="w-full h-full object-cover tui-dither"
                       loading="lazy"
                     />

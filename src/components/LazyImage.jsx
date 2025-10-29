@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 const LazyImage = ({ 
   src, 
   alt, 
+  width,
+  height,
   className = '',
   placeholderClassName = '',
   fallback = null 
@@ -62,6 +64,8 @@ const LazyImage = ({
           <motion.img
             src={src}
             alt={alt}
+            width={width}
+            height={height}
             className={`w-full h-full object-cover ${className}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: isLoaded ? 1 : 0 }}

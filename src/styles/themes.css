@@ -13,11 +13,16 @@
   --border: var(--line);
   --card-bg: var(--bg-elev);
   --glass-bg: color-mix(in srgb, var(--bg-elev) 80%, transparent);
+  --button-bg: color-mix(in srgb, var(--bg-elev) 88%, #050608 12%);
+  --button-hover-bg: color-mix(in srgb, var(--bg-elev) 70%, var(--accent) 30%);
+  --button-active-bg: color-mix(in srgb, var(--bg-elev) 60%, var(--accent) 40%);
+  --button-border: color-mix(in srgb, var(--accent) 35%, transparent);
+  --button-shine: color-mix(in srgb, var(--accent) 18%, transparent);
   
   /* Focus and interaction */
   --focus-ring: var(--accent);
-  --hover-bg: color-mix(in srgb, var(--accent) 8%, transparent);
-  --active-bg: color-mix(in srgb, var(--accent) 12%, transparent);
+  --hover-bg: color-mix(in srgb, var(--accent) 15%, transparent);
+  --active-bg: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 /* Light mode - neutral theme light variant */
@@ -28,6 +33,11 @@
   --muted: #2d3748;
   --accent: #1a365d;
   --line: #cbd5e0;
+  --button-bg: color-mix(in srgb, var(--bg-elev) 82%, #ffffff 18%);
+  --button-hover-bg: color-mix(in srgb, var(--bg-elev) 65%, var(--accent) 35%);
+  --button-active-bg: color-mix(in srgb, var(--bg-elev) 55%, var(--accent) 45%);
+  --button-border: color-mix(in srgb, var(--accent) 50%, transparent);
+  --button-shine: color-mix(in srgb, var(--accent) 24%, transparent);
 }
 
 /* Amber mode - gruvbox inspired warm theme */
@@ -38,5 +48,10 @@
   --muted: #a89984;
   --accent: #fabd2f;
   --line: #3c3836;
+  --button-bg: color-mix(in srgb, var(--bg-elev) 90%, #141414 10%);
+  --button-hover-bg: color-mix(in srgb, var(--bg-elev) 72%, var(--accent) 28%);
+  --button-active-bg: color-mix(in srgb, var(--bg-elev) 62%, var(--accent) 38%);
+  --button-border: color-mix(in srgb, var(--accent) 45%, transparent);
+  --button-shine: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 

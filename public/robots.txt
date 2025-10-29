@@ -1,0 +1,13 @@
+# robots.txt for btuckerc.dev
+# Allow all search engines to crawl
+
+User-agent: *
+Allow: /
+
+# Disallow crawling of build artifacts and API endpoints
+Disallow: /dist/
+Disallow: /node_modules/
+
+# Sitemap location
+Sitemap: https://btuckerc.dev/sitemap.xml
+

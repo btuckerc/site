@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
+import { Helmet } from 'react-helmet-async'
 import ProjectCard from '../components/ProjectCard'
 import CloseButton from '../components/CloseButton'
 import { useRovingFocus } from '../hooks/useRovingFocus.jsx'
@@ -93,7 +94,16 @@ const Projects = () => {
   }, [searchQuery])
 
   return (
-    <div className="projects-page min-h-screen pt-20 pb-24 px-4">
+    <>
+      <Helmet>
+        <title>Projects - Tucker Craig | Full-Stack Developer & FinOps Engineer</title>
+        <meta name="description" content="Portfolio of projects by Tucker Craig including Jeopardy study platform (trivrdy), personal blog CMS, audiobook server, dotfiles, and cloud cost optimization tools. Built with React, Next.js, Python, and modern web technologies." />
+        <meta property="og:title" content="Projects - Tucker Craig Portfolio" />
+        <meta property="og:description" content="Explore projects by Tucker Craig: Jeopardy study platform, personal blog CMS, audiobook server, dotfiles, and more. Full-stack development with React, Next.js, Python." />
+        <meta property="og:url" content="https://btuckerc.dev/projects" />
+        <link rel="canonical" href="https://btuckerc.dev/projects" />
+      </Helmet>
+      <div className="projects-page min-h-screen pt-20 pb-24 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-6 relative">
@@ -212,7 +222,8 @@ const Projects = () => {
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </>
   )
 }
 

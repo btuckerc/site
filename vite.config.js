@@ -12,5 +12,7 @@ export default defineConfig({
         }
       }
     }
-  }
+  },
+  // Ensure public assets are copied correctly
+  publicDir: 'public'
 })

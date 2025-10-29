@@ -10,6 +10,7 @@ const AsciiButton = forwardRef(({
   size = 'default', // sm, default, lg
   className = '',
   type = 'button',
+  as: Component = 'button',
   ...props 
 }, ref) => {
   const sizeClasses = {
@@ -19,25 +20,27 @@ const AsciiButton = forwardRef(({
   }
 
   const variantClasses = {
-    default: 'bg-card-bg hover:bg-hover-bg active:bg-active-bg',
-    ghost: 'bg-transparent hover:bg-hover-bg active:bg-active-bg',
+    default: 'bg-btn-bg hover:bg-btn-hover active:bg-btn-active text-fg',
+    ghost: 'bg-transparent hover:bg-btn-hover active:bg-btn-active text-fg',
     accent: 'bg-accent text-bg hover:bg-accent/90 active:bg-accent/80'
   }
 
+  const borderClass =
+    variant === 'accent'
+      ? 'border-accent/70'
+      : 'border-btn-border/80'
+
   return (
-    <motion.button
+    <motion.div
       ref={ref}
-      type={type}
       onClick={onClick}
       onKeyDown={onKeyDown}
-      disabled={disabled}
       className={`
         relative group
         font-medium
         border-0 outline-0 
         background-transparent
-        cursor-pointer
-        disabled:opacity-50 disabled:cursor-not-allowed
+        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring
         transition-colors duration-200
         ${className}
@@ -63,17 +66,27 @@ const AsciiButton = forwardRef(({
       {/* Inner container */}
       <div 
         className={`
-          relative border border-line bg-card-bg hover:bg-hover-bg
-          transition-colors duration-200 z-10
+          relative overflow-hidden border ${borderClass}
+          transition-all duration-200 z-10
           ${sizeClasses[size]}
-          ${variant === 'accent' ? 'bg-accent text-bg hover:bg-accent/90' : ''}
+          ${variantClasses[variant]}
+          ${disabled ? 'opacity-70' : 'group-hover:shadow-[0px_25px_45px_-35px_rgba(201,205,210,0.85)]'}
         `}
       >
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-60 transition-opacity duration-300"
+          style={{
+            background: variant === 'accent'
+              ? 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.32), transparent 68%)'
+              : 'radial-gradient(circle at 50% 0%, rgba(201,205,210,0.26), transparent 70%)'
+          }}
+        />
         <span className="relative z-10">
           {children}
         </span>
       </div>
-    </motion.button>
+    </motion.div>
   )
 })
 
