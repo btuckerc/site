@@ -24,8 +24,8 @@ const Home = () => {
         <meta property="og:url" content="https://btuckerc.dev/" />
         <link rel="canonical" href="https://btuckerc.dev/" />
       </Helmet>
-      <div className="min-h-screen flex items-center justify-center px-4 pt-24 pb-16">
-        <div className="max-w-3xl w-full" ref={(el) => el && el.focus({ preventScroll: true })}>
+      <div className="min-h-screen flex items-center justify-center px-4 pt-4 sm:pt-6 md:pt-8 pb-16">
+        <div className="max-w-4xl w-full" ref={(el) => el && el.focus({ preventScroll: true })}>
         <motion.div
           initial={{ opacity: 0, y: 24, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -37,43 +37,52 @@ const Home = () => {
           <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-accent/20 to-transparent" aria-hidden />
           <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-accent/20 to-transparent" aria-hidden />
 
-          <div className="relative px-8 py-12 md:px-12 md:py-16 text-center">
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 0.15, duration: 0.35, ease: "easeOut" }}
-              className="font-mono text-accent text-center mb-6"
-            >
-              {SYMBOLS.HORIZONTAL_LINE}
-            </motion.div>
+          <div className="relative px-8 py-16 md:px-14 md:py-20 text-center flex flex-col justify-between min-h-[600px]">
+            {/* Top Section - Name and Info */}
+            <div>
+              {/* Top horizontal line - matches character length of "davidson college '20" */}
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: 0.15, duration: 0.35, ease: "easeOut" }}
+                className="flex items-center justify-center mb-6 w-full"
+              >
+                <div className="h-px bg-accent w-[13ch] sm:w-[15ch] md:w-[17ch]" />
+              </motion.div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-fg mb-6 tracking-[0.3em] font-mono">
-              TUCKER CRAIG
-            </h1>
+              <h1 
+                className="font-bold text-fg mb-6 tracking-[0.3em] font-mono"
+                style={{ fontSize: 'clamp(2rem, 5vw + 1rem, 3.75rem)' }}
+              >
+                TUCKER CRAIG
+              </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.3, ease: "easeOut" }}
-              className="space-y-2 mb-10"
-            >
-              <p className="text-accent text-base md:text-lg font-mono tracking-[0.35em] uppercase">
-                finops engineer @ box
-              </p>
-              <p className="text-muted text-xs md:text-sm font-mono tracking-[0.35em] uppercase">
-                davidson college '20
-              </p>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25, duration: 0.3, ease: "easeOut" }}
+                className="space-y-2 mb-10"
+              >
+                <p className="text-accent text-base md:text-lg font-mono tracking-[0.35em] uppercase">
+                  finops engineer @ box
+                </p>
+                <p className="text-muted text-xs md:text-sm font-mono tracking-[0.35em] uppercase">
+                  davidson college '20
+                </p>
+              </motion.div>
 
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 0.35, duration: 0.35, ease: "easeOut" }}
-              className="font-mono text-accent text-center mb-12"
-            >
-              {SYMBOLS.HORIZONTAL_LINE}
-            </motion.div>
+              {/* Bottom horizontal line - matches character length of "davidson college '20" */}
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: 0.35, duration: 0.35, ease: "easeOut" }}
+                className="flex items-center justify-center w-full"
+              >
+                <div className="h-px bg-accent w-[13ch] sm:w-[15ch] md:w-[17ch]" />
+              </motion.div>
+            </div>
 
+            {/* Bottom Section - Navigation Buttons */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
               {navItems.map((item, index) => (
                 <Link

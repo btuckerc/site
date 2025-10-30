@@ -265,7 +265,13 @@ const CommandPalette = ({ isOpen, onClose }) => {
               <div className="px-4 py-3 border-t border-line text-xs text-muted flex gap-4 font-mono">
                 <span><kbd>↑↓</kbd> navigate</span>
                 <span><kbd>↵</kbd> select</span>
-                <span><kbd>esc</kbd> close</span>
+                <button
+                  onClick={onClose}
+                  className="ml-auto hover:text-accent transition-colors flex items-center gap-1"
+                  aria-label="Close command palette"
+                >
+                  <kbd>esc</kbd> close
+                </button>
               </div>
               </div>
             </motion.div>

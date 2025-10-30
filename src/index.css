@@ -28,21 +28,27 @@ body {
   overflow-x: hidden;
 }
 
-/* Fixed background image that scales based on viewport, not document height */
+/* Fixed background image that scales based on viewport, locked to viewport across all pages */
 body::after {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
   background-color: var(--bg);
   background-image: url('/bg-3.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-attachment: fixed;
   background-repeat: no-repeat;
   pointer-events: none;
   z-index: -2;
+  /* Ensure background covers entire viewport */
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 body::before {
@@ -63,19 +69,9 @@ body::before {
   );
   pointer-events: none;
   z-index: -1;
-}
-
-/* Mobile optimization - disable fixed background for better performance */
-@media (max-width: 768px) {
-  body::after {
-    position: absolute;
-    min-height: 100vh;
-  }
-  
-  body::before {
-    position: absolute;
-    min-height: 100vh;
-  }
+  /* Ensure overlay covers entire viewport */
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 /* Default scrollbar styling */

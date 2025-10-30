@@ -99,7 +99,7 @@ function AppContent() {
         
         {/* Footer landmark */}
         <footer role="contentinfo">
-          <Footer />
+          <Footer onCommandPaletteOpen={() => setIsCommandPaletteOpen(true)} />
         </footer>
         
         {/* Bottom scroll target */}
