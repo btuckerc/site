@@ -30,3 +30,13 @@ Same as above, but on your home server.
 Create `.github/workflows/update-stats.yml` - automatically runs in CI.
 
 After updating stats, commit the changes to `data/about.json` and deploy.
+
+## Local About Stats
+
+Run this from the portfolio workspace:
+
+```bash
+npm run stats:about
+```
+
+This refreshes local display aggregates in `data/about.json` without adding local paths or raw AI IDE history to the deployed site.

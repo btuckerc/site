@@ -121,7 +121,7 @@ export const FocusProvider = ({ children }) => {
   )
 }
 
-export const useRovingFocus = (containerId, items, options = {}) => {
+export const useRovingFocus = (containerId, items) => {
   const { 
     activeId, 
     focusedContainer,
@@ -130,14 +130,12 @@ export const useRovingFocus = (containerId, items, options = {}) => {
     registerItem,
     unregisterItem
   } = useFocusContext()
-  const { autoFocus = false } = options
-
   useEffect(() => {
     registerContainer(containerId, items)
     return () => unregisterContainer(containerId)
   }, [containerId, items, registerContainer, unregisterContainer])
 
-  const getItemProps = useCallback((item, index) => {
+  const getItemProps = useCallback((item) => {
     const isActive = activeId === item.id
     const isInActiveContainer = focusedContainer === containerId
 

@@ -16,16 +16,10 @@ export const useHotkeys = ({
   } = useFocusContext()
 
   const handleKeyDown = useCallback((event) => {
-    // Don't intercept if user is typing in an input
+    // Don't intercept while the user is editing text; local controls own Escape.
     if (event.target.tagName === 'INPUT' || 
         event.target.tagName === 'TEXTAREA' || 
         event.target.isContentEditable) {
-      
-      // Only allow Escape in inputs
-      if (event.key === 'Escape' && onEscape) {
-        event.preventDefault()
-        onEscape()
-      }
       return
     }
 

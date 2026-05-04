@@ -1,52 +1,771 @@
 [
   {
+    "id": "openclaw",
+    "title": "OpenClaw Personal Agent Runtime",
+    "year": "2026",
+    "date": "2026-03-13",
+    "dateCreated": "2026-01-27",
+    "dateModified": "2026-05-03",
+    "featured": 10,
+    "source": "macmini local",
+    "activity": "active but unhealthy",
+    "visibility": "local",
+    "verified": "Checked on macmini May 3, 2026. Runtime 2026.3.13 is present; the gateway was unhealthy; briefing and music jobs existed but iMessage delivery timed out.",
+    "blurb": "My macmini agent lab: skills, cron jobs, memory, messaging, and recovery work in one place.",
+    "tags": [
+      "Agentic Systems",
+      "OpenClaw",
+      "Skills",
+      "Cron",
+      "LaunchAgent"
+    ],
+    "overview": "OpenClaw is where I test personal-agent ideas on the macmini. It has skills, scheduled jobs, memory, message delivery, reliability checks, and agent workspaces. It is where I figure out what agent systems should actually do.",
+    "stack": [
+      "Python",
+      "Node.js",
+      "LaunchAgent",
+      "Gemini",
+      "Telegram",
+      "iMessage",
+      "SQLite/QMD"
+    ],
+    "features": [
+      "Skill library for notes, weather, groceries, web crawl, model evals, homelab work, and release notes",
+      "Morning briefing and music digest jobs",
+      "Memory index with session and memory sources",
+      "Reliability docs, tests, rollback notes, and launchd management scripts",
+      "No Servarr or media-stack projects listed here"
+    ]
+  },
+  {
+    "id": "hermes-agent",
+    "title": "Hermes Agent Deployment & Migration",
+    "year": "2026",
+    "date": "2026-04-19",
+    "dateCreated": "2026-03-29",
+    "dateModified": "2026-05-03",
+    "featured": 10,
+    "source": "macmini deployment + external upstream",
+    "activity": "running",
+    "visibility": "external upstream",
+    "verified": "Checked on macmini May 3, 2026. ai.hermes.gateway-fireworks is loaded, Hermes Agent v0.10.0 is installed, and custom/OpenRouter profiles, memory, and skills are configured.",
+    "blurb": "My active Hermes Agent setup on the macmini, with memory, skills, and gateway work.",
+    "tags": [
+      "Agentic Systems",
+      "Hermes",
+      "Nous Research",
+      "Gateway",
+      "Skills"
+    ],
+    "links": {
+      "github": "https://github.com/NousResearch/hermes-agent",
+      "docs": "https://hermes-agent.nousresearch.com/docs/"
+    },
+    "overview": "Hermes Agent is the upstream Nous Research agent I am running beside OpenClaw. I use it to compare what should stay custom and what should move to a maintained runtime.",
+    "stack": [
+      "Python",
+      "OpenRouter",
+      "Custom Providers",
+      "LaunchAgent",
+      "Telegram/Discord/Slack/WhatsApp/Signal",
+      "Skills Hub"
+    ],
+    "features": [
+      "Gateway profile running on macmini through launchd",
+      "OpenClaw migration path for settings, memories, skills, and workspace instructions",
+      "Persistent memory and skills across profiles",
+      "Messaging gateway for remote agent use",
+      "Side-by-side comparison with my custom OpenClaw work"
+    ]
+  },
+  {
+    "id": "webyl-comic-scanner",
+    "title": "Webyl Comic Scanner PoC",
+    "year": "2026",
+    "date": "2026-03-29",
+    "dateCreated": "2026-03-29",
+    "dateModified": "2026-03-29",
+    "featured": 9,
+    "source": "local",
+    "activity": "active",
+    "visibility": "local",
+    "verified": "Checked locally. Active repo with a March 2026 checkpoint and docs for iOS, offline benchmarks, Gemini, Vision, MobileCLIP2, and sync planning.",
+    "blurb": "An offline iPhone comic-cover lookup path with a local corpus, benchmarks, and hybrid matching.",
+    "tags": [
+      "Swift",
+      "iOS",
+      "Computer Vision",
+      "MobileCLIP2",
+      "Gemini"
+    ],
+    "overview": "Webyl is the newest version of my comic-scanner idea. I wanted the iPhone path to work offline first, so the app bundles a local corpus and compares Vision, MobileCLIP2, hybrid, and Gemini-backed matching.",
+    "stack": [
+      "Swift",
+      "Vision",
+      "MobileCLIP2",
+      "SQLite",
+      "Cloudflare R2",
+      "Cloud Run",
+      "Gemini"
+    ],
+    "features": [
+      "Fixed and held-out offline benchmarks",
+      "Hybrid local matcher with hard-set gates",
+      "Simulator and physical iPhone workflows",
+      "R2, Workers, Pages, and deployment notes",
+      "Offline lookup separated from the online reference corpus"
+    ]
+  },
+  {
     "id": "trivrdy",
     "title": "trivrdy - Jeopardy Study Platform",
     "year": "2024",
     "date": "2024-12-01",
     "dateCreated": "2024-12-01",
-    "dateModified": "2024-12-14",
+    "dateModified": "2026-04-02",
     "featured": 10,
-    "blurb": "Modern, interactive Jeopardy study platform with authentic questions from past episodes",
-    "tags": ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "Prisma"],
+    "source": "GitHub public + macmini homelab",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "GitHub pushed Apr 2, 2026; macmini homelab checkout is on origin/main.",
+    "blurb": "A Jeopardy study app built around real past clues and game-style practice.",
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Supabase",
+      "Prisma"
+    ],
     "links": {
       "github": "https://github.com/btuckerc/jeopardy"
     },
-    "overview": "Full-featured trivia platform that helps users improve their Jeopardy knowledge through practice modes and full game simulations. Features smart answer validation, progress tracking, and authentic questions from the J! Archive.",
-    "stack": ["Next.js 14", "TypeScript 5", "Tailwind CSS", "PostgreSQL", "Prisma ORM", "Supabase Auth", "React Query", "Vercel"],
+    "overview": "trivrdy is my Jeopardy study app. It uses J! Archive clues, practice modes, full boards, answer validation, and progress tracking so studying feels closer to the actual game than a flashcard pile.",
+    "stack": [
+      "Next.js 14",
+      "TypeScript",
+      "Tailwind CSS",
+      "PostgreSQL",
+      "Prisma ORM",
+      "Supabase Auth",
+      "Vercel"
+    ],
     "features": [
-      "Classic game mode with complete Jeopardy board simulation",
-      "Practice mode with spaced repetition learning",
-      "Smart answer validation with alternative acceptance",
+      "Classic mode with a full Jeopardy board",
+      "Practice mode and answer validation",
       "Progress tracking and performance analytics",
       "Spoiler protection for recent episodes",
-      "Leaderboards and user profiles",
-      "Dark mode support"
+      "Homelab deployment mirror on macmini"
     ]
   },
   {
-    "id": "blog",
-    "title": "Personal Blog & CMS",
-    "year": "2024",
-    "date": "2024-12-22",
-    "dateCreated": "2024-12-22",
-    "dateModified": "2024-12-23",
-    "featured": 9,
-    "blurb": "Hugo-based personal blog with automated deployment and Bluesky PDS integration",
-    "tags": ["Hugo", "DigitalOcean", "GitHub Actions", "Bluesky", "Nginx"],
+    "id": "boilerplate",
+    "title": "Boilerplate - AI IDE & Dotfiles Baseline",
+    "year": "2019",
+    "date": "2026-04-17",
+    "dateCreated": "2019-05-13",
+    "dateModified": "2026-04-17",
+    "featured": 10,
+    "source": "GitHub public + local",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "GitHub pushed Apr 17, 2026. Local and macmini checkouts use this as the shared chezmoi and mise baseline.",
+    "blurb": "The dotfiles and machine setup I use to keep my AI IDE workflow from drifting across computers.",
+    "tags": [
+      "Shell",
+      "Chezmoi",
+      "Mise",
+      "AI IDE",
+      "Dev Environment"
+    ],
     "links": {
-      "github": "https://github.com/btuckerc/blog",
-      "demo": "https://btuckerc.com"
+      "github": "https://github.com/btuckerc/boilerplate"
     },
-    "overview": "Fully automated personal blog built with Hugo static site generator, featuring custom deployment pipeline to DigitalOcean and integration with Bluesky Protocol (Personal Data Server).",
-    "stack": ["Hugo", "Paper Theme", "GitHub Actions", "DigitalOcean", "Nginx", "Bluesky PDS"],
+    "overview": "Boilerplate is the public repo behind my working environment. It keeps shells, editors, AI IDE config, skills, tool versions, and machine-specific setup aligned across macOS, Linux, and the homelab.",
+    "stack": [
+      "Bash/Zsh",
+      "Chezmoi",
+      "Mise",
+      "Lua",
+      "Starship",
+      "Tmux",
+      "AI IDE Tooling"
+    ],
     "features": [
-      "Automated CI/CD pipeline with GitHub Actions",
-      "Custom image migration scripts for Obsidian compatibility",
-      "Dark mode by default with theme customization",
-      "Full-text search functionality",
-      "SEO optimization and social link integration",
-      "Bluesky PDS instance for decentralized social identity"
+      "Shared AI IDE config managed through chezmoi",
+      "Machine-aware macOS and Linux rendering",
+      "Tool version management with mise",
+      "Neovim, tmux, terminal, and shell configuration",
+      "Bootstrap scripts, platform notes, and portable agent instructions"
+    ]
+  },
+  {
+    "id": "opencode-menu",
+    "title": "OpenCode Monitor",
+    "year": "2026",
+    "date": "2026-02-06",
+    "dateCreated": "2026-02-06",
+    "dateModified": "2026-02-07",
+    "featured": 9,
+    "source": "GitHub public + macmini local",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "GitHub pushed Feb 7, 2026; macmini checkout is on origin/main.",
+    "blurb": "A tiny macOS menu bar app for keeping an OpenCode server under control.",
+    "tags": [
+      "Swift",
+      "macOS",
+      "Menu Bar",
+      "LaunchAgent"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/opencode-menu"
+    },
+    "overview": "OpenCode Monitor exists because I wanted the server to feel like a normal macOS thing. The menu bar app starts it, stops it, restarts it, opens logs, checks updates, and gets out of the way.",
+    "stack": [
+      "Swift",
+      "macOS",
+      "LaunchAgent",
+      "Shell"
+    ],
+    "features": [
+      "Menu bar status for running/stopped state",
+      "Start, stop, restart, and open web UI",
+      "Idle auto-stop to save resources",
+      "Update checker and upgrade flow",
+      "Installer, build, and uninstall scripts"
+    ]
+  },
+  {
+    "id": "py-trading",
+    "title": "py-trading - Point-in-Time ML Trading Stack",
+    "year": "2025",
+    "date": "2025-11-29",
+    "dateCreated": "2025-11-28",
+    "dateModified": "2025-11-29",
+    "featured": 10,
+    "source": "GitHub public + local py-finance",
+    "activity": "recent",
+    "visibility": "public",
+    "verified": "Checked May 4, 2026 against public GitHub and local py-finance. The local README has the 2020-2024 regime-aware backtest numbers.",
+    "blurb": "The trading project that actually held up: point-in-time data, ML forecasts, risk controls, and broker paths.",
+    "tags": [
+      "Python",
+      "DuckDB",
+      "XGBoost",
+      "Backtesting",
+      "Trading"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/py-trading"
+    },
+    "overview": "py-trading is the finance project worth showing. It builds return forecasts, turns them into portfolio weights, and can run through paper or live broker paths without cheating on time. The README backtest: 58.9% CAGR, 1.52 Sharpe, -30.2% max drawdown.",
+    "stack": [
+      "Python",
+      "DuckDB",
+      "Parquet",
+      "XGBoost",
+      "LightGBM",
+      "PyTorch",
+      "Alpaca"
+    ],
+    "features": [
+      "Point-in-time data layer with as-of queries",
+      "Technical, cross-sectional, calendar, and regime features",
+      "Risk management with position, sector, drawdown, and regime controls",
+      "Paper broker and Alpaca broker paths",
+      "Regime-aware backtest and daily simulation workflows"
+    ]
+  },
+  {
+    "id": "lucky-ledger",
+    "title": "Lucky Ledger",
+    "year": "2025",
+    "date": "2025-12-23",
+    "dateCreated": "2025-12-23",
+    "dateModified": "2026-04-10",
+    "featured": 8,
+    "source": "GitHub public + local",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "GitHub pushed Dec 30, 2025. Local checkout has active rebrand, UI, and test work.",
+    "blurb": "A local-first SwiftUI scorekeeper for card nights and table games.",
+    "tags": [
+      "Swift",
+      "SwiftUI",
+      "iOS",
+      "Game Tools",
+      "Local-first"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/flip7calculator"
+    },
+    "overview": "Lucky Ledger started as a Flip 7 calculator and became a more general table-game scorekeeper. The point is fast live play: local saves, round history, undo/redo, deck profiles, and post-game stats.",
+    "stack": [
+      "Swift",
+      "SwiftUI",
+      "XCTest",
+      "Make",
+      "iOS"
+    ],
+    "features": [
+      "Local persistence and round history",
+      "Undo/redo and deck profile support",
+      "Post-game stats and charts",
+      "iPhone, iPad, and accessibility work",
+      "Makefile workflow that keeps DerivedData outside the repo"
+    ]
+  },
+  {
+    "id": "farkle",
+    "title": "Farkle Scorer",
+    "year": "2025",
+    "date": "2025-12-23",
+    "dateCreated": "2025-12-23",
+    "dateModified": "2025-12-23",
+    "featured": 8,
+    "source": "GitHub public + local",
+    "activity": "recent",
+    "visibility": "public",
+    "verified": "GitHub pushed Dec 23, 2025; local README and multiplayer notes are present.",
+    "blurb": "An offline iOS Farkle scorer with tap-to-score dice and nearby multiplayer experiments.",
+    "tags": [
+      "Swift",
+      "SwiftUI",
+      "iOS",
+      "Game Tools"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/farkle"
+    },
+    "overview": "Farkle Scorer is a small table-game utility. It handles visual dice selection, configurable house rules, manual entry for physical dice, and local-network multiplayer exploration.",
+    "stack": [
+      "Swift",
+      "SwiftUI",
+      "XCTest",
+      "Multipeer Connectivity"
+    ],
+    "features": [
+      "Tap-to-score dice and manual score entry",
+      "Configurable house rules",
+      "Offline-first data model",
+      "Optional nearby multiplayer",
+      "No-account design"
+    ]
+  },
+  {
+    "id": "angl-job-portal",
+    "title": "Career Job Hunt Portal",
+    "year": "2026",
+    "date": "2026-05-04",
+    "dateCreated": "2025-08-28",
+    "dateModified": "2026-05-04",
+    "featured": 8,
+    "source": "local + hosted",
+    "activity": "active",
+    "visibility": "hosted behind sign-in",
+    "verified": "Checked locally from the career/job-hunt repo. The hosted site is jobs.btuckerc.dev and is likely sign-in gated.",
+    "blurb": "My hosted job-search workspace for roles, applications, referrals, resumes, and LLM notes.",
+    "tags": [
+      "Rust",
+      "Next.js",
+      "PostgreSQL",
+      "NATS",
+      "LLM Ops"
+    ],
+    "overview": "This is the jobs site behind jobs.btuckerc.dev. I use it to keep role scoring, applications, referrals, resumes, ATS ingestion, search, and cached LLM advice in one place instead of spread across tabs and docs.",
+    "stack": [
+      "Next.js 14",
+      "Rust/Axum",
+      "PostgreSQL",
+      "Redis",
+      "NATS JetStream",
+      "Meilisearch",
+      "OpenRouter"
+    ],
+    "features": [
+      "Interview-likelihood and speed-advantage scoring",
+      "Greenhouse, Lever, and Ashby ingestion",
+      "Typst resume compilation and ATS-safe linting",
+      "Referral proximity scoring",
+      "LLM cache and token-bucket credit controls"
+    ],
+    "links": {
+      "live": "https://jobs.btuckerc.dev"
+    }
+  },
+  {
+    "id": "angl-feed",
+    "title": "AnglFeed",
+    "year": "2026",
+    "date": "2026-04-27",
+    "dateCreated": "2026-04-27",
+    "dateModified": "2026-04-27",
+    "featured": 7,
+    "source": "local",
+    "activity": "active",
+    "visibility": "local",
+    "verified": "Checked locally. Recent Apr 2026 activity and README cover queue delays, viewing windows, OAuth, and SQLite/Drizzle.",
+    "blurb": "A YouTube wrapper that adds friction before I disappear into recommendations.",
+    "tags": [
+      "SvelteKit",
+      "YouTube API",
+      "SQLite",
+      "Drizzle",
+      "Digital Wellbeing"
+    ],
+    "overview": "AnglFeed is built around a pretty simple idea: if a video is still worth watching later, I can watch it later. Videos enter a queue, stay locked for a delay, and play without recommendations or autoplay.",
+    "stack": [
+      "SvelteKit",
+      "TypeScript",
+      "Tailwind CSS",
+      "SQLite",
+      "Drizzle ORM",
+      "Google OAuth",
+      "YouTube Data API"
+    ],
+    "features": [
+      "Delayed playback queue",
+      "Viewing windows and workday restrictions",
+      "Distraction-free watch page",
+      "Subscriptions, explore, and queue pages",
+      "Optional Watch Later sync"
+    ]
+  },
+  {
+    "id": "nimbus",
+    "title": "Nimbus Forecasting Agent System",
+    "year": "2026",
+    "date": "2026-02-06",
+    "dateCreated": "2026-02-06",
+    "dateModified": "2026-05-04",
+    "featured": 8,
+    "source": "internal docs",
+    "activity": "active",
+    "visibility": "internal",
+    "verified": "Checked against Apr 2026 docs and resume. Nimbus has CLI work, dashboards, MCP tools, onboarding, 90%+ test coverage, offline evals, and 400+ services of context.",
+    "blurb": "The forecasting AI work: Q&A, MCP tools, evals, dashboards, and 400+ services of context.",
+    "tags": [
+      "Agentic Systems",
+      "FinOps",
+      "Forecasting",
+      "MCP",
+      "Cursor"
+    ],
+    "overview": "Nimbus started because too much forecast context lived in docs, sheets, and my head. I built it into a Q&A knowledge base with MCP tools, dashboards, onboarding, evals, and 400+ services of production context.",
+    "stack": [
+      "Cursor",
+      "MCP",
+      "BigQuery",
+      "DuckDB",
+      "Marimo",
+      "QMD",
+      "LLM Evals"
+    ],
+    "features": [
+      "Forecast, actuals, trends, accuracy, signals, scenarios, and migration analysis",
+      "Production ML context for 400+ services with sub-1% variance",
+      "MCP tools and a knowledge base for AI IDE work",
+      "BigQuery extraction, DuckDB caching, and local dashboards",
+      "Seasonality, alert-to-signal, and onboarding agents",
+      "Offline LLM evals before release"
+    ]
+  },
+  {
+    "id": "cadence",
+    "title": "Cadence Operations Agent",
+    "year": "2026",
+    "date": "2026-03-26",
+    "dateCreated": "2026-03-26",
+    "dateModified": "2026-05-04",
+    "featured": 8,
+    "source": "internal docs",
+    "activity": "documented",
+    "visibility": "internal",
+    "verified": "Checked against Apr 2026 docs. Cadence covers JIRA, Confluence, standups, sprint work, roadmap questions, Slack research, service desk, GitHub handoffs, and slash commands.",
+    "blurb": "An operations agent for the recurring team work that otherwise piles up quietly.",
+    "tags": [
+      "Agentic Systems",
+      "Operations",
+      "Jira",
+      "Confluence",
+      "Cursor"
+    ],
+    "overview": "Cadence is the non-forecasting half of the agent work. It pulls JIRA, Confluence, standups, roadmap questions, Slack research, service-desk work, and GitHub handoffs into a more repeatable path.",
+    "stack": [
+      "Cursor",
+      "Jira",
+      "Confluence",
+      "Slack",
+      "GitHub",
+      "Slash Commands",
+      "Shared Agent Harness"
+    ],
+    "features": [
+      "JIRA lifecycle and sprint support",
+      "Confluence and roadmap-review workflows",
+      "Slack research, service-desk, and GitHub handoffs",
+      "Slash commands for recurring routines",
+      "Shared harness direction with Nimbus"
+    ]
+  },
+  {
+    "id": "ai-tools",
+    "title": "ai-tools Shared Agent Platform",
+    "year": "2026",
+    "date": "2026-03-23",
+    "dateCreated": "2026-03-23",
+    "dateModified": "2026-05-04",
+    "featured": 8,
+    "source": "internal docs",
+    "activity": "documented",
+    "visibility": "internal",
+    "verified": "Checked against Apr 2026 docs and resume. ai-tools packages specialized agents, rules, memory, MCP, reusable skills, and shared AI IDE setup.",
+    "blurb": "The shared agent-tooling layer behind Nimbus, Cadence, memory, MCP, and reusable skills.",
+    "tags": [
+      "Agentic Systems",
+      "AI Platform",
+      "Skills",
+      "Cursor",
+      "Enablement"
+    ],
+    "overview": "ai-tools is where I started turning my personal AI workflow into something teammates could install. It packages rules, memory, MCP tools, skills, and agent setup for Nimbus and Cadence.",
+    "stack": [
+      "AI IDE Tooling",
+      "Shared Skills",
+      "Rules",
+      "Agent Harness",
+      "MCP",
+      "Documentation"
+    ],
+    "features": [
+      "Shared AI IDE setup path",
+      "Memory, MCP, and reusable skills",
+      "Strategic, operational, forecasting, and utility skill pools",
+      "Install flow for ai-tools, Nimbus, and Cadence",
+      "Rules and skills packaged for teammates",
+      "Base layer for future specialized agents"
+    ]
+  },
+  {
+    "id": "angl-net",
+    "title": "AnglNet",
+    "year": "2026",
+    "date": "2026-04-15",
+    "dateCreated": "2026-04-15",
+    "dateModified": "2026-04-15",
+    "featured": 6,
+    "source": "local",
+    "activity": "active",
+    "visibility": "local",
+    "verified": "Checked locally. Recent Apr 2026 activity and README cover Node/TypeScript diagnostics with OpenRouter analysis.",
+    "blurb": "A terminal network tool for home-network debugging and gaming latency.",
+    "tags": [
+      "TypeScript",
+      "Networking",
+      "OpenRouter",
+      "CLI",
+      "Diagnostics"
+    ],
+    "overview": "AnglNet is a terminal tool for when the network feels off and I want more than vibes. It runs discovery, latency and bandwidth tests, packet-loss checks, and AI-assisted router guidance.",
+    "stack": [
+      "Node.js",
+      "TypeScript",
+      "OpenRouter",
+      "Terminal UI",
+      "macOS",
+      "Windows"
+    ],
+    "features": [
+      "Network scanning and device identification",
+      "Latency, bandwidth, packet loss, and jitter testing",
+      "Gaming-specific optimization paths",
+      "Router configuration notes",
+      "Risk-scored recommendations with user consent"
+    ]
+  },
+  {
+    "id": "angl-chat",
+    "title": "Angl Chat",
+    "year": "2025",
+    "date": "2025-11-11",
+    "dateCreated": "2025-11-11",
+    "dateModified": "2025-11-11",
+    "featured": 5,
+    "source": "local",
+    "activity": "recent",
+    "visibility": "local",
+    "verified": "Checked locally. README covers the Go backend, SSE streaming, HTMX/Alpine frontend, and OpenRouter model management.",
+    "blurb": "A tiny self-hosted OpenRouter chat UI for reasoning models, branching, and token visibility.",
+    "tags": [
+      "Go",
+      "OpenRouter",
+      "HTMX",
+      "Alpine.js",
+      "SSE"
+    ],
+    "overview": "Angl Chat is my small model UI for Kimi K2 Thinking and other OpenRouter models. It keeps streaming, thinking blocks, branching, local storage, keyboard controls, and token metrics visible without a heavy frontend.",
+    "stack": [
+      "Go",
+      "Server-Sent Events",
+      "HTMX",
+      "Alpine.js",
+      "Docker",
+      "OpenRouter"
+    ],
+    "features": [
+      "Token-by-token streaming",
+      "Thinking-block visualization",
+      "Conversation branching and archive",
+      "Canvas pane for code or structured output",
+      "Real-time token and speed metrics"
+    ]
+  },
+  {
+    "id": "music-sync",
+    "title": "Music Sync App",
+    "year": "2026",
+    "date": "2026-01-02",
+    "dateCreated": "2026-01-02",
+    "dateModified": "2026-01-02",
+    "featured": 5,
+    "source": "local",
+    "activity": "prototype",
+    "visibility": "local",
+    "verified": "Checked locally. README covers a React/TypeScript sync app, Spotify OAuth, and Apple Music in demo/planned state.",
+    "blurb": "A local music-sync app for comparing Apple Music and Spotify before changing anything.",
+    "tags": [
+      "React",
+      "TypeScript",
+      "Spotify API",
+      "Apple Music",
+      "OAuth"
+    ],
+    "overview": "Music Sync App is for trueing up Apple Music and Spotify without blindly pushing changes. It focuses on matching tracks, previewing diffs, controlling dates, and requiring approval before updates.",
+    "stack": [
+      "React 18",
+      "TypeScript",
+      "Vite",
+      "Zustand",
+      "Spotify OAuth",
+      "MusicKit planned"
+    ],
+    "features": [
+      "Spotify OAuth flow",
+      "Apple Music setup path",
+      "ISRC-first matching design",
+      "Visual diff before updates",
+      "Local token storage"
+    ]
+  },
+  {
+    "id": "finance-tracker",
+    "title": "Finance Tracker",
+    "year": "2025",
+    "date": "2025-10-29",
+    "dateCreated": "2025-10-28",
+    "dateModified": "2025-10-29",
+    "featured": 5,
+    "source": "local git",
+    "activity": "recent",
+    "visibility": "local",
+    "verified": "Checked locally. Rails repo has active UI/controller/policy changes and README covers the local-only planning features.",
+    "blurb": "A local Rails app for my own financial planning, payoff scenarios, and equity comp math.",
+    "tags": [
+      "Rails",
+      "Ruby",
+      "PostgreSQL",
+      "Tailwind",
+      "Finance"
+    ],
+    "overview": "Finance Tracker is a local Rails app for the personal-finance questions I do not want spread across spreadsheets. It covers net worth, debt payoff, taxes, investments, RSU/ESPP math, recommendations, and scenario modeling.",
+    "stack": [
+      "Ruby 3.4",
+      "Rails 8",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Turbo",
+      "Stimulus"
+    ],
+    "features": [
+      "Debt payoff optimization strategies",
+      "Investment and retirement projections",
+      "RSU and ESPP analysis",
+      "Tax estimate and recommendation engines",
+      "Local-only personal data handling"
+    ]
+  },
+  {
+    "id": "n8n-multi-agent",
+    "title": "n8n Multi-Agent Workflow",
+    "year": "2025",
+    "date": "2025-08-17",
+    "dateCreated": "2025-08-17",
+    "dateModified": "2025-08-17",
+    "featured": 5,
+    "source": "local",
+    "activity": "exploration",
+    "visibility": "local",
+    "verified": "Checked locally. n8n docs describe the six-agent idea-to-implementation workflow.",
+    "blurb": "An n8n workflow that runs a rough idea through a small panel of agents before turning it into a spec.",
+    "tags": [
+      "Agentic Systems",
+      "n8n",
+      "OpenAI",
+      "Workflow Automation",
+      "Product Specs"
+    ],
+    "overview": "This n8n workflow was an early way to test multi-agent planning. Several agents look at the same rough idea, a synthesis step pulls out the tradeoffs, and the final output is shaped for a coding-agent handoff.",
+    "stack": [
+      "n8n",
+      "OpenAI",
+      "JSON Workflow Exports",
+      "Research Nodes"
+    ],
+    "features": [
+      "Six-agent round-table pass",
+      "Specialist perspectives before synthesis",
+      "Archived versions for workflow evolution",
+      "Spec written for a coding-agent handoff",
+      "Designed around AI coding-agent handoff quality"
+    ]
+  },
+  {
+    "id": "site",
+    "title": "This Website",
+    "year": "2025",
+    "date": "2025-10-25",
+    "dateCreated": "2025-10-25",
+    "dateModified": "2026-05-04",
+    "featured": 4,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "Public GitHub repo. This pass updated project data, status rendering, stale docs, and incorrect links.",
+    "blurb": "This site: a TUI-ish portfolio with searchable projects and just enough motion to feel alive.",
+    "tags": [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/site"
+    },
+    "overview": "This site is the public surface for the work I keep coming back to. It is built with React and Vite, with a terminal-inspired UI, command palette, font switcher, and project data I can update without rewriting pages by hand.",
+    "stack": [
+      "React 18",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion",
+      "React Router",
+      "GitHub API"
+    ],
+    "features": [
+      "TUI-inspired interface",
+      "Command palette for navigation",
+      "Font switching",
+      "Project search, source filters, and sorting",
+      "Accessible keyboard navigation"
     ]
   },
   {
@@ -56,91 +775,113 @@
     "date": "2025-06-02",
     "dateCreated": "2025-06-02",
     "dateModified": "2025-06-02",
-    "featured": 8,
-    "blurb": "Self-hosted audiobook server with AI transcription using OpenAI Whisper",
-    "tags": ["Python", "Flask", "Whisper", "HTML5 Audio", "FFmpeg"],
+    "featured": 4,
+    "source": "GitHub public + macmini local",
+    "activity": "maintained",
+    "visibility": "public",
+    "verified": "GitHub pushed Jun 2, 2025; macmini checkout has local book/app changes.",
+    "blurb": "A self-hosted audiobook server that generates local captions with Whisper.",
+    "tags": [
+      "Python",
+      "Flask",
+      "Whisper",
+      "HTML5 Audio",
+      "FFmpeg"
+    ],
     "links": {
       "github": "https://github.com/btuckerc/audioreader"
     },
-    "overview": "Minimal self-hosted server that uses OpenAI's Whisper to generate VTT captions for local audio files. Features web interface for browsing collections, managing transcriptions, and synchronized playback with captions.",
-    "stack": ["Python 3.11", "Flask", "OpenAI Whisper", "FFmpeg", "HTML5 Audio", "pyenv"],
+    "overview": "AudioReader is a small self-hosted server for local audio files. It uses Whisper to generate VTT captions, then plays audio with synced captions in the browser.",
+    "stack": [
+      "Python 3.11",
+      "Flask",
+      "OpenAI Whisper",
+      "FFmpeg",
+      "HTML5 Audio"
+    ],
     "features": [
-      "Automatic VTT caption generation with word-level timestamps",
-      "Integrated HTML5 audio player with synchronized captions",
-      "Parallel transcription processing (configurable workers)",
-      "Speed testing for different Whisper models",
-      "Playlist functionality for sequential playback",
-      "Background processing with real-time progress logs"
+      "VTT caption generation",
+      "HTML5 audio player with synchronized captions",
+      "Parallel transcription workers",
+      "Playlist functionality",
+      "Background processing with logs"
     ]
   },
   {
-    "id": "boilerplate",
-    "title": "Cross-Platform Dotfiles",
-    "year": "2019",
-    "date": "2019-05-13",
-    "dateCreated": "2019-05-13",
-    "dateModified": "2025-10-24",
-    "featured": 8,
-    "blurb": "Modern dotfile management system using chezmoi and mise for macOS and Linux",
-    "tags": ["Shell", "Lua", "Chezmoi", "Mise", "Neovim"],
+    "id": "blog",
+    "title": "Personal Blog & CMS",
+    "year": "2024",
+    "date": "2024-12-22",
+    "dateCreated": "2024-12-22",
+    "dateModified": "2024-12-23",
+    "featured": 3,
+    "source": "GitHub public",
+    "activity": "stable",
+    "visibility": "public",
+    "verified": "GitHub public repo btuckerc/blog; last pushed Dec 23, 2024.",
+    "blurb": "A Hugo blog with deployment scripts, search, image migration, and Bluesky identity work.",
+    "tags": [
+      "Hugo",
+      "DigitalOcean",
+      "GitHub Actions",
+      "Bluesky",
+      "Nginx"
+    ],
     "links": {
-      "github": "https://github.com/btuckerc/boilerplate"
+      "github": "https://github.com/btuckerc/blog",
+      "demo": "https://btuckerc.com"
     },
-    "overview": "Comprehensive cross-platform dotfile system managed with chezmoi and mise. Supports both macOS (zsh) and Linux (bash) with shared POSIX configuration. Includes full Neovim, Tmux, and terminal configurations.",
-    "stack": ["Bash/Zsh", "Chezmoi", "Mise", "Lua (Neovim)", "Starship", "Tmux"],
+    "overview": "This is my older blog/CMS setup. It uses Hugo, custom deploys to DigitalOcean, image migration scripts for Obsidian, search, theming, and Bluesky PDS identity work.",
+    "stack": [
+      "Hugo",
+      "Paper Theme",
+      "GitHub Actions",
+      "DigitalOcean",
+      "Nginx",
+      "Bluesky PDS"
+    ],
     "features": [
-      "Automated one-line setup script",
-      "Cross-platform support (macOS/Linux)",
-      "Tool version management with mise",
-      "Full Neovim configuration with LSP, Treesitter, Telescope",
-      "Tmux configuration with plugin manager",
-      "Project templates for Go and Python",
-      "Optional Brewfile for additional packages"
+      "Automated deploy pipeline",
+      "Image migration scripts for Obsidian compatibility",
+      "Dark mode and theme customization",
+      "Full-text search",
+      "Bluesky PDS identity integration"
     ]
   },
   {
-    "id": "spotify-dj",
-    "title": "Spotify DJ - Smart Playlist Ordering",
-    "year": "2019",
-    "date": "2019-04-20",
-    "dateCreated": "2019-04-20",
-    "dateModified": "2025-02-15",
-    "featured": 7,
-    "blurb": "Intelligent playlist ordering based on BPM, key, and energy analysis",
-    "tags": ["Python", "Spotify API", "Music Analysis", "Spotipy"],
-    "links": {
-      "github": "https://github.com/btuckerc/spotify-dj"
-    },
-    "overview": "Python application that analyzes Spotify playlists and suggests optimal song ordering based on musical characteristics including BPM, key compatibility, danceability, and energy levels for smooth transitions.",
-    "stack": ["Python", "Spotipy", "Spotify Web API", "OAuth2"],
-    "features": [
-      "Audio feature analysis (BPM, key, energy, danceability)",
-      "Smart song ordering algorithm for seamless transitions",
-      "Support for user playlists and track libraries",
-      "OAuth authentication flow",
-      "Customizable weighting for different audio features"
-    ]
-  },
-  {
-    "id": "comic-scanner",
+    "id": "comic-scanner-legacy",
     "title": "ComicScanner - Comic Book Cataloging",
     "year": "2024",
     "date": "2024-04-18",
     "dateCreated": "2024-04-18",
     "dateModified": "2024-05-30",
-    "blurb": "Image-based comic book identification and cataloging system",
-    "tags": ["Python", "Computer Vision", "Flask", "JavaScript"],
+    "source": "GitHub public",
+    "activity": "legacy",
+    "visibility": "public",
+    "verified": "Public GitHub repo. Superseded by the newer Webyl/iOS scanner work.",
+    "blurb": "The earlier comic scanner: image matching, barcode scanning, metadata lookup, and cataloging.",
+    "tags": [
+      "Python",
+      "Computer Vision",
+      "Flask",
+      "JavaScript"
+    ],
     "links": {
       "github": "https://github.com/btuckerc/ComicScanner"
     },
-    "overview": "Tool for scanning and cataloging comic book collections using image recognition. Features barcode scanning, automatic metadata retrieval, and collection management through a web interface.",
-    "stack": ["Python", "Flask", "JavaScript", "Computer Vision APIs"],
+    "overview": "ComicScanner is the earlier version of the comic-catalog idea. It used image recognition, barcode scanning, metadata lookup, and a web interface before I moved the newer work toward offline iPhone lookup.",
+    "stack": [
+      "Python",
+      "Flask",
+      "JavaScript",
+      "Computer Vision APIs"
+    ],
     "features": [
       "Image-based comic identification",
-      "Automatic metadata retrieval from multiple databases",
+      "Metadata retrieval from comic databases",
       "Collection management interface",
-      "Export and import functionality for backups",
-      "Support for ComicVine and Grand Comics Database"
+      "Export and import support",
+      "Predecessor to the newer Webyl iOS work"
     ]
   },
   {
@@ -150,80 +891,69 @@
     "date": "2024-05-02",
     "dateCreated": "2024-05-02",
     "dateModified": "2024-05-02",
-    "blurb": "AI-powered news feed summarization tool",
-    "tags": ["Python", "RSS", "NLP", "HTML"],
+    "source": "GitHub public",
+    "activity": "legacy",
+    "visibility": "public",
+    "verified": "GitHub public repo btuckerc/rss-summarizer; last pushed May 2, 2024.",
+    "blurb": "An RSS reader experiment that summarizes feeds so news intake takes less time.",
+    "tags": [
+      "Python",
+      "RSS",
+      "NLP",
+      "HTML"
+    ],
     "links": {
       "github": "https://github.com/btuckerc/rss-summarizer"
     },
-    "overview": "Web application that processes RSS news feeds and generates concise summaries using natural language processing. Helps users stay informed without reading full articles.",
-    "stack": ["Python", "RSS Parser", "HTML/CSS"],
+    "overview": "RSS Summarizer is an older experiment in making news intake less noisy. It reads RSS feeds, aggregates sources, and writes short summaries in a web UI.",
+    "stack": [
+      "Python",
+      "RSS Parser",
+      "HTML/CSS"
+    ],
     "features": [
       "RSS feed parsing and aggregation",
-      "Automated content summarization",
-      "Web-based interface for viewing summaries",
-      "Support for multiple news sources",
+      "Automatic summaries",
+      "Web interface for summaries",
+      "Multiple source support",
       "Markdown output formatting"
     ]
   },
   {
-    "id": "angl-chess",
-    "title": "ANGL Chess Trainer",
-    "year": "2025",
-    "date": "2025-10-19",
-    "dateCreated": "2025-10-19",
-    "dateModified": "2025-10-19",
-    "blurb": "Pedagogy-first web-based chess training platform",
-    "tags": ["Web", "Chess", "Education"],
+    "id": "spotify-dj",
+    "title": "Spotify DJ - Smart Playlist Ordering",
+    "year": "2019",
+    "date": "2019-04-20",
+    "dateCreated": "2019-04-20",
+    "dateModified": "2025-02-15",
+    "featured": 2,
+    "source": "GitHub public",
+    "activity": "legacy",
+    "visibility": "public",
+    "verified": "GitHub public repo btuckerc/spotify-dj; eight stars and last updated Feb 15, 2025.",
+    "blurb": "A Spotify playlist-ordering tool based on BPM, key, danceability, and energy.",
+    "tags": [
+      "Python",
+      "Spotify API",
+      "Music Analysis",
+      "Spotipy"
+    ],
     "links": {
-      "github": "https://github.com/btuckerc/angl-chess"
+      "github": "https://github.com/btuckerc/spotify-dj"
     },
-    "overview": "Educational chess platform focused on teaching chess concepts and strategies through interactive lessons and practice exercises.",
-    "stack": ["JavaScript", "HTML5", "CSS3"],
+    "overview": "Spotify DJ analyzes playlists and suggests an order that should transition better. It looks at BPM, key compatibility, danceability, and energy instead of leaving the playlist in whatever order I dumped songs into it.",
+    "stack": [
+      "Python",
+      "Spotipy",
+      "Spotify Web API",
+      "OAuth2"
+    ],
     "features": [
-      "Interactive chess board",
-      "Educational lesson structure",
-      "Practice exercises and puzzles"
-    ]
-  },
-  {
-    "id": "angl-note",
-    "title": "ANGL Note",
-    "year": "2025",
-    "date": "2025-10-12",
-    "dateCreated": "2025-10-12",
-    "dateModified": "2025-10-18",
-    "blurb": "Note-taking application with advanced organization",
-    "tags": ["Web", "Productivity", "Note-taking"],
-    "links": {
-      "github": "https://github.com/btuckerc/angl-note"
-    },
-    "overview": "Modern note-taking application designed for efficient information capture and organization.",
-    "features": [
-      "Fast note creation and editing",
-      "Advanced search and organization",
-      "Tag-based categorization"
-    ]
-  },
-  {
-    "id": "omarchy",
-    "title": "Omarchy - Arch Linux Setup",
-    "year": "2025",
-    "date": "2025-10-06",
-    "dateCreated": "2025-10-06",
-    "dateModified": "2025-10-06",
-    "fork": true,
-    "blurb": "Opinionated Arch Linux with Hyprland window manager configuration",
-    "tags": ["Linux", "Arch Linux", "Hyprland", "System Configuration"],
-    "links": {
-      "github": "https://github.com/btuckerc/omarchy"
-    },
-    "overview": "Complete Arch Linux setup with Hyprland window manager, optimized for productivity and aesthetics. Features carefully curated configurations for a tiling window manager workflow.",
-    "stack": ["Arch Linux", "Hyprland", "Wayland", "Shell Scripts"],
-    "features": [
-      "Hyprland tiling window manager setup",
-      "Custom keybindings and workspace management",
-      "Aesthetic theme and styling",
-      "Productivity-focused configuration"
+      "Audio feature analysis",
+      "Song-ordering algorithm",
+      "Playlist and track-library support",
+      "OAuth authentication",
+      "Customizable weighting"
     ]
   },
   {
@@ -233,45 +963,33 @@
     "date": "2019-10-23",
     "dateCreated": "2019-10-23",
     "dateModified": "2019-10-23",
-    "blurb": "Music analytics using linear algebra to analyze listening preferences",
-    "tags": ["Python", "Linear Algebra", "Spotify API", "Data Analysis"],
+    "source": "GitHub public",
+    "activity": "legacy",
+    "visibility": "public",
+    "verified": "GitHub public repo btuckerc/spotify-analyst; last pushed Oct 23, 2019.",
+    "blurb": "A Spotify analytics project that maps listening preferences with audio features and distance math.",
+    "tags": [
+      "Python",
+      "Linear Algebra",
+      "Spotify API",
+      "Data Analysis"
+    ],
     "links": {
       "github": "https://github.com/btuckerc/spotify-analyst"
     },
-    "overview": "Python application that analyzes Spotify listening habits using euclidean distance calculations to map music preferences and provide personalized recommendations based on mathematical audio feature analysis.",
-    "stack": ["Python", "Spotipy", "NumPy", "Spotify Web API"],
+    "overview": "Spotify Preference Analyst is a music-analysis project built around audio features and Euclidean distance. It maps listening habits, visualizes preferences, and tests recommendation ideas from the data.",
+    "stack": [
+      "Python",
+      "Spotipy",
+      "NumPy",
+      "Spotify Web API"
+    ],
     "features": [
-      "Listening history analysis with linear algebra",
-      "Euclidean distance calculations for preference mapping",
+      "Listening history analysis",
+      "Preference mapping with Euclidean distance",
       "Genre preference visualization",
       "Mathematical recommendation engine",
       "Audio feature correlation analysis"
-    ]
-  },
-  {
-    "id": "site",
-    "title": "This Website",
-    "year": "2025",
-    "date": "2025-10-25",
-    "dateCreated": "2025-10-25",
-    "dateModified": "2025-10-25",
-    "featured": 10,
-    "blurb": "Personal portfolio website with TUI aesthetic and dynamic content",
-    "tags": ["React", "Vite", "Tailwind CSS", "Framer Motion"],
-    "links": {
-      "github": "https://github.com/btuckerc/site"
-    },
-    "overview": "Modern portfolio website built with React and Vite, featuring a terminal-inspired user interface. Includes dynamic GitHub integration for stats, font switcher, command palette, and responsive design.",
-    "stack": ["React 18", "Vite", "Tailwind CSS", "Framer Motion", "React Router", "GitHub API"],
-    "features": [
-      "TUI-inspired minimal aesthetic",
-      "Command palette (⌘K) for navigation",
-      "Dynamic font switching (6 fonts available)",
-      "GitHub API integration for live stats",
-      "Animated page transitions with Framer Motion",
-      "Projects filtering and sorting",
-      "Keyboard navigation support",
-      "Responsive contact form"
     ]
   }
 ]

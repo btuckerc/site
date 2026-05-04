@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme.jsx'
-import { SYMBOLS, LABELS, bracketed } from '../constants/symbols'
+import { LABELS, bracketed } from '../constants/symbols'
 
 const StatusBar = () => {
   const navigate = useNavigate()
   const { theme, cycleTheme } = useTheme()
-  
+
   const getThemeIcon = () => {
     switch (theme) {
       case 'light':
@@ -32,7 +32,7 @@ const StatusBar = () => {
         )
     }
   }
-  
+
   const getNextThemeLabel = () => {
     switch (theme) {
       case 'dark': return 'light'
@@ -43,32 +43,32 @@ const StatusBar = () => {
   }
 
   return (
-    <nav 
-      className="fixed top-0 left-0 right-0 z-40 bg-bg-elev/90 backdrop-blur-sm border-b border-line"
+    <nav
+      className="fixed top-0 left-0 right-0 z-40 bg-transparent backdrop-blur-xl border-b border-line"
       role="navigation"
       aria-label="Site header and theme controls"
     >
-      <div className="flex items-center justify-between text-sm px-3 py-2">
+      <div className="flex items-center justify-between text-sm px-3 min-h-10">
         {/* Site branding - top left */}
         <button
           onClick={() => navigate('/')}
-          className="font-mono text-accent font-bold hover:text-fg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+          className="tui-action min-w-8 min-h-8 inline-flex items-center justify-center font-mono text-accent font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           aria-label="Go to homepage"
           title="Return to homepage"
         >
-          {bracketed(LABELS.SITE_INITIALS)}
+          <span className="tui-action-content">{bracketed(LABELS.SITE_INITIALS)}</span>
         </button>
-        
+
         {/* Theme controls - top right */}
         <button
           onClick={cycleTheme}
-          className="p-1 text-muted hover:text-accent transition-colors
+          className="tui-action min-w-8 min-h-8 inline-flex items-center justify-center text-muted
             focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           aria-label={`Switch to ${getNextThemeLabel()} theme`}
           title={`Switch to ${getNextThemeLabel()} theme`}
         >
-          <motion.div 
-            className="w-4 h-4" 
+          <motion.div
+            className="tui-action-content w-4 h-4"
             aria-hidden="true"
             key={theme}
             initial={{ rotate: -90, opacity: 0, scale: 0.8 }}

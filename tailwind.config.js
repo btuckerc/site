@@ -28,7 +28,7 @@ export default {
         'btn-shine': 'var(--button-shine)',
       },
       fontFamily: {
-        mono: ['var(--font-family)', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Fira Code', 'monospace'],
+        mono: ['var(--font-family)', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
         sans: ['var(--font-family)', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       animation: {

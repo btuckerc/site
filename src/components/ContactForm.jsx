@@ -110,11 +110,17 @@ const ContactForm = () => {
     formStartTime.current = Date.now()
   }
 
+  const fieldClassName = (hasError) => `tui-input tui-contact-field w-full px-3 py-2 border ${
+    hasError ? 'border-red-500' : 'border-line'
+  } focus:border-accent focus:outline-none transition-colors text-fg text-base`
+
   return (
-    <div className="border border-line bg-card-bg p-5 font-mono">
+    <div className="tui-panel tui-contact-panel border border-line bg-card-bg p-5 font-mono">
       <div className="mb-4">
         <button
+          type="button"
           onClick={() => setIsExpanded(!isExpanded)}
+          aria-expanded={isExpanded}
           className="text-accent text-base mb-2 font-semibold flex items-center gap-2 hover:text-fg transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
         >
           <span>{isExpanded ? '▼' : '▶'}</span>
@@ -128,7 +134,7 @@ const ContactForm = () => {
             <div className="py-8 text-center">
               <div className="text-accent text-3xl mb-3">✓</div>
               <div className="text-fg text-base mb-2">message sent</div>
-              <div className="text-muted text-sm mb-4">i'll get back to you soon</div>
+              <div className="text-muted text-sm mb-4">i'll read it and get back to you</div>
               <button
                 onClick={resetForm}
                 className="text-base text-accent hover:text-fg transition-colors"
@@ -187,9 +193,7 @@ const ContactForm = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-3 py-2 bg-bg border ${
-                      errors.name ? 'border-red-500' : 'border-line'
-                    } focus:border-accent focus:outline-none transition-colors text-fg text-base`}
+                    className={fieldClassName(errors.name)}
                     placeholder="your name"
                   />
                   {errors.name && (
@@ -207,9 +211,7 @@ const ContactForm = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-3 py-2 bg-bg border ${
-                      errors.email ? 'border-red-500' : 'border-line'
-                    } focus:border-accent focus:outline-none transition-colors text-fg text-base`}
+                    className={fieldClassName(errors.email)}
                     placeholder="you@example.com"
                   />
                   {errors.email && (
@@ -228,10 +230,8 @@ const ContactForm = () => {
                   rows={2}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 bg-bg border ${
-                    errors.message ? 'border-red-500' : 'border-line'
-                  } focus:border-accent focus:outline-none transition-colors resize-vertical text-fg text-base`}
-                  placeholder="your message here..."
+                  className={`${fieldClassName(errors.message)} resize-vertical`}
+                  placeholder="what are you working on?"
                   style={{ minHeight: '5rem' }}
                 />
                 {errors.message && (
@@ -243,7 +243,7 @@ const ContactForm = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 px-4 py-3 bg-accent/10 border border-accent text-accent hover:bg-accent hover:text-bg disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-base font-medium"
+                  className="tui-contact-submit flex-1 px-4 py-3 border border-accent text-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-base font-medium"
                 >
                   {isSubmitting ? 'sending...' : 'send →'}
                 </button>
@@ -251,9 +251,9 @@ const ContactForm = () => {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="px-4 py-3 border border-line text-muted hover:text-fg hover:border-accent transition-colors text-base"
+                  className="tui-action tui-contact-secondary px-4 py-3 border border-line text-muted hover:text-fg hover:border-accent transition-colors text-base"
                 >
-                  reset
+                  <span className="tui-action-content">reset</span>
                 </button>
               </div>
             </form>

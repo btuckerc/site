@@ -6,11 +6,11 @@ const CloseButton = () => {
   return (
     <button
       onClick={() => navigate('/')}
-      className="px-3 py-1 border border-line bg-card-bg hover:border-accent hover:bg-accent/10 transition-colors focus-visible font-mono text-sm text-muted hover:text-accent"
+      className="tui-action min-h-10 px-3 py-1 border border-line bg-card-bg focus-visible font-mono text-sm text-muted"
       aria-label="Go back home"
       title="Back (Esc)"
     >
-      ← back
+      <span className="tui-action-content">← back</span>
     </button>
   )
 }

@@ -24,14 +24,14 @@ const CommandPalette = ({ isOpen, onClose }) => {
     {
       id: 'about',
       title: 'go to about',
-      description: 'view profile and background',
+      description: 'open the AI card and resume',
       action: () => navigate('/about'),
       keywords: ['about', 'profile', 'bio', 'background', 'info']
     },
     {
       id: 'projects',
       title: 'go to projects',
-      description: 'browse project portfolio',
+      description: 'browse the project list',
       action: () => navigate('/projects'),
       keywords: ['projects', 'portfolio', 'work', 'code', 'repos']
     },
@@ -46,13 +46,9 @@ const CommandPalette = ({ isOpen, onClose }) => {
     {
       id: 'search',
       title: 'search projects',
-      description: 'focus project search input',
+      description: 'jump to project search',
       action: () => {
-        navigate('/projects')
-        setTimeout(() => {
-          const searchInput = document.querySelector('[data-search-input]')
-          if (searchInput) searchInput.focus()
-        }, 100)
+        navigate('/projects', { state: { focusSearch: Date.now() } })
       },
       keywords: ['search', 'find', 'filter', 'projects', 'query']
     },
@@ -67,7 +63,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
       id: 'linkedin',
       title: 'open linkedin',
       description: 'visit linkedin profile',
-      action: () => window.open('https://linkedin.com/in/tuckercraig', '_blank'),
+      action: () => window.open('https://www.linkedin.com/in/tucker-craig/', '_blank'),
       keywords: ['linkedin', 'profile', 'professional', 'social']
     },
     // Theme

@@ -14,7 +14,7 @@ const FONTS = [
   {
     id: 'source-code',
     name: 'Source Code Pro',
-    family: "'Source Code Pro', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
+    family: "'Source Code Pro Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
   },
   {
     id: 'ibm-plex',
@@ -22,19 +22,19 @@ const FONTS = [
     family: "'IBM Plex Mono', 'SF Mono', 'Menlo', 'Consolas', monospace"
   },
   {
-    id: 'jetbrains',
-    name: 'JetBrains Mono',
-    family: "'JetBrains Mono', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
+    id: 'geist-mono',
+    name: 'Geist Mono',
+    family: "'Geist Mono Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
   },
   {
-    id: 'fira-code',
-    name: 'Fira Code',
-    family: "'Fira Code', 'SF Mono', 'Menlo', 'Consolas', monospace"
+    id: 'martian-mono',
+    name: 'Martian Mono',
+    family: "'Martian Mono Variable', 'SF Mono', 'Menlo', 'Consolas', monospace"
   },
   {
-    id: 'montserrat',
-    name: 'Montserrat',
-    family: "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif"
+    id: 'intel-one',
+    name: 'Intel One Mono',
+    family: "'Intel One Mono Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
   },
   {
     id: 'system',
@@ -43,31 +43,51 @@ const FONTS = [
   }
 ]
 
+const FONT_ALIASES = {
+  jetbrains: 'geist-mono',
+  'fira-code': 'martian-mono',
+  montserrat: 'system'
+}
+
+const getCanonicalFontId = (id) => FONT_ALIASES[id] || id
+const hasFont = (id) => FONTS.some(font => font.id === id)
+
+const getStoredFontId = () => {
+  const savedFontId = localStorage.getItem('font-family')
+  const canonicalFontId = getCanonicalFontId(savedFontId)
+  return hasFont(canonicalFontId) ? canonicalFontId : 'source-code'
+}
+
 export const FontProvider = ({ children }) => {
   const [fontId, setFontId] = useState(() => {
-    return localStorage.getItem('font-family') || 'source-code'
+    return getStoredFontId()
   })
 
-  const currentFont = FONTS.find(f => f.id === fontId) || FONTS[0]
+  const canonicalFontId = getCanonicalFontId(fontId)
+  const currentFont = FONTS.find(f => f.id === canonicalFontId) || FONTS[0]
 
   useEffect(() => {
     document.documentElement.style.setProperty('--font-family', currentFont.family)
-    localStorage.setItem('font-family', fontId)
+    localStorage.setItem('font-family', currentFont.id)
+    if (fontId !== currentFont.id) {
+      setFontId(currentFont.id)
+    }
   }, [fontId, currentFont])
 
   const cycleFont = () => {
-    const currentIndex = FONTS.findIndex(f => f.id === fontId)
+    const currentIndex = FONTS.findIndex(f => f.id === currentFont.id)
     const nextIndex = (currentIndex + 1) % FONTS.length
     setFontId(FONTS[nextIndex].id)
   }
 
   const setFont = (id) => {
-    setFontId(id)
+    const canonicalId = getCanonicalFontId(id)
+    setFontId(hasFont(canonicalId) ? canonicalId : 'source-code')
   }
 
   return (
     <FontContext.Provider value={{
-      fontId,
+      fontId: currentFont.id,
       fontName: currentFont.name,
       cycleFont,
       setFont,

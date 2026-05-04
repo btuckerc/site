@@ -13,14 +13,16 @@ const AsciiButton = forwardRef(({
   as: Component = 'button',
   ...props 
 }, ref) => {
+  const MotionComponent = Component === 'button' ? motion.button : motion.div
+
   const sizeClasses = {
     sm: 'text-sm px-3 py-2',
     default: 'px-5 py-3',
-    lg: 'px-6 py-4 text-lg'
+    lg: 'px-5 py-3 text-base min-[360px]:px-6 min-[360px]:py-4 min-[360px]:text-lg'
   }
 
   const variantClasses = {
-    default: 'bg-btn-bg hover:bg-btn-hover active:bg-btn-active text-fg',
+    default: 'bg-card-bg hover:bg-card-bg active:bg-card-bg text-fg',
     ghost: 'bg-transparent hover:bg-btn-hover active:bg-btn-active text-fg',
     accent: 'bg-accent text-bg hover:bg-accent/90 active:bg-accent/80'
   }
@@ -31,15 +33,16 @@ const AsciiButton = forwardRef(({
       : 'border-btn-border/80'
 
   return (
-    <motion.div
+    <MotionComponent
       ref={ref}
+      type={Component === 'button' ? type : undefined}
       onClick={onClick}
       onKeyDown={onKeyDown}
       className={`
         relative group
         font-medium
-        border-0 outline-0 
-        background-transparent
+        border-0 outline-0
+        bg-transparent
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring
         transition-colors duration-200
@@ -73,20 +76,11 @@ const AsciiButton = forwardRef(({
           ${disabled ? 'opacity-70' : 'group-hover:shadow-[0px_25px_45px_-35px_rgba(201,205,210,0.85)]'}
         `}
       >
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-60 transition-opacity duration-300"
-          style={{
-            background: variant === 'accent'
-              ? 'radial-gradient(circle at 50% 0%, rgba(255,255,255,0.32), transparent 68%)'
-              : 'radial-gradient(circle at 50% 0%, rgba(201,205,210,0.26), transparent 70%)'
-          }}
-        />
         <span className="relative z-10">
           {children}
         </span>
       </div>
-    </motion.div>
+    </MotionComponent>
   )
 })
 

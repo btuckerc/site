@@ -1,6 +1,6 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
-import { lazy, Suspense, useState } from 'react'
+import { AnimatePresence, MotionConfig } from 'framer-motion'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider } from './hooks/useTheme.jsx'
 import { FontProvider } from './hooks/useFont.jsx'
@@ -11,19 +11,70 @@ import CommandPalette from './components/CommandPalette'
 import Footer from './components/Footer'
 
 // Lazy load pages for better performance
-const Home = lazy(() => import('./pages/Home'))
-const About = lazy(() => import('./pages/About'))
-const Projects = lazy(() => import('./pages/Projects'))
-const Contact = lazy(() => import('./pages/Contact'))
+const loadHomePage = () => import('./pages/Home')
+const loadAboutPage = () => import('./pages/About')
+const loadProjectsPage = () => import('./pages/Projects')
+const loadContactPage = () => import('./pages/Contact')
 
-// Minimal loading component
-const PageLoader = () => null
+const Home = lazy(loadHomePage)
+const About = lazy(loadAboutPage)
+const Projects = lazy(loadProjectsPage)
+const Contact = lazy(loadContactPage)
+
+const preloadPage = (loader) => {
+  loader().catch(() => {})
+}
+
+const scheduleIdleTask = (callback) => {
+  if ('requestIdleCallback' in window) {
+    return window.requestIdleCallback(callback, { timeout: 1800 })
+  }
+
+  return window.setTimeout(callback, 450)
+}
+
+const cancelIdleTask = (taskId) => {
+  if ('cancelIdleCallback' in window) {
+    window.cancelIdleCallback(taskId)
+    return
+  }
+
+  window.clearTimeout(taskId)
+}
+
+const PageLoader = () => (
+  <div className="min-h-[calc(100svh-6rem)] px-4 pt-20 pb-20 flex items-center justify-center">
+    <div className="border border-line bg-card-bg px-5 py-4 font-mono text-sm text-muted">
+      <span className="text-accent">▸</span> loading
+    </div>
+  </div>
+)
 
 function AppContent() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
   const { topRef, bottomRef, scrollToTop, scrollToBottom } = useScrollTargets()
   const navigate = useNavigate()
   const location = useLocation()
+
+  useEffect(() => {
+    let projectPreloadTimer
+    const projectPreloadFrame = window.requestAnimationFrame(() => {
+      projectPreloadTimer = window.setTimeout(() => {
+        preloadPage(loadProjectsPage)
+      }, 120)
+    })
+
+    const preloadTask = scheduleIdleTask(() => {
+      preloadPage(loadAboutPage)
+      preloadPage(loadContactPage)
+    })
+
+    return () => {
+      window.cancelAnimationFrame(projectPreloadFrame)
+      window.clearTimeout(projectPreloadTimer)
+      cancelIdleTask(preloadTask)
+    }
+  }, [])
 
   // Set up global hotkeys
   useHotkeys({
@@ -33,8 +84,9 @@ function AppContent() {
       const searchInput = document.querySelector('[data-search-input]')
       if (searchInput) {
         searchInput.focus()
+        searchInput.select?.()
       } else {
-        window.location.pathname = '/projects'
+        navigate('/projects', { state: { focusSearch: Date.now() } })
       }
     },
     onGoToTop: scrollToTop,
@@ -50,7 +102,7 @@ function AppContent() {
   })
 
   return (
-    <div className="min-h-screen text-fg overflow-x-hidden relative">
+    <div className="min-h-svh text-fg overflow-x-hidden relative">
       {/* Ambient overlays for TUI depth */}
       <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-bg/80 via-transparent to-bg/70" />
@@ -62,16 +114,16 @@ function AppContent() {
           }}
         />
         <div
-          className="absolute inset-0 opacity-15 mix-blend-color-dodge"
+          className="absolute inset-0 opacity-[0.12] mix-blend-soft-light"
           style={{
-            background: 'radial-gradient(circle at 20% 20%, rgba(201,205,210,0.16), transparent 45%), radial-gradient(circle at 80% 25%, rgba(201,205,210,0.12), transparent 52%), radial-gradient(circle at 50% 85%, rgba(201,205,210,0.1), transparent 55%)'
+            backgroundImage: 'linear-gradient(90deg, transparent 0%, rgba(201,205,210,0.12) 50%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(201,205,210,0.08) 52%, transparent 100%)'
           }}
         />
       </div>
 
       <div className="relative z-10">
         {/* Skip to main content for accessibility */}
-        <a href="#main-content" className="skip-to-main sr-only">
+        <a href="#main-content" className="skip-to-main">
           Skip to main content
         </a>
         
@@ -97,10 +149,7 @@ function AppContent() {
           </Suspense>
         </main>
         
-        {/* Footer landmark */}
-        <footer role="contentinfo">
-          <Footer onCommandPaletteOpen={() => setIsCommandPaletteOpen(true)} />
-        </footer>
+        <Footer onCommandPaletteOpen={() => setIsCommandPaletteOpen(true)} />
         
         {/* Bottom scroll target */}
         <div ref={bottomRef} tabIndex={-1} className="absolute bottom-0" aria-hidden="true" />
@@ -131,7 +180,9 @@ function App() {
       <ThemeProvider>
         <FontProvider>
           <FocusProvider>
-            <AppContent />
+            <MotionConfig reducedMotion="user">
+              <AppContent />
+            </MotionConfig>
           </FocusProvider>
         </FontProvider>
       </ThemeProvider>

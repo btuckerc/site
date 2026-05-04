@@ -53,10 +53,10 @@ This document summarizes all SEO improvements implemented for **btuckerc.dev** b
 ### 4. **Per-Page Metadata**
 - ✅ Installed `react-helmet-async` for dynamic page metadata
 - ✅ Added unique `<title>` tags for each page:
-  - Home: "Tucker Craig - FinOps Engineer at Box | Cloud Cost Optimization"
-  - About: "About Tucker Craig - FinOps Engineer, Cloud Cost Optimization Expert"
-  - Projects: "Projects - Tucker Craig | Full-Stack Developer & FinOps Engineer"
-  - Contact: "Contact Tucker Craig - FinOps Engineer & Full-Stack Developer"
+  - Home: "Tucker Craig - Applied AI & Systems"
+  - About: "About Tucker Craig - Applied AI & Systems"
+  - Projects: "Projects - Tucker Craig | Tools, Agents, and Systems"
+  - Contact: "Contact Tucker Craig - Applied AI & Systems"
 - ✅ Added unique meta descriptions for each page
 - ✅ Added per-page canonical URLs
 - ✅ Added per-page Open Graph tags
@@ -222,4 +222,3 @@ Beyond SEO, these improvements also:
 
 **Implementation Date:** January 27, 2025  
 **Status:** ✅ Complete (except Apple Touch Icon - see action required above)
-

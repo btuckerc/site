@@ -24,10 +24,6 @@
   --hover-bg: color-mix(in srgb, var(--accent) 15%, transparent);
   --active-bg: color-mix(in srgb, var(--accent) 20%, transparent);
   
-  /* Social link hover effect - using pure white with higher opacity */
-  --social-hover-bg: rgba(255, 255, 255, 0.5);
-  --social-hover-text: var(--bg);
-  --social-hover-shadow: rgba(255, 255, 255, 0.3);
 }
 
 /* Light mode - neutral theme light variant */
@@ -44,10 +40,6 @@
   --button-border: color-mix(in srgb, var(--accent) 50%, transparent);
   --button-shine: color-mix(in srgb, var(--accent) 24%, transparent);
   
-  /* Social link hover effect - lighter background for light theme */
-  --social-hover-bg: rgba(0, 0, 0, 0.15);
-  --social-hover-text: var(--fg);
-  --social-hover-shadow: rgba(0, 0, 0, 0.2);
 }
 
 /* Amber mode - gruvbox inspired warm theme */
@@ -64,9 +56,4 @@
   --button-border: color-mix(in srgb, var(--accent) 45%, transparent);
   --button-shine: color-mix(in srgb, var(--accent) 20%, transparent);
   
-  /* Social link hover effect - soft white for amber theme */
-  --social-hover-bg: rgba(255, 255, 255, 0.45);
-  --social-hover-text: var(--bg);
-  --social-hover-shadow: rgba(255, 255, 255, 0.25);
 }
-

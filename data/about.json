@@ -1,6 +1,6 @@
 {
   "name": "Tucker Craig",
-  "role": "FinOps Engineer @ Box",
+  "role": "Senior Software Engineer @ Box",
   "education": "Davidson College '20",
   "location": "Redwood City, CA",
   "startDate": "2018-06-01",
@@ -8,9 +8,27 @@
   "githubUsername": "btuckerc",
   "githubRepos": [
     "btuckerc/boilerplate",
+    "btuckerc/jeopardy",
+    "btuckerc/opencode-menu",
+    "btuckerc/TradeRoads",
+    "btuckerc/flip7calculator",
+    "btuckerc/farkle",
+    "btuckerc/py-trading",
+    "btuckerc/site",
+    "btuckerc/angl-chess",
     "btuckerc/angl-note",
     "btuckerc/audioreader",
-    "btuckerc/ComicScanner"
+    "btuckerc/blog",
+    "btuckerc/advent-of-code",
+    "btuckerc/init-leetcode",
+    "btuckerc/ComicScanner",
+    "btuckerc/rss-summarizer",
+    "btuckerc/spotify-analyst",
+    "btuckerc/scraping",
+    "btuckerc/spotify-dj",
+    "btuckerc/JustBobThoughts",
+    "btuckerc/phys-comp-final",
+    "btuckerc/opencv-tut"
   ],
   "front": {
     "avatar": {
@@ -21,96 +39,249 @@
       {
         "label": "experience",
         "value": "auto-years",
-        "suffix": "years"
+        "suffix": "years",
+        "detail": "Professional engineering work since June 2018, prorated daily."
       },
       {
-        "label": "cost saved",
-        "value": "$2.3M"
+        "label": "annual savings",
+        "value": "$2M+",
+        "detail": "Annual savings from forecasts, dashboards, and cost work with engineering leadership."
       },
       {
-        "label": "time in terminal",
-        "value": "auto-terminal",
-        "suffix": "hours"
+        "label": "AI agent systems",
+        "value": "auto-agent-systems",
+        "detail": "Nimbus, Cadence, ai-tools, OpenClaw, Hermes, and n8n. Some are shipped work, some are where I test what agents should feel like."
       },
       {
-        "label": "code written with AI",
-        "value": "auto-github",
-        "suffix": "lines"
+        "label": "token use",
+        "value": "auto-ai-ide-total",
+        "suffix": "tokens",
+        "detail": "Scaled from my local AI IDE usage since Dec 2024. Current pace is auto-ai-ide-monthly/mo."
+      },
+      {
+        "label": "AI evals",
+        "value": "95%+",
+        "suffix": "coverage",
+        "detail": "Nimbus has 95%+ test coverage and offline LLM evals. I do not want demos that only work on my machine.\n This system makes use of smaller local models to evaluate responses."
+      },
+      {
+        "label": "forecast signals",
+        "value": "200+",
+        "suffix": "/mo",
+        "detail": "Forecast edits now leave a trail instead of disappearing into old sheets, stale threads, or someone's memory."
       },
       {
         "label": "projects",
-        "value": "auto-repos"
+        "value": "auto-projects",
+        "detail": "Public repos, local work, hosted projects, and macmini agent work. auto-ai-projects have explicit AI or agent signals.",
+        "cta": {
+          "label": "view projects",
+          "to": "/projects"
+        }
       },
       {
         "label": "prod incidents",
-        "value": "1"
+        "value": "1",
+        "detail": "Ask me about the incident story. It is better over email.",
+        "cta": {
+          "label": "email me",
+          "to": "/contact"
+        }
       }
     ]
   },
   "back": {
-    "bio": "Senior FinOps Engineer at Box, specializing in multi-cloud cost optimization and capacity planning. I own monthly forecasting for multi-million dollar infrastructure with <1% variance and deliver $2.4M+ in annual savings through data-driven optimizations.",
+    "bio": "I'm a Senior Software Engineer at Box. The work I keep coming back to is applied AI: find the annoying workflow, understand why it exists, and build something my teammates can actually use.",
+    "aiProfile": {
+      "title": "Applied AI, close to the work",
+      "tagline": "I realized the trajectory for my career has fallen perfectly in place with the recent AI fad. I've spent a lot of time automating systems: at school, at home, at work...",
+      "summary": "A lot of my recent work started with an annoying problem: forecast context spread across docs, sheets, Slack, and people's heads. I built tools around that. Nimbus made forecast Q&A less dependent on me. Cadence made recurring team work less scattered. OpenClaw and Hermes are where I'm testing what personal agents can actually do.",
+      "stats": [
+        {
+          "label": "agents built",
+          "value": "6",
+          "detail": "Nimbus, Cadence, ai-tools, OpenClaw, Hermes, and n8n. Some are production-adjacent, some are where I test agent behavior."
+        },
+        {
+          "label": "quality bar",
+          "value": "95%+",
+          "detail": "For Nimbus, I paired 95%+ test coverage with offline LLM evals because I don't want agent demos that only work on my machine."
+        },
+        {
+          "label": "services modeled",
+          "value": "400+",
+          "detail": "The forecast context covers 400+ services across cost, usage, ML baselines, and review history."
+        },
+        {
+          "label": "signals captured",
+          "value": "200+/mo",
+          "detail": "Our forecast edits now leave a trail instead of disappearing into old sheets, stale threads, or someone's memory."
+        }
+      ],
+      "highlights": [
+        {
+          "name": "Nimbus",
+          "detail": "I built Nimbus as a Q&A knowledge base for forecast context. My teammates can ask questions that used to depend on me remembering where the answer lived."
+        },
+        {
+          "name": "Cadence",
+          "detail": "I used Cadence to pull recurring work into a more repeatable path: JIRA, Confluence, service-desk work, roadmap questions, and the small things that quietly pile up."
+        },
+        {
+          "name": "OpenClaw and Hermes",
+          "detail": "OpenClaw and Hermes are where I'm pushing on agents more directly: memory, tools, context, and what it feels like when the agent is actually useful."
+        },
+        {
+          "name": "Signals",
+          "detail": "I started turning forecast changes into persistent line items at our most atomic level. The old version left too much context in sheets and people's heads."
+        },
+        {
+          "name": "What I want more of",
+          "detail": "I want to keep building scalable, reliable, resilient AI tools."
+        }
+      ],
+      "skills": [
+        "Python",
+        "Go",
+        "TypeScript",
+        "BigQuery",
+        "SQL",
+        "Gemini",
+        "Antigravity",
+        "MCP",
+        "RAG",
+        "Agentic systems",
+        "Kubernetes",
+        "Terraform",
+        "Docker",
+        "Looker",
+        "Tableau"
+      ],
+      "direction": [
+        "The problem is still fuzzy, but everyone can feel the pain.",
+        "Someone needs to talk to users, follow the data, and ship the first useful path.",
+        "The AI piece has to survive outside a demo."
+      ]
+    },
+    "experience": [
+      {
+        "role": "Senior Software Engineer (FinOps)",
+        "org": "Box",
+        "period": "Aug 2024 - Present",
+        "location": "Redwood City, CA",
+        "points": [
+          "Built an internal AI agent platform with memory, MCP, and reusable skills for autonomous FinOps analysis and cross-team spend analysis.",
+          "Drove $2.9M annual multi-cloud savings through cost forecasts and dashboards, partnering with CTO and engineering leadership.",
+          "Scaled a production ML system for 400+ services with sub-1% variance for infrastructure decision support."
+        ]
+      },
+      {
+        "role": "Capacity & Performance Engineer III",
+        "org": "Box",
+        "period": "Jun 2020 - Aug 2024",
+        "location": "Redwood City, CA",
+        "points": [
+          "Replaced manual Google Sheets planning with automated 12-month capacity planning, cutting planning cycles from weeks to days.",
+          "Architected migration tooling that decommissioned 6+ global datacenters as Box moved from on-premise to multi-cloud.",
+          "Built a self-service infrastructure platform for 200+ engineers through Jira integration, reducing provisioning from days to hours."
+        ]
+      },
+      {
+        "role": "Data Center Services Intern",
+        "org": "Box",
+        "period": "Jun 2019 - Sep 2019",
+        "location": "Redwood City, CA",
+        "points": [
+          "Standardized hardware monitoring across a global datacenter fleet for consistent observability.",
+          "Deployed Sensu-based auto-ticketing for host-down and hardware alerts, cutting critical-alert MTTR by about 90%."
+        ]
+      },
+      {
+        "role": "Data Engineering Intern",
+        "org": "Tresata",
+        "period": "Jun 2018 - Sep 2018",
+        "location": "Charlotte, NC",
+        "points": [
+          "Presented data pipelines and analytical reports on housing affordability trends for local policy recommendations.",
+          "Completed data engineering bootcamp work in Scala, Apache Spark, and big-data processing frameworks.",
+          "Finalist in a client hackathon translating stakeholder requirements into product direction."
+        ]
+      },
+      {
+        "role": "Student Developer",
+        "org": "Davidson College IT Department",
+        "period": "Sep 2018 - May 2019",
+        "location": "Davidson, NC",
+        "points": [
+          "Shipped a full-stack add-drop service integrated with registrar systems.",
+          "Served as Scrum Master for biweekly ceremonies across infrastructure and application teams."
+        ]
+      },
+      {
+        "role": "Web Scraping Specialist",
+        "org": "'Cats Stats, Davidson College",
+        "period": "Sep 2016 - May 2020",
+        "location": "Davidson, NC",
+        "points": [
+          "Led a student team building automated data scraping and ETL pipelines.",
+          "Designed and taught a web scraping curriculum for 20+ students."
+        ]
+      }
+    ],
     "skills": [
       {
-        "category": "Cloud Platforms",
-        "items": ["GCP", "AWS", "Azure", "IBM Cloud"]
-      },
-      {
-        "category": "FinOps & Cost Management",
+        "category": "Languages & Systems",
         "items": [
-          "Cloud Cost Optimization",
-          "Budget Forecasting",
-          "Cost Allocation",
-          "CUDs",
-          "FinOps Framework"
-        ]
-      },
-      {
-        "category": "Languages",
-        "items": ["Python", "JavaScript", "Go", "SQL", "Bash", "Java", "C"]
-      },
-      {
-        "category": "Tools & Platforms",
-        "items": [
+          "Python",
+          "Go",
           "TypeScript",
-          "Django",
-          "React",
-          "Node.js",
-          "Flask",
-          "Docker",
+          "BigQuery",
+          "SQL",
           "Kubernetes",
           "Terraform",
-          "Jenkins",
-          "Git",
-          "Looker",
-          "Tableau",
-          "Jupyter",
-          "Linux"
+          "Docker",
+          "CI/CD"
+        ]
+      },
+      {
+        "category": "Specialized",
+        "items": [
+          "AI/ML systems (Gemini, Antigravity, MCP, RAG, agentic systems)",
+          "Cloud cost optimization (GCP, AWS, Azure, IBM)",
+          "BI tooling (Looker, Tableau)"
         ]
       }
     ],
-    "badges": [
+    "educationDetails": [
       {
-        "name": "FinOps Certified Practitioner",
-        "type": "certification",
-        "year": "2022"
-      },
-      {
-        "name": "Computer Science",
-        "type": "education",
-        "year": "2020"
+        "school": "Davidson College",
+        "period": "May 2020",
+        "detail": "B.S. Computer Science, minor in Digital Studies"
       }
     ],
-    "interests": [
-      "Cloud cost optimization",
-      "Data engineering",
-      "Full-stack development",
-      "Terminal-based workflows",
-      "Open source contributing"
-    ]
+    "leadership": [
+      {
+        "role": "President, The Nuances",
+        "org": "Davidson College",
+        "period": "2019 - 2020",
+        "detail": "Led an 18-member performing ensemble, managed a $10K annual budget, and organized rehearsals and concerts."
+      }
+    ],
+    "badges": [],
+    "interests": []
   },
   "cachedGithubStats": {
-    "repoCount": 19,
-    "totalLines": "11.4k",
-    "lastUpdated": "2025-10-25T03:03:56.525Z"
+    "repoCount": 22,
+    "totalLines": "146.6k",
+    "lastUpdated": "2026-05-04T03:05:54.000Z"
+  },
+  "cachedLocalStats": {
+    "projectCount": 26,
+    "aiAidedProjectCount": 13,
+    "agentSystemCount": 6,
+    "aiIdeTokenTotal": "32.3B",
+    "aiIdeMonthlyPace": "1.9B",
+    "aiIdeObservedSince": "Oct 2025",
+    "aiIdeScaledSince": "Dec 2024"
   }
 }

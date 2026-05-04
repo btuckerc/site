@@ -38,7 +38,7 @@ export const useScrollAnimation = () => {
   }
 }
 
-export const useStaggeredScrollAnimation = (itemCount = 0) => {
+export const useStaggeredScrollAnimation = () => {
   const [elementRef, setElementRef] = useState(null)
   const [hasAnimated, setHasAnimated] = useState(false)
 
