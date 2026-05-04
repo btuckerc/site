@@ -102,24 +102,8 @@ function AppContent() {
   })
 
   return (
-    <div className="min-h-svh text-fg overflow-x-hidden relative">
-      {/* Ambient overlays for TUI depth */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-bg/80 via-transparent to-bg/70" />
-        <div
-          className="absolute inset-0 opacity-10 mix-blend-soft-light"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(201,205,210,0.06) 1px, transparent 1px)',
-            backgroundSize: '100% 4px'
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.12] mix-blend-soft-light"
-          style={{
-            backgroundImage: 'linear-gradient(90deg, transparent 0%, rgba(201,205,210,0.12) 50%, transparent 100%), linear-gradient(180deg, transparent 0%, rgba(201,205,210,0.08) 52%, transparent 100%)'
-          }}
-        />
-      </div>
+    <div className="min-h-svh text-fg overflow-x-hidden relative isolate">
+      <div aria-hidden="true" className="site-backdrop" />
 
       <div className="relative z-10">
         {/* Skip to main content for accessibility */}

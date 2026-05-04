@@ -16,7 +16,8 @@
   --button-bg: color-mix(in srgb, var(--bg-elev) 88%, #050608 12%);
   --button-hover-bg: color-mix(in srgb, var(--bg-elev) 70%, var(--accent) 30%);
   --button-active-bg: color-mix(in srgb, var(--bg-elev) 60%, var(--accent) 40%);
-  --button-border: color-mix(in srgb, var(--accent) 35%, transparent);
+  --button-border: color-mix(in srgb, var(--line) 70%, var(--accent) 30%);
+  --button-bracket: var(--fg);
   --button-shine: color-mix(in srgb, var(--accent) 18%, transparent);
   
   /* Focus and interaction */
@@ -38,6 +39,7 @@
   --button-hover-bg: color-mix(in srgb, var(--bg-elev) 65%, var(--accent) 35%);
   --button-active-bg: color-mix(in srgb, var(--bg-elev) 55%, var(--accent) 45%);
   --button-border: color-mix(in srgb, var(--accent) 50%, transparent);
+  --button-bracket: var(--accent);
   --button-shine: color-mix(in srgb, var(--accent) 24%, transparent);
   
 }
@@ -54,6 +56,7 @@
   --button-hover-bg: color-mix(in srgb, var(--bg-elev) 72%, var(--accent) 28%);
   --button-active-bg: color-mix(in srgb, var(--bg-elev) 62%, var(--accent) 38%);
   --button-border: color-mix(in srgb, var(--accent) 45%, transparent);
+  --button-bracket: var(--accent);
   --button-shine: color-mix(in srgb, var(--accent) 20%, transparent);
   
 }

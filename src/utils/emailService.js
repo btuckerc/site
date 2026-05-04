@@ -40,7 +40,7 @@ export const sendEmailViaEmailJS = async (formData) => {
     from_name: formData.name,
     from_email: formData.email,
     message: formData.message,
-    to_email: "hello@btuckerc.dev", // Your email
+    to_email: "btuckerc.dev@gmail.com", // Your email
   };
 
   try {

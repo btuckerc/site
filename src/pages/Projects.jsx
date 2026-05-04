@@ -209,15 +209,15 @@ const Projects = () => {
       </Helmet>
       <div className="projects-page tui-page-shell min-h-svh pt-20 pb-28 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="tui-page-header mb-6 relative">
-          <div className="absolute top-0 left-0">
+        <div className="tui-page-header mb-6 relative grid gap-4 md:block">
+          <div className="justify-self-start md:absolute md:left-0 md:top-0">
             <CloseButton />
           </div>
-          <div className="text-center">
+          <div className="min-w-0 text-center">
             <h1 className="tui-page-title text-xl font-bold text-fg mb-2 font-mono">
               <span className="text-accent">[</span> projects <span className="text-accent">]</span>
             </h1>
-            <p className="text-muted text-xs font-mono">
+            <p className="mx-auto max-w-[16rem] text-muted text-xs font-mono leading-relaxed sm:max-w-lg">
               public work, local prototypes, and the agent stuff I keep coming back to
             </p>
           </div>

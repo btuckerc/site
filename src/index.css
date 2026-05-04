@@ -23,6 +23,7 @@ html {
   --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --motion-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --tui-action-edge-opacity: 0; /* Set to 0.85 to restore the left-edge hover marker. */
+  --site-bg-image: url('/bg-3-mobile-900.jpg');
 }
 
 body {
@@ -37,50 +38,152 @@ body {
   overflow-x: hidden;
 }
 
-/* Fixed background image that scales based on viewport, locked to viewport across all pages */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--bg);
-  background-image: url('/bg-3.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  z-index: -2;
-  /* Ensure background covers entire viewport */
-  min-width: 100vw;
-  min-height: 100vh;
+@media (min-resolution: 1.5dppx) {
+  :root {
+    --site-bg-image: url('/bg-3-mobile-1536.jpg');
+  }
 }
 
-body::before {
-  content: '';
+@media (orientation: landscape) {
+  :root {
+    --site-bg-image: url('/bg-3-1280.jpg');
+  }
+}
+
+@media (orientation: landscape) and (min-resolution: 1.5dppx) {
+  :root {
+    --site-bg-image: url('/bg-3-1920.jpg');
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --site-bg-image: url('/bg-3-1920.jpg');
+  }
+}
+
+@media (min-width: 900px) and (min-resolution: 1.5dppx) {
+  :root {
+    --site-bg-image: url('/bg-3-2560.jpg');
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --site-bg-image: url('/bg-3-2560.jpg');
+  }
+}
+
+@media (min-width: 1600px) and (min-resolution: 1.5dppx) {
+  :root {
+    --site-bg-image: url('/bg-3-3840.jpg');
+  }
+}
+
+@supports (background-image: image-set(url('/bg-3-mobile-900.jpg') 1x)) {
+  :root {
+    --site-bg-image: image-set(
+      url('/bg-3-mobile-900.jpg') 1x,
+      url('/bg-3-mobile-1536.jpg') 2x
+    );
+  }
+
+  @media (orientation: landscape) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-1280.jpg') 1x,
+        url('/bg-3-1920.jpg') 2x
+      );
+    }
+  }
+
+  @media (min-width: 900px) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-1920.jpg') 1x,
+        url('/bg-3-2560.jpg') 2x
+      );
+    }
+  }
+
+  @media (min-width: 1600px) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-2560.jpg') 1x,
+        url('/bg-3-3840.jpg') 2x
+      );
+    }
+  }
+}
+
+.site-backdrop {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
+  z-index: 0;
+  width: 100%;
   height: 100vh;
-  /* Dark overlay using theme colors for TUI aesthetic and readability */
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--bg) 70%, transparent) 0%,
-    color-mix(in srgb, var(--bg) 65%, transparent) 50%,
-    color-mix(in srgb, var(--bg) 70%, transparent) 100%
-  );
+  height: 100lvh;
+  overflow: hidden;
+  background-color: var(--bg);
   pointer-events: none;
-  z-index: -1;
-  /* Ensure overlay covers entire viewport */
-  min-width: 100vw;
-  min-height: 100vh;
+  contain: layout paint style;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+.site-backdrop::before,
+.site-backdrop::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.site-backdrop::before {
+  inset: -1px;
+  background-color: var(--bg);
+  background-image: url('/bg-3.jpg');
+  background-image: var(--site-bg-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1.005);
+}
+
+.site-backdrop::after {
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg) 70%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 65%, transparent) 50%,
+      color-mix(in srgb, var(--bg) 70%, transparent) 100%
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--bg) 80%, transparent) 0%,
+      transparent 48%,
+      color-mix(in srgb, var(--bg) 70%, transparent) 100%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--accent) 4%, transparent) 0 1px,
+      transparent 1px 4px
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--accent) 5%, transparent) 50%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      color-mix(in srgb, var(--accent) 4%, transparent) 52%,
+      transparent 100%
+    );
 }
 
 /* Scrollbars stay close to native behavior, with just enough theme color to fit. */
@@ -220,10 +323,10 @@ input[type='search']::-webkit-search-results-decoration {
 
 /* Terminal-style interaction primitives */
 .tui-home-shell {
+  background-color: transparent;
   border-color: color-mix(in srgb, var(--accent) 58%, var(--line));
-  transform: translateZ(0);
-  will-change: transform;
   transition:
+    background-color var(--motion-fast) var(--motion-ease-standard),
     box-shadow var(--motion-fast) var(--motion-ease-standard);
 }
 
@@ -244,7 +347,6 @@ input[type='search']::-webkit-search-results-decoration {
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  will-change: transform, opacity;
 }
 
 .tui-command-cue-home {
@@ -272,7 +374,6 @@ input[type='search']::-webkit-search-results-decoration {
 
 .tui-command-cue-label {
   display: inline-block;
-  will-change: transform;
 }
 
 .tui-command-cue-key {
@@ -287,6 +388,46 @@ input[type='search']::-webkit-search-results-decoration {
   box-shadow: 0 8px 22px -18px rgba(0, 0, 0, 0.85);
   font: inherit;
   line-height: 1;
+}
+
+.tui-site-chrome {
+  background-color: color-mix(in srgb, var(--bg) 58%, transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tui-home-shell,
+  .tui-about-card {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .tui-command-cue {
+    will-change: transform, opacity;
+  }
+
+  .tui-command-cue-label {
+    will-change: transform;
+  }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 700px) {
+  .backdrop-blur-sm,
+  .backdrop-blur-xl {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .tui-site-chrome {
+    background-color: color-mix(in srgb, var(--bg) 94%, transparent);
+  }
+
+  .tui-footer-popover {
+    background-color: color-mix(in srgb, var(--bg) 92%, var(--bg-elev) 8%);
+  }
+
+  .tui-home-shell {
+    background-color: transparent;
+  }
 }
 
 @media (max-height: 780px) {
@@ -331,11 +472,6 @@ input[type='search']::-webkit-search-results-decoration {
 .backface-hidden {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-}
-
-.tui-about-card {
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .tui-about-card:focus-visible {
@@ -464,6 +600,22 @@ input[type='search']::-webkit-search-results-decoration {
 
 .tui-stat-value {
   white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .tui-stat-trigger {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .tui-stat-value {
+    justify-self: start;
+    margin-left: 1.17rem;
+    max-width: calc(100% - 1.17rem);
+    overflow-wrap: anywhere;
+    text-align: left;
+    white-space: normal;
+  }
 }
 
 .tui-stat-detail {
@@ -1195,6 +1347,11 @@ input[type='search']::-webkit-search-results-decoration {
 .tui-result-meta {
   border-left: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
   padding-left: 0.65rem;
+}
+
+.tui-project-text {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .tui-panel {

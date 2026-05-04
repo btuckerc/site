@@ -56,10 +56,10 @@ const Contact = () => {
                     {isEmailExpanded && (
                       <div className="pl-3">
                         <a
-                          href="mailto:hello@btuckerc.dev"
+                          href="mailto:btuckerc.dev@gmail.com"
                           className="tui-link-chip tui-contact-link"
                         >
-                          hello@btuckerc.dev
+                          btuckerc.dev@gmail.com
                         </a>
                       </div>
                     )}

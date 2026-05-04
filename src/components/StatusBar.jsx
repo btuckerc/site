@@ -44,7 +44,7 @@ const StatusBar = () => {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-40 bg-transparent backdrop-blur-xl border-b border-line"
+      className="tui-site-chrome fixed top-0 left-0 right-0 z-40 bg-transparent backdrop-blur-xl border-b border-line"
       role="navigation"
       aria-label="Site header and theme controls"
     >

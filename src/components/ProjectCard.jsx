@@ -74,15 +74,15 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
       <button
         type="button"
         onClick={() => hasExpandableContent && setIsExpanded(!isExpanded)}
-        className="w-full text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+        className="w-full min-w-0 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
         disabled={!hasExpandableContent}
         aria-expanded={hasExpandableContent ? isExpanded : undefined}
         aria-controls={hasExpandableContent ? contentId : undefined}
         {...focusProps}
       >
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="flex-1">
-            <h3 className="text-lg font-bold text-fg">
+        <div className="flex min-w-0 flex-col gap-2 mb-3 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+          <div className="min-w-0 flex-1">
+            <h3 className="tui-project-text text-base font-bold text-fg leading-snug sm:text-lg">
               <HighlightedText text={project.title} highlightConfig={highlightConfig} />
             </h3>
             {project.fork && (
@@ -104,7 +104,7 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
           <span className="text-sm text-accent shrink-0">{project.year}</span>
         </div>
         {project.blurb && (
-          <p className="text-sm text-muted leading-relaxed mb-3">
+          <p className="tui-project-text text-xs text-muted leading-relaxed mb-3 sm:text-sm">
             <HighlightedText text={project.blurb} highlightConfig={highlightConfig} />
           </p>
         )}
@@ -114,7 +114,7 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
           </div>
         )}
         <div className="flex items-center justify-between">
-          <div className="text-sm text-muted min-w-0">
+          <div className="tui-project-text text-sm text-muted min-w-0">
             {project.tags && project.tags.length > 0 ? (
               <>
                 {project.tags.slice(0, 3).map((tag, index) => (

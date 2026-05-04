@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
@@ -15,6 +15,8 @@ export const usePointerDepth = ({
   spring = { stiffness: 160, damping: 24, mass: 0.4 }
 } = {}) => {
   const shouldReduceMotion = useReducedMotion()
+  const [canUsePointerDepth, setCanUsePointerDepth] = useState(false)
+  const isDepthDisabled = shouldReduceMotion || !canUsePointerDepth
   const isAttracting = mode === 'attract'
   const pointerX = useMotionValue(0)
   const pointerY = useMotionValue(0)
@@ -37,8 +39,24 @@ export const usePointerDepth = ({
   const z = useTransform(smoothActive, [0, 1], [0, liftZ])
   const scale = useTransform(smoothActive, [0, 1], [1, hoverScale])
 
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return undefined
+
+    const media = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const syncPointerCapability = () => setCanUsePointerDepth(media.matches)
+    syncPointerCapability()
+
+    if (media.addEventListener) {
+      media.addEventListener('change', syncPointerCapability)
+      return () => media.removeEventListener('change', syncPointerCapability)
+    }
+
+    media.addListener(syncPointerCapability)
+    return () => media.removeListener(syncPointerCapability)
+  }, [])
+
   const updatePointerDepth = useCallback((event) => {
-    if (shouldReduceMotion) return
+    if (isDepthDisabled) return
 
     const rect = event.currentTarget.getBoundingClientRect()
     const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2
@@ -47,7 +65,7 @@ export const usePointerDepth = ({
     pointerX.set(clamp(x, -1, 1))
     pointerY.set(clamp(y, -1, 1))
     pointerActive.set(1)
-  }, [pointerActive, pointerX, pointerY, shouldReduceMotion])
+  }, [isDepthDisabled, pointerActive, pointerX, pointerY])
 
   const resetPointerDepth = useCallback(() => {
     pointerX.set(0)
@@ -55,13 +73,17 @@ export const usePointerDepth = ({
     pointerActive.set(0)
   }, [pointerActive, pointerX, pointerY])
 
+  useEffect(() => {
+    if (isDepthDisabled) resetPointerDepth()
+  }, [isDepthDisabled, resetPointerDepth])
+
   return {
-    depthHandlers: shouldReduceMotion ? {} : {
+    depthHandlers: isDepthDisabled ? {} : {
       onMouseMove: updatePointerDepth,
       onMouseLeave: resetPointerDepth,
       onBlur: resetPointerDepth
     },
-    depthStyle: shouldReduceMotion ? undefined : {
+    depthStyle: isDepthDisabled ? undefined : {
       rotateX,
       rotateY,
       x,

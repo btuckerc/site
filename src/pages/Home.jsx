@@ -51,7 +51,7 @@ const Home = () => {
           transition={{ duration: 0.45, ease: "easeOut" }}
           {...depthHandlers}
           style={depthStyle}
-          className="tui-home-shell relative overflow-hidden border border-line/70 bg-bg/85 backdrop-blur-xl shadow-[0_32px_100px_-50px_rgba(0,0,0,0.85)]"
+          className="tui-home-shell relative overflow-hidden border border-line/70 bg-transparent backdrop-blur-xl shadow-[0_32px_100px_-50px_rgba(0,0,0,0.85)]"
         >
           <div className="home-panel relative px-6 py-10 sm:px-8 sm:py-14 md:px-14 md:py-20 text-center flex flex-col justify-between min-h-[min(600px,calc(100svh-9rem))] gap-10 sm:gap-12">
             {/* Top Section - Name and Info */}
@@ -67,7 +67,7 @@ const Home = () => {
               </motion.div>
 
               <h1 
-                className="font-bold text-fg mb-[clamp(0.875rem,2.4vw,1.5rem)] text-[clamp(1.7rem,9.35vw,4rem)] leading-[1.05] font-mono whitespace-nowrap"
+                className="font-bold text-fg mb-[clamp(0.875rem,2.4vw,1.5rem)] text-[clamp(1.45rem,7.2vw,4rem)] leading-[1.05] font-mono whitespace-nowrap"
               >
                 TUCKER CRAIG
               </h1>

@@ -261,7 +261,7 @@ const Footer = ({ onCommandPaletteOpen }) => {
         )}
       </AnimatePresence>
 
-      <motion.footer layoutRoot className="fixed bottom-0 left-0 right-0 z-50 border-t border-line bg-transparent backdrop-blur-xl">
+      <motion.footer layoutRoot className="tui-site-chrome fixed bottom-0 left-0 right-0 z-50 border-t border-line bg-transparent backdrop-blur-xl">
         <div className="relative flex items-center justify-between text-xs font-mono text-muted px-3 py-1 min-h-[44px]">
           {/* Social links - bottom left */}
           {/* Desktop: Show all links horizontally */}

@@ -30,7 +30,7 @@ const AsciiButton = forwardRef(({
   const borderClass =
     variant === 'accent'
       ? 'border-accent/70'
-      : 'border-btn-border/80'
+      : 'border-[var(--button-border)]'
 
   return (
     <MotionComponent
@@ -54,16 +54,16 @@ const AsciiButton = forwardRef(({
       {...props}
     >
       {/* Bracket hover effect lines */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 pointer-events-none z-30">
         {/* Left bracket */}
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-accent" />
-        <div className="absolute left-0 top-0 w-[10px] h-px bg-accent" />
-        <div className="absolute left-0 bottom-0 w-[10px] h-px bg-accent" />
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-[var(--button-bracket)]" />
+        <div className="absolute left-0 top-0 w-[10px] h-px bg-[var(--button-bracket)]" />
+        <div className="absolute left-0 bottom-0 w-[10px] h-px bg-[var(--button-bracket)]" />
         
         {/* Right bracket */}
-        <div className="absolute right-0 top-0 bottom-0 w-px bg-accent" />
-        <div className="absolute top-0 right-0 w-[10px] h-px bg-accent" />
-        <div className="absolute bottom-0 right-0 w-[10px] h-px bg-accent" />
+        <div className="absolute right-0 top-0 bottom-0 w-px bg-[var(--button-bracket)]" />
+        <div className="absolute top-0 right-0 w-[10px] h-px bg-[var(--button-bracket)]" />
+        <div className="absolute bottom-0 right-0 w-[10px] h-px bg-[var(--button-bracket)]" />
       </div>
 
       {/* Inner container */}
@@ -73,7 +73,7 @@ const AsciiButton = forwardRef(({
           transition-all duration-200 z-10
           ${sizeClasses[size]}
           ${variantClasses[variant]}
-          ${disabled ? 'opacity-70' : 'group-hover:shadow-[0px_25px_45px_-35px_rgba(201,205,210,0.85)]'}
+          ${disabled ? 'opacity-70' : ''}
         `}
       >
         <span className="relative z-10">
