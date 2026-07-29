@@ -1107,6 +1107,21 @@ input[type='search']::-webkit-search-results-decoration {
   text-shadow: 0 0 22px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
+.privacy-policy-copy ul {
+  padding-left: 1.35rem;
+}
+
+.privacy-policy-copy li {
+  position: relative;
+}
+
+.privacy-policy-copy li::before {
+  content: '›';
+  position: absolute;
+  left: -1.1rem;
+  color: var(--accent);
+}
+
 .tui-control-panel {
   position: relative;
   overflow: hidden;

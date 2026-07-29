@@ -15,11 +15,13 @@ const loadHomePage = () => import('./pages/Home')
 const loadAboutPage = () => import('./pages/About')
 const loadProjectsPage = () => import('./pages/Projects')
 const loadContactPage = () => import('./pages/Contact')
+const loadFlippingSevenPrivacyPage = () => import('./pages/FlippingSevenPrivacy')
 
 const Home = lazy(loadHomePage)
 const About = lazy(loadAboutPage)
 const Projects = lazy(loadProjectsPage)
 const Contact = lazy(loadContactPage)
+const FlippingSevenPrivacy = lazy(loadFlippingSevenPrivacyPage)
 
 const preloadPage = (loader) => {
   loader().catch(() => {})
@@ -128,6 +130,10 @@ function AppContent() {
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route
+                  path="/privacy/flipping-seven-calculator"
+                  element={<FlippingSevenPrivacy />}
+                />
               </Routes>
             </AnimatePresence>
           </Suspense>
