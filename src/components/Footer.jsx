@@ -1,10 +1,9 @@
 import { useState, Fragment, useCallback, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useFont } from '../hooks/useFont'
 import { SYMBOLS } from '../constants/symbols'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub, faLinkedin, faTwitter, faSpotify, faSoundcloud } from '@fortawesome/free-brands-svg-icons'
+import BrandIcon from './BrandIcon'
 
 const menuPanelMotion = {
   initial: { opacity: 0, y: 6, scaleY: 0.98 },
@@ -23,12 +22,6 @@ const menuItemMotion = (index = 0) => ({
   exit: { opacity: 0, x: -3, transition: { duration: 0.08 } }
 })
 
-const commandCueTransition = {
-  duration: 0.1,
-  ease: [0.4, 0, 0.2, 1],
-  layout: { duration: 0.22, ease: [0.22, 1, 0.36, 1] },
-  opacity: { duration: 0.07, ease: [0.4, 0, 0.2, 1] }
-}
 
 const commandFooterPaths = new Set(['/about', '/projects', '/contact'])
 
@@ -46,11 +39,12 @@ const Footer = ({ onCommandPaletteOpen }) => {
   const hasFooterCommand = commandFooterPaths.has(location.pathname)
 
   const socialLinks = [
-    { name: 'github', url: 'https://github.com/btuckerc', key: 'gh', icon: faGithub },
-    { name: 'linkedin', url: 'https://www.linkedin.com/in/tucker-craig/', key: 'in', icon: faLinkedin },
-    { name: 'twitter', url: 'https://x.com/btuckerc', key: 'tw', icon: faTwitter },
-    { name: 'spotify', url: 'https://open.spotify.com/user/tuxedo7777?si=ed756fe16e924916', key: 'sp', icon: faSpotify },
-    { name: 'soundcloud', url: 'https://soundcloud.com/tuxix', key: 'sc', icon: faSoundcloud },
+    { name: 'github', url: 'https://github.com/btuckerc', key: 'gh' },
+    { name: 'linkedin', url: 'https://www.linkedin.com/in/tucker-craig/', key: 'in' },
+    { name: 'twitter', url: 'https://x.com/btuckercdev', key: 'tw' },
+    { name: 'instagram', url: 'https://www.instagram.com/btuckerc.dev/', key: 'ig' },
+    { name: 'spotify', url: 'https://open.spotify.com/user/tuxedo7777?si=ed756fe16e924916', key: 'sp' },
+    { name: 'soundcloud', url: 'https://soundcloud.com/tuxix', key: 'sc' },
   ]
 
   const focusControl = (ref) => {
@@ -116,35 +110,25 @@ const Footer = ({ onCommandPaletteOpen }) => {
   }, [isPickerOpen, fontId])
 
   return (
-    <LayoutGroup id="footer-command-cue">
+  <>
       {/* Desktop command hint floats above the home footer so it never competes with footer controls. */}
       {isHomePage && (
-        <motion.div
-          layoutRoot
+        <div
           className="tui-command-hint-home hidden min-[700px]:block fixed left-0 right-0 z-40 text-center pointer-events-none"
         >
-          <motion.div
-            initial={false}
-            animate={{ '--tui-command-helper-opacity': 1 }}
-            transition={commandCueTransition}
+          <div
             className="tui-command-cue tui-command-cue-home inline-flex text-muted text-xs font-mono"
           >
             <span className="tui-command-cue-content">
               <span className="tui-command-cue-helper">
                 type <kbd className="tui-command-cue-key">{SYMBOLS.COMMAND_PREFIX}</kbd> for
               </span>
-              <motion.span
-                layoutId="command-cue-label"
-                layout="position"
-                initial={false}
-                transition={commandCueTransition}
-                className="tui-command-cue-label"
-              >
+              <span className="tui-command-cue-label">
                 commands
-              </motion.span>
+              </span>
             </span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       )}
 
       {/* Font Picker Dropdown */}
@@ -168,7 +152,7 @@ const Footer = ({ onCommandPaletteOpen }) => {
               id="footer-font-picker"
               ref={fontPanelRef}
               onKeyDown={handlePickerKeyDown}
-              className="tui-menu-panel tui-footer-popover tui-footer-popover-right z-[70] origin-bottom-right border border-line/70 bg-bg/85 backdrop-blur-xl shadow-[0_32px_100px_-50px_rgba(0,0,0,0.85)]"
+              className="tui-menu-panel tui-footer-popover tui-footer-popover-right z-[70] origin-bottom-right border border-line/70 shadow-[0_32px_100px_-50px_rgba(0,0,0,0.85)]"
               role="menu"
               aria-label="Font family"
             >
@@ -218,7 +202,7 @@ const Footer = ({ onCommandPaletteOpen }) => {
               id="footer-social-links"
               ref={socialPanelRef}
               onKeyDown={handleSocialPanelKeyDown}
-              className="tui-menu-panel tui-footer-popover tui-footer-popover-left z-[70] origin-bottom-left border border-line/70 bg-bg/85 backdrop-blur-xl shadow-[0_32px_100px_-50px_rgba(0,0,0,0.85)]"
+              className="tui-menu-panel tui-footer-popover tui-footer-popover-left z-[70] origin-bottom-left border border-line/70 shadow-[0_32px_100px_-50px_rgba(0,0,0,0.85)]"
               aria-label="Social links"
             >
               <nav className="py-2 text-xs font-mono" aria-label="Social profiles">
@@ -234,7 +218,7 @@ const Footer = ({ onCommandPaletteOpen }) => {
                     onClick={() => closeSocialMenu(false)}
                   >
                     {showIcons ? (
-                      <FontAwesomeIcon icon={link.icon} className="text-xs" />
+                      <BrandIcon name={link.name} className="h-3 w-3" />
                     ) : (
                       <span className="text-muted">{link.key}</span>
                     )}
@@ -261,15 +245,11 @@ const Footer = ({ onCommandPaletteOpen }) => {
         )}
       </AnimatePresence>
 
-      <motion.footer layoutRoot className="tui-site-chrome fixed bottom-0 left-0 right-0 z-50 border-t border-line bg-transparent backdrop-blur-xl">
+      <footer className="tui-site-chrome fixed bottom-0 left-0 right-0 z-50 border-t border-line">
         <div className="relative flex items-center justify-between text-xs font-mono text-muted px-3 py-1 min-h-[44px]">
           {/* Social links - bottom left */}
           {/* Desktop: Show all links horizontally */}
-          <motion.nav
-            layoutId="social-links"
-            layout="position"
-            initial={false}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+          <nav
             className="hidden min-[700px]:flex items-center h-8"
             aria-label="Social profiles"
           >
@@ -284,7 +264,7 @@ const Footer = ({ onCommandPaletteOpen }) => {
                 >
                   <span className="tui-action-content text-muted inline-flex items-center justify-center">
                     {showIcons ? (
-                      <FontAwesomeIcon icon={link.icon} className="text-xs" />
+                      <BrandIcon name={link.name} className="h-3 w-3" />
                     ) : (
                       <span className="text-xs font-mono leading-none">{link.key}</span>
                     )}
@@ -311,16 +291,10 @@ const Footer = ({ onCommandPaletteOpen }) => {
                 </motion.button>
               )}
             </AnimatePresence>
-          </motion.nav>
+          </nav>
 
           {/* Mobile: Collapsible social menu button */}
-          <motion.div
-            layoutId="social-links"
-            layout="position"
-            initial={false}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="min-[700px]:hidden relative"
-          >
+          <div className="min-[700px]:hidden relative">
             <button
               ref={socialButtonRef}
               type="button"
@@ -335,30 +309,21 @@ const Footer = ({ onCommandPaletteOpen }) => {
                 <span className="text-accent">{isSocialMenuOpen ? '▼' : '▶'}</span>
               </span>
             </button>
-          </motion.div>
+          </div>
 
           {/* Desktop: compact command entry on pages where the full home cue would compete with the footer. */}
           {hasFooterCommand && (
             <div className="hidden min-[700px]:block absolute left-1/2 transform -translate-x-1/2 pointer-events-auto">
-              <motion.button
-                initial={false}
-                animate={{ opacity: 1 }}
-                transition={commandCueTransition}
+              <button
                 type="button"
                 onClick={() => onCommandPaletteOpen?.()}
                 className="tui-command-cue tui-command-cue-footer tui-action min-h-8 px-2 text-muted text-xs font-mono"
                 aria-label="Open command palette"
               >
-                <motion.span
-                  layoutId="command-cue-label"
-                  layout="position"
-                  initial={false}
-                  transition={commandCueTransition}
-                  className="tui-action-content tui-command-cue-label"
-                >
+                <span className="tui-action-content tui-command-cue-label">
                   commands
-                </motion.span>
-              </motion.button>
+                </span>
+              </button>
             </div>
           )}
 
@@ -393,8 +358,8 @@ const Footer = ({ onCommandPaletteOpen }) => {
             <span className="text-accent">©</span> 2026
           </div>
         </div>
-      </motion.footer>
-    </LayoutGroup>
+      </footer>
+    </>
   )
 }
 

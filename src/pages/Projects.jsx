@@ -45,6 +45,7 @@ const matchesSourceFilter = (project, sourceFilter) => {
         tags.includes('agentic') ||
         title.includes('openclaw') ||
         title.includes('hermes') ||
+        title.includes('grok') ||
         tags.includes('mcp') ||
         tags.includes('n8n')
       )
@@ -200,10 +201,10 @@ const Projects = () => {
   return (
     <>
       <Helmet>
-        <title>Projects - Tucker Craig | Tools, Agents, and Systems</title>
-        <meta name="description" content="Projects from Tucker Craig: agent systems, applied AI tools, public GitHub work, local prototypes, OpenClaw, Hermes, trading, iOS apps, and infrastructure projects." />
-        <meta property="og:title" content="Projects - Tucker Craig Portfolio" />
-        <meta property="og:description" content="Agent systems, applied AI tools, public GitHub work, local prototypes, OpenClaw, Hermes, trading, iOS apps, and infrastructure projects." />
+        <title>Projects - Tucker Craig</title>
+        <meta name="description" content="Searchable list of what I've built: agent runtimes, forecast tooling, iOS apps, trading code, and the macmini that ties them together." />
+        <meta property="og:title" content="Projects - Tucker Craig" />
+        <meta property="og:description" content="Agent runtimes, forecast tooling, iOS apps, trading code, and the macmini that ties them together." />
         <meta property="og:url" content="https://btuckerc.dev/projects" />
         <link rel="canonical" href="https://btuckerc.dev/projects" />
       </Helmet>
@@ -217,8 +218,8 @@ const Projects = () => {
             <h1 className="tui-page-title text-xl font-bold text-fg mb-2 font-mono">
               <span className="text-accent">[</span> projects <span className="text-accent">]</span>
             </h1>
-            <p className="mx-auto max-w-[16rem] text-muted text-xs font-mono leading-relaxed sm:max-w-lg">
-              public work, local prototypes, and the agent stuff I keep coming back to
+            <p className="mx-auto max-w-2xl text-pretty text-muted text-xs font-mono leading-relaxed">
+              public work, local prototypes, and the agent experiments running on my macmini
             </p>
           </div>
         </div>
@@ -336,8 +337,8 @@ const Projects = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="tui-panel border border-line bg-card-bg/90 px-5 py-10 text-center mb-12 font-mono"
+            transition={{ duration: 0.12 }}
+            className="tui-panel border border-line bg-card-bg px-5 py-10 text-center mb-12 font-mono"
           >
             <div className="text-muted">
               <div className="text-sm">{emptyMessage}</div>
@@ -373,7 +374,7 @@ const Projects = () => {
                 <span className="text-accent">▸</span> more public work on <a href="https://github.com/btuckerc" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-fg transition-colors">github →</a>
               </div>
               <div>
-                <span className="text-accent">▸</span> local-only projects are here when I could check the repo, docs, or running state
+                <span className="text-accent">▸</span> local-only projects are listed from repo, docs, and running state when I could check them
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 [
   {
     "id": "openclaw",
-    "title": "OpenClaw Personal Agent Runtime",
+    "title": "OpenClaw Agent",
     "year": "2026",
     "date": "2026-03-13",
     "dateCreated": "2026-01-27",
@@ -11,7 +11,7 @@
     "activity": "active but unhealthy",
     "visibility": "local",
     "verified": "Checked on macmini May 3, 2026. Runtime 2026.3.13 is present; the gateway was unhealthy; briefing and music jobs existed but iMessage delivery timed out.",
-    "blurb": "My macmini agent lab: skills, cron jobs, memory, messaging, and recovery work in one place.",
+    "blurb": "OpenClaw on the macmini: skills, cron, memory, messaging.",
     "tags": [
       "Agentic Systems",
       "OpenClaw",
@@ -19,7 +19,7 @@
       "Cron",
       "LaunchAgent"
     ],
-    "overview": "OpenClaw is where I test personal-agent ideas on the macmini. It has skills, scheduled jobs, memory, message delivery, reliability checks, and agent workspaces. It is where I figure out what agent systems should actually do.",
+    "overview": "OpenClaw runs personal-agent experiments on the macmini. Skills, scheduled jobs, memory, and message delivery. I use it to see what actually survives overnight.",
     "stack": [
       "Python",
       "Node.js",
@@ -39,7 +39,7 @@
   },
   {
     "id": "hermes-agent",
-    "title": "Hermes Agent Deployment & Migration",
+    "title": "Hermes Agent",
     "year": "2026",
     "date": "2026-04-19",
     "dateCreated": "2026-03-29",
@@ -49,7 +49,7 @@
     "activity": "running",
     "visibility": "external upstream",
     "verified": "Checked on macmini May 3, 2026. ai.hermes.gateway-fireworks is loaded, Hermes Agent v0.10.0 is installed, and custom/OpenRouter profiles, memory, and skills are configured.",
-    "blurb": "My active Hermes Agent setup on the macmini, with memory, skills, and gateway work.",
+    "blurb": "Hermes Agent on the macmini, next to OpenClaw.",
     "tags": [
       "Agentic Systems",
       "Hermes",
@@ -61,7 +61,7 @@
       "github": "https://github.com/NousResearch/hermes-agent",
       "docs": "https://hermes-agent.nousresearch.com/docs/"
     },
-    "overview": "Hermes Agent is the upstream Nous Research agent I am running beside OpenClaw. I use it to compare what should stay custom and what should move to a maintained runtime.",
+    "overview": "Hermes Agent is the Nous Research runtime I run beside OpenClaw. Same job, different gateway.",
     "stack": [
       "Python",
       "OpenRouter",
@@ -76,6 +76,236 @@
       "Persistent memory and skills across profiles",
       "Messaging gateway for remote agent use",
       "Side-by-side comparison with my custom OpenClaw work"
+    ]
+  },
+  {
+    "id": "grokbot",
+    "title": "Grokbot",
+    "year": "2026",
+    "date": "2026-06-01",
+    "dateModified": "2026-09-02",
+    "featured": 9,
+    "source": "local",
+    "activity": "active",
+    "visibility": "local",
+    "verified": "Local Grok agent beside OpenClaw and Hermes.",
+    "blurb": "Grok agent I run next to OpenClaw and Hermes.",
+    "tags": [
+      "Agentic Systems",
+      "Grok",
+      "xAI"
+    ],
+    "overview": "Grokbot sits next to OpenClaw and Hermes. Same job, Grok instead of the other runtimes.",
+    "stack": [
+      "Grok"
+    ],
+    "features": [
+      "Grok-backed agent",
+      "Runs beside OpenClaw and Hermes"
+    ]
+  },
+  {
+    "id": "omp-config",
+    "title": "OMP config",
+    "year": "2026",
+    "date": "2026-08-30",
+    "dateModified": "2026-08-30",
+    "featured": 9,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "boilerplate home/dot_local/share/decent-angl/skills/omp-config and ~/.omp live config. Pin is mise, not omp update.",
+    "blurb": "Shared Oh My Pi baseline: models, skills, agents, auth-broker, pinned mise release.",
+    "tags": [
+      "OMP",
+      "Chezmoi",
+      "Mise",
+      "Agents"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/boilerplate"
+    },
+    "overview": "OMP config lives in boilerplate and applies through chezmoi. SuperGrok authenticates with xai-oauth on the machine. OpenRouter is overflow only. The pin moves with omp-baseline upgrade, never omp update.",
+    "stack": [
+      "Oh My Pi",
+      "Chezmoi",
+      "Mise",
+      "Bitwarden"
+    ],
+    "features": [
+      "Shared skills, agents, and model defaults",
+      "Auth-broker for SuperGrok",
+      "Exact mise pin, no omp update"
+    ]
+  },
+  {
+    "id": "omp-sync",
+    "title": "OMP sync",
+    "year": "2026",
+    "date": "2026-08-30",
+    "dateModified": "2026-08-30",
+    "featured": 9,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "boilerplate home/dot_local/bin/executable_omp-baseline. Fleet check is t14, macbook, macmini.",
+    "blurb": "Keeps the Oh My Pi pin and config the same on macbook, macmini, and T14.",
+    "tags": [
+      "OMP",
+      "Fleet",
+      "Chezmoi"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/boilerplate"
+    },
+    "overview": "omp-baseline plus chezmoi apply. Fleet probe hits t14, macbook, and macmini. A scheduled guard reports pin drift. It does not run omp update.",
+    "stack": [
+      "Bash",
+      "Chezmoi",
+      "Mise",
+      "SSH"
+    ],
+    "features": [
+      "Moves the three pin sites together",
+      "Fleet status for t14, macbook, macmini",
+      "Hourly guard, drift marker, no silent overwrite of source"
+    ]
+  },
+  {
+    "id": "platform-ops",
+    "title": "platform-ops",
+    "year": "2026",
+    "date": "2026-08-30",
+    "dateModified": "2026-08-30",
+    "featured": 8,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "boilerplate skill platform-ops. Current target macbook, portable-macos-workstation.",
+    "blurb": "The rule for what lives in chezmoi versus what I change on the machine itself.",
+    "tags": [
+      "Ops",
+      "macOS",
+      "Linux",
+      "Chezmoi"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/boilerplate"
+    },
+    "overview": "platform-ops inspects OS, desktop, hardware, and network settings, then decides if the change belongs in the shared boilerplate tree or only on that host. Router work goes to the opnsense skill instead.",
+    "stack": [
+      "Chezmoi",
+      "macOS",
+      "Omarchy"
+    ],
+    "features": [
+      "Shared vs machine-local ownership",
+      "macOS and Omarchy/Linux references",
+      "Does not own the home router"
+    ]
+  },
+  {
+    "id": "t14-plugins",
+    "title": "T14 Omarchy plugins",
+    "year": "2026",
+    "date": "2026-08-30",
+    "dateModified": "2026-08-30",
+    "featured": 8,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "boilerplate home/dot_local/share/omarchy-shell-overlay/plugins. T14 itself is down this session.",
+    "blurb": "Shell overlay on the ThinkPad: Tailscale, network, bluetooth, power, Dropbox, workspaces.",
+    "tags": [
+      "Omarchy",
+      "Linux",
+      "Quickshell",
+      "ThinkPad"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/boilerplate/tree/master/home/dot_local/share/omarchy-shell-overlay/plugins"
+    },
+    "overview": "T14 runs Omarchy. The plugins live in boilerplate as a Quickshell overlay. Panels for Tailscale, network, bluetooth, power, and Dropbox, plus a workspaces widget. The machine is down this session. The source is in the public repo.",
+    "stack": [
+      "QML",
+      "Quickshell",
+      "Hyprland",
+      "Omarchy"
+    ],
+    "features": [
+      "Tailscale panel with peers and exit nodes",
+      "Network, bluetooth, power, Dropbox panels",
+      "Workspaces bar widget"
+    ]
+  },
+  {
+    "id": "opnsense-clt",
+    "title": "OPNsense home router",
+    "year": "2026",
+    "date": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "featured": 8,
+    "source": "local appliance + shared skill",
+    "activity": "active",
+    "visibility": "local",
+    "verified": "opnsense skill in boilerplate. Appliance is clt at 10.77.77.1. API credentials stay in Bitwarden, not Git.",
+    "blurb": "Home firewall I stood up as clt. LAN, DNS, DHCP, Tailscale on the router.",
+    "tags": [
+      "OPNsense",
+      "Networking",
+      "Tailscale",
+      "Homelab"
+    ],
+    "overview": "OPNsense box named clt. LAN is 10.77.77.0/24. Unbound for DNS, dnsmasq for DHCP, Tailscale on the router with acceptDNS off so Unbound stays LAN DNS. I talk to it through a pinned API from the fleet.",
+    "stack": [
+      "OPNsense",
+      "Unbound",
+      "dnsmasq",
+      "Tailscale"
+    ],
+    "features": [
+      "LAN 10.77.77.0/24",
+      "Unbound DNS, dnsmasq DHCP",
+      "Tailscale on the router, acceptDNS off",
+      "REST API from the fleet, keys out of Git"
+    ]
+  },
+  {
+    "id": "center-seat",
+    "title": "CenterSeat",
+    "year": "2026",
+    "date": "2026-08-04",
+    "dateCreated": "2026-08-04",
+    "dateModified": "2026-08-04",
+    "featured": 10,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "verified": "GitHub public btuckerc/center-seat, pushed Aug 4, 2026. Live at movies.angl.gg.",
+    "blurb": "Finds the best open movie-theater seat across nearby showtimes.",
+    "tags": [
+      "Go",
+      "TypeScript",
+      "Showtimes",
+      "Seat maps"
+    ],
+    "links": {
+      "live": "https://movies.angl.gg",
+      "github": "https://github.com/btuckerc/center-seat"
+    },
+    "overview": "CenterSeat searches a movie, place, date range, and time window, reads live seat maps, and ranks contiguous seats. It does not hold or buy tickets.",
+    "stack": [
+      "Go",
+      "Node.js",
+      "Docker",
+      "OpenCinema",
+      "Atom"
+    ],
+    "features": [
+      "Live seat maps from partner inventory",
+      "Ranks contiguous seats by preference",
+      "Read-only. It never holds or buys tickets",
+      "Hosted at movies.angl.gg"
     ]
   },
   {
@@ -163,13 +393,13 @@
     "year": "2019",
     "date": "2026-04-17",
     "dateCreated": "2019-05-13",
-    "dateModified": "2026-04-17",
+    "dateModified": "2026-08-30",
     "featured": 10,
     "source": "GitHub public + local",
     "activity": "active",
     "visibility": "public",
-    "verified": "GitHub pushed Apr 17, 2026. Local and macmini checkouts use this as the shared chezmoi and mise baseline.",
-    "blurb": "The dotfiles and machine setup I use to keep my AI IDE workflow from drifting across computers.",
+    "verified": "GitHub public btuckerc/boilerplate, pushed Aug 30, 2026.",
+    "blurb": "Dotfiles and tool versions I share across Mac, Linux, and the homelab.",
     "tags": [
       "Shell",
       "Chezmoi",
@@ -196,6 +426,46 @@
       "Tool version management with mise",
       "Neovim, tmux, terminal, and shell configuration",
       "Bootstrap scripts, platform notes, and portable agent instructions"
+    ]
+  },
+  {
+    "id": "decent-angl",
+    "title": "decent-angl Private Ops Overlay",
+    "year": "2026",
+    "date": "2026-04-11",
+    "dateCreated": "2026-04-11",
+    "dateModified": "2026-05-04",
+    "featured": 9,
+    "source": "local + macmini mirror",
+    "activity": "active",
+    "visibility": "local",
+    "verified": "Checked locally and against the macmini mirror on May 4, 2026. The private overlay is on main at 67fb1ab and matches origin/main.",
+    "blurb": "The private layer around my machines: notes, backups, host roles, messaging, and Codex coordination.",
+    "tags": [
+      "Ops",
+      "Tailscale",
+      "Restic",
+      "Obsidian",
+      "Codex"
+    ],
+    "overview": "decent-angl is the private overlay beside Boilerplate. It keeps the cross-machine setup grounded: macbook as the portable Mac, omarchy as the Linux workstation, and macmini as the home mirror, backup node, notes backend, and Apple Messages bridge.",
+    "stack": [
+      "Chezmoi",
+      "Mise",
+      "Tailscale",
+      "Restic",
+      "Vaultwarden",
+      "Obsidian LiveSync",
+      "Python",
+      "Rust"
+    ],
+    "features": [
+      "Machine roles and Tailscale-first SSH standards",
+      "Private rollout notes for the public Boilerplate baseline",
+      "Restic repositories, schedules, restore smoke tests, and retention rules",
+      "Self-hosted Obsidian LiveSync standard with Git as the backstop",
+      "Shared imsg CLI and TUI for Messages access from each machine",
+      "Codex usage snapshots and budget status across the fleet"
     ]
   },
   {
@@ -247,7 +517,7 @@
     "activity": "recent",
     "visibility": "public",
     "verified": "Checked May 4, 2026 against public GitHub and local py-finance. The local README has the 2020-2024 regime-aware backtest numbers.",
-    "blurb": "The trading project that actually held up: point-in-time data, ML forecasts, risk controls, and broker paths.",
+    "blurb": "Point-in-time market data, ML forecasts, risk controls, and broker paths.",
     "tags": [
       "Python",
       "DuckDB",
@@ -277,18 +547,18 @@
     ]
   },
   {
-    "id": "lucky-ledger",
-    "title": "Lucky Ledger",
+    "id": "flipping-seven-calculator",
+    "title": "Flipping Seven Calculator",
     "year": "2025",
     "date": "2025-12-23",
     "dateCreated": "2025-12-23",
-    "dateModified": "2026-04-10",
-    "featured": 8,
+    "dateModified": "2026-08-06",
+    "featured": 10,
     "source": "GitHub public + local",
     "activity": "active",
     "visibility": "public",
-    "verified": "GitHub pushed Dec 30, 2025. Local checkout has active rebrand, UI, and test work.",
-    "blurb": "A local-first SwiftUI scorekeeper for card nights and table games.",
+    "verified": "App Store listing id 6756905042, version 1.3 on Aug 6, 2026. GitHub public btuckerc/flip7calculator.",
+    "blurb": "iOS scorekeeper for Flip 7. I shipped it as Flip 7 Calculator, then renamed it after a copyright claim.",
     "tags": [
       "Swift",
       "SwiftUI",
@@ -297,9 +567,11 @@
       "Local-first"
     ],
     "links": {
-      "github": "https://github.com/btuckerc/flip7calculator"
+      "app store": "https://apps.apple.com/us/app/flipping-seven-calculator/id6756905042",
+      "github": "https://github.com/btuckerc/flip7calculator",
+      "privacy": "https://btuckerc.dev/privacy/flipping-seven-calculator"
     },
-    "overview": "Lucky Ledger started as a Flip 7 calculator and became a more general table-game scorekeeper. The point is fast live play: local saves, round history, undo/redo, deck profiles, and post-game stats.",
+    "overview": "Flipping Seven Calculator keeps score for Flip 7 on iPhone and iPad. Tap cards, bonuses, round history, undo. Version 1.3 renamed it from Flip 7 Calculator after a copyright claim. Offline. Not affiliated with the publisher.",
     "stack": [
       "Swift",
       "SwiftUI",
@@ -363,7 +635,7 @@
     "source": "local + hosted",
     "activity": "active",
     "visibility": "hosted behind sign-in",
-    "verified": "Checked locally from the career/job-hunt repo. The hosted site is jobs.btuckerc.dev and is likely sign-in gated.",
+    "verified": "Checked locally from the career/job-hunt repo. Hosted at jobs.btuckerc.dev behind sign-in.",
     "blurb": "My hosted job-search workspace for roles, applications, referrals, resumes, and LLM notes.",
     "tags": [
       "Rust",
@@ -405,7 +677,7 @@
     "activity": "active",
     "visibility": "local",
     "verified": "Checked locally. Recent Apr 2026 activity and README cover queue delays, viewing windows, OAuth, and SQLite/Drizzle.",
-    "blurb": "A YouTube wrapper that adds friction before I disappear into recommendations.",
+    "blurb": "A YouTube client with a delay before the next video.",
     "tags": [
       "SvelteKit",
       "YouTube API",
@@ -413,7 +685,7 @@
       "Drizzle",
       "Digital Wellbeing"
     ],
-    "overview": "AnglFeed is built around a pretty simple idea: if a video is still worth watching later, I can watch it later. Videos enter a queue, stay locked for a delay, and play without recommendations or autoplay.",
+    "overview": "AnglFeed wraps YouTube with a viewing window and a queue delay so autoplay does not run for hours. OAuth, SQLite, Drizzle.",
     "stack": [
       "SvelteKit",
       "TypeScript",
@@ -443,7 +715,7 @@
     "activity": "active",
     "visibility": "internal",
     "verified": "Checked against Apr 2026 docs and resume. Nimbus has CLI work, dashboards, MCP tools, onboarding, 90%+ test coverage, offline evals, and 400+ services of context.",
-    "blurb": "The forecasting AI work: Q&A, MCP tools, evals, dashboards, and 400+ services of context.",
+    "blurb": "Internal Q&A over forecast context, MCP tools, and evals.",
     "tags": [
       "Agentic Systems",
       "FinOps",
@@ -482,7 +754,7 @@
     "activity": "documented",
     "visibility": "internal",
     "verified": "Checked against Apr 2026 docs. Cadence covers JIRA, Confluence, standups, sprint work, roadmap questions, Slack research, service desk, GitHub handoffs, and slash commands.",
-    "blurb": "An operations agent for the recurring team work that otherwise piles up quietly.",
+    "blurb": "An operations agent for JIRA, Confluence, standups, and other recurring team work.",
     "tags": [
       "Agentic Systems",
       "Operations",
@@ -544,43 +816,6 @@
       "Install flow for ai-tools, Nimbus, and Cadence",
       "Rules and skills packaged for teammates",
       "Base layer for future specialized agents"
-    ]
-  },
-  {
-    "id": "angl-net",
-    "title": "AnglNet",
-    "year": "2026",
-    "date": "2026-04-15",
-    "dateCreated": "2026-04-15",
-    "dateModified": "2026-04-15",
-    "featured": 6,
-    "source": "local",
-    "activity": "active",
-    "visibility": "local",
-    "verified": "Checked locally. Recent Apr 2026 activity and README cover Node/TypeScript diagnostics with OpenRouter analysis.",
-    "blurb": "A terminal network tool for home-network debugging and gaming latency.",
-    "tags": [
-      "TypeScript",
-      "Networking",
-      "OpenRouter",
-      "CLI",
-      "Diagnostics"
-    ],
-    "overview": "AnglNet is a terminal tool for when the network feels off and I want more than vibes. It runs discovery, latency and bandwidth tests, packet-loss checks, and AI-assisted router guidance.",
-    "stack": [
-      "Node.js",
-      "TypeScript",
-      "OpenRouter",
-      "Terminal UI",
-      "macOS",
-      "Windows"
-    ],
-    "features": [
-      "Network scanning and device identification",
-      "Latency, bandwidth, packet loss, and jitter testing",
-      "Gaming-specific optimization paths",
-      "Router configuration notes",
-      "Risk-scored recommendations with user consent"
     ]
   },
   {
@@ -735,13 +970,13 @@
     "year": "2025",
     "date": "2025-10-25",
     "dateCreated": "2025-10-25",
-    "dateModified": "2026-05-04",
+    "dateModified": "2026-09-02",
     "featured": 4,
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "verified": "Public GitHub repo. This pass updated project data, status rendering, stale docs, and incorrect links.",
-    "blurb": "This site: a TUI-ish portfolio with searchable projects and just enough motion to feel alive.",
+    "verified": "This repo. Public GitHub btuckerc/site.",
+    "blurb": "This site. Searchable projects, a command palette, and theme and font controls.",
     "tags": [
       "React",
       "Vite",
@@ -751,7 +986,7 @@
     "links": {
       "github": "https://github.com/btuckerc/site"
     },
-    "overview": "This site is the public surface for the work I keep coming back to. It is built with React and Vite, with a terminal-inspired UI, command palette, font switcher, and project data I can update without rewriting pages by hand.",
+    "overview": "The portfolio at btuckerc.dev. Command palette, font switcher, and project data in JSON so I can edit entries without rewriting pages.",
     "stack": [
       "React 18",
       "Vite",

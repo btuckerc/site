@@ -66,6 +66,20 @@ const CommandPalette = ({ isOpen, onClose }) => {
       action: () => window.open('https://www.linkedin.com/in/tucker-craig/', '_blank'),
       keywords: ['linkedin', 'profile', 'professional', 'social']
     },
+    {
+      id: 'twitter',
+      title: 'open x',
+      description: 'visit x profile',
+      action: () => window.open('https://x.com/btuckercdev', '_blank'),
+      keywords: ['twitter', 'x', 'social', 'profile']
+    },
+    {
+      id: 'instagram',
+      title: 'open instagram',
+      description: 'visit instagram profile',
+      action: () => window.open('https://www.instagram.com/btuckerc.dev/', '_blank'),
+      keywords: ['instagram', 'ig', 'social', 'profile']
+    },
     // Theme
     {
       id: 'theme',
@@ -192,7 +206,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             onClick={onClose}
-            className="fixed inset-0 bg-bg/90 backdrop-blur-sm z-50"
+            className="fixed inset-0 tui-scrim backdrop-blur-sm z-50"
           />
           
           {/* Palette */}
@@ -207,7 +221,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
               aria-modal="true"
               aria-labelledby="command-palette-title"
             >
-              <div className="bg-card-bg border border-line shadow-2xl overflow-hidden">
+              <div className="tui-palette-panel border border-line shadow-2xl overflow-hidden">
               <div className="p-4 border-b border-line">
                 <h2 id="command-palette-title" className="sr-only">
                   Command Palette

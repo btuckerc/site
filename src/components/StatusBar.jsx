@@ -44,7 +44,7 @@ const StatusBar = () => {
 
   return (
     <nav
-      className="tui-site-chrome fixed top-0 left-0 right-0 z-40 bg-transparent backdrop-blur-xl border-b border-line"
+      className="tui-site-chrome fixed top-0 left-0 right-0 z-40 border-b border-line"
       role="navigation"
       aria-label="Site header and theme controls"
     >
@@ -52,7 +52,7 @@ const StatusBar = () => {
         {/* Site branding - top left */}
         <button
           onClick={() => navigate('/')}
-          className="tui-action min-w-8 min-h-8 inline-flex items-center justify-center font-mono text-accent font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+          className="tui-action min-w-11 min-h-11 inline-flex items-center justify-center font-mono text-accent font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           aria-label="Go to homepage"
           title="Return to homepage"
         >
@@ -62,7 +62,7 @@ const StatusBar = () => {
         {/* Theme controls - top right */}
         <button
           onClick={cycleTheme}
-          className="tui-action min-w-8 min-h-8 inline-flex items-center justify-center text-muted
+          className="tui-action min-w-11 min-h-11 inline-flex items-center justify-center text-muted
             focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           aria-label={`Switch to ${getNextThemeLabel()} theme`}
           title={`Switch to ${getNextThemeLabel()} theme`}

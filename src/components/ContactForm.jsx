@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { performSpamCheck, recordSubmission } from '../utils/spamFilter'
 import { sendEmail } from '../utils/emailService'
 
@@ -12,15 +12,7 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
-  const [isExpanded, setIsExpanded] = useState(true)
   const formStartTime = useRef(Date.now())
-  
-  // Reset form start time when form is expanded
-  useEffect(() => {
-    if (isExpanded) {
-      formStartTime.current = Date.now()
-    }
-  }, [isExpanded])
 
   const validateForm = () => {
     const newErrors = {}
@@ -32,13 +24,13 @@ const ContactForm = () => {
     if (!formData.email.trim()) {
       newErrors.email = 'email required'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'invalid email format'
+      newErrors.email = "that email doesn't look right"
     }
 
     if (!formData.message.trim()) {
       newErrors.message = 'message required'
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'message too short (min 10 chars)'
+      newErrors.message = 'give me at least 10 characters'
     }
 
     setErrors(newErrors)
@@ -117,19 +109,9 @@ const ContactForm = () => {
   return (
     <div className="tui-panel tui-contact-panel border border-line bg-card-bg p-5 font-mono">
       <div className="mb-4">
-        <button
-          type="button"
-          onClick={() => setIsExpanded(!isExpanded)}
-          aria-expanded={isExpanded}
-          className="text-accent text-base mb-2 font-semibold flex items-center gap-2 hover:text-fg transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
-        >
-          <span>{isExpanded ? '▼' : '▶'}</span>
-          <span>send message</span>
-        </button>
+        <h2 className="text-accent text-base font-semibold">send message</h2>
       </div>
 
-      {isExpanded && (
-        <>
           {submitStatus === 'success' ? (
             <div className="py-8 text-center">
               <div className="text-accent text-3xl mb-3">✓</div>
@@ -258,8 +240,6 @@ const ContactForm = () => {
               </div>
             </form>
           )}
-        </>
-      )}
     </div>
   )
 }

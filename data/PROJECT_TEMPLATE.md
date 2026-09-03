@@ -107,14 +107,31 @@ All fields below are optional. If omitted, that section won't appear in the expa
 }
 ```
 
+## Voice
+
+Write the thing. Do not decorate it.
+
+- **Blurb:** one sentence. Name the project and what it does. If a literal phrase exists, use it. No metaphor, no "the point is", no "feels like".
+- **Overview:** what it is, why it exists, one concrete detail (a URL, a runtime, a rename, a number).
+- **Features:** verbs and nouns. "Live seat maps from partner inventory" not "a window into availability".
+
+Mannered prose is a metaphor standing in for a fact. Cut it.
+
+## How to source
+
+Edit `data/projects.json` directly. The UI reads that file. Do not put copy in components.
+
+1. `gh repo list btuckerc --limit 40 --json name,description,url,pushedAt,homepageUrl,isPrivate`
+2. For a public repo: `gh api repos/btuckerc/<name>` and the README. `homepageUrl` becomes `links.live`.
+3. For local/macmini work: a README, a launchd unit, or a running process. Write what you checked in `verified` with a date.
+4. Set `date` / `dateModified` from the push or check date, not memory.
+5. Keep Servarr/media stack out. Private repo names stay out of `visibility` and `links`.
+
 ## Tips
 
 1. **Tags**: Keep tags concise. First 3 are always visible, rest show as "+N"
-2. **Blurb**: Keep it to one sentence. Plain is better than clever.
-3. **Features**: Name the actual thing, not the abstraction.
-4. **Links**: Use any key name you want - it displays exactly as written
-5. **Verification**: Prefer a GitHub push date, local README/status file, or runtime state check over memory.
-6. **Scope**: Do not list the Servarr/media stack as portfolio work; only mention agent or homelab infrastructure when it is directly relevant and non-sensitive.
+2. **Links**: Use any key name you want. It displays exactly as written.
+3. **Verification**: GitHub push date, local README, or a runtime check. Not memory.
 
 ## Modifying Existing Projects
 

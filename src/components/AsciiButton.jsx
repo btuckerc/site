@@ -1,86 +1,60 @@
-import { motion } from 'framer-motion'
 import { forwardRef } from 'react'
 
-const AsciiButton = forwardRef(({ 
-  children, 
-  onClick, 
+const AsciiButton = forwardRef(({
+  children,
+  onClick,
   onKeyDown,
   disabled = false,
-  variant = 'default', // default, ghost, accent
-  size = 'default', // sm, default, lg
+  variant = 'default',
+  size = 'default',
   className = '',
   type = 'button',
   as: Component = 'button',
-  ...props 
+  ...props
 }, ref) => {
-  const MotionComponent = Component === 'button' ? motion.button : motion.div
-
   const sizeClasses = {
     sm: 'text-sm px-3 py-2',
     default: 'px-5 py-3',
     lg: 'px-5 py-3 text-base min-[360px]:px-6 min-[360px]:py-4 min-[360px]:text-lg'
   }
 
-  const variantClasses = {
-    default: 'bg-card-bg hover:bg-card-bg active:bg-card-bg text-fg',
-    ghost: 'bg-transparent hover:bg-btn-hover active:bg-btn-active text-fg',
-    accent: 'bg-accent text-bg hover:bg-accent/90 active:bg-accent/80'
-  }
-
-  const borderClass =
-    variant === 'accent'
-      ? 'border-accent/70'
-      : 'border-[var(--button-border)]'
-
   return (
-    <MotionComponent
+    <Component
       ref={ref}
       type={Component === 'button' ? type : undefined}
       onClick={onClick}
       onKeyDown={onKeyDown}
       className={`
-        relative group
+        tui-home-nav-btn relative group
         font-medium
         border-0 outline-0
         bg-transparent
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring
-        transition-colors duration-200
         ${className}
       `}
-      whileHover={disabled ? {} : { scale: 1.01 }}
-      whileTap={disabled ? {} : { scale: 0.99 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       {...props}
     >
-      {/* Bracket hover effect lines */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 pointer-events-none z-30">
-        {/* Left bracket */}
+      <div className="tui-home-nav-bracket absolute inset-0 pointer-events-none z-30" aria-hidden="true">
         <div className="absolute left-0 top-0 bottom-0 w-px bg-[var(--button-bracket)]" />
         <div className="absolute left-0 top-0 w-[10px] h-px bg-[var(--button-bracket)]" />
         <div className="absolute left-0 bottom-0 w-[10px] h-px bg-[var(--button-bracket)]" />
-        
-        {/* Right bracket */}
         <div className="absolute right-0 top-0 bottom-0 w-px bg-[var(--button-bracket)]" />
         <div className="absolute top-0 right-0 w-[10px] h-px bg-[var(--button-bracket)]" />
         <div className="absolute bottom-0 right-0 w-[10px] h-px bg-[var(--button-bracket)]" />
       </div>
 
-      {/* Inner container */}
-      <div 
+      <div
         className={`
-          relative overflow-hidden border ${borderClass}
-          transition-all duration-200 z-10
+          tui-btn-face relative overflow-hidden border z-10
           ${sizeClasses[size]}
-          ${variantClasses[variant]}
+          ${variant === 'accent' ? 'tui-btn-face-accent' : ''}
           ${disabled ? 'opacity-70' : ''}
         `}
       >
-        <span className="relative z-10">
-          {children}
-        </span>
+        <span className="relative z-10">{children}</span>
       </div>
-    </MotionComponent>
+    </Component>
   )
 })
 

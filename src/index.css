@@ -116,6 +116,78 @@ body {
   }
 }
 
+@supports (background-image: image-set(url('/bg-3-mobile-900.avif') type('image/avif'))) {
+  :root {
+    --site-bg-image: image-set(
+      url('/bg-3-mobile-900.avif') type('image/avif'),
+      url('/bg-3-mobile-900.jpg') type('image/jpeg')
+    );
+  }
+
+  @media (min-resolution: 1.5dppx) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-mobile-1536.avif') type('image/avif'),
+        url('/bg-3-mobile-1536.jpg') type('image/jpeg')
+      );
+    }
+  }
+
+  @media (orientation: landscape) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-1280.avif') type('image/avif'),
+        url('/bg-3-1280.jpg') type('image/jpeg')
+      );
+    }
+  }
+
+  @media (orientation: landscape) and (min-resolution: 1.5dppx) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-1920.avif') type('image/avif'),
+        url('/bg-3-1920.jpg') type('image/jpeg')
+      );
+    }
+  }
+
+  @media (min-width: 900px) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-1920.avif') type('image/avif'),
+        url('/bg-3-1920.jpg') type('image/jpeg')
+      );
+    }
+  }
+
+  @media (min-width: 900px) and (min-resolution: 1.5dppx) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-2560.avif') type('image/avif'),
+        url('/bg-3-2560.jpg') type('image/jpeg')
+      );
+    }
+  }
+
+  @media (min-width: 1600px) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-2560.avif') type('image/avif'),
+        url('/bg-3-2560.jpg') type('image/jpeg')
+      );
+    }
+  }
+
+  @media (min-width: 1600px) and (min-resolution: 1.5dppx) {
+    :root {
+      --site-bg-image: image-set(
+        url('/bg-3-3840.avif') type('image/avif'),
+        url('/bg-3-3840.jpg') type('image/jpeg')
+      );
+    }
+  }
+}
+
 .site-backdrop {
   position: fixed;
   top: 0;
@@ -142,7 +214,6 @@ body {
 .site-backdrop::before {
   inset: -1px;
   background-color: var(--bg);
-  background-image: url('/bg-3.jpg');
   background-image: var(--site-bg-image);
   background-size: cover;
   background-position: center center;
@@ -183,6 +254,16 @@ body {
       transparent 0%,
       color-mix(in srgb, var(--accent) 4%, transparent) 52%,
       transparent 100%
+    );
+}
+
+.light .site-backdrop::after {
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg) 82%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 78%, transparent) 50%,
+      color-mix(in srgb, var(--bg) 84%, transparent) 100%
     );
 }
 
@@ -282,9 +363,9 @@ select:focus-visible,
 [role="button"]:focus-visible,
 [role="tab"]:focus-visible,
 [role="menuitem"]:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 1px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* Focus styles for interactive elements */
@@ -309,7 +390,7 @@ input[type='search']::-webkit-search-results-decoration {
   color: var(--bg);
   padding: 8px 12px;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 0;
   z-index: 1000;
   transition: top 0.3s;
   font-family: var(--font-family);
@@ -322,21 +403,59 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 /* Terminal-style interaction primitives */
+.tui-home-lift {
+  box-shadow: 0 28px 90px -42px rgba(0, 0, 0, 0.78);
+}
+
 .tui-home-shell {
-  background-color: transparent;
+  background-color: color-mix(in srgb, var(--bg) 46%, transparent);
   border-color: color-mix(in srgb, var(--accent) 58%, var(--line));
   transition:
     background-color var(--motion-fast) var(--motion-ease-standard),
-    box-shadow var(--motion-fast) var(--motion-ease-standard);
+    border-color var(--motion-fast) var(--motion-ease-standard);
 }
 
 .tui-home-shell:hover,
 .tui-home-shell:focus-within {
-  box-shadow: 0 36px 110px -58px rgba(0, 0, 0, 0.9);
+  border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
+}
+
+.tui-home-nav-btn .tui-btn-face {
+  background: color-mix(in srgb, var(--bg) 82%, #000 18%);
+  border-color: color-mix(in srgb, var(--fg) 32%, var(--line));
+  color: var(--fg);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--fg) 10%, transparent);
+  transition:
+    background-color var(--motion-fast) var(--motion-ease-standard),
+    border-color var(--motion-fast) var(--motion-ease-standard),
+    color var(--motion-fast) var(--motion-ease-standard);
+}
+
+.tui-home-nav-bracket {
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--motion-ease-standard);
+}
+
+.tui-home-nav-btn:hover .tui-btn-face,
+.tui-home-nav-btn:focus-visible .tui-btn-face {
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  border-color: color-mix(in srgb, var(--accent) 58%, var(--line));
+}
+
+.tui-home-nav-btn:hover .tui-home-nav-bracket,
+.tui-home-nav-btn:focus-visible .tui-home-nav-bracket {
+  opacity: 1;
+}
+
+.tui-btn-face-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
 }
 
 .home-panel {
   container-type: inline-size;
+  min-height: min(600px, calc(100svh - 9rem));
 }
 
 .tui-command-hint-home {
@@ -391,22 +510,15 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .tui-site-chrome {
-  background-color: color-mix(in srgb, var(--bg) 58%, transparent);
+  background-color: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .tui-home-shell,
   .tui-about-card {
     transform: translateZ(0);
-    will-change: transform;
-  }
-
-  .tui-command-cue {
-    will-change: transform, opacity;
-  }
-
-  .tui-command-cue-label {
-    will-change: transform;
   }
 }
 
@@ -419,6 +531,8 @@ input[type='search']::-webkit-search-results-decoration {
 
   .tui-site-chrome {
     background-color: color-mix(in srgb, var(--bg) 94%, transparent);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .tui-footer-popover {
@@ -426,7 +540,11 @@ input[type='search']::-webkit-search-results-decoration {
   }
 
   .tui-home-shell {
-    background-color: transparent;
+    background-color: color-mix(in srgb, var(--bg) 78%, transparent);
+  }
+
+  .home-panel {
+    min-height: 0;
   }
 }
 
@@ -480,14 +598,12 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .tui-about-face {
-  --about-face-bg: var(--card-bg);
+  --about-face-bg: var(--card-fill);
   isolation: isolate;
   overflow: hidden;
   background: var(--about-face-bg);
-  border: 1px solid color-mix(in srgb, var(--line) 82%, var(--accent) 18%);
-  box-shadow:
-    0 34px 105px -62px rgba(0, 0, 0, 0.9),
-    inset 0 -1px 0 color-mix(in srgb, var(--bg) 34%, transparent);
+  border: 1px solid var(--line);
+  box-shadow: 0 34px 105px -62px rgba(0, 0, 0, 0.9);
   transition:
     border-color var(--motion-fast) var(--motion-ease-standard),
     box-shadow var(--motion-fast) var(--motion-ease-standard),
@@ -497,9 +613,7 @@ input[type='search']::-webkit-search-results-decoration {
 .tui-about-card:hover .tui-about-face,
 .tui-about-card:focus-within .tui-about-face {
   border-color: color-mix(in srgb, var(--accent) 54%, var(--line));
-  box-shadow:
-    0 38px 118px -64px rgba(0, 0, 0, 0.92),
-    inset 0 -1px 0 color-mix(in srgb, var(--bg) 38%, transparent);
+  box-shadow: 0 38px 118px -64px rgba(0, 0, 0, 0.92);
 }
 
 .tui-avatar-frame {
@@ -512,11 +626,16 @@ input[type='search']::-webkit-search-results-decoration {
     inset 0 0 0 1px color-mix(in srgb, var(--bg) 50%, transparent);
 }
 
+.tui-stat-list {
+  border-top: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  margin-top: 0.35rem;
+  padding-top: 0.55rem;
+}
+
 .tui-stat-panel {
-  background: color-mix(in srgb, var(--bg-elev) 78%, var(--bg) 22%);
-  border: 1px solid color-mix(in srgb, var(--line) 84%, var(--accent) 16%);
-  box-shadow:
-    inset 0 -14px 28px -28px color-mix(in srgb, var(--bg) 80%, transparent);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .tui-stat-row {
@@ -564,8 +683,8 @@ input[type='search']::-webkit-search-results-decoration {
   align-items: baseline;
   gap: 0.75rem;
   width: 100%;
-  min-height: 1.86rem;
-  padding: 0.18rem 0.42rem;
+  min-height: 1.45rem;
+  padding: 0.12rem 0.15rem;
   border: 0;
   background: transparent;
   color: inherit;
@@ -600,6 +719,7 @@ input[type='search']::-webkit-search-results-decoration {
 
 .tui-stat-value {
   white-space: nowrap;
+  text-align: right;
 }
 
 @media (max-width: 700px) {
@@ -653,8 +773,8 @@ input[type='search']::-webkit-search-results-decoration {
 
 @media (min-width: 640px) {
   .tui-stat-trigger {
-    min-height: 2rem;
-    padding-block: 0.24rem;
+    min-height: 1.55rem;
+    padding-block: 0.14rem;
   }
 
   .tui-stat-detail {
@@ -843,15 +963,12 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .tui-about-flip-footer {
-  padding-top: 0.5rem;
-  margin-bottom: -0.7rem;
-}
-
-@media (min-width: 640px) {
-  .tui-about-flip-footer {
-    padding-top: 0.55rem;
-    margin-bottom: -1.3rem;
-  }
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  border-top: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  background: transparent;
+  z-index: 2;
 }
 
 .tui-about-row {
@@ -971,8 +1088,15 @@ input[type='search']::-webkit-search-results-decoration {
   transform: none;
 }
 
+.tui-scrim {
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+}
+
+.tui-palette-panel,
 .tui-menu-panel {
   overflow: hidden;
+  background: var(--bg-elev);
+  isolation: isolate;
 }
 
 .tui-footer-popover {
@@ -1099,14 +1223,6 @@ input[type='search']::-webkit-search-results-decoration {
   isolation: isolate;
 }
 
-.tui-page-header {
-  min-height: 3rem;
-}
-
-.tui-page-title {
-  text-shadow: 0 0 22px color-mix(in srgb, var(--accent) 18%, transparent);
-}
-
 .privacy-policy-copy ul {
   padding-left: 1.35rem;
 }
@@ -1116,15 +1232,20 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .privacy-policy-copy li::before {
-  content: '›';
+  content: '>';
   position: absolute;
   left: -1.1rem;
   color: var(--accent);
 }
 
+.tui-page-header {
+  min-height: 3rem;
+}
+
 .tui-control-panel {
   position: relative;
   overflow: hidden;
+  background: var(--card-fill);
   box-shadow: 0 18px 54px -48px rgba(0, 0, 0, 0.82);
 }
 
@@ -1269,9 +1390,6 @@ input[type='search']::-webkit-search-results-decoration {
   color: var(--fg);
 }
 
-.tui-filter-button:focus-visible {
-  outline: none;
-}
 
 .tui-filter-button-icon {
   color: var(--muted);
@@ -1369,7 +1487,57 @@ input[type='search']::-webkit-search-results-decoration {
   word-break: break-word;
 }
 
+.tui-project-card {
+  position: relative;
+}
+
+.tui-project-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 2px;
+  background: var(--accent);
+  opacity: 0;
+  transform: scaleY(0.4);
+  pointer-events: none;
+  transition:
+    opacity var(--motion-fast) var(--motion-ease-standard),
+    transform var(--motion-fast) var(--motion-ease-standard);
+}
+
+.tui-project-card:hover::before,
+.tui-project-card:focus-within::before,
+.tui-project-card.is-open::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.tui-project-trigger {
+  cursor: pointer;
+}
+
+.tui-project-trigger:disabled {
+  cursor: default;
+}
+
+.tui-project-chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 0.9rem;
+  color: var(--accent);
+  transform: rotate(0deg);
+  transform-origin: 50% 55%;
+  transition: transform var(--motion-fast) var(--motion-ease-standard);
+}
+
+.tui-project-trigger[aria-expanded='true'] .tui-project-chevron {
+  transform: rotate(90deg);
+}
+
 .tui-panel {
+  background: var(--card-fill);
   transition:
     border-color var(--motion-fast) var(--motion-ease-standard),
     background-color var(--motion-fast) var(--motion-ease-standard),
@@ -1379,18 +1547,17 @@ input[type='search']::-webkit-search-results-decoration {
 .tui-panel:hover,
 .tui-panel:focus-within {
   border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
-  background: color-mix(in srgb, var(--card-bg) 94%, var(--accent) 3%);
-  box-shadow: 0 20px 60px -54px rgba(0, 0, 0, 0.8);
+  background: color-mix(in srgb, var(--card-fill) 94%, var(--accent) 3%);
 }
 
 .tui-contact-panel {
-  background: var(--card-bg);
+  background: var(--card-fill);
   box-shadow: 0 18px 54px -48px rgba(0, 0, 0, 0.82);
 }
 
 .tui-contact-panel:hover,
 .tui-contact-panel:focus-within {
-  background: color-mix(in srgb, var(--card-bg) 96%, var(--accent) 2%);
+  background: color-mix(in srgb, var(--card-fill) 96%, var(--accent) 2%);
 }
 
 .tui-contact-field {

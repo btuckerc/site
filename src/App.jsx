@@ -44,13 +44,7 @@ const cancelIdleTask = (taskId) => {
   window.clearTimeout(taskId)
 }
 
-const PageLoader = () => (
-  <div className="min-h-[calc(100svh-6rem)] px-4 pt-20 pb-20 flex items-center justify-center">
-    <div className="border border-line bg-card-bg px-5 py-4 font-mono text-sm text-muted">
-      <span className="text-accent">▸</span> loading
-    </div>
-  </div>
-)
+const PageLoader = () => null
 
 function AppContent() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
@@ -58,25 +52,6 @@ function AppContent() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  useEffect(() => {
-    let projectPreloadTimer
-    const projectPreloadFrame = window.requestAnimationFrame(() => {
-      projectPreloadTimer = window.setTimeout(() => {
-        preloadPage(loadProjectsPage)
-      }, 120)
-    })
-
-    const preloadTask = scheduleIdleTask(() => {
-      preloadPage(loadAboutPage)
-      preloadPage(loadContactPage)
-    })
-
-    return () => {
-      window.cancelAnimationFrame(projectPreloadFrame)
-      window.clearTimeout(projectPreloadTimer)
-      cancelIdleTask(preloadTask)
-    }
-  }, [])
 
   // Set up global hotkeys
   useHotkeys({

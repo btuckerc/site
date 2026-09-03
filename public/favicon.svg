@@ -1,4 +1,13 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100" height="100" rx="8" fill="#0f1115"/>
-  <text x="50" y="65" text-anchor="middle" font-family="monospace" font-size="45" font-weight="bold" fill="#c9cdd2">[TC]</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="TC">
+  <style>
+    .bg { fill: #0f1115; }
+    .fg { fill: #c9cdd2; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #e8eaed; }
+      .fg { fill: #2a3038; }
+    }
+  </style>
+  <rect class="bg" width="32" height="32" rx="5"/>
+  <path class="fg" d="M4 8h12v4H12v12H8V12H4z"/>
+  <path class="fg" d="M18 8h10v4h-6v8h6v4H18z"/>
 </svg>

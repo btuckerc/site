@@ -2,21 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c9cdd2" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Primary Meta Tags -->
-    <title>Tucker Craig - Applied AI & Systems</title>
-    <meta name="title" content="Tucker Craig - Applied AI & Systems" />
-    <meta name="description" content="Senior Software Engineer at Box building applied AI tools, agent systems, forecasting workflows, and infrastructure projects. Davidson College '20." />
+    <title>Tucker Craig - FinOps & Agent Systems</title>
+    <meta name="title" content="Tucker Craig - FinOps & Agent Systems" />
     <meta name="author" content="Tucker Craig" />
     
-    <!-- Open Graph / Facebook -->
+    <meta name="description" content="Senior Software Engineer (FinOps) at Box. I build forecast tooling and agent systems my teammates actually use, plus a shelf of side projects on a macmini." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://btuckerc.dev" />
-    <meta property="og:title" content="Tucker Craig - Applied AI & Systems" />
-    <meta property="og:description" content="Senior Software Engineer at Box building applied AI tools, agent systems, forecasting workflows, and infrastructure projects. Davidson College '20." />
+    <meta property="og:title" content="Tucker Craig - FinOps & Agent Systems" />
+    <meta property="og:description" content="Senior Software Engineer (FinOps) at Box. I build forecast tooling and agent systems my teammates actually use, plus a shelf of side projects on a macmini." />
     <meta property="og:image" content="https://btuckerc.dev/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -27,15 +29,15 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://btuckerc.dev" />
-    <meta name="twitter:title" content="Tucker Craig - Applied AI & Systems" />
-    <meta name="twitter:description" content="Senior Software Engineer at Box building applied AI tools, agent systems, forecasting workflows, and infrastructure projects." />
+    <meta name="twitter:title" content="Tucker Craig - FinOps & Agent Systems" />
+    <meta name="twitter:description" content="FinOps at Box. Forecast tooling, agent systems, and a macmini full of side projects." />
     <meta name="twitter:image" content="https://btuckerc.dev/og-image.jpg" />
     <meta name="twitter:image:alt" content="Tucker Craig - Applied AI and systems" />
-    <meta name="twitter:creator" content="@btuckerc" />
+    <meta name="twitter:creator" content="@btuckercdev" />
     
     <!-- Additional Meta Tags -->
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#06b6d4" />
+    <meta name="theme-color" content="#0f1115" />
     <link rel="canonical" href="https://btuckerc.dev" />
     
     <!-- Structured Data (JSON-LD) -->
@@ -58,11 +60,12 @@
       "sameAs": [
         "https://www.linkedin.com/in/tucker-craig/",
         "https://github.com/btuckerc",
-        "https://x.com/btuckerc",
+        "https://x.com/btuckercdev",
+        "https://www.instagram.com/btuckerc.dev/",
         "https://open.spotify.com/user/tuxedo7777",
         "https://soundcloud.com/tuxix"
       ],
-      "description": "Senior Software Engineer at Box building applied AI tools, agent systems, forecasting workflows, and infrastructure projects.",
+      "description": "Senior Software Engineer (FinOps) at Box. Forecast tooling and agent systems that teammates actually use.",
       "knowsAbout": [
         "FinOps",
         "Cloud Cost Optimization",
@@ -95,7 +98,7 @@
       "@type": "WebSite",
       "name": "Tucker Craig",
       "url": "https://btuckerc.dev",
-      "description": "Personal portfolio website of Tucker Craig - applied AI, agent systems, and infrastructure projects",
+      "description": "Tucker Craig's site: projects, agent systems, and a terminal UI that got out of hand.",
       "author": {
         "@type": "Person",
         "name": "Tucker Craig"
@@ -121,18 +124,31 @@
           'fira-code': 'martian-mono',
           montserrat: 'system'
         };
+        const fontFiles = {
+          'source-code': '/fonts/source-code-pro-latin-wght-normal.woff2'
+        };
         const savedFont = localStorage.getItem('font-family') || 'source-code';
         const fontId = aliases[savedFont] || savedFont;
         document.documentElement.style.setProperty('--font-family', fonts[fontId] || fonts['source-code']);
         if (fontId !== savedFont && fonts[fontId]) {
           localStorage.setItem('font-family', fontId);
         }
+        const fontHref = fontFiles[fontId];
+        if (fontHref) {
+          const preload = document.createElement('link');
+          preload.rel = 'preload';
+          preload.as = 'font';
+          preload.type = 'font/woff2';
+          preload.crossOrigin = 'anonymous';
+          preload.href = fontHref;
+          document.head.appendChild(preload);
+        }
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-DVI6Y2eO.js"></script>
+    <script type="module" crossorigin src="/assets/index-BQl8o0QQ.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/vendor-CDaM45aE.js">
-    <link rel="modulepreload" crossorigin href="/assets/motion-BCoVqKof.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-9VuGX1kb.css">
+    <link rel="modulepreload" crossorigin href="/assets/motion-CQ7yLBhv.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-RHp0cgPF.css">
   </head>
   <body>
     <div id="root"></div>

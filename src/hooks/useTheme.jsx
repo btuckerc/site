@@ -10,6 +10,12 @@ export const useTheme = () => {
   return context
 }
 
+const THEME_COLORS = {
+  dark: '#0f1115',
+  light: '#e8eaed',
+  amber: '#1d2021',
+}
+
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme-mode')
@@ -18,17 +24,22 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const root = document.documentElement
-    
+
     // Remove all theme classes
     root.classList.remove('light', 'amber')
-    
+
     // Apply theme class if not dark (dark is default)
     if (theme === 'light') {
       root.classList.add('light')
     } else if (theme === 'amber') {
       root.classList.add('amber')
     }
-    
+
+    document.querySelector('meta[name="theme-color"]')?.setAttribute(
+      'content',
+      THEME_COLORS[theme] || THEME_COLORS.dark
+    )
+
     // Persist to localStorage
     localStorage.setItem('theme-mode', theme)
   }, [theme])

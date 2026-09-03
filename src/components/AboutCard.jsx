@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import aboutData from "../../data/about.json";
 import { bracketed, treeItem } from "../constants/symbols";
-import usePointerDepth from "../hooks/usePointerDepth";
 
 const AboutCard = ({ onFlip }) => {
   const navigate = useNavigate();
@@ -25,15 +24,6 @@ const AboutCard = ({ onFlip }) => {
   const frontScrollRef = useRef(null);
   const backScrollRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
-  const { depthHandlers, depthStyle } = usePointerDepth({
-    mode: "attract",
-    maxRotateX: 0.58,
-    maxRotateY: 0.72,
-    liftZ: 6,
-    hoverScale: 1.0018,
-    perspective: 1350,
-    spring: { stiffness: 175, damping: 26, mass: 0.38 },
-  });
 
   // Keep the terminal-style scroll edge fades in sync with each face.
   useEffect(() => {
@@ -210,31 +200,15 @@ const AboutCard = ({ onFlip }) => {
           </span>
           <span>{label}</span>
         </button>
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              id={contentId}
-              role="region"
-              aria-labelledby={buttonId}
-              initial={{
-                height: shouldReduceMotion ? "auto" : 0,
-                opacity: shouldReduceMotion ? 1 : 0,
-              }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{
-                height: shouldReduceMotion ? "auto" : 0,
-                opacity: shouldReduceMotion ? 1 : 0,
-              }}
-              transition={{
-                duration: shouldReduceMotion ? 0 : 0.16,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="overflow-hidden"
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {isOpen && (
+          <div
+            id={contentId}
+            role="region"
+            aria-labelledby={buttonId}
+          >
+            {children}
+          </div>
+        )}
       </div>
     );
   };
@@ -255,9 +229,7 @@ const AboutCard = ({ onFlip }) => {
   return (
     <div className="flex justify-center w-full py-4">
       <motion.div
-        className="tui-about-card relative w-full max-w-2xl h-[min(48rem,calc(100svh-8rem))] min-h-[28rem] perspective-1000 pointer-events-auto"
-        {...depthHandlers}
-        style={depthStyle}
+        className="tui-about-card relative w-full max-w-2xl max-h-[min(42rem,calc(100svh-8rem))] perspective-1000 pointer-events-auto"
       >
         <motion.div
           className="relative w-full h-full preserve-3d"
@@ -266,7 +238,7 @@ const AboutCard = ({ onFlip }) => {
         >
           {/* Front of card */}
           <motion.div
-            className="tui-about-face absolute inset-0 w-full h-full backface-hidden p-5 sm:p-7 md:p-8"
+            className="tui-about-face relative w-full backface-hidden px-5 pt-5 pb-0 sm:px-7 sm:pt-6 sm:pb-0"
             style={{
               transform: "rotateY(0deg)",
               pointerEvents: isFlipped ? "none" : "auto",
@@ -285,10 +257,10 @@ const AboutCard = ({ onFlip }) => {
               </button>
             </div>
 
-            <div className="h-full flex flex-col pt-8 relative">
+            <div className="flex flex-col">
               {/* Top shadow - fixed at top of scroll area, avatar-width, accounting for scrollbar */}
               <div
-                className="absolute top-8 left-1/2 w-36 sm:w-40 h-8 pointer-events-none z-20 transition-opacity duration-200"
+                className="absolute top-6 left-1/2 w-36 sm:w-40 h-8 pointer-events-none z-20 transition-opacity duration-200"
                 style={{
                   background:
                     "linear-gradient(to bottom, var(--about-face-bg) 0%, transparent 100%)",
@@ -300,14 +272,13 @@ const AboutCard = ({ onFlip }) => {
               {/* Scrollable content anchored to top */}
               <div
                 ref={frontScrollRef}
-                className="flex-1 overflow-y-auto ascii-scrollbar pr-1 sm:pr-2"
+                className="min-h-0 overflow-y-auto ascii-scrollbar pr-1 sm:pr-2"
                 role="region"
                 aria-label="About summary stats"
                 tabIndex={0}
               >
-                {/* Avatar */}
-                <div className="mb-4 sm:mb-6 flex justify-center">
-                  <div className="tui-avatar-frame w-32 h-32 sm:w-40 sm:h-40 overflow-hidden">
+                <div className="mb-3 flex justify-center">
+                  <div className="tui-avatar-frame w-28 h-28 sm:w-32 sm:h-32 overflow-hidden">
                     <img
                       src="/avatar-336.png"
                       srcSet="/avatar-336.png 1x, /avatar-672.png 2x"
@@ -321,19 +292,18 @@ const AboutCard = ({ onFlip }) => {
                 </div>
 
                 {/* Name and Role */}
-                <h2 className="text-2xl sm:text-3xl font-bold text-fg mb-2 font-mono text-center">
+                <h2 className="text-2xl sm:text-3xl font-bold text-fg mb-1 font-mono text-center">
                   {aboutData.name}
                 </h2>
-                <p className="text-accent font-medium mb-2 font-mono text-center text-sm sm:text-lg">
+                <p className="text-accent font-medium mb-1 font-mono text-center text-sm sm:text-lg">
                   {aboutData.role}
                 </p>
-                <p className="text-muted text-sm sm:text-base mb-4 sm:mb-6 text-center font-mono">
+                <p className="text-muted text-sm sm:text-base mb-2 text-center font-mono">
                   {aboutData.education}
                 </p>
 
-                {/* Stats - TUI list style */}
-                <div className="tui-stat-panel p-3 sm:p-4 mb-4">
-                  <div className="space-y-0.5 sm:space-y-1 text-[0.82rem] sm:text-[0.95rem] font-mono">
+                <div className="tui-stat-list">
+                  <div className="text-[0.82rem] sm:text-[0.9rem] font-mono">
                     {aboutData.front.stats.map((stat, index) => {
                       const statKey = getStatKey(stat, index);
                       const detail = getStatDetail(stat);
@@ -377,40 +347,36 @@ const AboutCard = ({ onFlip }) => {
                             </span>
                           </button>
 
-                          <AnimatePresence initial={false}>
-                            {isOpen && detail && (
-                              <motion.div
-                                id={detailId}
-                                role="region"
-                                aria-labelledby={buttonId}
-                                className="tui-stat-detail"
-                                initial={{
-                                  height: shouldReduceMotion ? "auto" : 0,
-                                  opacity: shouldReduceMotion ? 1 : 0,
-                                }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{
-                                  height: shouldReduceMotion ? "auto" : 0,
-                                  opacity: shouldReduceMotion ? 1 : 0,
-                                }}
-                                transition={{
-                                  duration: shouldReduceMotion ? 0 : 0.16,
-                                  ease: [0.22, 1, 0.36, 1],
-                                }}
-                              >
-                                <div>{detail}</div>
-                                {stat.cta && (
-                                  <Link
-                                    to={stat.cta.to}
-                                    className="tui-stat-cta"
-                                    onClick={(event) => event.stopPropagation()}
-                                  >
-                                    {stat.cta.label}
-                                  </Link>
-                                )}
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                          {isOpen && detail && (
+                            <div
+                              id={detailId}
+                              role="region"
+                              aria-labelledby={buttonId}
+                              className="tui-stat-detail"
+                            >
+                              <div>{detail}</div>
+                              {stat.cta?.to && (
+                                <Link
+                                  to={stat.cta.to}
+                                  className="tui-stat-cta"
+                                  onClick={(event) => event.stopPropagation()}
+                                >
+                                  {stat.cta.label}
+                                </Link>
+                              )}
+                              {stat.cta?.href && (
+                                <a
+                                  href={stat.cta.href}
+                                  className="tui-stat-cta"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(event) => event.stopPropagation()}
+                                >
+                                  {stat.cta.label}
+                                </a>
+                              )}
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -419,7 +385,7 @@ const AboutCard = ({ onFlip }) => {
               </div>
 
               {/* Flip hint at bottom */}
-              <div className="tui-about-flip-footer relative border-t border-line/80">
+              <div className="tui-about-flip-footer relative shrink-0">
                 <div
                   className="absolute bottom-full left-0 right-0 h-6 pointer-events-none transition-opacity duration-200"
                   style={{
@@ -435,9 +401,9 @@ const AboutCard = ({ onFlip }) => {
                     handleFlip();
                   }}
                   className="tui-action tui-card-action flex w-fit mx-auto min-h-10 px-4 border border-line/70 bg-card-bg text-muted text-xs sm:text-sm text-center font-mono opacity-90"
-                  aria-label="Flip card to see back"
+                  aria-label="Flip card to the AI card and resume"
                 >
-                  <span className="tui-action-content">details →</span>
+                  <span className="tui-action-content">ai card / resume →</span>
                 </button>
               </div>
             </div>
@@ -481,7 +447,7 @@ const AboutCard = ({ onFlip }) => {
                     className="tui-about-mode-button"
                     onClick={() => setBackMode("ai")}
                   >
-                    AI card
+                    ai card
                   </button>
                   <button
                     type="button"
@@ -505,7 +471,7 @@ const AboutCard = ({ onFlip }) => {
 
               <div
                 ref={backScrollRef}
-                className="flex-1 space-y-4 sm:space-y-5 overflow-y-auto ascii-scrollbar pr-1 sm:pr-2 pt-5 pb-7 sm:pb-8"
+                className="min-h-0 flex-1 space-y-4 sm:space-y-5 overflow-y-auto ascii-scrollbar pr-1 sm:pr-2 pt-5 pb-7 sm:pb-8"
                 role="region"
                 aria-label="About details"
                 tabIndex={0}
@@ -536,7 +502,7 @@ const AboutCard = ({ onFlip }) => {
 
                     <div>
                       <h4 className="text-fg font-semibold mb-3 text-sm sm:text-base font-mono">
-                        {treeItem("Recent Proof")}
+                        {treeItem("recent proof")}
                       </h4>
                       <div className="space-y-3 text-sm sm:text-base">
                         {aiProfile.highlights.map((item, index) => (
@@ -557,7 +523,7 @@ const AboutCard = ({ onFlip }) => {
 
                     <div>
                       <h4 className="text-fg font-semibold mb-3 text-sm sm:text-base font-mono">
-                        {treeItem("Working Toolkit")}
+                        {treeItem("working toolkit")}
                       </h4>
                       <div className="tui-ai-skill-cloud">
                         {aiProfile.skills.map((skill) => (
@@ -734,7 +700,7 @@ const AboutCard = ({ onFlip }) => {
                 )}
               </div>
 
-              <div className="tui-about-flip-footer relative border-t border-line/80">
+              <div className="tui-about-flip-footer relative shrink-0 border-t border-line/80">
                 <div
                   className="absolute bottom-full left-0 right-0 h-6 pointer-events-none transition-opacity duration-200"
                   style={{
