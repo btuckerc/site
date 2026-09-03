@@ -39,7 +39,7 @@
       {
         "label": "hardware",
         "value": "arduino",
-        "detail": "Arduino. Agent access in my pocket."
+        "detail": "Work in progress. Arduino. Agent access in my pocket."
       },
       {
         "label": "nodes",
@@ -61,9 +61,16 @@
         "detail": "OpenClaw and Hermes on the macmini. Grokbot is the newest addition."
       },
       {
-        "label": "terminal",
-        "value": "2011",
-        "detail": "I have been in a terminal since high school. The site looks like one because that is how I work."
+        "label": "experience",
+        "value": "auto-years",
+        "suffix": "years",
+        "detail": "Professional software engineer since Jun 2018."
+      },
+      {
+        "label": "token use",
+        "value": "auto-ai-ide-total",
+        "suffix": "tokens",
+        "detail": "1.9B a month from Dec 2024 through early July. 3.8B a month since I moved onto Grok."
       },
       {
         "label": "day job",
@@ -262,12 +269,15 @@
     "lastUpdated": "2026-05-04T03:05:54.000Z"
   },
   "cachedLocalStats": {
-    "projectCount": 27,
-    "aiAidedProjectCount": 13,
-    "agentSystemCount": 6,
-    "aiIdeTokenTotal": "32.4B",
-    "aiIdeMonthlyPace": "1.9B",
+    "projectCount": 33,
+    "aiAidedProjectCount": 14,
+    "agentSystemCount": 7,
+    "aiIdeTokenTotal": "44.0B",
+    "aiIdeMonthlyPace": "3.8B",
+    "aiIdeLegacyMonthlyPace": "1.9B",
     "aiIdeObservedSince": "Oct 2025",
-    "aiIdeScaledSince": "Dec 2024"
+    "aiIdeScaledSince": "Dec 2024",
+    "aiIdeScaleStart": "2024-12-01",
+    "aiIdeRateSwitch": "2026-07-02"
   }
 }

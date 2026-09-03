@@ -18,7 +18,11 @@ const repoRoot = join(__dirname, '..')
 const aboutPath = join(repoRoot, 'data/about.json')
 const projectsPath = join(repoRoot, 'data/projects.json')
 const aiIdeScaleStartDate = new Date('2024-12-01T00:00:00Z')
+const aiIdeRateSwitchDate = new Date('2026-07-02T00:00:00Z')
+const aiIdeLegacyMonthlyPace = 1.9e9
+const aiIdeCurrentMonthlyPace = 3.8e9
 const msPerDay = 1000 * 60 * 60 * 24
+const msPerMonth = msPerDay * (365.25 / 12)
 
 const formatNumber = (value) => {
   if (!Number.isFinite(value)) return '0'
@@ -51,19 +55,8 @@ const runSqliteJson = (dbPath, sql) => {
   return JSON.parse(result.stdout || '[]')
 }
 
-const getUtcDay = (date) => Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
-
-const getInclusiveDaySpan = (start, end) =>
-  Math.max(1, Math.floor((getUtcDay(end) - getUtcDay(start)) / msPerDay) + 1)
-
 const getMonthLabel = (date) =>
   new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(date)
-
-const getMonthKey = (date) =>
-  `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`
-
-const getDaysInUtcMonth = (date) =>
-  new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0)).getUTCDate()
 
 const hasAiSignal = (project) => {
   const aiSignals = [
@@ -98,77 +91,45 @@ const hasAiSignal = (project) => {
 }
 
 const getAiIdeTokenUsage = () => {
-  const dbPath = getAiIdeStatePath()
-  if (!existsSync(dbPath)) return null
-
   const now = new Date()
+  const legacyEnd = now < aiIdeRateSwitchDate ? now : aiIdeRateSwitchDate
+  const legacyMs = Math.max(0, legacyEnd.getTime() - aiIdeScaleStartDate.getTime())
+  const currentMs = Math.max(0, now.getTime() - aiIdeRateSwitchDate.getTime())
+  const scaledTotalTokens =
+    aiIdeLegacyMonthlyPace * (legacyMs / msPerMonth) +
+    aiIdeCurrentMonthlyPace * (currentMs / msPerMonth)
 
-  const [history] = runSqliteJson(dbPath, `
-    select
-      min(created_at) as min_created_at,
-      max(created_at) as max_created_at,
-      coalesce(sum(tokens_used), 0) as tokens,
-      count(*) as threads
-    from threads
-    where tokens_used > 0;
-  `)
+  let observedSince = getMonthLabel(aiIdeScaleStartDate)
+  let observedThreads = 0
 
-  const monthlyRows = runSqliteJson(dbPath, `
-    select
-      strftime('%Y-%m', datetime(created_at, 'unixepoch')) as month,
-      min(created_at) as min_created_at,
-      max(created_at) as max_created_at,
-      coalesce(sum(tokens_used), 0) as tokens,
-      count(*) as threads
-    from threads
-    where tokens_used > 0
-    group by month
-    order by month;
-  `)
-
-  const observedTokens = Number(history?.tokens || 0)
-  const observedStart = history?.min_created_at ? new Date(Number(history.min_created_at) * 1000) : now
-  const observedEnd = history?.max_created_at ? new Date(Number(history.max_created_at) * 1000) : now
-  const averageThrough = observedEnd > now ? observedEnd : now
-  const scaledDays = getInclusiveDaySpan(aiIdeScaleStartDate, averageThrough)
-  const currentMonth = getMonthKey(now)
-
-  const monthlyValues = monthlyRows.map((row) => {
-    const monthStart = new Date(`${row.month}-01T00:00:00Z`)
-    const tokens = Number(row.tokens || 0)
-    const threads = Number(row.threads || 0)
-
-    if (row.month !== currentMonth) {
-      return { ...row, displayTokens: tokens, threads }
+  const dbPath = getAiIdeStatePath()
+  if (existsSync(dbPath)) {
+    try {
+      const [history] = runSqliteJson(dbPath, `
+        select
+          min(created_at) as min_created_at,
+          count(*) as threads
+        from threads
+        where tokens_used > 0;
+      `)
+      if (history?.min_created_at) {
+        observedSince = getMonthLabel(new Date(Number(history.min_created_at) * 1000))
+      }
+      observedThreads = Number(history?.threads || 0)
+    } catch {
+      // Keep the piecewise Grok/OMP rate even if the old AI IDE db cannot be read.
     }
-
-    const latestThreadDate = row.max_created_at ? new Date(Number(row.max_created_at) * 1000) : now
-    const elapsedDays = getInclusiveDaySpan(monthStart, latestThreadDate)
-    const projectedTokens = (tokens / elapsedDays) * getDaysInUtcMonth(monthStart)
-
-    return { ...row, displayTokens: projectedTokens, threads }
-  })
-
-  const completedMonthlyValues = monthlyValues.filter((row) => row.month !== currentMonth)
-  const completedActiveMonthlyValues = completedMonthlyValues.filter((row) =>
-    row.displayTokens >= 100_000_000 || row.threads >= 5
-  )
-  const activeMonthlyValues = completedActiveMonthlyValues.length
-    ? completedActiveMonthlyValues
-    : monthlyValues.filter((row) => row.displayTokens >= 100_000_000 || row.threads >= 5)
-  const monthlyPaceTokens = activeMonthlyValues.length
-    ? activeMonthlyValues.reduce((sum, row) => sum + row.displayTokens, 0) / activeMonthlyValues.length
-    : observedTokens / Math.max(1, getInclusiveDaySpan(observedStart, averageThrough) / (365.25 / 12))
-  const scaledTotalTokens = monthlyPaceTokens * (scaledDays / (365.25 / 12))
-  const currentMonthUsage = monthlyValues.find((row) => row.month === currentMonth)
+  }
 
   return {
-    monthlyDisplay: formatNumber(monthlyPaceTokens),
+    monthlyDisplay: formatNumber(aiIdeCurrentMonthlyPace),
+    legacyMonthlyDisplay: formatNumber(aiIdeLegacyMonthlyPace),
     totalDisplay: formatNumber(scaledTotalTokens),
-    currentMonthThreads: Number(currentMonthUsage?.threads || 0),
-    observedThreads: Number(history?.threads || 0),
-    observedSince: getMonthLabel(observedStart),
-    scaledSince: getMonthLabel(aiIdeScaleStartDate)
+    observedThreads,
+    observedSince,
+    scaledSince: getMonthLabel(aiIdeScaleStartDate),
+    scaleStart: '2024-12-01',
+    rateSwitch: '2026-07-02'
   }
 }
 
@@ -202,8 +163,11 @@ const main = () => {
     ...(aiIdeUsage ? {
       aiIdeTokenTotal: aiIdeUsage.totalDisplay,
       aiIdeMonthlyPace: aiIdeUsage.monthlyDisplay,
+      aiIdeLegacyMonthlyPace: aiIdeUsage.legacyMonthlyDisplay,
       aiIdeObservedSince: aiIdeUsage.observedSince,
-      aiIdeScaledSince: aiIdeUsage.scaledSince
+      aiIdeScaledSince: aiIdeUsage.scaledSince,
+      aiIdeScaleStart: aiIdeUsage.scaleStart,
+      aiIdeRateSwitch: aiIdeUsage.rateSwitch
     } : {})
   }
 
@@ -213,10 +177,9 @@ const main = () => {
   console.log(`✓ AI-aided projects: ${aiAidedProjectCount}`)
   console.log(`✓ Agent systems: ${agentSystemCount}`)
   if (aiIdeUsage) {
-    console.log(`✓ AI IDE token use: ${aiIdeUsage.totalDisplay} scaled since ${aiIdeUsage.scaledSince}`)
-    console.log(`✓ AI IDE monthly pace: ${aiIdeUsage.monthlyDisplay} tokens/mo from ${aiIdeUsage.currentMonthThreads} current-month thread${aiIdeUsage.currentMonthThreads === 1 ? '' : 's'}`)
+    console.log(`✓ Token use: ${aiIdeUsage.totalDisplay} using ${aiIdeUsage.legacyMonthlyDisplay}/mo through ${aiIdeUsage.rateSwitch}, then ${aiIdeUsage.monthlyDisplay}/mo`)
   } else {
-    console.log('• AI IDE state database not found; kept existing AI IDE usage value')
+    console.log('• Token use model missing; kept existing value')
   }
   console.log(`✓ Updated ${aboutPath}`)
 }

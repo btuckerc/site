@@ -1,8 +1,130 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import aboutData from "../../data/about.json";
 import { bracketed, treeItem } from "../constants/symbols";
+import {
+  formatExactCount,
+  formatScaledNumber,
+  formatTenureExact,
+  formatTenureYears,
+  liveTokenTotal,
+  parseLocalDate,
+} from "../utils/liveStats";
+
+const useTickingNow = (enabled) => {
+  const shouldReduceMotion = useReducedMotion();
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    if (!enabled || shouldReduceMotion) return undefined;
+    const id = window.setInterval(() => setNow(new Date()), 1000);
+    return () => window.clearInterval(id);
+  }, [enabled, shouldReduceMotion]);
+
+  return now;
+};
+
+const LiveStatValue = ({ display, exact, suffix }) => {
+  const ref = useRef(null);
+  const openRef = useRef(false);
+  const [tip, setTip] = useState(null);
+
+  const updateTip = () => {
+    const el = ref.current;
+    if (!el || !openRef.current) return;
+    const rect = el.getBoundingClientRect();
+    const gap = 8;
+    const placeAbove = rect.top > 96;
+    setTip({
+      top: placeAbove ? rect.top - gap : rect.bottom + gap,
+      left: rect.right,
+      placeAbove,
+    });
+  };
+
+  const showTip = () => {
+    openRef.current = true;
+    updateTip();
+  };
+
+  const hideTip = () => {
+    openRef.current = false;
+    setTip(null);
+  };
+
+  useLayoutEffect(() => {
+    updateTip();
+  }, [display, exact]);
+
+  useEffect(() => {
+    if (!tip) return undefined;
+    window.addEventListener("scroll", hideTip, true);
+    window.addEventListener("resize", hideTip);
+    return () => {
+      window.removeEventListener("scroll", hideTip, true);
+      window.removeEventListener("resize", hideTip);
+    };
+  }, [tip]);
+
+  return (
+    <span
+      ref={ref}
+      className="tui-stat-live tui-stat-value text-fg font-medium shrink-0 text-right"
+      aria-label={`${display}${suffix ? ` ${suffix}` : ""}. ${exact}`}
+      onMouseEnter={showTip}
+      onMouseLeave={hideTip}
+    >
+      <span>{display}</span>
+      {suffix && (
+        <span className="text-muted text-xs ml-1"> {suffix}</span>
+      )}
+      {tip &&
+        createPortal(
+          <span
+            className="tui-stat-live-tip"
+            role="tooltip"
+            aria-hidden="true"
+            style={{
+              top: tip.top,
+              left: tip.left,
+              transform: tip.placeAbove
+                ? "translate(-100%, -100%)"
+                : "translate(-100%, 0)",
+            }}
+          >
+            {exact}
+          </span>,
+          document.body,
+        )}
+    </span>
+  );
+};
+
+const LiveTenureValue = ({ startDate, suffix }) => {
+  const start = parseLocalDate(startDate);
+  const now = useTickingNow(Boolean(start));
+  return (
+    <LiveStatValue
+      display={formatTenureYears(start, now)}
+      exact={formatTenureExact(start, now)}
+      suffix={suffix}
+    />
+  );
+};
+
+const LiveTokenValue = ({ stats, suffix }) => {
+  const now = useTickingNow(true);
+  const total = liveTokenTotal(stats, now);
+  return (
+    <LiveStatValue
+      display={formatScaledNumber(total)}
+      exact={`${formatExactCount(total)} tokens`}
+      suffix={suffix}
+    />
+  );
+};
 
 const AboutCard = ({ onFlip }) => {
   const navigate = useNavigate();
@@ -336,15 +458,27 @@ const AboutCard = ({ onFlip }) => {
                               </span>
                               <span>{stat.label}</span>
                             </span>
-                            <span className="tui-stat-value text-fg font-medium shrink-0 text-right">
-                              {getStatValue(stat)}
-                              {stat.suffix && (
-                                <span className="text-muted text-xs ml-1">
-                                  {" "}
-                                  {stat.suffix}
-                                </span>
-                              )}
-                            </span>
+                            {stat.value === "auto-years" ? (
+                              <LiveTenureValue
+                                startDate={aboutData.startDate}
+                                suffix={stat.suffix}
+                              />
+                            ) : stat.value === "auto-ai-ide-total" ? (
+                              <LiveTokenValue
+                                stats={aboutData.cachedLocalStats}
+                                suffix={stat.suffix}
+                              />
+                            ) : (
+                              <span className="tui-stat-value text-fg font-medium shrink-0 text-right">
+                                {getStatValue(stat)}
+                                {stat.suffix && (
+                                  <span className="text-muted text-xs ml-1">
+                                    {" "}
+                                    {stat.suffix}
+                                  </span>
+                                )}
+                              </span>
+                            )}
                           </button>
 
                           {isOpen && detail && (

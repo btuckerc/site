@@ -641,7 +641,7 @@ input[type='search']::-webkit-search-results-decoration {
 .tui-stat-row {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid transparent;
   transition:
     border-color var(--motion-fast) var(--motion-ease-standard),
@@ -720,6 +720,34 @@ input[type='search']::-webkit-search-results-decoration {
 .tui-stat-value {
   white-space: nowrap;
   text-align: right;
+}
+
+.tui-stat-row:hover,
+.tui-stat-row:focus-within {
+  z-index: 2;
+}
+
+.tui-stat-live {
+  position: relative;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.tui-stat-live-tip {
+  position: fixed;
+  z-index: 40;
+  min-width: 11.5rem;
+  max-width: min(18rem, 70vw);
+  padding: 0.4rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
+  background: var(--bg-elev);
+  color: var(--muted);
+  font-family: var(--font-family);
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: right;
+  white-space: normal;
+  pointer-events: none;
 }
 
 @media (max-width: 700px) {
