@@ -27,12 +27,12 @@ const Home = () => {
               <h1 className="home-personal-hero-title font-mono font-bold leading-tight text-fg">TUCKER CRAIG</h1>
               <p className="home-personal-hero-role font-mono text-accent">Software Engineer</p>
               <p className="home-personal-hero-lede">
-                I&apos;m writing the firmware for omalo, a pocket companion running ichr.
+                I&apos;ve been working on a little hardware project. It involves Pokémon, AI, and a device that fits in your pocket.
               </p>
             </div>
             <div className="home-personal-hero-context">
               <p>
-                My projects include handheld games, a movie-seat finder, playlist tools, and a shared workspace setup for macOS and Linux.
+                I like building things that make everyday life a little easier, from finding a good movie seat to managing playlists and automating repetitive tasks.
               </p>
               <p className="mt-4 text-muted">
                 I also sang acapella in{' '}
