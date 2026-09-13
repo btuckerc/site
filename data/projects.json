@@ -1,471 +1,71 @@
 [
   {
-    "id": "openclaw",
-    "title": "OpenClaw Agent",
-    "year": "2026",
-    "date": "2026-03-13",
-    "dateCreated": "2026-01-27",
-    "dateModified": "2026-05-03",
-    "featured": 10,
-    "source": "macmini local",
-    "activity": "active but unhealthy",
-    "visibility": "local",
-    "verified": "Checked on macmini May 3, 2026. Runtime 2026.3.13 is present; the gateway was unhealthy; briefing and music jobs existed but iMessage delivery timed out.",
-    "blurb": "OpenClaw on the macmini: skills, cron, memory, messaging.",
-    "tags": [
-      "Agentic Systems",
-      "OpenClaw",
-      "Skills",
-      "Cron",
-      "LaunchAgent"
-    ],
-    "overview": "OpenClaw runs personal-agent experiments on the macmini. Skills, scheduled jobs, memory, and message delivery. I use it to see what actually survives overnight.",
-    "stack": [
-      "Python",
-      "Node.js",
-      "LaunchAgent",
-      "Gemini",
-      "Telegram",
-      "iMessage",
-      "SQLite/QMD"
-    ],
-    "features": [
-      "Skill library for notes, weather, groceries, web crawl, model evals, homelab work, and release notes",
-      "Morning briefing and music digest jobs",
-      "Memory index with session and memory sources",
-      "Reliability docs, tests, rollback notes, and launchd management scripts",
-      "No Servarr or media-stack projects listed here"
-    ]
-  },
-  {
-    "id": "hermes-agent",
-    "title": "Hermes Agent",
-    "year": "2026",
-    "date": "2026-04-19",
-    "dateCreated": "2026-03-29",
-    "dateModified": "2026-05-03",
-    "featured": 10,
-    "source": "macmini deployment + external upstream",
-    "activity": "running",
-    "visibility": "external upstream",
-    "verified": "Checked on macmini May 3, 2026. ai.hermes.gateway-fireworks is loaded, Hermes Agent v0.10.0 is installed, and custom/OpenRouter profiles, memory, and skills are configured.",
-    "blurb": "Hermes Agent on the macmini, next to OpenClaw.",
-    "tags": [
-      "Agentic Systems",
-      "Hermes",
-      "Nous Research",
-      "Gateway",
-      "Skills"
-    ],
-    "links": {
-      "github": "https://github.com/NousResearch/hermes-agent",
-      "docs": "https://hermes-agent.nousresearch.com/docs/"
-    },
-    "overview": "Hermes Agent is the Nous Research runtime I run beside OpenClaw. Same job, different gateway.",
-    "stack": [
-      "Python",
-      "OpenRouter",
-      "Custom Providers",
-      "LaunchAgent",
-      "Telegram/Discord/Slack/WhatsApp/Signal",
-      "Skills Hub"
-    ],
-    "features": [
-      "Gateway profile running on macmini through launchd",
-      "OpenClaw migration path for settings, memories, skills, and workspace instructions",
-      "Persistent memory and skills across profiles",
-      "Messaging gateway for remote agent use",
-      "Side-by-side comparison with my custom OpenClaw work"
-    ]
-  },
-  {
-    "id": "grokbot",
-    "title": "Grokbot",
-    "year": "2026",
-    "date": "2026-06-01",
-    "dateModified": "2026-09-02",
-    "featured": 9,
-    "source": "local",
-    "activity": "active",
-    "visibility": "local",
-    "verified": "Local Grok agent beside OpenClaw and Hermes.",
-    "blurb": "Grok agent I run next to OpenClaw and Hermes.",
-    "tags": [
-      "Agentic Systems",
-      "Grok",
-      "xAI"
-    ],
-    "overview": "Grokbot sits next to OpenClaw and Hermes. Same job, Grok instead of the other runtimes.",
-    "stack": [
-      "Grok"
-    ],
-    "features": [
-      "Grok-backed agent",
-      "Runs beside OpenClaw and Hermes"
-    ]
-  },
-  {
-    "id": "omp-config",
-    "title": "OMP config",
-    "year": "2026",
-    "date": "2026-08-30",
-    "dateModified": "2026-08-30",
-    "featured": 9,
-    "source": "GitHub public",
-    "activity": "active",
-    "visibility": "public",
-    "verified": "boilerplate home/dot_local/share/decent-angl/skills/omp-config and ~/.omp live config. Pin is mise, not omp update.",
-    "blurb": "Shared Oh My Pi baseline: models, skills, agents, auth-broker, pinned mise release.",
-    "tags": [
-      "OMP",
-      "Chezmoi",
-      "Mise",
-      "Agents"
-    ],
-    "links": {
-      "github": "https://github.com/btuckerc/boilerplate"
-    },
-    "overview": "OMP config lives in boilerplate and applies through chezmoi. SuperGrok authenticates with xai-oauth on the machine. OpenRouter is overflow only. The pin moves with omp-baseline upgrade, never omp update.",
-    "stack": [
-      "Oh My Pi",
-      "Chezmoi",
-      "Mise",
-      "Bitwarden"
-    ],
-    "features": [
-      "Shared skills, agents, and model defaults",
-      "Auth-broker for SuperGrok",
-      "Exact mise pin, no omp update"
-    ]
-  },
-  {
-    "id": "omp-sync",
-    "title": "OMP sync",
-    "year": "2026",
-    "date": "2026-08-30",
-    "dateModified": "2026-08-30",
-    "featured": 9,
-    "source": "GitHub public",
-    "activity": "active",
-    "visibility": "public",
-    "verified": "boilerplate home/dot_local/bin/executable_omp-baseline. Fleet check is t14, macbook, macmini.",
-    "blurb": "Keeps the Oh My Pi pin and config the same on macbook, macmini, and T14.",
-    "tags": [
-      "OMP",
-      "Fleet",
-      "Chezmoi"
-    ],
-    "links": {
-      "github": "https://github.com/btuckerc/boilerplate"
-    },
-    "overview": "omp-baseline plus chezmoi apply. Fleet probe hits t14, macbook, and macmini. A scheduled guard reports pin drift. It does not run omp update.",
-    "stack": [
-      "Bash",
-      "Chezmoi",
-      "Mise",
-      "SSH"
-    ],
-    "features": [
-      "Moves the three pin sites together",
-      "Fleet status for t14, macbook, macmini",
-      "Hourly guard, drift marker, no silent overwrite of source"
-    ]
-  },
-  {
-    "id": "platform-ops",
-    "title": "platform-ops",
-    "year": "2026",
-    "date": "2026-08-30",
-    "dateModified": "2026-08-30",
-    "featured": 8,
-    "source": "GitHub public",
-    "activity": "active",
-    "visibility": "public",
-    "verified": "boilerplate skill platform-ops. Current target macbook, portable-macos-workstation.",
-    "blurb": "The rule for what lives in chezmoi versus what I change on the machine itself.",
-    "tags": [
-      "Ops",
-      "macOS",
-      "Linux",
-      "Chezmoi"
-    ],
-    "links": {
-      "github": "https://github.com/btuckerc/boilerplate"
-    },
-    "overview": "platform-ops inspects OS, desktop, hardware, and network settings, then decides if the change belongs in the shared boilerplate tree or only on that host. Router work goes to the opnsense skill instead.",
-    "stack": [
-      "Chezmoi",
-      "macOS",
-      "Omarchy"
-    ],
-    "features": [
-      "Shared vs machine-local ownership",
-      "macOS and Omarchy/Linux references",
-      "Does not own the home router"
-    ]
-  },
-  {
-    "id": "t14-plugins",
-    "title": "T14 Omarchy plugins",
-    "year": "2026",
-    "date": "2026-08-30",
-    "dateModified": "2026-08-30",
-    "featured": 8,
-    "source": "GitHub public",
-    "activity": "active",
-    "visibility": "public",
-    "verified": "boilerplate home/dot_local/share/omarchy-shell-overlay/plugins. T14 itself is down this session.",
-    "blurb": "Shell overlay on the ThinkPad: Tailscale, network, bluetooth, power, Dropbox, workspaces.",
-    "tags": [
-      "Omarchy",
-      "Linux",
-      "Quickshell",
-      "ThinkPad"
-    ],
-    "links": {
-      "github": "https://github.com/btuckerc/boilerplate/tree/master/home/dot_local/share/omarchy-shell-overlay/plugins"
-    },
-    "overview": "T14 runs Omarchy. The plugins live in boilerplate as a Quickshell overlay. Panels for Tailscale, network, bluetooth, power, and Dropbox, plus a workspaces widget. The machine is down this session. The source is in the public repo.",
-    "stack": [
-      "QML",
-      "Quickshell",
-      "Hyprland",
-      "Omarchy"
-    ],
-    "features": [
-      "Tailscale panel with peers and exit nodes",
-      "Network, bluetooth, power, Dropbox panels",
-      "Workspaces bar widget"
-    ]
-  },
-  {
-    "id": "opnsense-clt",
-    "title": "OPNsense home router",
-    "year": "2026",
-    "date": "2026-09-02",
-    "dateModified": "2026-09-02",
-    "featured": 8,
-    "source": "local appliance + shared skill",
-    "activity": "active",
-    "visibility": "local",
-    "verified": "opnsense skill in boilerplate. Appliance is clt at 10.77.77.1. API credentials stay in Bitwarden, not Git.",
-    "blurb": "Home firewall I stood up as clt. LAN, DNS, DHCP, Tailscale on the router.",
-    "tags": [
-      "OPNsense",
-      "Networking",
-      "Tailscale",
-      "Homelab"
-    ],
-    "overview": "OPNsense box named clt. LAN is 10.77.77.0/24. Unbound for DNS, dnsmasq for DHCP, Tailscale on the router with acceptDNS off so Unbound stays LAN DNS. I talk to it through a pinned API from the fleet.",
-    "stack": [
-      "OPNsense",
-      "Unbound",
-      "dnsmasq",
-      "Tailscale"
-    ],
-    "features": [
-      "LAN 10.77.77.0/24",
-      "Unbound DNS, dnsmasq DHCP",
-      "Tailscale on the router, acceptDNS off",
-      "REST API from the fleet, keys out of Git"
-    ]
-  },
-  {
     "id": "center-seat",
     "title": "CenterSeat",
     "year": "2026",
     "date": "2026-08-04",
-    "dateCreated": "2026-08-04",
-    "dateModified": "2026-08-04",
     "featured": 10,
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "verified": "GitHub public btuckerc/center-seat, pushed Aug 4, 2026. Live at movies.angl.gg.",
-    "blurb": "Finds the best open movie-theater seat across nearby showtimes.",
-    "tags": [
-      "Go",
-      "TypeScript",
-      "Showtimes",
-      "Seat maps"
-    ],
+    "blurb": "A movie-seat ranking project that compares seats together across showtimes.",
+    "tags": ["Go", "TypeScript", "Showtimes", "Seat maps"],
     "links": {
-      "live": "https://movies.angl.gg",
       "github": "https://github.com/btuckerc/center-seat"
     },
-    "overview": "CenterSeat searches a movie, place, date range, and time window, reads live seat maps, and ranks contiguous seats. It does not hold or buy tickets.",
-    "stack": [
-      "Go",
-      "Node.js",
-      "Docker",
-      "OpenCinema",
-      "Atom"
-    ],
+    "overview": "CenterSeat compares seats across nearby showtimes and ranks contiguous seats. Live searches require a configured data provider.",
+    "stack": ["Go", "Node.js", "Docker", "OpenCinema", "Atom"],
     "features": [
-      "Live seat maps from partner inventory",
+      "Compares seat maps across showtimes",
       "Ranks contiguous seats by preference",
-      "Read-only. It never holds or buys tickets",
-      "Hosted at movies.angl.gg"
-    ]
-  },
-  {
-    "id": "webyl-comic-scanner",
-    "title": "Webyl Comic Scanner PoC",
-    "year": "2026",
-    "date": "2026-03-29",
-    "dateCreated": "2026-03-29",
-    "dateModified": "2026-03-29",
-    "featured": 9,
-    "source": "local",
-    "activity": "active",
-    "visibility": "local",
-    "verified": "Checked locally. Active repo with a March 2026 checkpoint and docs for iOS, offline benchmarks, Gemini, Vision, MobileCLIP2, and sync planning.",
-    "blurb": "An offline iPhone comic-cover lookup path with a local corpus, benchmarks, and hybrid matching.",
-    "tags": [
-      "Swift",
-      "iOS",
-      "Computer Vision",
-      "MobileCLIP2",
-      "Gemini"
-    ],
-    "overview": "Webyl is the newest version of my comic-scanner idea. I wanted the iPhone path to work offline first, so the app bundles a local corpus and compares Vision, MobileCLIP2, hybrid, and Gemini-backed matching.",
-    "stack": [
-      "Swift",
-      "Vision",
-      "MobileCLIP2",
-      "SQLite",
-      "Cloudflare R2",
-      "Cloud Run",
-      "Gemini"
-    ],
-    "features": [
-      "Fixed and held-out offline benchmarks",
-      "Hybrid local matcher with hard-set gates",
-      "Simulator and physical iPhone workflows",
-      "R2, Workers, Pages, and deployment notes",
-      "Offline lookup separated from the online reference corpus"
-    ]
-  },
-  {
-    "id": "trivrdy",
-    "title": "trivrdy - Jeopardy Study Platform",
-    "year": "2024",
-    "date": "2024-12-01",
-    "dateCreated": "2024-12-01",
-    "dateModified": "2026-04-02",
-    "featured": 10,
-    "source": "GitHub public + macmini homelab",
-    "activity": "active",
-    "visibility": "public",
-    "verified": "GitHub pushed Apr 2, 2026; macmini homelab checkout is on origin/main.",
-    "blurb": "A Jeopardy study app built around real past clues and game-style practice.",
-    "tags": [
-      "Next.js",
-      "TypeScript",
-      "PostgreSQL",
-      "Supabase",
-      "Prisma"
-    ],
-    "links": {
-      "github": "https://github.com/btuckerc/jeopardy"
-    },
-    "overview": "trivrdy is my Jeopardy study app. It uses J! Archive clues, practice modes, full boards, answer validation, and progress tracking so studying feels closer to the actual game than a flashcard pile.",
-    "stack": [
-      "Next.js 14",
-      "TypeScript",
-      "Tailwind CSS",
-      "PostgreSQL",
-      "Prisma ORM",
-      "Supabase Auth",
-      "Vercel"
-    ],
-    "features": [
-      "Classic mode with a full Jeopardy board",
-      "Practice mode and answer validation",
-      "Progress tracking and performance analytics",
-      "Spoiler protection for recent episodes",
-      "Homelab deployment mirror on macmini"
+      "Code and setup are available on GitHub",
+      "Live searches require a configured provider"
     ]
   },
   {
     "id": "boilerplate",
-    "title": "Boilerplate - AI IDE & Dotfiles Baseline",
+    "title": "Boilerplate",
     "year": "2019",
-    "date": "2026-04-17",
-    "dateCreated": "2019-05-13",
-    "dateModified": "2026-08-30",
-    "featured": 10,
-    "source": "GitHub public + local",
+    "date": "2026-08-30",
+    "featured": 9,
+    "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "verified": "GitHub public btuckerc/boilerplate, pushed Aug 30, 2026.",
-    "blurb": "Dotfiles and tool versions I share across Mac, Linux, and the homelab.",
-    "tags": [
-      "Shell",
-      "Chezmoi",
-      "Mise",
-      "AI IDE",
-      "Dev Environment"
-    ],
+    "blurb": "My macOS and Linux workspace setup, managed with chezmoi and mise.",
+    "tags": ["Shell", "Chezmoi", "Mise", "Dev Environment"],
     "links": {
       "github": "https://github.com/btuckerc/boilerplate"
     },
-    "overview": "Boilerplate is the public repo behind my working environment. It keeps shells, editors, AI IDE config, skills, tool versions, and machine-specific setup aligned across macOS, Linux, and the homelab.",
-    "stack": [
-      "Bash/Zsh",
-      "Chezmoi",
-      "Mise",
-      "Lua",
-      "Starship",
-      "Tmux",
-      "AI IDE Tooling"
-    ],
+    "overview": "Boilerplate is a cross-platform workspace setup managed with chezmoi and mise. The repository includes setup notes for macOS and Linux.",
+    "stack": ["Bash/Zsh", "Chezmoi", "Mise", "Lua", "Tmux"],
     "features": [
-      "Shared AI IDE config managed through chezmoi",
-      "Machine-aware macOS and Linux rendering",
+      "Shared macOS and Linux configuration",
       "Tool version management with mise",
-      "Neovim, tmux, terminal, and shell configuration",
-      "Bootstrap scripts, platform notes, and portable agent instructions"
+      "Machine-aware templates",
+      "Bootstrap and recovery notes"
     ]
   },
   {
-    "id": "decent-angl",
-    "title": "decent-angl Private Ops Overlay",
-    "year": "2026",
-    "date": "2026-04-11",
-    "dateCreated": "2026-04-11",
-    "dateModified": "2026-05-04",
-    "featured": 9,
-    "source": "local + macmini mirror",
+    "id": "trivrdy",
+    "title": "Jeopardy study platform",
+    "year": "2024",
+    "date": "2026-04-02",
+    "featured": 8,
+    "source": "GitHub public",
     "activity": "active",
-    "visibility": "local",
-    "verified": "Checked locally and against the macmini mirror on May 4, 2026. The private overlay is on main at 67fb1ab and matches origin/main.",
-    "blurb": "The private layer around my machines: notes, backups, host roles, messaging, and Codex coordination.",
-    "tags": [
-      "Ops",
-      "Tailscale",
-      "Restic",
-      "Obsidian",
-      "Codex"
-    ],
-    "overview": "decent-angl is the private overlay beside Boilerplate. It keeps the cross-machine setup grounded: macbook as the portable Mac, omarchy as the Linux workstation, and macmini as the home mirror, backup node, notes backend, and Apple Messages bridge.",
-    "stack": [
-      "Chezmoi",
-      "Mise",
-      "Tailscale",
-      "Restic",
-      "Vaultwarden",
-      "Obsidian LiveSync",
-      "Python",
-      "Rust"
-    ],
+    "visibility": "public",
+    "blurb": "A Jeopardy study platform with search and practice tools.",
+    "tags": ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
+    "links": {
+      "github": "https://github.com/btuckerc/jeopardy"
+    },
+    "overview": "This study platform brings search, practice modes, full boards, answer validation, and progress tracking into one place.",
+    "stack": ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma"],
     "features": [
-      "Machine roles and Tailscale-first SSH standards",
-      "Private rollout notes for the public Boilerplate baseline",
-      "Restic repositories, schedules, restore smoke tests, and retention rules",
-      "Self-hosted Obsidian LiveSync standard with Git as the backstop",
-      "Shared imsg CLI and TUI for Messages access from each machine",
-      "Codex usage snapshots and budget status across the fleet"
+      "Search and practice workflows",
+      "Full-board game mode",
+      "Answer validation",
+      "Progress tracking"
     ]
   },
   {
@@ -473,118 +73,45 @@
     "title": "OpenCode Monitor",
     "year": "2026",
     "date": "2026-02-06",
-    "dateCreated": "2026-02-06",
-    "dateModified": "2026-02-07",
-    "featured": 9,
-    "source": "GitHub public + macmini local",
+    "featured": 8,
+    "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "verified": "GitHub pushed Feb 7, 2026; macmini checkout is on origin/main.",
-    "blurb": "A tiny macOS menu bar app for keeping an OpenCode server under control.",
-    "tags": [
-      "Swift",
-      "macOS",
-      "Menu Bar",
-      "LaunchAgent"
-    ],
+    "blurb": "A small macOS menu bar app for keeping an OpenCode server under control.",
+    "tags": ["Swift", "macOS", "Menu Bar", "LaunchAgent"],
     "links": {
       "github": "https://github.com/btuckerc/opencode-menu"
     },
-    "overview": "OpenCode Monitor exists because I wanted the server to feel like a normal macOS thing. The menu bar app starts it, stops it, restarts it, opens logs, checks updates, and gets out of the way.",
-    "stack": [
-      "Swift",
-      "macOS",
-      "LaunchAgent",
-      "Shell"
-    ],
+    "overview": "OpenCode Monitor keeps server status, start and stop controls, logs, updates, and optional idle shutdown in a macOS menu bar app.",
+    "stack": ["Swift", "macOS", "LaunchAgent", "Shell"],
     "features": [
-      "Menu bar status for running/stopped state",
-      "Start, stop, restart, and open web UI",
-      "Idle auto-stop to save resources",
-      "Update checker and upgrade flow",
-      "Installer, build, and uninstall scripts"
+      "Menu bar status and controls",
+      "Start, stop, and restart actions",
+      "Optional idle auto-stop",
+      "Build and uninstall scripts"
     ]
   },
   {
-    "id": "py-trading",
-    "title": "py-trading - Point-in-Time ML Trading Stack",
+    "id": "audioreader",
+    "title": "AudioReader",
     "year": "2025",
-    "date": "2025-11-29",
-    "dateCreated": "2025-11-28",
-    "dateModified": "2025-11-29",
-    "featured": 10,
-    "source": "GitHub public + local py-finance",
-    "activity": "recent",
+    "date": "2025-06-02",
+    "featured": 7,
+    "source": "GitHub public",
+    "activity": "maintained",
     "visibility": "public",
-    "verified": "Checked May 4, 2026 against public GitHub and local py-finance. The local README has the 2020-2024 regime-aware backtest numbers.",
-    "blurb": "Point-in-time market data, ML forecasts, risk controls, and broker paths.",
-    "tags": [
-      "Python",
-      "DuckDB",
-      "XGBoost",
-      "Backtesting",
-      "Trading"
-    ],
+    "blurb": "A local audiobook player with synchronized transcription captions.",
+    "tags": ["Python", "Flask", "Whisper", "HTML5 Audio"],
     "links": {
-      "github": "https://github.com/btuckerc/py-trading"
+      "github": "https://github.com/btuckerc/audioreader"
     },
-    "overview": "py-trading is the finance project worth showing. It builds return forecasts, turns them into portfolio weights, and can run through paper or live broker paths without cheating on time. The README backtest: 58.9% CAGR, 1.52 Sharpe, -30.2% max drawdown.",
-    "stack": [
-      "Python",
-      "DuckDB",
-      "Parquet",
-      "XGBoost",
-      "LightGBM",
-      "PyTorch",
-      "Alpaca"
-    ],
+    "overview": "AudioReader serves local audio in a browser and pairs playback with VTT captions generated from transcription.",
+    "stack": ["Python", "Flask", "Whisper", "FFmpeg", "HTML5 Audio"],
     "features": [
-      "Point-in-time data layer with as-of queries",
-      "Technical, cross-sectional, calendar, and regime features",
-      "Risk management with position, sector, drawdown, and regime controls",
-      "Paper broker and Alpaca broker paths",
-      "Regime-aware backtest and daily simulation workflows"
-    ]
-  },
-  {
-    "id": "flipping-seven-calculator",
-    "title": "Flipping Seven Calculator",
-    "year": "2025",
-    "date": "2025-12-23",
-    "dateCreated": "2025-12-23",
-    "dateModified": "2026-08-06",
-    "featured": 10,
-    "source": "GitHub public + local",
-    "activity": "active",
-    "visibility": "public",
-    "verified": "App Store listing id 6756905042, version 1.3 on Aug 6, 2026. GitHub public btuckerc/flip7calculator.",
-    "blurb": "iOS scorekeeper for Flip 7. I shipped it as Flip 7 Calculator, then renamed it after a copyright claim.",
-    "tags": [
-      "Swift",
-      "SwiftUI",
-      "iOS",
-      "Game Tools",
-      "Local-first"
-    ],
-    "links": {
-      "app store": "https://apps.apple.com/us/app/flipping-seven-calculator/id6756905042",
-      "github": "https://github.com/btuckerc/flip7calculator",
-      "privacy": "https://btuckerc.dev/privacy/flipping-seven-calculator"
-    },
-    "overview": "Flipping Seven Calculator keeps score for Flip 7 on iPhone and iPad. Tap cards, bonuses, round history, undo. Version 1.3 renamed it from Flip 7 Calculator after a copyright claim. Offline. Not affiliated with the publisher.",
-    "stack": [
-      "Swift",
-      "SwiftUI",
-      "XCTest",
-      "Make",
-      "iOS"
-    ],
-    "features": [
-      "Local persistence and round history",
-      "Undo/redo and deck profile support",
-      "Post-game stats and charts",
-      "iPhone, iPad, and accessibility work",
-      "Makefile workflow that keeps DerivedData outside the repo"
+      "Synchronized VTT captions",
+      "HTML5 audio playback",
+      "Playlist support",
+      "Local transcription workflow"
     ]
   },
   {
@@ -592,531 +119,115 @@
     "title": "Farkle Scorer",
     "year": "2025",
     "date": "2025-12-23",
-    "dateCreated": "2025-12-23",
-    "dateModified": "2025-12-23",
-    "featured": 8,
-    "source": "GitHub public + local",
+    "featured": 7,
+    "source": "GitHub public",
     "activity": "recent",
     "visibility": "public",
-    "verified": "GitHub pushed Dec 23, 2025; local README and multiplayer notes are present.",
     "blurb": "An offline iOS Farkle scorer with tap-to-score dice and nearby multiplayer experiments.",
-    "tags": [
-      "Swift",
-      "SwiftUI",
-      "iOS",
-      "Game Tools"
-    ],
+    "tags": ["Swift", "SwiftUI", "iOS", "Game Tools"],
     "links": {
       "github": "https://github.com/btuckerc/farkle"
     },
-    "overview": "Farkle Scorer is a small table-game utility. It handles visual dice selection, configurable house rules, manual entry for physical dice, and local-network multiplayer exploration.",
-    "stack": [
-      "Swift",
-      "SwiftUI",
-      "XCTest",
-      "Multipeer Connectivity"
-    ],
+    "overview": "Farkle Scorer handles visual dice selection, manual entry for physical dice, house rules, and optional nearby multiplayer exploration.",
+    "stack": ["Swift", "SwiftUI", "XCTest", "Multipeer Connectivity"],
     "features": [
-      "Tap-to-score dice and manual score entry",
+      "Tap-to-score dice",
+      "Manual score entry",
       "Configurable house rules",
-      "Offline-first data model",
-      "Optional nearby multiplayer",
-      "No-account design"
+      "Offline-first data model"
     ]
   },
   {
-    "id": "angl-job-portal",
-    "title": "Career Job Hunt Portal",
-    "year": "2026",
-    "date": "2026-05-04",
-    "dateCreated": "2025-08-28",
-    "dateModified": "2026-05-04",
-    "featured": 8,
-    "source": "local + hosted",
-    "activity": "active",
-    "visibility": "hosted behind sign-in",
-    "verified": "Checked locally from the career/job-hunt repo. Hosted at jobs.btuckerc.dev behind sign-in.",
-    "blurb": "My hosted job-search workspace for roles, applications, referrals, resumes, and LLM notes.",
-    "tags": [
-      "Rust",
-      "Next.js",
-      "PostgreSQL",
-      "NATS",
-      "LLM Ops"
-    ],
-    "overview": "This is the jobs site behind jobs.btuckerc.dev. I use it to keep role scoring, applications, referrals, resumes, ATS ingestion, search, and cached LLM advice in one place instead of spread across tabs and docs.",
-    "stack": [
-      "Next.js 14",
-      "Rust/Axum",
-      "PostgreSQL",
-      "Redis",
-      "NATS JetStream",
-      "Meilisearch",
-      "OpenRouter"
-    ],
-    "features": [
-      "Interview-likelihood and speed-advantage scoring",
-      "Greenhouse, Lever, and Ashby ingestion",
-      "Typst resume compilation and ATS-safe linting",
-      "Referral proximity scoring",
-      "LLM cache and token-bucket credit controls"
-    ],
-    "links": {
-      "live": "https://jobs.btuckerc.dev"
-    }
-  },
-  {
-    "id": "angl-feed",
-    "title": "AnglFeed",
-    "year": "2026",
-    "date": "2026-04-27",
-    "dateCreated": "2026-04-27",
-    "dateModified": "2026-04-27",
-    "featured": 7,
-    "source": "local",
-    "activity": "active",
-    "visibility": "local",
-    "verified": "Checked locally. Recent Apr 2026 activity and README cover queue delays, viewing windows, OAuth, and SQLite/Drizzle.",
-    "blurb": "A YouTube client with a delay before the next video.",
-    "tags": [
-      "SvelteKit",
-      "YouTube API",
-      "SQLite",
-      "Drizzle",
-      "Digital Wellbeing"
-    ],
-    "overview": "AnglFeed wraps YouTube with a viewing window and a queue delay so autoplay does not run for hours. OAuth, SQLite, Drizzle.",
-    "stack": [
-      "SvelteKit",
-      "TypeScript",
-      "Tailwind CSS",
-      "SQLite",
-      "Drizzle ORM",
-      "Google OAuth",
-      "YouTube Data API"
-    ],
-    "features": [
-      "Delayed playback queue",
-      "Viewing windows and workday restrictions",
-      "Distraction-free watch page",
-      "Subscriptions, explore, and queue pages",
-      "Optional Watch Later sync"
-    ]
-  },
-  {
-    "id": "nimbus",
-    "title": "Nimbus Forecasting Agent System",
-    "year": "2026",
-    "date": "2026-02-06",
-    "dateCreated": "2026-02-06",
-    "dateModified": "2026-05-04",
-    "featured": 8,
-    "source": "internal docs",
-    "activity": "active",
-    "visibility": "internal",
-    "verified": "Checked against Apr 2026 docs and resume. Nimbus has CLI work, dashboards, MCP tools, onboarding, 90%+ test coverage, offline evals, and 400+ services of context.",
-    "blurb": "Internal Q&A over forecast context, MCP tools, and evals.",
-    "tags": [
-      "Agentic Systems",
-      "FinOps",
-      "Forecasting",
-      "MCP",
-      "Cursor"
-    ],
-    "overview": "Nimbus started because too much forecast context lived in docs, sheets, and my head. I built it into a Q&A knowledge base with MCP tools, dashboards, onboarding, evals, and 400+ services of production context.",
-    "stack": [
-      "Cursor",
-      "MCP",
-      "BigQuery",
-      "DuckDB",
-      "Marimo",
-      "QMD",
-      "LLM Evals"
-    ],
-    "features": [
-      "Forecast, actuals, trends, accuracy, signals, scenarios, and migration analysis",
-      "Production ML context for 400+ services with sub-1% variance",
-      "MCP tools and a knowledge base for AI IDE work",
-      "BigQuery extraction, DuckDB caching, and local dashboards",
-      "Seasonality, alert-to-signal, and onboarding agents",
-      "Offline LLM evals before release"
-    ]
-  },
-  {
-    "id": "cadence",
-    "title": "Cadence Operations Agent",
-    "year": "2026",
-    "date": "2026-03-26",
-    "dateCreated": "2026-03-26",
-    "dateModified": "2026-05-04",
-    "featured": 8,
-    "source": "internal docs",
-    "activity": "documented",
-    "visibility": "internal",
-    "verified": "Checked against Apr 2026 docs. Cadence covers JIRA, Confluence, standups, sprint work, roadmap questions, Slack research, service desk, GitHub handoffs, and slash commands.",
-    "blurb": "An operations agent for JIRA, Confluence, standups, and other recurring team work.",
-    "tags": [
-      "Agentic Systems",
-      "Operations",
-      "Jira",
-      "Confluence",
-      "Cursor"
-    ],
-    "overview": "Cadence is the non-forecasting half of the agent work. It pulls JIRA, Confluence, standups, roadmap questions, Slack research, service-desk work, and GitHub handoffs into a more repeatable path.",
-    "stack": [
-      "Cursor",
-      "Jira",
-      "Confluence",
-      "Slack",
-      "GitHub",
-      "Slash Commands",
-      "Shared Agent Harness"
-    ],
-    "features": [
-      "JIRA lifecycle and sprint support",
-      "Confluence and roadmap-review workflows",
-      "Slack research, service-desk, and GitHub handoffs",
-      "Slash commands for recurring routines",
-      "Shared harness direction with Nimbus"
-    ]
-  },
-  {
-    "id": "ai-tools",
-    "title": "ai-tools Shared Agent Platform",
-    "year": "2026",
-    "date": "2026-03-23",
-    "dateCreated": "2026-03-23",
-    "dateModified": "2026-05-04",
-    "featured": 8,
-    "source": "internal docs",
-    "activity": "documented",
-    "visibility": "internal",
-    "verified": "Checked against Apr 2026 docs and resume. ai-tools packages specialized agents, rules, memory, MCP, reusable skills, and shared AI IDE setup.",
-    "blurb": "The shared agent-tooling layer behind Nimbus, Cadence, memory, MCP, and reusable skills.",
-    "tags": [
-      "Agentic Systems",
-      "AI Platform",
-      "Skills",
-      "Cursor",
-      "Enablement"
-    ],
-    "overview": "ai-tools is where I started turning my personal AI workflow into something teammates could install. It packages rules, memory, MCP tools, skills, and agent setup for Nimbus and Cadence.",
-    "stack": [
-      "AI IDE Tooling",
-      "Shared Skills",
-      "Rules",
-      "Agent Harness",
-      "MCP",
-      "Documentation"
-    ],
-    "features": [
-      "Shared AI IDE setup path",
-      "Memory, MCP, and reusable skills",
-      "Strategic, operational, forecasting, and utility skill pools",
-      "Install flow for ai-tools, Nimbus, and Cadence",
-      "Rules and skills packaged for teammates",
-      "Base layer for future specialized agents"
-    ]
-  },
-  {
-    "id": "angl-chat",
-    "title": "Angl Chat",
+    "id": "flipping-seven-calculator",
+    "title": "Flipping Seven Calculator",
     "year": "2025",
-    "date": "2025-11-11",
-    "dateCreated": "2025-11-11",
-    "dateModified": "2025-11-11",
-    "featured": 5,
-    "source": "local",
-    "activity": "recent",
-    "visibility": "local",
-    "verified": "Checked locally. README covers the Go backend, SSE streaming, HTMX/Alpine frontend, and OpenRouter model management.",
-    "blurb": "A tiny self-hosted OpenRouter chat UI for reasoning models, branching, and token visibility.",
-    "tags": [
-      "Go",
-      "OpenRouter",
-      "HTMX",
-      "Alpine.js",
-      "SSE"
-    ],
-    "overview": "Angl Chat is my small model UI for Kimi K2 Thinking and other OpenRouter models. It keeps streaming, thinking blocks, branching, local storage, keyboard controls, and token metrics visible without a heavy frontend.",
-    "stack": [
-      "Go",
-      "Server-Sent Events",
-      "HTMX",
-      "Alpine.js",
-      "Docker",
-      "OpenRouter"
-    ],
-    "features": [
-      "Token-by-token streaming",
-      "Thinking-block visualization",
-      "Conversation branching and archive",
-      "Canvas pane for code or structured output",
-      "Real-time token and speed metrics"
-    ]
-  },
-  {
-    "id": "music-sync",
-    "title": "Music Sync App",
-    "year": "2026",
-    "date": "2026-01-02",
-    "dateCreated": "2026-01-02",
-    "dateModified": "2026-01-02",
-    "featured": 5,
-    "source": "local",
-    "activity": "prototype",
-    "visibility": "local",
-    "verified": "Checked locally. README covers a React/TypeScript sync app, Spotify OAuth, and Apple Music in demo/planned state.",
-    "blurb": "A local music-sync app for comparing Apple Music and Spotify before changing anything.",
-    "tags": [
-      "React",
-      "TypeScript",
-      "Spotify API",
-      "Apple Music",
-      "OAuth"
-    ],
-    "overview": "Music Sync App is for trueing up Apple Music and Spotify without blindly pushing changes. It focuses on matching tracks, previewing diffs, controlling dates, and requiring approval before updates.",
-    "stack": [
-      "React 18",
-      "TypeScript",
-      "Vite",
-      "Zustand",
-      "Spotify OAuth",
-      "MusicKit planned"
-    ],
-    "features": [
-      "Spotify OAuth flow",
-      "Apple Music setup path",
-      "ISRC-first matching design",
-      "Visual diff before updates",
-      "Local token storage"
-    ]
-  },
-  {
-    "id": "finance-tracker",
-    "title": "Finance Tracker",
-    "year": "2025",
-    "date": "2025-10-29",
-    "dateCreated": "2025-10-28",
-    "dateModified": "2025-10-29",
-    "featured": 5,
-    "source": "local git",
-    "activity": "recent",
-    "visibility": "local",
-    "verified": "Checked locally. Rails repo has active UI/controller/policy changes and README covers the local-only planning features.",
-    "blurb": "A local Rails app for my own financial planning, payoff scenarios, and equity comp math.",
-    "tags": [
-      "Rails",
-      "Ruby",
-      "PostgreSQL",
-      "Tailwind",
-      "Finance"
-    ],
-    "overview": "Finance Tracker is a local Rails app for the personal-finance questions I do not want spread across spreadsheets. It covers net worth, debt payoff, taxes, investments, RSU/ESPP math, recommendations, and scenario modeling.",
-    "stack": [
-      "Ruby 3.4",
-      "Rails 8",
-      "PostgreSQL",
-      "Tailwind CSS",
-      "Turbo",
-      "Stimulus"
-    ],
-    "features": [
-      "Debt payoff optimization strategies",
-      "Investment and retirement projections",
-      "RSU and ESPP analysis",
-      "Tax estimate and recommendation engines",
-      "Local-only personal data handling"
-    ]
-  },
-  {
-    "id": "n8n-multi-agent",
-    "title": "n8n Multi-Agent Workflow",
-    "year": "2025",
-    "date": "2025-08-17",
-    "dateCreated": "2025-08-17",
-    "dateModified": "2025-08-17",
-    "featured": 5,
-    "source": "local",
-    "activity": "exploration",
-    "visibility": "local",
-    "verified": "Checked locally. n8n docs describe the six-agent idea-to-implementation workflow.",
-    "blurb": "An n8n workflow that runs a rough idea through a small panel of agents before turning it into a spec.",
-    "tags": [
-      "Agentic Systems",
-      "n8n",
-      "OpenAI",
-      "Workflow Automation",
-      "Product Specs"
-    ],
-    "overview": "This n8n workflow was an early way to test multi-agent planning. Several agents look at the same rough idea, a synthesis step pulls out the tradeoffs, and the final output is shaped for a coding-agent handoff.",
-    "stack": [
-      "n8n",
-      "OpenAI",
-      "JSON Workflow Exports",
-      "Research Nodes"
-    ],
-    "features": [
-      "Six-agent round-table pass",
-      "Specialist perspectives before synthesis",
-      "Archived versions for workflow evolution",
-      "Spec written for a coding-agent handoff",
-      "Designed around AI coding-agent handoff quality"
-    ]
-  },
-  {
-    "id": "site",
-    "title": "This Website",
-    "year": "2025",
-    "date": "2025-10-25",
-    "dateCreated": "2025-10-25",
-    "dateModified": "2026-09-02",
-    "featured": 4,
+    "date": "2025-12-23",
+    "featured": 6,
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "verified": "This repo. Public GitHub btuckerc/site.",
-    "blurb": "This site. Searchable projects, a command palette, and theme and font controls.",
-    "tags": [
-      "React",
-      "Vite",
-      "Tailwind CSS",
-      "Framer Motion"
-    ],
+    "blurb": "An iOS scorekeeper for Flip 7 with round history and undo.",
+    "tags": ["Swift", "SwiftUI", "iOS", "Game Tools"],
     "links": {
-      "github": "https://github.com/btuckerc/site"
+      "github": "https://github.com/btuckerc/flip7calculator",
+      "privacy": "https://btuckerc.dev/privacy/flipping-seven-calculator"
     },
-    "overview": "The portfolio at btuckerc.dev. Command palette, font switcher, and project data in JSON so I can edit entries without rewriting pages.",
-    "stack": [
-      "React 18",
-      "Vite",
-      "Tailwind CSS",
-      "Framer Motion",
-      "React Router",
-      "GitHub API"
-    ],
+    "overview": "Flipping Seven Calculator keeps score on iPhone and iPad with card taps, bonuses, round history, undo, and local persistence.",
+    "stack": ["Swift", "SwiftUI", "XCTest", "iOS"],
     "features": [
-      "TUI-inspired interface",
-      "Command palette for navigation",
-      "Font switching",
-      "Project search, source filters, and sorting",
-      "Accessible keyboard navigation"
+      "Round history and undo",
+      "Local persistence",
+      "Post-game statistics",
+      "iPhone and iPad layouts"
     ]
   },
   {
-    "id": "audioreader",
-    "title": "AudioReader - Local Audiobook Server",
-    "year": "2025",
-    "date": "2025-06-02",
-    "dateCreated": "2025-06-02",
-    "dateModified": "2025-06-02",
-    "featured": 4,
-    "source": "GitHub public + macmini local",
-    "activity": "maintained",
-    "visibility": "public",
-    "verified": "GitHub pushed Jun 2, 2025; macmini checkout has local book/app changes.",
-    "blurb": "A self-hosted audiobook server that generates local captions with Whisper.",
-    "tags": [
-      "Python",
-      "Flask",
-      "Whisper",
-      "HTML5 Audio",
-      "FFmpeg"
-    ],
-    "links": {
-      "github": "https://github.com/btuckerc/audioreader"
-    },
-    "overview": "AudioReader is a small self-hosted server for local audio files. It uses Whisper to generate VTT captions, then plays audio with synced captions in the browser.",
-    "stack": [
-      "Python 3.11",
-      "Flask",
-      "OpenAI Whisper",
-      "FFmpeg",
-      "HTML5 Audio"
-    ],
-    "features": [
-      "VTT caption generation",
-      "HTML5 audio player with synchronized captions",
-      "Parallel transcription workers",
-      "Playlist functionality",
-      "Background processing with logs"
-    ]
-  },
-  {
-    "id": "blog",
-    "title": "Personal Blog & CMS",
-    "year": "2024",
-    "date": "2024-12-22",
-    "dateCreated": "2024-12-22",
-    "dateModified": "2024-12-23",
-    "featured": 3,
+    "id": "spotify-dj",
+    "title": "Spotify DJ",
+    "year": "2019",
+    "date": "2025-02-15",
+    "featured": 5,
     "source": "GitHub public",
-    "activity": "stable",
+    "activity": "earlier experiment",
     "visibility": "public",
-    "verified": "GitHub public repo btuckerc/blog; last pushed Dec 23, 2024.",
-    "blurb": "A Hugo blog with deployment scripts, search, image migration, and Bluesky identity work.",
-    "tags": [
-      "Hugo",
-      "DigitalOcean",
-      "GitHub Actions",
-      "Bluesky",
-      "Nginx"
-    ],
+    "blurb": "An earlier experiment in ordering playlists by BPM, key, and danceability.",
+    "tags": ["Python", "Spotify API", "Music Analysis", "Spotipy"],
     "links": {
-      "github": "https://github.com/btuckerc/blog",
-      "demo": "https://btuckerc.com"
+      "github": "https://github.com/btuckerc/spotify-dj"
     },
-    "overview": "This is my older blog/CMS setup. It uses Hugo, custom deploys to DigitalOcean, image migration scripts for Obsidian, search, theming, and Bluesky PDS identity work.",
-    "stack": [
-      "Hugo",
-      "Paper Theme",
-      "GitHub Actions",
-      "DigitalOcean",
-      "Nginx",
-      "Bluesky PDS"
-    ],
+    "overview": "Spotify DJ analyzes playlist audio features and suggests an order based on BPM, key, danceability, and energy. Check the repository setup before running it.",
+    "stack": ["Python", "Spotipy", "Spotify Web API", "OAuth2"],
     "features": [
-      "Automated deploy pipeline",
-      "Image migration scripts for Obsidian compatibility",
-      "Dark mode and theme customization",
-      "Full-text search",
-      "Bluesky PDS identity integration"
+      "Audio feature analysis",
+      "Song-ordering algorithm",
+      "Playlist and track-library support",
+      "Configurable weighting"
+    ]
+  },
+  {
+    "id": "phys-comp-final",
+    "title": "Physical computing final",
+    "year": "2018",
+    "date": "2018-05-14",
+    "featured": 4,
+    "source": "GitHub public",
+    "activity": "historical",
+    "visibility": "public",
+    "blurb": "A college physical-computing project built around a garden owl.",
+    "tags": ["Python", "OpenCV", "Sensors", "Physical Computing"],
+    "links": {
+      "github": "https://github.com/btuckerc/phys-comp-final"
+    },
+    "overview": "This college physical-computing project explored a garden owl with camera, light, and sound sensors, alongside a documented data flow.",
+    "stack": ["Python", "OpenCV", "NumPy", "Sensors"],
+    "features": [
+      "Camera and sensor inputs",
+      "OpenCV exploration",
+      "Data-flow documentation",
+      "Historical project context"
     ]
   },
   {
     "id": "comic-scanner-legacy",
-    "title": "ComicScanner - Comic Book Cataloging",
+    "title": "ComicScanner",
     "year": "2024",
     "date": "2024-04-18",
-    "dateCreated": "2024-04-18",
-    "dateModified": "2024-05-30",
+    "featured": 3,
     "source": "GitHub public",
     "activity": "legacy",
     "visibility": "public",
-    "verified": "Public GitHub repo. Superseded by the newer Webyl/iOS scanner work.",
-    "blurb": "The earlier comic scanner: image matching, barcode scanning, metadata lookup, and cataloging.",
-    "tags": [
-      "Python",
-      "Computer Vision",
-      "Flask",
-      "JavaScript"
-    ],
+    "blurb": "An earlier comic-cataloging project with image matching and barcode scanning.",
+    "tags": ["Python", "Computer Vision", "Flask", "JavaScript"],
     "links": {
       "github": "https://github.com/btuckerc/ComicScanner"
     },
-    "overview": "ComicScanner is the earlier version of the comic-catalog idea. It used image recognition, barcode scanning, metadata lookup, and a web interface before I moved the newer work toward offline iPhone lookup.",
-    "stack": [
-      "Python",
-      "Flask",
-      "JavaScript",
-      "Computer Vision APIs"
-    ],
+    "overview": "ComicScanner is the earlier version of a comic-catalog idea, with barcode scanning, metadata lookup, image matching, and collection management.",
+    "stack": ["Python", "Flask", "JavaScript", "Computer Vision APIs"],
     "features": [
-      "Image-based comic identification",
-      "Metadata retrieval from comic databases",
-      "Collection management interface",
-      "Export and import support",
-      "Predecessor to the newer Webyl iOS work"
+      "Barcode scanning",
+      "Image-based identification",
+      "Metadata lookup",
+      "Collection import and export"
     ]
   },
   {
@@ -1124,71 +235,22 @@
     "title": "RSS News Summarizer",
     "year": "2024",
     "date": "2024-05-02",
-    "dateCreated": "2024-05-02",
-    "dateModified": "2024-05-02",
-    "source": "GitHub public",
-    "activity": "legacy",
-    "visibility": "public",
-    "verified": "GitHub public repo btuckerc/rss-summarizer; last pushed May 2, 2024.",
-    "blurb": "An RSS reader experiment that summarizes feeds so news intake takes less time.",
-    "tags": [
-      "Python",
-      "RSS",
-      "NLP",
-      "HTML"
-    ],
-    "links": {
-      "github": "https://github.com/btuckerc/rss-summarizer"
-    },
-    "overview": "RSS Summarizer is an older experiment in making news intake less noisy. It reads RSS feeds, aggregates sources, and writes short summaries in a web UI.",
-    "stack": [
-      "Python",
-      "RSS Parser",
-      "HTML/CSS"
-    ],
-    "features": [
-      "RSS feed parsing and aggregation",
-      "Automatic summaries",
-      "Web interface for summaries",
-      "Multiple source support",
-      "Markdown output formatting"
-    ]
-  },
-  {
-    "id": "spotify-dj",
-    "title": "Spotify DJ - Smart Playlist Ordering",
-    "year": "2019",
-    "date": "2019-04-20",
-    "dateCreated": "2019-04-20",
-    "dateModified": "2025-02-15",
     "featured": 2,
     "source": "GitHub public",
     "activity": "legacy",
     "visibility": "public",
-    "verified": "GitHub public repo btuckerc/spotify-dj; eight stars and last updated Feb 15, 2025.",
-    "blurb": "A Spotify playlist-ordering tool based on BPM, key, danceability, and energy.",
-    "tags": [
-      "Python",
-      "Spotify API",
-      "Music Analysis",
-      "Spotipy"
-    ],
+    "blurb": "An RSS reader experiment that summarizes feeds in a small web interface.",
+    "tags": ["Python", "RSS", "NLP", "HTML"],
     "links": {
-      "github": "https://github.com/btuckerc/spotify-dj"
+      "github": "https://github.com/btuckerc/rss-summarizer"
     },
-    "overview": "Spotify DJ analyzes playlists and suggests an order that should transition better. It looks at BPM, key compatibility, danceability, and energy instead of leaving the playlist in whatever order I dumped songs into it.",
-    "stack": [
-      "Python",
-      "Spotipy",
-      "Spotify Web API",
-      "OAuth2"
-    ],
+    "overview": "RSS News Summarizer reads feeds, aggregates sources, and writes short summaries in a web interface.",
+    "stack": ["Python", "RSS Parser", "HTML/CSS"],
     "features": [
-      "Audio feature analysis",
-      "Song-ordering algorithm",
-      "Playlist and track-library support",
-      "OAuth authentication",
-      "Customizable weighting"
+      "RSS feed parsing",
+      "Source aggregation",
+      "Automatic summaries",
+      "Markdown output"
     ]
   },
   {
@@ -1196,35 +258,22 @@
     "title": "Spotify Preference Analyst",
     "year": "2019",
     "date": "2019-10-23",
-    "dateCreated": "2019-10-23",
-    "dateModified": "2019-10-23",
+    "featured": 1,
     "source": "GitHub public",
     "activity": "legacy",
     "visibility": "public",
-    "verified": "GitHub public repo btuckerc/spotify-analyst; last pushed Oct 23, 2019.",
-    "blurb": "A Spotify analytics project that maps listening preferences with audio features and distance math.",
-    "tags": [
-      "Python",
-      "Linear Algebra",
-      "Spotify API",
-      "Data Analysis"
-    ],
+    "blurb": "A music-analysis project that maps listening preferences with audio features and distance math.",
+    "tags": ["Python", "Linear Algebra", "Spotify API", "Data Analysis"],
     "links": {
       "github": "https://github.com/btuckerc/spotify-analyst"
     },
-    "overview": "Spotify Preference Analyst is a music-analysis project built around audio features and Euclidean distance. It maps listening habits, visualizes preferences, and tests recommendation ideas from the data.",
-    "stack": [
-      "Python",
-      "Spotipy",
-      "NumPy",
-      "Spotify Web API"
-    ],
+    "overview": "Spotify Preference Analyst explores listening patterns with audio features, Euclidean distance, and visualizations.",
+    "stack": ["Python", "Spotipy", "NumPy", "Spotify Web API"],
     "features": [
       "Listening history analysis",
-      "Preference mapping with Euclidean distance",
-      "Genre preference visualization",
-      "Mathematical recommendation engine",
-      "Audio feature correlation analysis"
+      "Preference mapping",
+      "Genre visualization",
+      "Recommendation experiments"
     ]
   }
 ]

@@ -1,31 +1,18 @@
-import { Helmet } from "react-helmet-async";
 import ContactForm from "../components/ContactForm";
-import CloseButton from "../components/CloseButton";
+import PageMeta from "../components/PageMeta";
 
 const Contact = () => {
   return (
     <>
-      <Helmet>
-        <title>Contact - Tucker Craig</title>
-        <meta
-          name="description"
-          content="Email, GitHub, LinkedIn, and a form that lands straight in my inbox. Ask about forecast tooling, agents, or the one production incident."
-        />
-        <meta property="og:title" content="Contact - Tucker Craig" />
-        <meta
-          property="og:description"
-          content="Email, GitHub, LinkedIn, or the form. The incident story is better over email."
-        />
-        <meta property="og:url" content="https://btuckerc.dev/contact" />
-        <link rel="canonical" href="https://btuckerc.dev/contact" />
-      </Helmet>
-      <div className="tui-page-shell min-h-svh pt-20 pb-28 px-4">
+      <PageMeta
+        title="Contact — Tucker Craig"
+        description="Get in touch with Tucker Craig via email, GitHub, LinkedIn, or the contact form."
+        url="https://btuckerc.dev/contact"
+      />
+      <div className="tui-page-shell min-h-svh pb-28 px-4">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
-          <div className="tui-page-header mb-6 relative">
-            <div className="absolute top-0 left-0">
-              <CloseButton />
-            </div>
+          <div className="tui-page-header mb-6">
             <div className="text-center">
               <h1 className="tui-page-title text-xl font-bold text-fg font-mono">
                 <span className="text-accent">[</span> contact{" "}

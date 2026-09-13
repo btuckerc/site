@@ -1,0 +1,31 @@
+/* Preserve familiar native pointing affordances for actionable controls. */
+a[href], button:enabled, summary, select:enabled,
+[role="button"]:not([aria-disabled="true"]),
+input[type="button"]:enabled, input[type="submit"]:enabled,
+input[type="checkbox"]:enabled, input[type="radio"]:enabled { cursor: pointer; }
+button:disabled, [aria-disabled="true"] { cursor: default; }
+
+@media (max-width: 360px) {
+  .tui-header-link { padding-inline: .2rem; }
+  .tui-header-nav-scroll { gap: .1rem; }
+}
+
+.about-page .tui-about-card { max-height: none; }
+
+.omalo-device-hero .omalo-kicker,
+.omalo-support-section .omalo-kicker,
+.omalo-name-origin-label { color: #795222; }
+.app-screens .app-screens-note,
+.app-screens .app-screens-grid figcaption { font-size: .875rem; line-height: 1.65; }
+@media (max-width: 520px) { .omalo-page { padding-top: 0; } }
+
+/* Keep the hand over nested labels/icons as well as each control's padding. */
+.tui-app-shell :is(a[href], button:enabled, summary),
+.tui-app-shell :is(a[href], button:enabled, summary) * {
+  cursor: pointer;
+}
+.tui-app-shell :is(a[href], button:enabled)::before,
+.tui-app-shell :is(a[href], button:enabled)::after {
+  cursor: pointer;
+  pointer-events: none;
+}

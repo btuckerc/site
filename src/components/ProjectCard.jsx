@@ -59,8 +59,7 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
     project.overview || 
     (project.stack && project.stack.length > 0) || 
     (project.features && project.features.length > 0) || 
-    validLinks.length > 0 ||
-    project.verified
+    validLinks.length > 0
 
   return (
     <div className={`tui-panel tui-project-card border border-line bg-card-bg p-4 font-mono${isExpanded ? ' is-open' : ''}`}>
@@ -179,14 +178,7 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
             </div>
           )}
 
-          {project.verified && (
-            <div>
-              <div className="text-accent mb-2 font-semibold">verified</div>
-              <div className="text-muted leading-relaxed">
-                <HighlightedText text={project.verified} highlightConfig={highlightConfig} />
-              </div>
-            </div>
-          )}
+
 
           {validLinks.length > 0 && (
             <div className="border-t border-line pt-4 mt-4">

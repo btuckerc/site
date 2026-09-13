@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">omalo — a pocket companion running ichr</title>
+  <desc id="desc">A typographic product card for omalo, a pocket companion running ichr, with Pokémon Emerald on omalo.</desc>
+  <rect width="1200" height="630" fill="#191714"/>
+  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#c79255" stroke-width="2"/>
+  <path d="M72 112H1128" stroke="#c79255" stroke-width="1" opacity=".75"/>
+  <text x="72" y="88" fill="#c79255" font-family="monospace" font-size="22" letter-spacing="3">omalo / ichr</text>
+  <text x="72" y="274" fill="#eee8dc" font-family="monospace" font-size="116" font-weight="700" letter-spacing="-5">omalo</text>
+  <text x="78" y="332" fill="#e6bb78" font-family="monospace" font-size="31">a pocket companion running ichr</text>
+  <rect x="72" y="398" width="1056" height="1" fill="#c79255" opacity=".55"/>
+  <text x="72" y="458" fill="#eee8dc" font-family="monospace" font-size="36" font-weight="700">Pokémon Emerald on omalo</text>
+  <text x="72" y="506" fill="#83b8a6" font-family="monospace" font-size="22" letter-spacing="1">PROTOTYPE</text>
+  <circle cx="1110" cy="536" r="10" fill="#83b8a6"/>
+</svg>

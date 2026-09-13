@@ -1,0 +1,9 @@
+.app-screens { margin-top: 2rem; }
+.app-screens-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.app-screens-grid figure { margin: 0; min-width: 0; }
+.app-screens-grid a { display: block; background: #000; }
+.app-screens-grid a:focus-visible { outline: 2px solid var(--omalo-bronze); outline-offset: 4px; }
+.app-screens-grid img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.app-screens-grid figcaption { margin-top: .65rem; font-size: .75rem; line-height: 1.5; }
+.app-screens-note { margin-top: 1.25rem; font-size: .72rem; line-height: 1.7; }
+@media (max-width: 640px) { .app-screens-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem .75rem; } }

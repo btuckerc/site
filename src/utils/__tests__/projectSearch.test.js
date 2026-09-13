@@ -12,11 +12,10 @@ const idsFor = (query) => searchProjects(index, query).map(({ project }) => proj
 
 describe('project search', () => {
   it('splits natural multi-word queries and camel-case project names', () => {
-    const ids = idsFor('open claw agent runtime')
+    const ids = idsFor('center seat showtimes')
 
-    expect(ids[0]).toBe('openclaw')
-    expect(ids).toContain('hermes-agent')
-    expect(ids).not.toContain('opencode-menu')
+    expect(ids[0]).toBe('center-seat')
+    expect(ids).not.toContain('spotify-dj')
   })
 
   it('handles typos without returning broad unrelated matches', () => {
@@ -26,8 +25,8 @@ describe('project search', () => {
 
   it('uses domain aliases for portfolio language', () => {
     expect(idsFor('dotfiles')[0]).toBe('boilerplate')
-    expect(idsFor('ml trading')[0]).toBe('py-trading')
-    expect(idsFor('macmini gateway').slice(0, 2)).toEqual(['hermes-agent', 'openclaw'])
+    expect(idsFor('movie seats')[0]).toBe('center-seat')
+    expect(idsFor('audiobook')[0]).toBe('audioreader')
   })
 
   it('keeps short meaningful technical terms', () => {
@@ -42,7 +41,7 @@ describe('project search', () => {
   })
 
   it('keeps related suggestions short enough to scan', () => {
-    const suggestions = getProjectSearchSuggestions(index, 'agent runtime', 8).map(({ label }) => label)
+    const suggestions = getProjectSearchSuggestions(index, 'playlist', 8).map(({ label }) => label)
 
     expect(suggestions.length).toBeGreaterThan(0)
     expect(suggestions.every((label) => label.length <= 42 && label.split(' ').length <= 5)).toBe(true)

@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/update-about-stats.js",
     "build": "vite build",
+    "postbuild": "node scripts/prerender-routes.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",

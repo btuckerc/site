@@ -1,11 +1,18 @@
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme.jsx'
 import { LABELS, bracketed } from '../constants/symbols'
 
 const StatusBar = () => {
-  const navigate = useNavigate()
+  const location = useLocation()
   const { theme, cycleTheme } = useTheme()
+
+  const routeLinks = [
+    { path: '/projects', label: 'projects' },
+    { path: '/projects/omalo', label: 'omalo' },
+    { path: '/about', label: 'about' },
+    { path: '/contact', label: 'contact' },
+  ]
 
   const getThemeIcon = () => {
     switch (theme) {
@@ -42,22 +49,44 @@ const StatusBar = () => {
     }
   }
 
+  const isProjectsArea = location.pathname === '/projects' || location.pathname === '/projects/s3-amoled'
+
   return (
     <nav
       className="tui-site-chrome fixed top-0 left-0 right-0 z-40 border-b border-line"
       role="navigation"
       aria-label="Site header and theme controls"
     >
-      <div className="flex items-center justify-between text-sm px-3 min-h-10">
+      <div className="tui-header-inner flex items-center justify-between text-sm px-3 min-h-10">
         {/* Site branding - top left */}
-        <button
-          onClick={() => navigate('/')}
+        <Link
+          to="/"
           className="tui-action min-w-11 min-h-11 inline-flex items-center justify-center font-mono text-accent font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           aria-label="Go to homepage"
+          aria-current={location.pathname === '/' ? 'page' : undefined}
           title="Return to homepage"
         >
           <span className="tui-action-content">{bracketed(LABELS.SITE_INITIALS)}</span>
-        </button>
+        </Link>
+
+        <div className="tui-header-nav min-w-0 flex-1" aria-label="Site pages">
+          <div className="tui-header-nav-scroll">
+            {routeLinks.map((item) => {
+              const isActive = (item.path === '/projects' && isProjectsArea) || location.pathname === item.path
+
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`tui-header-link ${isActive ? 'tui-header-link-active' : ''}`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
+          </div>
+        </div>
 
         {/* Theme controls - top right */}
         <button

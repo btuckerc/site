@@ -1,5 +1,7 @@
 # SEO Optimization Summary
 
+> Historical planning record. Superseded by the September 2026 project-led implementation documented in README.md and the current source. Earlier positioning and completion claims below are preserved as history; they are not current copy or verification instructions.
+
 ## Implementation Complete ✅
 
 This document summarizes all SEO improvements implemented for **btuckerc.dev** based on current best practices and Google's SEO guidelines.

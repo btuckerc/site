@@ -16,8 +16,10 @@ export const useHotkeys = ({
   } = useFocusContext()
 
   const handleKeyDown = useCallback((event) => {
-    // Don't intercept while the user is editing text; local controls own Escape.
-    if (event.target.tagName === 'INPUT' || 
+    // Text fields and native media controls own their keyboard interactions.
+    if (event.defaultPrevented ||
+        event.composedPath().some(node => node instanceof Element && node.matches('video, audio, select')) ||
+        event.target.tagName === 'INPUT' ||
         event.target.tagName === 'TEXTAREA' || 
         event.target.isContentEditable) {
       return

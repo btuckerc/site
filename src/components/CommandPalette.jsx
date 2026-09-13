@@ -8,6 +8,8 @@ const CommandPalette = ({ isOpen, onClose }) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef()
   const selectedItemRef = useRef(null)
+  const previousFocusRef = useRef(null)
+  const skipFocusRestoreRef = useRef(false)
   const navigate = useNavigate()
   const { cycleTheme, theme } = useTheme()
 
@@ -19,13 +21,15 @@ const CommandPalette = ({ isOpen, onClose }) => {
       title: 'go home',
       description: 'return to landing page',
       action: () => navigate('/'),
+      focusTarget: '#main-content',
       keywords: ['home', 'landing', 'main', 'index']
     },
     {
       id: 'about',
       title: 'go to about',
-      description: 'open the AI card and resume',
+      description: 'read the public about page',
       action: () => navigate('/about'),
+      focusTarget: '#main-content',
       keywords: ['about', 'profile', 'bio', 'background', 'info']
     },
     {
@@ -33,13 +37,31 @@ const CommandPalette = ({ isOpen, onClose }) => {
       title: 'go to projects',
       description: 'browse the project list',
       action: () => navigate('/projects'),
+      focusTarget: '#main-content',
       keywords: ['projects', 'portfolio', 'work', 'code', 'repos']
+    },
+    {
+      id: 'omalo',
+      title: 'explore omalo',
+      description: 'open the omalo product page',
+      action: () => navigate('/projects/omalo'),
+      focusTarget: '#main-content',
+      keywords: ['omalo', 'ichr', 'pocket', 'companion', 'pokemon', 'device']
+    },
+    {
+      id: 's3-amoled',
+      title: 'open technical notes',
+      description: 'read the omalo implementation notes',
+      action: () => navigate('/projects/s3-amoled'),
+      focusTarget: '#main-content',
+      keywords: ['s3', 'amoled', 'pokemon', 'grain', 'handheld', 'firmware']
     },
     {
       id: 'contact',
       title: 'go to contact',
       description: 'get in touch',
       action: () => navigate('/contact'),
+      focusTarget: '#main-content',
       keywords: ['contact', 'email', 'reach', 'message', 'form']
     },
     // Actions
@@ -50,6 +72,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
       action: () => {
         navigate('/projects', { state: { focusSearch: Date.now() } })
       },
+      focusTarget: '[data-search-input]',
       keywords: ['search', 'find', 'filter', 'projects', 'query']
     },
     {
@@ -129,9 +152,21 @@ const CommandPalette = ({ isOpen, onClose }) => {
 
   // Focus input when opened
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus()
+    if (isOpen) {
+      const activeElement = document.activeElement
+      previousFocusRef.current = activeElement instanceof HTMLElement ? activeElement : null
+      inputRef.current?.focus()
+      return
     }
+
+    const previousFocus = previousFocusRef.current
+    previousFocusRef.current = null
+    if (!skipFocusRestoreRef.current && previousFocus?.isConnected) {
+      window.requestAnimationFrame(() => {
+        if (previousFocus.isConnected) previousFocus.focus()
+      })
+    }
+    skipFocusRestoreRef.current = false
   }, [isOpen])
 
   // Scroll selected item into view
@@ -170,14 +205,59 @@ const CommandPalette = ({ isOpen, onClose }) => {
       
       case 'Escape':
         e.preventDefault()
-        onClose()
+        closePalette()
         break
     }
   }
 
+  const closePalette = ({ restoreFocus = true } = {}) => {
+    if (!restoreFocus) skipFocusRestoreRef.current = true
+    onClose()
+  }
+
+  const focusDestination = (selector) => {
+    if (!selector) return
+
+    let frameId
+    let timeoutId
+    let observer
+
+    const cleanup = () => {
+      if (frameId) window.cancelAnimationFrame(frameId)
+      if (timeoutId) window.clearTimeout(timeoutId)
+      observer?.disconnect()
+    }
+
+    const tryFocus = () => {
+      const target = document.querySelector(selector)
+      if (!(target instanceof HTMLElement)) return false
+      target.focus()
+      cleanup()
+      return true
+    }
+
+    const retry = () => {
+      if (tryFocus()) return
+      frameId = window.requestAnimationFrame(retry)
+    }
+
+    // Let the route commit before looking for its main landmark or search field.
+    frameId = window.requestAnimationFrame(retry)
+    if (typeof MutationObserver === 'function') {
+      observer = new MutationObserver(tryFocus)
+      observer.observe(document.body, { childList: true, subtree: true })
+    }
+    timeoutId = window.setTimeout(cleanup, 1200)
+  }
+
   const executeCommand = (command) => {
     command.action()
-    onClose()
+    if (command.focusTarget) {
+      closePalette({ restoreFocus: false })
+      focusDestination(command.focusTarget)
+    } else {
+      closePalette()
+    }
     setQuery('') // Clear query for next time
   }
 
@@ -205,7 +285,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            onClick={onClose}
+            onClick={() => closePalette()}
             className="fixed inset-0 tui-scrim backdrop-blur-sm z-50"
           />
           
@@ -232,6 +312,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
+                  aria-label="Search commands"
                   placeholder="type command..."
                   className="w-full bg-transparent border-none outline-none text-fg placeholder-muted text-base font-mono"
                 />
@@ -276,7 +357,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
                 <span><kbd>↑↓</kbd> navigate</span>
                 <span><kbd>↵</kbd> select</span>
                 <button
-                  onClick={onClose}
+                  onClick={() => closePalette()}
                   className="ml-auto hover:text-accent transition-colors flex items-center gap-1"
                   aria-label="Close command palette"
                 >

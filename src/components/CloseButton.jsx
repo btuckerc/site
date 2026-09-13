@@ -5,8 +5,9 @@ const CloseButton = () => {
 
   return (
     <button
+      type="button"
       onClick={() => navigate('/')}
-      className="tui-action min-h-10 px-3 py-1 border border-line bg-card-bg focus-visible font-mono text-sm text-muted"
+      className="tui-page-back-button tui-action inline-flex min-h-11 items-center border border-line bg-card-bg px-3 py-2 font-mono text-sm text-muted"
       aria-label="Go back home"
       title="Back (Esc)"
     >

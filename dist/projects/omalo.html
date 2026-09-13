@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c9cdd2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title data-rh="true">omalo — a pocket companion running ichr</title>
+    <meta name="title" content="omalo — a pocket companion running ichr" data-rh="true" />
+    <meta name="author" content="Tucker Craig" />
+    
+    <meta name="description" content="omalo is a pocket companion running ichr. Pokémon Emerald runs on the device with an AI handoff for gameplay goals." data-rh="true" />
+    <meta property="og:type" content="article" data-rh="true" />
+    <meta property="og:url" content="https://btuckerc.dev/projects/omalo" data-rh="true" />
+    <meta property="og:title" content="omalo — a pocket companion running ichr" data-rh="true" />
+    <meta property="og:description" content="omalo is a pocket companion running ichr. Pokémon Emerald runs on the device with an AI handoff for gameplay goals." data-rh="true" />
+    <meta property="og:image" content="https://btuckerc.dev/media/omalo/share.jpg" data-rh="true" />
+    <meta property="og:image:width" content="1200" data-rh="true" />
+    <meta property="og:image:height" content="630" data-rh="true" />
+    <meta property="og:image:alt" content="omalo, a pocket companion running ichr, with Pokémon Emerald on omalo." data-rh="true" />
+    <meta property="og:site_name" content="Tucker Craig" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" data-rh="true" />
+    <meta name="twitter:url" content="https://btuckerc.dev/projects/omalo" data-rh="true" />
+    <meta name="twitter:title" content="omalo — a pocket companion running ichr" data-rh="true" />
+    <meta name="twitter:description" content="omalo is a pocket companion running ichr. Pokémon Emerald runs on the device with an AI handoff for gameplay goals." data-rh="true" />
+    <meta name="twitter:image" content="https://btuckerc.dev/media/omalo/share.jpg" data-rh="true" />
+    <meta name="twitter:image:alt" content="omalo, a pocket companion running ichr, with Pokémon Emerald on omalo." data-rh="true" />
+    <meta name="twitter:creator" content="@btuckercdev" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f1115" />
+    <link rel="canonical" href="https://btuckerc.dev/projects/omalo" data-rh="true" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Tucker Craig",
+      "description": "Software engineer building omalo, a pocket companion running ichr, with Pokémon Emerald and an AI handoff for gameplay goals.",
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Davidson College",
+        "sameAs": "https://www.davidson.edu"
+      },
+      "url": "https://btuckerc.dev/",
+      "sameAs": [
+        "https://www.linkedin.com/in/tucker-craig/",
+        "https://github.com/btuckerc",
+        "https://x.com/btuckercdev",
+        "https://www.instagram.com/btuckerc.dev/",
+        "https://open.spotify.com/user/tuxedo7777",
+        "https://soundcloud.com/tuxix"
+      ],
+      "knowsAbout": [
+        "Handheld firmware",
+        "Small web apps",
+        "Developer tools",
+        "Game design",
+        "Music tools"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Tucker Craig",
+      "url": "https://btuckerc.dev/",
+      "description": "Tucker Craig's software and hardware projects, including omalo, a pocket companion running ichr.",
+      "author": {
+        "@type": "Person",
+        "name": "Tucker Craig"
+      }
+    }
+    </script>
+    
+    <!-- Font declarations are bundled with the app; selected faces load on demand. -->
+    
+    <!-- Load font preference immediately to prevent flash -->
+    <script>
+      (function() {
+        const fonts = {
+          'neue-montreal': "'PP Neue Montreal', 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
+          'source-code': "'Source Code Pro Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
+          'ibm-plex': "'IBM Plex Mono', 'SF Mono', 'Menlo', 'Consolas', monospace",
+          'geist-mono': "'Geist Mono Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
+          'martian-mono': "'Martian Mono Variable', 'SF Mono', 'Menlo', 'Consolas', monospace",
+          'intel-one': "'Intel One Mono Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
+          'system': "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+        };
+        const aliases = {
+          jetbrains: 'geist-mono',
+          'fira-code': 'martian-mono',
+          montserrat: 'system',
+          'pp-neue-montreal': 'neue-montreal'
+        };
+        const fontFiles = {
+          'source-code': '/fonts/source-code-pro-latin-wght-normal.woff2',
+          'neue-montreal': 'https://pangrampangram.com/cdn/shop/files/PPNeueMontreal-Variable_b3ebe68c-91e0-4337-a3bc-c2a15b5e395b.woff2?v=1182376259239852185'
+        };
+        const savedFont = localStorage.getItem('font-family') || 'neue-montreal';
+        const fontId = aliases[savedFont] || savedFont;
+        document.documentElement.style.setProperty('--font-family', fonts[fontId] || fonts['neue-montreal']);
+        if (fontId !== savedFont && fonts[fontId]) {
+          localStorage.setItem('font-family', fontId);
+        }
+        const fontHref = fontFiles[fontId];
+        if (fontHref) {
+          const preload = document.createElement('link');
+          preload.rel = 'preload';
+          preload.as = 'font';
+          preload.type = 'font/woff2';
+          preload.crossOrigin = 'anonymous';
+          preload.href = fontHref;
+          document.head.appendChild(preload);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-Dzjx1RDN.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CDaM45aE.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-C7b1aktH.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-_xIz0cSs.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

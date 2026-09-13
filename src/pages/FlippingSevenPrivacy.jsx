@@ -1,5 +1,4 @@
-import { Helmet } from 'react-helmet-async'
-import CloseButton from '../components/CloseButton'
+import PageMeta from '../components/PageMeta'
 
 const policySections = [
   {
@@ -91,36 +90,17 @@ const summaryItems = [
 
 const FlippingSevenPrivacy = () => (
   <>
-    <Helmet>
-      <title>Privacy Policy — Flipping Seven Calculator</title>
-      <meta
-        name="description"
-        content="Privacy policy for Flipping Seven Calculator, an offline scorekeeping utility that does not collect personal data."
-      />
-      <meta name="robots" content="index, follow" />
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content="Privacy Policy — Flipping Seven Calculator" />
-      <meta
-        property="og:description"
-        content="Flipping Seven Calculator does not collect, transmit, sell, or share personal data."
-      />
-      <meta
-        property="og:url"
-        content="https://btuckerc.dev/privacy/flipping-seven-calculator"
-      />
-      <link
-        rel="canonical"
-        href="https://btuckerc.dev/privacy/flipping-seven-calculator"
-      />
-    </Helmet>
+    <PageMeta
+      title="Privacy Policy — Flipping Seven Calculator"
+      description="Privacy policy for Flipping Seven Calculator, an offline scorekeeping utility that does not collect personal data."
+      url="https://btuckerc.dev/privacy/flipping-seven-calculator"
+      openGraphDescription="Flipping Seven Calculator does not collect, transmit, sell, or share personal data."
+    />
 
-    <div className="tui-page-shell min-h-svh px-4 pb-28 pt-20">
+    <div className="tui-page-shell min-h-svh px-4 pb-28">
       <article className="mx-auto max-w-4xl font-mono">
-        <div className="tui-page-header relative mb-8 flex min-h-12 items-center justify-center">
-          <div className="absolute left-0 top-0">
-            <CloseButton />
-          </div>
-          <p className="hidden text-xs uppercase tracking-[0.18em] text-muted sm:block">
+        <div className="tui-page-header mb-8">
+          <p className="hidden text-center text-xs uppercase tracking-[0.18em] text-muted sm:block">
             Flipping Seven Calculator
           </p>
         </div>

@@ -24,103 +24,39 @@ const SEARCH_FIELDS = [
   { key: 'blurb', label: 'summary', weight: 0.1 },
   { key: 'source', label: 'source', weight: 0.08 },
   { key: 'overview', label: 'overview', weight: 0.05 },
-  { key: 'features', label: 'features', weight: 0.04 },
-  { key: 'verified', label: 'verification', weight: 0.03 }
+  { key: 'features', label: 'features', weight: 0.04 }
 ]
 
 const FUZZY_SEARCH_KEYS = new Set(['title', 'aliases', 'tags', 'stack', 'blurb'])
 
 const SYNONYM_GROUPS = [
-  ['ai', 'agent', 'agentic', 'llm', 'model', 'assistant'],
-  ['automation', 'cron', 'workflow', 'schedule', 'launchagent'],
+  ['ai', 'agent', 'model', 'assistant'],
   ['dotfiles', 'chezmoi', 'mise', 'bootstrap', 'dev environment'],
-  ['finance', 'finops', 'trading', 'ledger'],
-  ['forecast', 'forecasting', 'weather', 'prediction'],
   ['ios', 'iphone', 'swift', 'mobile'],
-  ['vision', 'computer vision', 'image', 'scanner', 'cover lookup'],
+  ['vision', 'computer vision', 'image', 'scanner'],
   ['music', 'spotify', 'playlist', 'audio'],
   ['github', 'public', 'repo', 'repository'],
-  ['local', 'macmini', 'homelab'],
-  ['job', 'career', 'application', 'hiring'],
   ['rss', 'feed', 'news', 'summarizer'],
   ['terminal', 'cli', 'shell', 'console']
 ]
 
 const PROJECT_ALIAS_RULES = [
-  {
-    pattern: /open\s*claw|openclaw/,
-    aliases: [
-      'open claw',
-      'personal assistant',
-      'assistant runtime',
-      'agent runtime',
-      'memory indexing',
-      'remote messaging'
-    ]
-  },
-  {
-    pattern: /hermes/,
-    aliases: [
-      'nous research',
-      'agent deployment',
-      'openclaw migration',
-      'messaging gateway',
-      'openrouter profiles'
-    ]
-  },
-  {
-    pattern: /webyl|comic scanner|comic cover/,
-    aliases: [
-      'comic scanner',
-      'comic cover lookup',
-      'offline image search',
-      'iphone scanner',
-      'mobile clip'
-    ]
-  },
-  {
-    pattern: /trivrdy|jeopardy|trivia/,
-    aliases: ['trivia', 'quiz', 'jeopardy practice', 'study platform', 'answer validation']
-  },
-  {
-    pattern: /boilerplate|ai ide|dotfiles|chezmoi/,
-    aliases: ['dotfiles', 'ai ide setup', 'ai ide baseline', 'machine bootstrap', 'dev environment']
-  },
-  {
-    pattern: /trading|xgboost|backtesting/,
-    aliases: ['ml trading', 'machine learning trading', 'paper trading', 'risk controls', 'backtest']
-  },
-  {
-    pattern: /nimbus|forecast/,
-    aliases: ['weather agent', 'forecasting agent', 'daily forecast', 'weather automation']
-  },
-  {
-    pattern: /n8n|multi agent/,
-    aliases: ['n8n', 'multi agent', 'workflow automation', 'orchestration']
-  },
-  {
-    pattern: /audio|audiobook/,
-    aliases: ['audiobook', 'local audio server', 'media server', 'audio reader']
-  },
-  {
-    pattern: /spotify|playlist|music/,
-    aliases: ['spotify', 'playlist ordering', 'music analysis', 'listening preferences']
-  },
-  {
-    pattern: /job|career|hunt/,
-    aliases: ['job hunt', 'career tracking', 'application portal', 'resume workflow']
-  }
+  { pattern: /comic.*scanner/, aliases: ['comic scanner', 'barcode scanning', 'comic catalog'] },
+  { pattern: /trivrdy|jeopardy|trivia/, aliases: ['trivia', 'quiz', 'jeopardy practice', 'study platform'] },
+  { pattern: /boilerplate|dotfiles|chezmoi/, aliases: ['dotfiles', 'workspace setup', 'dev environment'] },
+  { pattern: /audio|audiobook/, aliases: ['audiobook', 'audio reader', 'captions'] },
+  { pattern: /spotify|playlist|music/, aliases: ['spotify', 'playlist ordering', 'music analysis'] },
+  { pattern: /center.*seat/, aliases: ['movie seats', 'movie theater', 'showtimes'] }
 ]
 
 const DEFAULT_SUGGESTIONS = [
-  'agent runtime',
+  'movie seats',
   'swift ios',
-  'ai ide dotfiles',
-  'ml trading',
+  'dotfiles',
+  'playlist ordering',
   'computer vision',
-  'launchagent',
-  'github public',
-  'macmini local'
+  'audiobook',
+  'github public'
 ]
 
 const MAX_SUGGESTION_CHARS = 42
@@ -269,8 +205,7 @@ const buildSearchRecord = (project) => {
     blurb: normalizeSearchText(project.blurb),
     source: normalizeSearchText([project.source, project.activity, project.visibility]),
     overview: normalizeSearchText(project.overview),
-    features: normalizeSearchText(project.features || []),
-    verified: normalizeSearchText(project.verified)
+    features: normalizeSearchText(project.features || [])
   }
   const searchCompact = SEARCH_FIELDS.reduce((values, field) => {
     values[field.key] = compactSearchText(search[field.key] || '')

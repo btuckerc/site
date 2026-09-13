@@ -4,13 +4,11 @@ Personal portfolio for [btuckerc.dev](https://btuckerc.dev). The site is a React
 
 ## Current Focus
 
-The projects page pulls from three places:
-
-- Public GitHub repositories under `btuckerc`
-- Local workspaces on this Mac
-- Agent-system state on `admin@macmini`, including OpenClaw and Hermes
-
-Private repos and the macmini Servarr/media stack do not get listed as portfolio projects.
+The homepage leads with omalo, a pocket companion running ichr, and Pokémon
+Emerald on the device with an AI handoff for gameplay goals. The `/projects/omalo`
+page is the product introduction; `/projects/s3-amoled` keeps the technical
+notes and Grain detail. The projects page is a reviewed allow-list of authored
+public work.
 
 ## Commands
 
@@ -26,21 +24,25 @@ The development server is powered by Vite. Production output is written to `dist
 ## Data
 
 - `data/projects.json` drives the projects page.
-- `data/about.json` drives the about card and cached GitHub stats.
+- `data/about.json` drives the public about card.
 - `data/PROJECT_TEMPLATE.md` documents project fields.
 
-Project entries can include a short check note:
+Project entries use a short public description and links that a visitor can
+follow:
 
 ```json
 {
-  "source": "GitHub public + local",
+  "source": "GitHub public",
   "activity": "active",
   "visibility": "public",
-  "verified": "Short note describing what was checked and when."
+  "blurb": "A short description of the project.",
+  "links": { "github": "https://github.com/btuckerc/example" }
 }
 ```
 
-Keep descriptions grounded in a repo README, GitHub metadata, or local runtime state. For public copy, avoid private repo names, secrets, local absolute paths, or media-stack infrastructure.
+Keep descriptions grounded in a public repo README or metadata. Do not place
+credentials, local paths, device identifiers, or unpublished material in build
+inputs.
 
 ## Structure
 
@@ -57,7 +59,24 @@ scripts/         maintenance scripts
 
 ## Notes
 
-- Cached GitHub stats are intentionally stored in `data/about.json` so the deployed site does not need a client-side token.
-- `scripts/update-github-stats.js` can refresh the public repo count and language-byte estimate when run with `GITHUB_TOKEN`.
-- `npm run stats:about` refreshes local-only about-card aggregates, including project count, AI-aided project count, agent-system count, and display-only AI IDE token-use totals. It reads local AI IDE state and writes only cached numbers used by the site.
-- Existing generated output under `dist/` is not required for local development.
+- `npm run stats:about` validates the reviewed public content structure and
+  does not collect or write runtime statistics.
+- `npm run build` also creates initial HTML metadata for each route through
+  `scripts/prerender-routes.js`. Each non-root route is emitted as both a
+  directory index and an extensionless `.html` artifact so static hosting and
+  the Vite preview resolve `/route` and `/route/` consistently.
+- Generated output under `dist/` is suitable for a static preview; deployment
+  remains a separate action.
+
+## Production deployment
+
+Cloudflare Pages project `site` serves `btuckerc.dev` from Git branch `main`.
+Commit the complete website source, public assets, and build scripts before
+pushing a release. Run `npm run lint`, `npm test -- --run`, and `npm run build`.
+Verify the deployed home, omalo and s3-amoled routes, metadata, and media.
+
+The September 12, 2026 site was initially uploaded directly while its source
+remained uncommitted. A subsequent Git push rebuilt older content. That source
+has now been reconciled onto `main`. Direct uploads must use a committed build
+and must not leave production ahead of its source branch. Private planning and
+publication materials in `btuckercdev-profile` are not website build inputs.

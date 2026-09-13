@@ -1,115 +1,110 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Helmet } from 'react-helmet-async'
-import { useRovingFocus } from '../hooks/useRovingFocus.jsx'
-import AsciiButton from '../components/AsciiButton'
-
-const preloadRoutes = {
-  about: () => import('./About'),
-  projects: () => import('./Projects'),
-  contact: () => import('./Contact')
-}
+import PageMeta from '../components/PageMeta'
+import StarterSelectionCapture from '../components/StarterSelectionCapture'
+import '../styles/home-media.css'
 
 const Home = () => {
-  const navItems = [
-    { id: 'about', label: 'ABOUT', path: '/about' },
-    { id: 'projects', label: 'PROJECTS', path: '/projects' },
-    { id: 'contact', label: 'CONTACT', path: '/contact' }
-  ]
-
-  const { getItemProps } = useRovingFocus('home-nav', navItems)
-
-  const preloadRoute = (id) => {
-    preloadRoutes[id]?.().catch(() => {})
-  }
-
   return (
     <>
-      <Helmet>
-        <title>Tucker Craig - FinOps & Agent Systems</title>
-        <meta name="description" content="Tucker Craig, Senior Software Engineer (FinOps) at Box. Forecast tooling, agent systems, and projects that run whether or not anyone's watching. Davidson '20." />
-        <meta property="og:title" content="Tucker Craig - FinOps & Agent Systems" />
-        <meta property="og:description" content="Senior Software Engineer (FinOps) at Box. Forecast tooling, agent systems, and a macmini full of side projects." />
-        <meta property="og:url" content="https://btuckerc.dev/" />
-        <link rel="canonical" href="https://btuckerc.dev/" />
-      </Helmet>
-      <div className="tui-page-shell min-h-svh flex items-center justify-center px-4 pt-14 sm:pt-16 pb-16">
-        <div className="tui-home-lift max-w-4xl w-full">
+      <PageMeta
+        title="Tucker Craig — Software Engineer"
+        description="Software engineer building omalo, a pocket companion running ichr, with Pokémon Emerald and an AI handoff for gameplay goals."
+        url="https://btuckerc.dev/"
+        image="https://btuckerc.dev/media/omalo/share.jpg"
+        imageAlt="omalo, a pocket companion running ichr, with Pokémon Emerald on omalo."
+      />
+
+      <div className="home-page tui-page-shell min-h-svh px-4 pt-16 pb-28 sm:pt-20">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.18, ease: "easeOut" }}
-          className="tui-home-shell relative overflow-hidden border border-line/70 backdrop-blur-xl"
+          initial={{ y: 6 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          className="mx-auto w-full max-w-5xl"
         >
-          <div className="home-panel relative px-6 py-10 sm:px-8 sm:py-14 md:px-14 md:py-20 text-center flex flex-col justify-between gap-10 sm:gap-12">
-            {/* Top Section - Name and Info */}
-            <div className="home-identity">
-              {/* Optical rules frame the title block without competing with the name. */}
-              <motion.div
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ delay: 0.12, duration: 0.2, ease: "easeOut" }}
-                className="flex items-center justify-center mb-[clamp(1rem,2.2vw,1.5rem)] w-full"
-              >
-                <div className="home-identity-rule h-px bg-accent" />
-              </motion.div>
-
-              <h1 
-                className="font-bold text-fg mb-[clamp(0.875rem,2.4vw,1.5rem)] text-[clamp(1.85rem,8vw,4rem)] leading-[1.05] font-mono whitespace-nowrap"
-              >
-                TUCKER CRAIG
-              </h1>
-
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.14, duration: 0.2, ease: "easeOut" }}
-                className="space-y-2 mb-[clamp(1.75rem,4vw,2.25rem)]"
-              >
-                <p className="text-fg text-sm sm:text-base md:text-lg font-mono uppercase leading-[1.45] sm:leading-relaxed">
-                  <span className="block">senior software engineer</span>
-                  <span className="block">finops @ box</span>
-                </p>
-                <p className="text-muted text-xs md:text-sm font-mono uppercase leading-normal">
-                  davidson college '20
-                </p>
-              </motion.div>
-
-              {/* Keep the lower rule matched to the upper rule for stable symmetry. */}
-              <motion.div
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ delay: 0.16, duration: 0.2, ease: "easeOut" }}
-                className="flex items-center justify-center w-full"
-              >
-                <div className="home-identity-rule h-px bg-accent" />
-              </motion.div>
+          <header className="home-header home-personal-hero border border-line/70 bg-card-bg/70 backdrop-blur-xl">
+            <div className="home-personal-hero-copy">
+              <h1 className="home-personal-hero-title font-mono font-bold leading-tight text-fg">TUCKER CRAIG</h1>
+              <p className="home-personal-hero-role font-mono text-accent">Software Engineer</p>
+              <p className="home-personal-hero-lede">
+                I&apos;m writing the firmware for omalo, a pocket companion running ichr.
+              </p>
             </div>
-
-            {/* Bottom Section - Navigation Buttons */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-[360px]:gap-5 md:gap-6" data-home-nav>
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.id}
-                  to={item.path}
-                  className="block w-full font-mono text-base sm:text-lg uppercase no-underline"
-                  {...getItemProps(item, index)}
-                  onMouseEnter={() => preloadRoute(item.id)}
-                  onFocus={() => preloadRoute(item.id)}
+            <div className="home-personal-hero-context">
+              <p>
+                My projects include handheld games, a movie-seat finder, playlist tools, and a shared workspace setup for macOS and Linux.
+              </p>
+              <p className="mt-4 text-muted">
+                I also sang acapella in{' '}
+                <a
+                  href="https://open.spotify.com/track/5CV2w2PIbKouRr2jNKjJIR"
+                  className="whitespace-nowrap text-accent underline underline-offset-4"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <AsciiButton
-                    size="lg"
-                    className="w-full"
-                    as="div"
-                  >
-                    {item.label}
-                  </AsciiButton>
-                </Link>
-              ))}
+                  The Nuances
+                </a>{' '}
+                at Davidson.
+              </p>
+              <Link to="/about" className="tui-link-chip mt-5 inline-flex">more about me →</Link>
             </div>
-          </div>
+          </header>
+
+          <section className="home-feature mt-6 border border-line/70 bg-card-bg/80 p-5 backdrop-blur-xl sm:p-8" aria-labelledby="featured-project-title">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="home-kicker font-mono text-xs text-accent">featured product / omalo</p>
+                <h2 id="featured-project-title" className="mt-2 font-mono text-2xl font-bold text-fg sm:text-3xl">Pokémon Emerald on omalo</h2>
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base sm:leading-7">
+                  I&apos;m building the device firmware and the Pokémon controls, including an AI handoff for gameplay goals.
+                </p>
+              </div>
+              <span className="home-status font-mono text-xs text-muted"><span className="text-accent" aria-hidden="true">●</span> Prototype</span>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <Link to="/projects/omalo" className="tui-action tui-home-primary inline-flex min-h-11 items-center border border-accent/70 bg-card-bg px-4 py-2 font-mono text-sm text-fg">
+                <span className="tui-action-content">explore omalo →</span>
+              </Link>
+              <Link to="/projects/s3-amoled" className="tui-link-chip">technical notes</Link>
+              <Link to="/projects" className="tui-link-chip">more projects</Link>
+            </div>
+
+            <div className="home-feature-media mt-6 grid gap-4 sm:grid-cols-2">
+              <figure className="home-media-card home-media-card-device">
+                <p className="starter-capture-label">the device</p>
+                <strong className="starter-capture-title">omalo in hand</strong>
+                <div className="home-media-frame home-media-frame-device">
+                  <img
+                    src="/media/s3-amoled/device-in-hand-public.jpg"
+                    alt="A hand holds a small rounded device running Pokémon Emerald. The screen shows a queued ‘Beat the game’ goal and asks the player to continue, then say go."
+                    width="756"
+                    height="1008"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption>Prototype with a gameplay goal queued.</figcaption>
+              </figure>
+              <StarterSelectionCapture className="home-media-card home-media-card-game home-game-capture" />
+            </div>
+          </section>
+
+          <section className="home-supporting mt-6 grid gap-4 md:grid-cols-2" aria-label="Supporting projects">
+            <article className="home-support-card border border-line/70 bg-card-bg/70 p-5 sm:p-6">
+              <p className="home-kicker font-mono text-xs text-accent">center-seat</p>
+              <h2 className="mt-2 font-mono text-lg font-bold text-fg">Movie-seat ranking</h2>
+              <p className="mt-3 text-sm leading-6 text-muted">A movie-seat ranking project that compares seats together across showtimes.</p>
+              <a href="https://github.com/btuckerc/center-seat" className="tui-link-chip mt-5 inline-flex" target="_blank" rel="noopener noreferrer">code and setup ↗</a>
+            </article>
+            <article className="home-support-card border border-line/70 bg-card-bg/70 p-5 sm:p-6">
+              <p className="home-kicker font-mono text-xs text-accent">boilerplate</p>
+              <h2 className="mt-2 font-mono text-lg font-bold text-fg">A portable workspace</h2>
+              <p className="mt-3 text-sm leading-6 text-muted">My macOS and Linux workspace setup, managed with chezmoi and mise.</p>
+              <a href="https://github.com/btuckerc/boilerplate" className="tui-link-chip mt-5 inline-flex" target="_blank" rel="noopener noreferrer">browse the configuration ↗</a>
+            </article>
+          </section>
         </motion.div>
-        </div>
       </div>
     </>
   )

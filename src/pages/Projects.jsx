@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useRef, useState, useDeferredValue } from 'react'
 import { motion } from 'framer-motion'
-import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import ProjectCard from '../components/ProjectCard'
-import CloseButton from '../components/CloseButton'
 import { useRovingFocus } from '../hooks/useRovingFocus.jsx'
 import {
   createProjectSearchIndex,
@@ -12,12 +10,11 @@ import {
   searchProjects
 } from '../utils/projectSearch'
 import projectsData from '../../data/projects.json'
+import PageMeta from '../components/PageMeta'
 
 const filterOptions = [
   { id: 'all', label: 'all' },
-  { id: 'github', label: 'github' },
-  { id: 'local', label: 'local' },
-  { id: 'agentic', label: 'agentic' }
+  { id: 'github', label: 'github' }
 ]
 
 const sortOptions = [
@@ -32,23 +29,9 @@ const getProjectDate = (project, boundary = '12-31') => project.date || `${proje
 
 const matchesSourceFilter = (project, sourceFilter) => {
   const source = `${project.source || ''} ${project.visibility || ''}`.toLowerCase()
-  const tags = (project.tags || []).join(' ').toLowerCase()
-  const title = project.title.toLowerCase()
-
   switch (sourceFilter) {
     case 'github':
       return source.includes('github') || source.includes('public')
-    case 'local':
-      return source.includes('local') || source.includes('macmini')
-    case 'agentic':
-      return (
-        tags.includes('agentic') ||
-        title.includes('openclaw') ||
-        title.includes('hermes') ||
-        title.includes('grok') ||
-        tags.includes('mcp') ||
-        tags.includes('n8n')
-      )
     default:
       return true
   }
@@ -200,26 +183,20 @@ const Projects = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Projects - Tucker Craig</title>
-        <meta name="description" content="Searchable list of what I've built: agent runtimes, forecast tooling, iOS apps, trading code, and the macmini that ties them together." />
-        <meta property="og:title" content="Projects - Tucker Craig" />
-        <meta property="og:description" content="Agent runtimes, forecast tooling, iOS apps, trading code, and the macmini that ties them together." />
-        <meta property="og:url" content="https://btuckerc.dev/projects" />
-        <link rel="canonical" href="https://btuckerc.dev/projects" />
-      </Helmet>
-      <div className="projects-page tui-page-shell min-h-svh pt-20 pb-28 px-4">
+      <PageMeta
+        title="Projects — Tucker Craig"
+        description="Selected public projects by Tucker Craig, with code and context where available."
+        url="https://btuckerc.dev/projects"
+      />
+      <div className="projects-page tui-page-shell min-h-svh pb-28 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="tui-page-header mb-6 relative grid gap-4 md:block">
-          <div className="justify-self-start md:absolute md:left-0 md:top-0">
-            <CloseButton />
-          </div>
+        <div className="tui-page-header mb-6">
           <div className="min-w-0 text-center">
             <h1 className="tui-page-title text-xl font-bold text-fg mb-2 font-mono">
               <span className="text-accent">[</span> projects <span className="text-accent">]</span>
             </h1>
             <p className="mx-auto max-w-2xl text-pretty text-muted text-xs font-mono leading-relaxed">
-              public work, local prototypes, and the agent experiments running on my macmini
+              A few projects to start with, followed by the rest of my public work.
             </p>
           </div>
         </div>
@@ -238,7 +215,7 @@ const Projects = () => {
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
               onKeyDown={handleSearchKeyDown}
-              placeholder="agent runtime, swift ios, dotfiles..."
+              placeholder="movie seats, dotfiles, Swift iOS..."
               data-search-input
               aria-describedby="projects-results-summary"
               autoComplete="off"
@@ -342,7 +319,7 @@ const Projects = () => {
           >
             <div className="text-muted">
               <div className="text-sm">{emptyMessage}</div>
-              <div className="mt-2 text-xs">Try fewer words, a different stack, or one of the scopes above.</div>
+              <div className="mt-2 text-xs">Try fewer words, a different stack, or the GitHub scope.</div>
               <div className="mt-5 flex flex-wrap justify-center gap-2">
                 {hasOtherScopeMatches && (
                   <button
@@ -372,9 +349,6 @@ const Projects = () => {
             <div className="text-xs font-mono text-muted">
               <div className="mb-2">
                 <span className="text-accent">▸</span> more public work on <a href="https://github.com/btuckerc" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-fg transition-colors">github →</a>
-              </div>
-              <div>
-                <span className="text-accent">▸</span> local-only projects are listed from repo, docs, and running state when I could check them
               </div>
             </div>
           </div>
