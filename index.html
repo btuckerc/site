@@ -106,12 +106,13 @@
     }
     </script>
     
-    <!-- Web fonts are self-hosted through the Vite CSS bundle. -->
+    <!-- Font declarations are bundled with the app; selected faces load on demand. -->
     
     <!-- Load font preference immediately to prevent flash -->
     <script>
       (function() {
         const fonts = {
+          'neue-montreal': "'PP Neue Montreal', 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
           'source-code': "'Source Code Pro Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
           'ibm-plex': "'IBM Plex Mono', 'SF Mono', 'Menlo', 'Consolas', monospace",
           'geist-mono': "'Geist Mono Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
@@ -122,14 +123,16 @@
         const aliases = {
           jetbrains: 'geist-mono',
           'fira-code': 'martian-mono',
-          montserrat: 'system'
+          montserrat: 'system',
+          'pp-neue-montreal': 'neue-montreal'
         };
         const fontFiles = {
-          'source-code': '/fonts/source-code-pro-latin-wght-normal.woff2'
+          'source-code': '/fonts/source-code-pro-latin-wght-normal.woff2',
+          'neue-montreal': 'https://pangrampangram.com/cdn/shop/files/PPNeueMontreal-Variable_b3ebe68c-91e0-4337-a3bc-c2a15b5e395b.woff2?v=1182376259239852185'
         };
-        const savedFont = localStorage.getItem('font-family') || 'source-code';
+        const savedFont = localStorage.getItem('font-family') || 'neue-montreal';
         const fontId = aliases[savedFont] || savedFont;
-        document.documentElement.style.setProperty('--font-family', fonts[fontId] || fonts['source-code']);
+        document.documentElement.style.setProperty('--font-family', fonts[fontId] || fonts['neue-montreal']);
         if (fontId !== savedFont && fonts[fontId]) {
           localStorage.setItem('font-family', fontId);
         }

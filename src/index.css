@@ -17,7 +17,8 @@ html {
 }
 
 :root {
-  --font-family: 'Source Code Pro Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  --font-family: 'PP Neue Montreal', 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --tui-footer-bar-height: 2.75rem;
   --motion-fast: 160ms;
   --motion-medium: 220ms;
   --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
@@ -513,6 +514,162 @@ input[type='search']::-webkit-search-results-decoration {
   background-color: color-mix(in srgb, var(--bg) 72%, transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+}
+
+.tui-header-nav {
+  margin-inline: 0.5rem;
+  overflow: hidden;
+}
+
+.tui-header-nav-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tui-header-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.tui-header-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-family: var(--font-family);
+  font-size: 0.68rem;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    color var(--motion-fast) var(--motion-ease-standard),
+    border-color var(--motion-fast) var(--motion-ease-standard),
+    background-color var(--motion-fast) var(--motion-ease-standard);
+}
+
+.tui-header-link:hover,
+.tui-header-link:focus-visible,
+.tui-header-link-active {
+  color: var(--fg);
+  border-color: color-mix(in srgb, var(--accent) 58%, var(--line));
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+@media (max-width: 699px) {
+  .tui-header-nav {
+    margin-inline: 0.2rem;
+  }
+
+  .tui-header-nav-scroll {
+    justify-content: flex-start;
+  }
+
+  .tui-header-link {
+    padding-inline: 0.34rem;
+    font-size: 0.64rem;
+  }
+}
+
+/* The command affordance floats as a small dock above the utility footer. The
+ * footer itself stays light so the dock is the only blurred surface. */
+.tui-footer {
+  padding-bottom: env(safe-area-inset-bottom);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+@supports not ((backdrop-filter: blur(8px))) {
+  .tui-footer {
+    background: color-mix(in srgb, var(--bg) 95%, var(--bg-elev) 5%);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+.tui-footer-control-row {
+  min-height: var(--tui-footer-bar-height);
+  background: transparent;
+}
+
+.tui-command-dock {
+  position: fixed;
+  bottom: calc(3.5rem + env(safe-area-inset-bottom));
+  left: 50%;
+  z-index: 50;
+  width: min(15.625rem, calc(100vw - 1rem));
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.tui-command-dock-button {
+  display: inline-flex;
+  width: 100%;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 54%, var(--line));
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--fg) 16%, transparent),
+    0 18px 45px -28px rgba(0, 0, 0, 0.88);
+  color: var(--fg);
+  pointer-events: auto;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+@supports not ((backdrop-filter: blur(8px))) {
+  .tui-command-dock-button {
+    background: color-mix(in srgb, var(--bg) 95%, var(--bg-elev) 5%);
+  }
+}
+
+.tui-command-dock-button:hover,
+.tui-command-dock-button:focus-visible {
+  border-color: var(--accent);
+}
+
+.tui-command-dock-button .tui-command-cue-key {
+  min-width: 1.625rem;
+  min-height: 1.625rem;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.tui-command-dock-mark {
+  color: var(--accent);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.about-page .tui-about-card {
+  max-height: calc(100svh - 10rem);
+}
+
+@media (max-width: 699px) {
+  .tui-command-dock {
+    bottom: calc(3.5rem + env(safe-area-inset-bottom));
+    width: min(15.625rem, calc(100vw - 1rem));
+  }
+
+  .tui-command-dock-button {
+    font-size: 0.75rem;
+  }
+
+  .tui-command-dock-button .tui-command-cue-key {
+    min-width: 1.625rem;
+    min-height: 1.625rem;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1129,8 +1286,8 @@ input[type='search']::-webkit-search-results-decoration {
 
 .tui-footer-popover {
   position: fixed;
-  bottom: calc(3rem + env(safe-area-inset-bottom));
-  max-height: calc(100svh - 5.5rem);
+  bottom: calc(var(--tui-footer-bar-height) + env(safe-area-inset-bottom));
+  max-height: calc(100svh - var(--tui-footer-bar-height) - 0.75rem - env(safe-area-inset-bottom));
   overflow-y: auto;
 }
 

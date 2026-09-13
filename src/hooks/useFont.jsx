@@ -12,6 +12,11 @@ export const useFont = () => {
 
 const FONTS = [
   {
+    id: 'neue-montreal',
+    name: 'Neue Montreal',
+    family: "'PP Neue Montreal', 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+  },
+  {
     id: 'source-code',
     name: 'Source Code Pro',
     family: "'Source Code Pro Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
@@ -46,7 +51,8 @@ const FONTS = [
 const FONT_ALIASES = {
   jetbrains: 'geist-mono',
   'fira-code': 'martian-mono',
-  montserrat: 'system'
+  montserrat: 'system',
+  'pp-neue-montreal': 'neue-montreal'
 }
 
 const getCanonicalFontId = (id) => FONT_ALIASES[id] || id
@@ -55,7 +61,7 @@ const hasFont = (id) => FONTS.some(font => font.id === id)
 const getStoredFontId = () => {
   const savedFontId = localStorage.getItem('font-family')
   const canonicalFontId = getCanonicalFontId(savedFontId)
-  return hasFont(canonicalFontId) ? canonicalFontId : 'source-code'
+  return hasFont(canonicalFontId) ? canonicalFontId : 'neue-montreal'
 }
 
 export const FontProvider = ({ children }) => {
@@ -82,7 +88,7 @@ export const FontProvider = ({ children }) => {
 
   const setFont = (id) => {
     const canonicalId = getCanonicalFontId(id)
-    setFontId(hasFont(canonicalId) ? canonicalId : 'source-code')
+    setFontId(hasFont(canonicalId) ? canonicalId : 'neue-montreal')
   }
 
   return (

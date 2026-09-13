@@ -23,8 +23,6 @@ const menuItemMotion = (index = 0) => ({
 })
 
 
-const commandFooterPaths = new Set(['/about', '/projects', '/contact'])
-
 const Footer = ({ onCommandPaletteOpen }) => {
   const { fontId, fonts, setFont } = useFont()
   const [isPickerOpen, setIsPickerOpen] = useState(false)
@@ -36,7 +34,6 @@ const Footer = ({ onCommandPaletteOpen }) => {
   const fontPanelRef = useRef(null)
   const location = useLocation()
   const isHomePage = location.pathname === '/'
-  const hasFooterCommand = commandFooterPaths.has(location.pathname)
 
   const socialLinks = [
     { name: 'github', url: 'https://github.com/btuckerc', key: 'gh' },
@@ -111,26 +108,6 @@ const Footer = ({ onCommandPaletteOpen }) => {
 
   return (
   <>
-      {/* Desktop command hint floats above the home footer so it never competes with footer controls. */}
-      {isHomePage && (
-        <div
-          className="tui-command-hint-home hidden min-[700px]:block fixed left-0 right-0 z-40 text-center pointer-events-none"
-        >
-          <div
-            className="tui-command-cue tui-command-cue-home inline-flex text-muted text-xs font-mono"
-          >
-            <span className="tui-command-cue-content">
-              <span className="tui-command-cue-helper">
-                type <kbd className="tui-command-cue-key">{SYMBOLS.COMMAND_PREFIX}</kbd> for
-              </span>
-              <span className="tui-command-cue-label">
-                commands
-              </span>
-            </span>
-          </div>
-        </div>
-      )}
-
       {/* Font Picker Dropdown */}
       <AnimatePresence>
         {isPickerOpen && (
@@ -171,7 +148,7 @@ const Footer = ({ onCommandPaletteOpen }) => {
                     style={{ fontFamily: font.family }}
                   >
                     <span className="tui-menu-item-label">{font.name.toLowerCase()}</span>
-                    {font.id === 'source-code' && <span className="ml-2 text-muted font-mono">(default)</span>}
+                    {font.id === 'neue-montreal' && <span className="ml-2 text-muted font-mono">(default)</span>}
                     {fontId === font.id && <span className="ml-auto text-accent font-mono">*</span>}
                   </motion.button>
                 ))}
@@ -245,8 +222,25 @@ const Footer = ({ onCommandPaletteOpen }) => {
         )}
       </AnimatePresence>
 
-      <footer className="tui-site-chrome fixed bottom-0 left-0 right-0 z-50 border-t border-line">
-        <div className="relative flex items-center justify-between text-xs font-mono text-muted px-3 py-1 min-h-[44px]">
+      <div className="tui-command-dock" aria-label="Command palette shortcut">
+        <button
+          type="button"
+          onClick={() => onCommandPaletteOpen?.()}
+          className="tui-command-cue tui-command-cue-footer tui-command-dock-button tui-action min-h-11 px-3 text-muted text-[0.68rem] font-mono"
+          aria-label="Open command palette (type colon for commands)"
+          aria-keyshortcuts=":"
+        >
+          <span className="tui-action-content tui-command-cue-content">
+            <span className="tui-command-dock-mark" aria-hidden="true">›</span>
+            <span>type</span>
+            <kbd className="tui-command-cue-key" aria-hidden="true">{SYMBOLS.COMMAND_PREFIX}</kbd>
+            <span>for commands</span>
+          </span>
+        </button>
+      </div>
+
+      <footer className="tui-footer fixed bottom-0 left-0 right-0 z-50 border-t border-line">
+        <div className="tui-footer-control-row relative flex min-h-[44px] items-center justify-between text-xs font-mono text-muted px-3 py-1">
           {/* Social links - bottom left */}
           {/* Desktop: Show all links horizontally */}
           <nav
@@ -308,34 +302,6 @@ const Footer = ({ onCommandPaletteOpen }) => {
                 <span>links</span>
                 <span className="text-accent">{isSocialMenuOpen ? '▼' : '▶'}</span>
               </span>
-            </button>
-          </div>
-
-          {/* Desktop: compact command entry on pages where the full home cue would compete with the footer. */}
-          {hasFooterCommand && (
-            <div className="hidden min-[700px]:block absolute left-1/2 transform -translate-x-1/2 pointer-events-auto">
-              <button
-                type="button"
-                onClick={() => onCommandPaletteOpen?.()}
-                className="tui-command-cue tui-command-cue-footer tui-action min-h-8 px-2 text-muted text-xs font-mono"
-                aria-label="Open command palette"
-              >
-                <span className="tui-action-content tui-command-cue-label">
-                  commands
-                </span>
-              </button>
-            </div>
-          )}
-
-          {/* Mobile: Commands button (replaces command hint on small screens) */}
-          <div className="min-[700px]:hidden absolute left-1/2 transform -translate-x-1/2 pointer-events-auto">
-            <button
-              type="button"
-              onClick={() => onCommandPaletteOpen?.()}
-              className="tui-action min-h-8 px-2 text-muted text-xs font-mono"
-              aria-label="Open command palette"
-            >
-              <span className="tui-action-content">commands</span>
             </button>
           </div>
 
