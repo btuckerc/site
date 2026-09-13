@@ -523,6 +523,9 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .tui-site-chrome {
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   background-color: color-mix(in srgb, var(--bg) 72%, transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
@@ -608,6 +611,8 @@ input[type='search']::-webkit-search-results-decoration {
 .tui-footer-control-row {
   min-height: var(--tui-footer-bar-height);
   background: transparent;
+  padding-left: max(.75rem, env(safe-area-inset-left));
+  padding-right: max(.75rem, env(safe-area-inset-right));
 }
 
 .tui-command-dock {
@@ -692,6 +697,13 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 @media (hover: none), (pointer: coarse), (max-width: 700px) {
+  /* An opaque edge lets Safari extend the footer's color behind its floating
+   * toolbar. Controls remain above the bottom inset via the footer padding. */
+  .tui-footer {
+    background-color: var(--bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
   .backdrop-blur-sm,
   .backdrop-blur-xl {
     -webkit-backdrop-filter: none !important;
@@ -1418,6 +1430,17 @@ input[type='search']::-webkit-search-results-decoration {
 
 .tui-page-shell {
   isolation: isolate;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+.home-page.tui-page-shell { padding-top: calc(4rem + env(safe-area-inset-top)); }
+@media (min-width: 640px) {
+  .home-page.tui-page-shell { padding-top: calc(5rem + env(safe-area-inset-top)); }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .home-page .home-personal-hero { background-color: var(--bg-elev); }
 }
 
 .privacy-policy-copy ul {
@@ -1441,9 +1464,9 @@ input[type='search']::-webkit-search-results-decoration {
 
 .tui-global-back-row {
   display: flex;
-  min-height: 6.25rem;
+  min-height: calc(6.25rem + env(safe-area-inset-top));
   align-items: flex-start;
-  padding: 2.75rem 1rem 0;
+  padding: calc(2.75rem + env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) 0 max(1rem, env(safe-area-inset-left));
   margin-bottom: 1rem;
 }
 
@@ -1978,6 +2001,10 @@ input[type='search']::-webkit-search-results-decoration {
 /* Personal home hero: give Tucker room to introduce himself before the
  * featured product carries the current project detail. */
 .home-personal-hero {
+  /* Keep this reading surface blurred on touch devices too; the generic
+   * backdrop utilities are deliberately disabled by the mobile rule above. */
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(15rem, 0.9fr);
   align-items: end;

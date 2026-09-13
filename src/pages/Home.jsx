@@ -22,7 +22,7 @@ const Home = () => {
           transition={{ duration: 0.2, ease: 'easeOut' }}
           className="mx-auto w-full max-w-5xl"
         >
-          <header className="home-header home-personal-hero border border-line/70 bg-card-bg/70 backdrop-blur-xl">
+          <header className="home-header home-personal-hero border border-line/70 bg-card-bg/70">
             <div className="home-personal-hero-copy">
               <h1 className="home-personal-hero-title font-mono font-bold leading-tight text-fg">TUCKER CRAIG</h1>
               <p className="home-personal-hero-role font-mono text-accent">Software Engineer</p>

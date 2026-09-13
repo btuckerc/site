@@ -417,12 +417,6 @@
           "trainer",
           "risk"
         ],
-        "strict": [
-          "Exclude",
-          "encounter",
-          "grass",
-          "entirely"
-        ],
         "mapRegion": [
           "Route",
           "102",

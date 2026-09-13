@@ -38,8 +38,8 @@ function RouteMap({ route, progress, overlays, copy, trip, battleFallback }) {
   </div></div>
 }
 export default function NavigationDemo({ copy }) {
-  const [task, setTask] = useState('shortest'), [trip, setTrip] = useState('crossing'), [strict, setStrict] = useState(false), [overlays, setOverlays] = useState(true), [progress, setProgress] = useState(0)
-  const result = useMemo(() => routeFor(task, trip, strict), [task, trip, strict])
+  const [task, setTask] = useState('shortest'), [trip, setTrip] = useState('crossing'), [overlays, setOverlays] = useState(true), [progress, setProgress] = useState(0)
+  const result = useMemo(() => routeFor(task, trip), [task, trip])
   const [infoOpen, setInfoOpen] = useState(false)
   const infoId = useId(), taskControls = useRef(null)
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function NavigationDemo({ copy }) {
     <fieldset ref={taskControls} className="route-tasks"><legend>{copy.prompt}</legend>{tasks.map(id => <div key={id} className={`route-task-option ${task === id ? 'is-selected' : ''}`}><label><input type="radio" name="navigation-task" value={id} checked={task === id} onChange={() => { setTask(id); reset() }} /><span>{copy.tasks[id]}</span></label>{task === id && result.battleFallback && <button type="button" className="route-info-button" aria-label={copy.battleInfoLabel} aria-expanded={infoOpen} aria-controls={infoId} onClick={() => setInfoOpen(open => !open)}>i</button>}</div>)}
       {result.battleFallback && <div id={infoId} hidden={!infoOpen} className="route-info-popover" role="note"><strong>{copy.battleTitle}</strong><p>{copy.battleNotice}</p></div>}
     </fieldset>
-    <div className="route-options"><label>{copy.tripLabel}<select value={trip} onChange={e => { setTrip(e.target.value); reset() }}>{Object.keys(destinations).map(id => <option key={id} value={id}>{copy.trips[id]}</option>)}</select></label><label><input type="checkbox" checked={overlays} onChange={e => setOverlays(e.target.checked)} />{copy.overlays}</label><label><input type="checkbox" checked={strict} onChange={e => { setStrict(e.target.checked); reset() }} />{copy.strict}</label></div>
+    <div className="route-options"><label>{copy.tripLabel}<select value={trip} onChange={e => { setTrip(e.target.value); reset() }}>{Object.keys(destinations).map(id => <option key={id} value={id}>{copy.trips[id]}</option>)}</select></label><label><input type="checkbox" checked={overlays} onChange={e => setOverlays(e.target.checked)} />{copy.overlays}</label></div>
     <RouteMap route={result.path} progress={progress} overlays={overlays} copy={copy} trip={trip} battleFallback={result.battleFallback} />
     <div className="route-map-labels"><span>{copy.west}</span><span>{copy.east}</span></div>
     <p className="navigation-legend">{copy.legend}</p>
