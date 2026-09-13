@@ -33,6 +33,22 @@
 .command-dock-tooltip { position: absolute; bottom: calc(100% + .5rem); left: 50%; transform: translate(-50%, 4px); opacity: 0; visibility: hidden; pointer-events: none; white-space: nowrap; padding: .55rem .75rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font-size: .75rem; transition: opacity 140ms ease, transform 140ms ease, visibility 140ms; }
 .is-compact:hover .command-dock-tooltip,
 .is-compact:focus-within .command-dock-tooltip { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+@media (hover: none), (pointer: coarse), (max-width: 700px) {
+  /* Safari can sample the uppermost fixed layer at the bottom edge. The dock
+   * sits above the footer, so its own surface must be opaque on a cold load,
+   * not merely look opaque because the footer is visible through it. */
+  .tui-command-dock.is-compact {
+    background-color: var(--bg);
+  }
+  .tui-command-dock.is-compact::before {
+    content: '';
+    position: absolute;
+    inset: 100% 0 auto;
+    height: env(safe-area-inset-bottom);
+    background-color: var(--bg);
+    pointer-events: none;
+  }
+}
 @media (min-width: 700px) and (max-width: 900px) {
   .tui-footer-control-row nav > a { min-width: 2rem; padding-inline: .4rem; }
   .tui-footer-control-row nav > span { margin-inline: .2rem; }
