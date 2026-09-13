@@ -1,20 +1,22 @@
 import GrainCapture from '../components/GrainCapture'
 import AppScreens from '../components/AppScreens'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageMeta from '../components/PageMeta'
 import StarterSelectionCapture from '../components/StarterSelectionCapture'
+import '../styles/omalo-refinements.css'
+import '../styles/project-navigation.css'
 
 const shareImage = 'https://btuckerc.dev/media/omalo/share.jpg'
 const pageUrl = 'https://btuckerc.dev/projects/omalo'
 
 const sectionLinks = [
-  { id: 'device', label: 'device' },
+  { id: 'device', label: 'The device' },
   { id: 'pokemon', label: 'Pokémon' },
   { id: 'grain', label: 'Grain' },
-  { id: 'extensibility', label: 'extend it' },
-  { id: 'the-name', label: 'the name' },
+  { id: 'extensibility', label: 'Extend it' },
+  { id: 'the-name', label: 'The name' },
 ]
 
 const useActiveSection = () => {
@@ -93,33 +95,34 @@ const useActiveSection = () => {
 }
 
 const OmaloTableOfContents = ({ activeSection }) => {
-  const links = sectionLinks.map(({ id, label }) => (
+  const mobileNav = useRef(null)
+  const links = sectionLinks.map(({ id, label }, index) => (
     <a
       key={id}
       href={`#${id}`}
-      className="omalo-toc-link"
       aria-current={activeSection === id ? 'location' : undefined}
+      onClick={() => { if (mobileNav.current) mobileNav.current.open = false }}
     >
-      {label}
+      <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{label}
     </a>
   ))
 
   return (
     <>
-      <aside className="omalo-toc omalo-toc-desktop" aria-label="On this page">
-        <p className="omalo-toc-label">on this page</p>
-        <nav className="omalo-toc-nav" aria-label="Omalo sections">
+      <aside className="story-nav-desktop" aria-label="On this page">
+        <p className="case-study-kicker">on this page</p>
+        <nav className="story-section-links" aria-label="Omalo sections">
           {links}
         </nav>
-        <Link to="/projects/s3-amoled" className="omalo-toc-cross-link">technical notes ↗</Link>
+        <Link to="/projects/s3-amoled" className="story-overview">technical notes ↗</Link>
       </aside>
 
-      <details className="omalo-toc-mobile">
+      <details className="story-nav-mobile" ref={mobileNav}>
         <summary>On this page</summary>
-        <nav className="omalo-toc-nav" aria-label="Omalo sections">
+        <nav className="story-section-links" aria-label="Omalo sections">
           {links}
         </nav>
-        <Link to="/projects/s3-amoled" className="omalo-toc-cross-link">technical notes ↗</Link>
+        <Link to="/projects/s3-amoled" className="story-overview">technical notes ↗</Link>
       </details>
     </>
   )
@@ -176,8 +179,8 @@ const Omalo = () => {
     />
 
     <div className="omalo-page tui-page-shell min-h-svh px-4 pb-32">
-      <div className="mx-auto max-w-5xl">
-        <div className="omalo-layout">
+      <div className="mx-auto max-w-6xl">
+        <div className="story-layout">
           <OmaloTableOfContents activeSection={activeSection} />
           <div className="omalo-content">
             <motion.section
@@ -235,7 +238,7 @@ const Omalo = () => {
             <p className="omalo-kicker">Grain</p>
             <h2 id="grain-title" className="omalo-section-title">A tiny game you play by moving it</h2>
             <p className="omalo-copy">
-              Grain is another game on omalo: a tiny game you play by moving it. Move the pocket companion to steer a fleck around a rounded play area.
+              Move omalo to steer a fleck around a rounded play area. The capture compares what happens with bounce off and on.
             </p>
             <div className="omalo-actions">
               <Link to="/projects/s3-amoled#grain" className="omalo-action">read the Grain notes</Link>
@@ -267,7 +270,7 @@ const Omalo = () => {
                 <h3 className="mt-7 font-mono text-lg font-semibold">ichor → ichr</h3>
                 <p className="omalo-copy">
                   <code>ichr</code> is short for <em>ichor</em>. In the Greek story of Talos, ichor is the life fluid inside a bronze body. I use that idea as a metaphor for a soul: ichr is the software inside omalo that makes it respond.{' '}
-                  <a href="https://www.theoi.com/Text/ApolloniusRhodius4.html#1638" className="underline underline-offset-4" target="_blank" rel="noopener noreferrer">Read Apollonius&apos;s passage ↗</a>
+                  <a href="https://www.greekmythology.com/Myths/Elements/Ichor/ichor.html" className="underline underline-offset-4" target="_blank" rel="noopener noreferrer">A quick read on ichor ↗</a>
                 </p>
               </div>
               <figure className="omalo-name-diagram" aria-label="The name blends oma with talo">

@@ -122,7 +122,7 @@ function AppContent() {
           </RouteErrorBoundary>
         </main>
         
-        <Footer onCommandPaletteOpen={() => setIsCommandPaletteOpen(true)} />
+        <Footer isCommandPaletteOpen={isCommandPaletteOpen} onCommandPaletteToggle={() => setIsCommandPaletteOpen(open => !open)} />
         
         {/* Bottom scroll target */}
         <div ref={bottomRef} tabIndex={-1} className="absolute bottom-0" aria-hidden="true" />

@@ -43,8 +43,8 @@ const pages = [
   },
   {
     route: '/projects/s3-amoled',
-    title: 's3-amoled — Pokémon, an AI handoff, and Grain',
-    description: 'Technical notes for omalo, a pocket companion running ichr, with Pokémon gameplay, an AI handoff, and Grain.',
+    title: 'What happens when you hand Pokémon to an AI?',
+    description: 'Inside omalo: a Pokémon battle handoff, checking what an agent actually did, and a tiny motion-controlled game.',
     image: 'https://btuckerc.dev/media/s3-amoled/share.jpg',
     imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
     type: 'article'

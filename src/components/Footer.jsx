@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useFont } from '../hooks/useFont'
 import { SYMBOLS } from '../constants/symbols'
 import BrandIcon from './BrandIcon'
+import '../styles/command-dock.css'
 
 const menuPanelMotion = {
   initial: { opacity: 0, y: 6, scaleY: 0.98 },
@@ -23,7 +24,7 @@ const menuItemMotion = (index = 0) => ({
 })
 
 
-const Footer = ({ onCommandPaletteOpen }) => {
+const Footer = ({ onCommandPaletteToggle, isCommandPaletteOpen = false }) => {
   const { fontId, fonts, setFont } = useFont()
   const [isPickerOpen, setIsPickerOpen] = useState(false)
   const [showIcons, setShowIcons] = useState(true)
@@ -222,21 +223,27 @@ const Footer = ({ onCommandPaletteOpen }) => {
         )}
       </AnimatePresence>
 
-      <div className="tui-command-dock" aria-label="Command palette shortcut">
+      <div className={`tui-command-dock ${isHomePage ? 'is-floating' : 'is-compact'}`} aria-label="Command palette shortcut">
         <button
           type="button"
-          onClick={() => onCommandPaletteOpen?.()}
+          onClick={() => onCommandPaletteToggle?.()}
           className="tui-command-cue tui-command-cue-footer tui-command-dock-button tui-action min-h-11 px-3 text-muted text-[0.68rem] font-mono"
-          aria-label="Open command palette (type colon for commands)"
+          aria-label={`${isCommandPaletteOpen ? 'Close' : 'Open'} command palette (type colon for commands)`}
+          aria-expanded={isCommandPaletteOpen}
+          aria-controls="command-palette-dialog"
+          aria-haspopup="dialog"
           aria-keyshortcuts=":"
+          aria-describedby={isHomePage ? undefined : 'command-dock-tooltip'}
         >
-          <span className="tui-action-content tui-command-cue-content">
+          <span className="tui-action-content tui-command-cue-content command-dock-expanded" aria-hidden="true">
             <span className="tui-command-dock-mark" aria-hidden="true">›</span>
             <span>type</span>
             <kbd className="tui-command-cue-key" aria-hidden="true">{SYMBOLS.COMMAND_PREFIX}</kbd>
             <span>for commands</span>
           </span>
+          <span className="command-dock-compact" aria-hidden="true"><kbd className="command-dock-colon">:</kbd></span>
         </button>
+        {!isHomePage && <span id="command-dock-tooltip" className="command-dock-tooltip" role="tooltip">type : for commands</span>}
       </div>
 
       <footer className="tui-footer fixed bottom-0 left-0 right-0 z-50 border-t border-line">

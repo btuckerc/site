@@ -1,0 +1,47 @@
+/* One persistent control moves between the footer and floating home banner. */
+.tui-command-dock.is-floating,
+.tui-command-dock.is-compact {
+  z-index: 51;
+  transition: bottom 440ms cubic-bezier(.22, 1, .36, 1), width 440ms cubic-bezier(.22, 1, .36, 1);
+}
+.tui-command-dock.is-compact {
+  bottom: env(safe-area-inset-bottom);
+  width: 3.5rem;
+}
+.tui-command-dock .tui-command-dock-button {
+  position: relative;
+  height: 2.75rem;
+  padding: 0;
+  transition: background-color 350ms ease, border-color 350ms ease, box-shadow 350ms ease, border-radius 350ms ease;
+}
+.is-compact .tui-command-dock-button {
+  background: transparent;
+  border-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.is-compact .tui-command-dock-button:hover,
+.is-compact .tui-command-dock-button:focus-visible { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.command-dock-expanded { transition: opacity 160ms ease, transform 350ms ease; }
+.is-compact .command-dock-expanded { opacity: 0; transform: translateY(5px) scale(.82); pointer-events: none; }
+.command-dock-compact { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; font-size: .65rem; line-height: 1; letter-spacing: .05em; opacity: 0; transform: translateY(-5px); transition: opacity 200ms ease, transform 350ms ease; pointer-events: none; }
+.command-dock-colon { display: grid; place-items: center; width: 1.5rem; height: 1.625rem; border: 1px solid color-mix(in srgb, var(--fg) 48%, transparent); border-radius: 3px; background: color-mix(in srgb, var(--fg) 4%, transparent); font-family: monospace; font-size: 1.25rem; font-weight: 600; line-height: 1; letter-spacing: 0; }
+.is-compact .command-dock-compact { opacity: 1; transform: translateY(0); }
+.is-floating .command-dock-expanded { transition-delay: 100ms; }
+.command-dock-tooltip { position: absolute; bottom: calc(100% + .5rem); left: 50%; transform: translate(-50%, 4px); opacity: 0; visibility: hidden; pointer-events: none; white-space: nowrap; padding: .55rem .75rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font-size: .75rem; transition: opacity 140ms ease, transform 140ms ease, visibility 140ms; }
+.is-compact:hover .command-dock-tooltip,
+.is-compact:focus-within .command-dock-tooltip { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+@media (min-width: 700px) and (max-width: 900px) {
+  .tui-footer-control-row nav > a { min-width: 2rem; padding-inline: .4rem; }
+  .tui-footer-control-row nav > span { margin-inline: .2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tui-command-dock.is-floating,
+  .tui-command-dock.is-compact,
+  .tui-command-dock .tui-command-dock-button,
+  .command-dock-expanded,
+  .command-dock-compact,
+  .command-dock-tooltip { transition: none; }
+}

@@ -298,6 +298,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
               transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
               className="w-full max-w-lg pointer-events-auto"
               role="dialog"
+              id="command-palette-dialog"
               aria-modal="true"
               aria-labelledby="command-palette-title"
             >
