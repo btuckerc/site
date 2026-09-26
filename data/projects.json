@@ -63,6 +63,15 @@
       "github": "https://github.com/btuckerc/dictation",
       "download": "https://github.com/btuckerc/dictation/releases/latest"
     },
+    "media": {
+      "video": "/media/dictation/orb-rainbow.mp4",
+      "poster": "/media/dictation/orb-rainbow-poster.png",
+      "width": 640,
+      "height": 360,
+      "title": "preview",
+      "alt": "The Dynamic Orb recording overlay: a dark glass capsule appears, a rainbow light ripples as you speak, a cursor pulls a drop from its edge that melts back, and the light swirls while transcribing.",
+      "caption": "Dynamic Orb overlay · light ripples as you speak and swirls while transcribing."
+    },
     "overview": "An independent Handy-based app with Fast and Accurate speech-recognition presets. Plain dictation works offline after model downloads; optional text cleanup sends the transcript to an OpenAI-compatible endpoint you configure. The Apple Silicon download is signed and notarized.",
     "stack": ["Rust", "Tauri", "Parakeet", "Whisper"],
     "features": [

@@ -58,6 +58,12 @@
 
 .grain-capture .starter-capture-media { max-width: 15rem; margin-inline: auto; }
 
+/* Project cards: the preview heading matches the card's own section headings. */
+.project-capture .starter-capture-label { display: none; }
+.starter-capture.project-capture .starter-capture-title { margin-top: 0; color: var(--accent); font-size: .875rem; font-weight: 600; }
+.project-capture .starter-capture-media { margin-top: .5rem; }
+.starter-capture.project-capture .starter-capture-caption { color: var(--muted); }
+
 /* Media labels must follow the surface they sit on, not the site theme. */
 .omalo-page .omalo-support-note {
   --fg: #191714;

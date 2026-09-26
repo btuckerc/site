@@ -1,5 +1,6 @@
 import { Fragment, memo, useId, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { GameCapture } from './StarterSelectionCapture'
 
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
@@ -57,6 +58,7 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
   // Show expandable arrow only if there's additional content
   const hasExpandableContent = 
     project.overview || 
+    project.media ||
     (project.stack && project.stack.length > 0) || 
     (project.features && project.features.length > 0) || 
     validLinks.length > 0
@@ -142,6 +144,22 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
             transition={{ duration: 0.14, ease: [0.4, 0, 0.2, 1] }}
             className="mt-4 pt-4 border-t border-line space-y-4 text-sm"
           >
+          {project.media && (
+            <GameCapture
+              className="project-capture"
+              src={project.media.video}
+              poster={project.media.poster}
+              downloadSrc={null}
+              width={project.media.width}
+              height={project.media.height}
+              label="preview"
+              title={project.media.title}
+              alt={project.media.alt}
+              caption={project.media.caption}
+              captureNote={null}
+            />
+          )}
+
           {project.overview && (
             <div>
               <div className="text-accent mb-2 font-semibold">overview</div>
