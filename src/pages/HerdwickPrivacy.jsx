@@ -9,8 +9,9 @@ const policySections = [
     content: (
       <p>
         <strong className="text-fg">None.</strong> Herdwick has no analytics, advertising,
-        or crash-reporting SDKs, and the developer runs no servers. Nothing you do in the app
-        is sent to the developer.
+        or crash-reporting SDKs. The developer stores nothing about you. The only
+        developer-run service is the optional push relay described below, which forwards
+        alerts without storing or logging them.
       </p>
     ),
   },
@@ -74,6 +75,40 @@ const policySections = [
     ),
   },
   {
+    title: 'Alerts while away (optional)',
+    content: (
+      <>
+        <p>
+          If you turn on Alerts While Away, Herdwick starts a small watcher on each connected
+          computer over SSH when you leave the app. It stops when you come back, exits on its
+          own after a day, and installs nothing that lasts.
+        </p>
+        <p className="mt-4">
+          When an agent needs you or finishes, your computer sends Herdwick&apos;s push relay:
+        </p>
+        <ul className="mt-3 space-y-2" role="list">
+          <li>This device&apos;s Apple push notification token</li>
+          <li>
+            Identifiers for the computer (a random ID Herdwick created), the herdr session,
+            and the pane
+          </li>
+          <li>The agent&apos;s new state and a change number</li>
+        </ul>
+        <p className="mt-4">
+          It never sends names, paths, or anything an agent wrote. The relay, run by the
+          developer on Cloudflare Workers, passes this to Apple&apos;s push notification service
+          and keeps nothing: no storage and no request logs. The alert text is generic; your
+          device fills in names it already knows. Turn the option off in Settings at any time.
+          The relay&apos;s{' '}
+          <a href="https://github.com/btuckerc/herdwick/blob/main/relay/src/index.js" className={linkClass}>
+            source code
+          </a>{' '}
+          is public.
+        </p>
+      </>
+    ),
+  },
+  {
     title: 'Data stored on your device',
     content: (
       <>
@@ -95,7 +130,8 @@ const policySections = [
       <ul className="space-y-2" role="list">
         <li>
           <strong className="text-fg">Notifications</strong>: off until you turn them on. Alerts
-          are created on your device when Herdwick checks your machines. There is no push server.
+          are created on your device while Herdwick is open or refreshing in the background, or
+          arrive through Apple&apos;s push service if you turn on Alerts While Away.
         </li>
         <li>
           <strong className="text-fg">Photos</strong>: Herdwick uses the system photo picker and
@@ -103,7 +139,7 @@ const policySections = [
         </li>
         <li>
           <strong className="text-fg">Network</strong>: used only to reach the machines you add
-          and, if you use it, Tailscale.
+          and, if you use them, Tailscale and Apple&apos;s push service.
         </li>
       </ul>
     ),
@@ -170,8 +206,7 @@ const HerdwickPrivacy = () => (
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
             Herdwick is an iPhone and iPad client for coding agents running on your own computers.
-            It connects to them directly over SSH. The developer collects no data and runs no
-            servers.
+            It connects to them directly over SSH. The developer collects and stores no data.
           </p>
           <dl className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {summaryItems.map(([term, description]) => (
