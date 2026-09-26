@@ -21,6 +21,7 @@ const loadOmaloPage = () => import('./pages/Omalo')
 const loadS3AmoledPage = () => import('./pages/S3Amoled')
 const loadContactPage = () => import('./pages/Contact')
 const loadFlippingSevenPrivacyPage = () => import('./pages/FlippingSevenPrivacy')
+const loadHerdwickPrivacyPage = () => import('./pages/HerdwickPrivacy')
 
 const Home = lazy(loadHomePage)
 const About = lazy(loadAboutPage)
@@ -29,6 +30,7 @@ const Omalo = lazy(loadOmaloPage)
 const S3Amoled = lazy(loadS3AmoledPage)
 const Contact = lazy(loadContactPage)
 const FlippingSevenPrivacy = lazy(loadFlippingSevenPrivacyPage)
+const HerdwickPrivacy = lazy(loadHerdwickPrivacyPage)
 
 const PageLoader = () => (
   <div
@@ -116,6 +118,7 @@ function AppContent() {
                     path="/privacy/flipping-seven-calculator"
                     element={<FlippingSevenPrivacy />}
                   />
+                  <Route path="/herdwick-privacy" element={<HerdwickPrivacy />} />
                 </Routes>
               </AnimatePresence>
             </Suspense>
