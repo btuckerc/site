@@ -185,7 +185,7 @@ const HerdwickPrivacy = () => (
     <PageMeta
       title="Privacy Policy — Herdwick"
       description="Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. The developer collects no data."
-      url="https://btuckerc.dev/herdwick-privacy"
+      url="https://btuckerc.dev/privacy/herdwick"
       openGraphDescription="Herdwick connects directly to your own machines over SSH. The developer collects no data."
     />
 

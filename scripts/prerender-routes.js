@@ -66,7 +66,7 @@ const pages = [
     type: 'website'
   },
   {
-    route: '/herdwick-privacy',
+    route: '/privacy/herdwick',
     title: 'Privacy Policy — Herdwick',
     description: 'Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. The developer collects no data.',
     image: 'https://btuckerc.dev/og-image.jpg',

@@ -118,7 +118,7 @@ function AppContent() {
                     path="/privacy/flipping-seven-calculator"
                     element={<FlippingSevenPrivacy />}
                   />
-                  <Route path="/herdwick-privacy" element={<HerdwickPrivacy />} />
+                  <Route path="/privacy/herdwick" element={<HerdwickPrivacy />} />
                 </Routes>
               </AnimatePresence>
             </Suspense>
