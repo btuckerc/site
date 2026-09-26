@@ -1,5 +1,126 @@
 [
   {
+    "id": "pace-bar",
+    "title": "Pace Bar",
+    "year": "2026",
+    "date": "2026-09-26",
+    "featured": 11,
+    "fork": true,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "blurb": "Codex and Claude quotas, local inference, and OpenRouter credit in one quiet macOS menu bar.",
+    "tags": ["macOS", "Menu Bar", "SwiftUI", "Developer Tools"],
+    "links": {
+      "github": "https://github.com/btuckerc/pace-bar",
+      "download": "https://github.com/btuckerc/pace-bar/releases/latest"
+    },
+    "overview": "A focused fork of CodexBar by Peter Steinberger and contributors, built with SwiftUI and AppKit. The Apple Silicon download is signed and notarized and requires macOS 14 or later; Intel Macs build from source. Forecasts are estimates, not an account switcher.",
+    "stack": ["Swift", "SwiftUI", "AppKit"],
+    "features": [
+      "One quota ring per Codex and Claude subscription",
+      "Pooled Codex forecast that flags quota about to reset unused",
+      "Local inference token counts and speed, with optional GPU readings",
+      "OpenRouter balance kept distinct from estimated API cost"
+    ]
+  },
+  {
+    "id": "herdwick",
+    "title": "Herdwick",
+    "year": "2026",
+    "date": "2026-09-25",
+    "featured": 11,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "blurb": "A native iPhone and iPad client for herdr: read and answer your coding agents over SSH.",
+    "tags": ["iOS", "iPadOS", "Swift", "Coding Agents"],
+    "links": {
+      "github": "https://github.com/btuckerc/herdwick",
+      "privacy": "https://btuckerc.dev/privacy/herdwick"
+    },
+    "overview": "Herdwick connects to your own machine over SSH, shows every agent herdr tracks, and renders their transcripts as conversations, with a live terminal when you need it. Requires iOS 26 and a Mac or Linux host running herdr; build from source with Xcode. An independent project, not affiliated with herdr or Tailscale.",
+    "stack": ["Swift", "SwiftTerm", "SSH", "TailscaleKit"],
+    "features": [
+      "Inbox of agents across hosts, with the ones that need you first",
+      "omp, Claude Code and Codex transcripts rendered as chat",
+      "Native controls for questions and permission prompts",
+      "Plain SSH or an embedded Tailscale node; no account or analytics"
+    ]
+  },
+  {
+    "id": "dictation",
+    "title": "Dictation",
+    "year": "2026",
+    "date": "2026-09-25",
+    "featured": 11,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "blurb": "Mac-first technical dictation with local speech recognition and custom vocabulary, built on Handy.",
+    "tags": ["macOS", "Dictation", "Speech Recognition", "Tauri"],
+    "links": {
+      "github": "https://github.com/btuckerc/dictation",
+      "download": "https://github.com/btuckerc/dictation/releases/latest"
+    },
+    "overview": "An independent Handy-based app with Fast and Accurate speech-recognition presets. Plain dictation works offline after model downloads; optional text cleanup sends the transcript to an OpenAI-compatible endpoint you configure. The Apple Silicon download is signed and notarized.",
+    "stack": ["Rust", "Tauri", "Parakeet", "Whisper"],
+    "features": [
+      "Local speech recognition with two presets",
+      "Custom vocabulary for the Accurate preset",
+      "Configurable dictation shortcuts",
+      "Optional transcript cleanup with a plain-text fallback"
+    ]
+  },
+  {
+    "id": "streamapp",
+    "title": "StreamApp",
+    "year": "2026",
+    "date": "2026-09-24",
+    "featured": 11,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "blurb": "Record your screen or stream to Twitch from your Mac’s menu bar.",
+    "tags": ["macOS", "Menu Bar", "Screen Recording", "Twitch"],
+    "links": {
+      "github": "https://github.com/btuckerc/streamapp",
+      "download": "https://github.com/btuckerc/streamapp/releases/latest"
+    },
+    "overview": "A menu bar app for screen or window capture, webcam and audio controls, Twitch streaming, a notch teleprompter, and desktop annotation. The download is signed and notarized for Apple Silicon Macs on macOS 26 or newer; source builds need no signing certificate. GPL-3.0.",
+    "stack": ["Swift", "FFmpeg", "WebRTC"],
+    "features": [
+      "Crash-recoverable screen or window recording",
+      "Desktop and Full Camera layouts with webcam punch-in",
+      "Twitch streaming with explicit start confirmation",
+      "Desktop drawing and live loudness meters"
+    ]
+  },
+  {
+    "id": "tablet-companion",
+    "title": "Tablet Companion",
+    "year": "2026",
+    "date": "2026-09-21",
+    "featured": 11,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "blurb": "Set up a Wacom tablet and its drawing shortcuts on your Mac.",
+    "tags": ["macOS", "Wacom", "Tablet", "Drawing"],
+    "links": {
+      "github": "https://github.com/btuckerc/tablet-companion",
+      "download": "https://github.com/btuckerc/tablet-companion/releases/latest"
+    },
+    "overview": "A setup companion for the Wacom Intuos BT S, tested with driver 6.4.14-1. It hands off the Wacom driver installer and assigns tablet-button shortcuts for StreamApp drawing while preserving other buttons. Other tablets are not supported yet. The download is signed and notarized for Apple Silicon Macs on macOS 26 or newer.",
+    "stack": ["Swift", "Wacom Driver"],
+    "features": [
+      "Guided Wacom driver download and installer handoff",
+      "Suggested tablet-button layout for StreamApp",
+      "Restore prior button assignments",
+      "Local settings backups"
+    ]
+  },
+  {
     "id": "center-seat",
     "title": "CenterSeat",
     "year": "2026",
