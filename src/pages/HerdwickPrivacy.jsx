@@ -202,7 +202,7 @@ const HerdwickPrivacy = () => (
             Privacy policy
           </p>
           <h1 className="tui-page-title text-2xl font-bold leading-tight text-fg sm:text-4xl">
-            Your machines. Your connection.
+            Your agents stay on your machines.
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
             Herdwick is an iPhone and iPad client for coding agents running on your own computers.
