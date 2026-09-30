@@ -22,6 +22,7 @@ const loadS3AmoledPage = () => import('./pages/S3Amoled')
 const loadContactPage = () => import('./pages/Contact')
 const loadFlippingSevenPrivacyPage = () => import('./pages/FlippingSevenPrivacy')
 const loadHerdwickPrivacyPage = () => import('./pages/HerdwickPrivacy')
+const loadHerdwickSupportPage = () => import('./pages/HerdwickSupport')
 
 const Home = lazy(loadHomePage)
 const About = lazy(loadAboutPage)
@@ -31,6 +32,7 @@ const S3Amoled = lazy(loadS3AmoledPage)
 const Contact = lazy(loadContactPage)
 const FlippingSevenPrivacy = lazy(loadFlippingSevenPrivacyPage)
 const HerdwickPrivacy = lazy(loadHerdwickPrivacyPage)
+const HerdwickSupport = lazy(loadHerdwickSupportPage)
 
 const PageLoader = () => (
   <div
@@ -119,6 +121,7 @@ function AppContent() {
                     element={<FlippingSevenPrivacy />}
                   />
                   <Route path="/privacy/herdwick" element={<HerdwickPrivacy />} />
+                  <Route path="/herdwick/support" element={<HerdwickSupport />} />
                 </Routes>
               </AnimatePresence>
             </Suspense>
