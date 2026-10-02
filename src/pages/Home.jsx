@@ -36,7 +36,7 @@ const Home = () => {
             </div>
             <div className="home-personal-hero-context">
               <p>
-                I like building things that make everyday life a little easier, from finding a good movie seat to managing playlists and automating repetitive tasks.
+                I like building things that make everyday life a little easier. We can fix everything. Lately that&apos;s meant apps to track my AI usage, replace expensive voice-to-text, and bring AI agents to my phone, and I&apos;m excited to share more along the way.
               </p>
               <p className="mt-4 text-muted">
                 I also sang acapella in{' '}
