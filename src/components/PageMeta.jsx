@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 
-const defaultImage = 'https://btuckerc.dev/og-image.jpg'
-const defaultImageAlt = 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.'
+const defaultImage = 'https://btuckerc.dev/og/home.jpg'
+const defaultImageAlt = 'Tucker Craig, software engineer. I like building things that make everyday life a little easier.'
 
 const PageMeta = ({
   title,

@@ -9,7 +9,7 @@ describe('PageMeta navigation', () => {
     document.head.innerHTML = new DOMParser().parseFromString(template, 'text/html').head.innerHTML
     const view = render(
       <HelmetProvider>
-        <PageMeta title="Case study" description="Case description" url="https://btuckerc.dev/projects/s3-amoled" type="article" image="https://btuckerc.dev/media/s3-amoled/share.jpg" />
+        <PageMeta title="Case study" description="Case description" url="https://btuckerc.dev/projects/s3-amoled" type="article" image="https://btuckerc.dev/og/s3-amoled.jpg" />
       </HelmetProvider>
     )
     const check = async (title, url, type, image) => {
@@ -30,12 +30,12 @@ describe('PageMeta navigation', () => {
         }
       })
     }
-    await check('Case study', 'https://btuckerc.dev/projects/s3-amoled', 'article', 'https://btuckerc.dev/media/s3-amoled/share.jpg')
+    await check('Case study', 'https://btuckerc.dev/projects/s3-amoled', 'article', 'https://btuckerc.dev/og/s3-amoled.jpg')
     view.rerender(
       <HelmetProvider>
         <PageMeta title="Contact" description="Contact description" url="https://btuckerc.dev/contact" />
       </HelmetProvider>
     )
-    await check('Contact', 'https://btuckerc.dev/contact', 'website', 'https://btuckerc.dev/og-image.jpg')
+    await check('Contact', 'https://btuckerc.dev/contact', 'website', 'https://btuckerc.dev/og/home.jpg')
   })
 })

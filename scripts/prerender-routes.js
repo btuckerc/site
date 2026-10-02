@@ -12,25 +12,25 @@ const pages = [
   {
     route: '/',
     title: 'Tucker Craig — Software Engineer',
-    description: 'Software engineer building omalo, a pocket companion running ichr, with Pokémon Emerald and an AI handoff for gameplay goals.',
-    image: 'https://btuckerc.dev/media/omalo/share.jpg',
-    imageAlt: 'omalo, a pocket companion running ichr, with Pokémon Emerald on omalo.',
+    description: 'Software engineer who likes building things that make everyday life a little easier. Right now: omalo, a pocket companion with Pokémon and an AI handoff.',
+    image: 'https://btuckerc.dev/og/home.jpg',
+    imageAlt: 'Tucker Craig, software engineer. I like building things that make everyday life a little easier.',
     type: 'website'
   },
   {
     route: '/about',
     title: 'About — Tucker Craig',
-    description: "Tucker Craig's software and hardware projects, from handheld games to music tools.",
-    image: 'https://btuckerc.dev/og-image.jpg',
-    imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
+    description: "Hello, world! I'm Tucker. I build apps for my AI usage, my own voice-to-text, and AI agents on my phone, plus firmware for omalo.",
+    image: 'https://btuckerc.dev/og/about.jpg',
+    imageAlt: "Tucker Craig, about. Hello, world! I'm Tucker.",
     type: 'website'
   },
   {
     route: '/projects',
     title: 'Projects — Tucker Craig',
-    description: 'Selected public projects by Tucker Craig, with code and context where available.',
-    image: 'https://btuckerc.dev/og-image.jpg',
-    imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
+    description: 'Things Tucker Craig has built, big and small: Pace Bar, Herdwick, Dictation, CenterSeat, and more.',
+    image: 'https://btuckerc.dev/og/projects.jpg',
+    imageAlt: 'Tucker Craig, projects: Pace Bar, Herdwick, Dictation, CenterSeat, earcandy, and more.',
     type: 'website'
   },
   {
@@ -45,40 +45,40 @@ const pages = [
     route: '/projects/s3-amoled',
     title: 'What happens when you hand Pokémon to an AI?',
     description: 'Inside omalo: a Pokémon battle handoff, checking what an agent actually did, and a tiny motion-controlled game.',
-    image: 'https://btuckerc.dev/media/s3-amoled/share.jpg',
-    imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
+    image: 'https://btuckerc.dev/og/s3-amoled.jpg',
+    imageAlt: 'omalo notes, s3-amoled: what happens when you hand Pokémon to an AI?',
     type: 'article'
   },
   {
     route: '/contact',
     title: 'Contact — Tucker Craig',
     description: 'Get in touch with Tucker Craig via email, GitHub, LinkedIn, or the contact form.',
-    image: 'https://btuckerc.dev/og-image.jpg',
-    imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
+    image: 'https://btuckerc.dev/og/contact.jpg',
+    imageAlt: 'Tucker Craig, contact. Say hello at btuckerc.dev@gmail.com.',
     type: 'website'
   },
   {
     route: '/privacy/flipping-seven-calculator',
     title: 'Privacy Policy — Flipping Seven Calculator',
     description: 'Privacy policy for Flipping Seven Calculator, an offline scorekeeping utility that does not collect personal data.',
-    image: 'https://btuckerc.dev/og-image.jpg',
-    imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
+    image: 'https://btuckerc.dev/og/flipping-seven-privacy.jpg',
+    imageAlt: 'Flipping Seven privacy: simple app, simple privacy.',
     type: 'website'
   },
   {
     route: '/privacy/herdwick',
     title: 'Privacy Policy — Herdwick',
     description: 'Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. The developer collects no data.',
-    image: 'https://btuckerc.dev/og-image.jpg',
-    imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
+    image: 'https://btuckerc.dev/og/herdwick-privacy.jpg',
+    imageAlt: 'Herdwick privacy: your agents stay on your machines.',
     type: 'website'
   },
   {
     route: '/herdwick/support',
     title: 'Support — Herdwick',
     description: 'Help for Herdwick, the iPhone and iPad app for reading and answering coding agents on your own machines.',
-    image: 'https://btuckerc.dev/og-image.jpg',
-    imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
+    image: 'https://btuckerc.dev/og/herdwick-support.jpg',
+    imageAlt: 'Herdwick support: coding agents on your phone.',
     type: 'website'
   }
 ]

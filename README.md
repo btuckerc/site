@@ -65,6 +65,12 @@ scripts/         maintenance scripts
   `scripts/prerender-routes.js`. Each non-root route is emitted as both a
   directory index and an extensionless `.html` artifact so static hosting and
   the Vite preview resolve `/route` and `/route/` consistently.
+- Share previews (`og:image` / `twitter:image`) live in `public/og/`, one
+  1200×630 JPG per route except omalo, which keeps `public/media/omalo/share.jpg`.
+  They are rendered from `scripts/share-cards/card.html` by
+  `node scripts/render-share-cards.js` (headless Chrome; set `CHROME_BIN`, and
+  `CHROME_NO_SANDBOX=1` where the Chrome sandbox is unavailable). Re-run it after
+  changing card copy or the featured project list, then commit the JPGs.
 - Generated output under `dist/` is suitable for a static preview; deployment
   remains a separate action.
 

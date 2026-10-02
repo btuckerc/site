@@ -13,10 +13,10 @@ const Home = () => {
     <>
       <PageMeta
         title="Tucker Craig — Software Engineer"
-        description="Software engineer building omalo, a pocket companion running ichr, with Pokémon Emerald and an AI handoff for gameplay goals."
+        description="Software engineer who likes building things that make everyday life a little easier. Right now: omalo, a pocket companion with Pokémon and an AI handoff."
         url="https://btuckerc.dev/"
-        image="https://btuckerc.dev/media/omalo/share.jpg"
-        imageAlt="omalo, a pocket companion running ichr, with Pokémon Emerald on omalo."
+        image="https://btuckerc.dev/og/home.jpg"
+        imageAlt="Tucker Craig, software engineer. I like building things that make everyday life a little easier."
       />
 
       <div className="home-page tui-page-shell min-h-svh px-4 pt-16 pb-28 sm:pt-20">

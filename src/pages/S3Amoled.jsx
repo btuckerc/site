@@ -28,7 +28,7 @@ export default function S3Amoled() {
     onClick={() => { if (mobileNav.current) mobileNav.current.open = false }}
   ><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{labels[index]}</a>)
   return <>
-    <PageMeta title={copy.title} description="Inside omalo: a Pokémon battle handoff, checking what an agent actually did, and a tiny motion-controlled game." url="https://btuckerc.dev/projects/s3-amoled" type="article" image="https://btuckerc.dev/media/s3-amoled/share.jpg" />
+    <PageMeta title={copy.title} description="Inside omalo: a Pokémon battle handoff, checking what an agent actually did, and a tiny motion-controlled game." url="https://btuckerc.dev/projects/s3-amoled" type="article" image="https://btuckerc.dev/og/s3-amoled.jpg" imageAlt="omalo notes, s3-amoled: what happens when you hand Pokémon to an AI?" />
     <div className="case-study-page technical-readability-page tui-page-shell min-h-svh px-4 pb-28">
       <div className="story-layout mx-auto max-w-6xl">
         <aside className="story-nav-desktop" aria-label="On this page">

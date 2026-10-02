@@ -95,6 +95,8 @@ const FlippingSevenPrivacy = () => (
       description="Privacy policy for Flipping Seven Calculator, an offline scorekeeping utility that does not collect personal data."
       url="https://btuckerc.dev/privacy/flipping-seven-calculator"
       openGraphDescription="Flipping Seven Calculator does not collect, transmit, sell, or share personal data."
+      image="https://btuckerc.dev/og/flipping-seven-privacy.jpg"
+      imageAlt="Flipping Seven privacy: simple app, simple privacy."
     />
 
     <div className="tui-page-shell min-h-svh px-4 pb-28">

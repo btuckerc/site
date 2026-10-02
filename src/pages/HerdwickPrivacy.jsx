@@ -187,6 +187,8 @@ const HerdwickPrivacy = () => (
       description="Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. The developer collects no data."
       url="https://btuckerc.dev/privacy/herdwick"
       openGraphDescription="Herdwick connects directly to your own machines over SSH. The developer collects no data."
+      image="https://btuckerc.dev/og/herdwick-privacy.jpg"
+      imageAlt="Herdwick privacy: your agents stay on your machines."
     />
 
     <div className="tui-page-shell min-h-svh px-4 pb-28">

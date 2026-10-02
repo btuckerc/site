@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>share card</title>
+<style>
+  @font-face {
+    font-family: 'PP Neue Montreal';
+    font-weight: 100 900;
+    src: url('https://pangrampangram.com/cdn/shop/files/PPNeueMontreal-Variable_b3ebe68c-91e0-4337-a3bc-c2a15b5e395b.woff2?v=1182376259239852185') format('woff2-variations');
+  }
+  @font-face {
+    font-family: 'Source Code Pro Variable';
+    font-weight: 200 900;
+    src: url('../../public/fonts/source-code-pro-latin-wght-normal.woff2') format('woff2-variations');
+  }
+
+  /* Site tokens: src/styles/themes.css (default dark theme). */
+  :root {
+    --bg: #0f1115;
+    --bg-elev: #171a1f;
+    --fg: #e7e9ec;
+    --muted: #9aa3ad;
+    --accent: #c9cdd2;
+    --line: #2a2f36;
+    --sans: 'PP Neue Montreal', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'Source Code Pro Variable', 'SF Mono', Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--bg); }
+  body { font-family: var(--sans); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+  .stage {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    padding: 40px 48px 0;
+    background:
+      linear-gradient(180deg, rgba(15, 17, 21, 0.2) 0%, rgba(15, 17, 21, 0) 45%, rgba(15, 17, 21, 0.45) 100%),
+      url('../../public/bg-3-1920.jpg') center 70% / cover no-repeat;
+  }
+
+  /* Mirrors .home-personal-hero: blurred glass card, 70% line border. */
+  .card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+    align-items: center;
+    gap: 52px;
+    height: 478px;
+    padding: 48px 56px;
+    border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    background: color-mix(in srgb, var(--bg-elev) 62%, transparent);
+    backdrop-filter: blur(18px);
+  }
+
+  .eyebrow {
+    margin-bottom: 18px;
+    color: var(--muted);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .title {
+    font-size: 108px;
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .tag {
+    margin-top: 24px;
+    color: var(--accent);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .tag.bracketed { font-family: var(--mono); font-weight: 500; letter-spacing: 0.04em; text-transform: none; font-size: 38px; }
+  .tag .bracket { color: var(--muted); }
+
+  /* Mirrors .home-personal-hero-context: muted copy behind a hairline. */
+  .context {
+    position: relative;
+    padding-left: 32px;
+    color: var(--muted);
+    font-size: 25px;
+    line-height: 1.5;
+  }
+  .context::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 1px;
+    background: color-mix(in srgb, var(--accent) 42%, var(--line));
+    content: '';
+  }
+  .context p + p { margin-top: 16px; }
+  .context .strong { color: var(--fg); }
+
+  .list { margin-top: 16px; list-style: none; font-family: var(--mono); font-size: 23px; line-height: 1.6; }
+  .list li { color: var(--fg); white-space: nowrap; }
+  .list li::before { content: '› '; color: var(--muted); }
+  .list li.more { color: var(--muted); }
+  .list li.more::before { content: '  '; }
+
+  /* Mirrors the site's TUI footer bar. */
+  .bar {
+    position: absolute;
+    right: 48px;
+    bottom: 26px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 22px;
+    border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    font-family: var(--mono);
+    font-size: 21px;
+    color: var(--muted);
+  }
+  .bar .url { color: var(--fg); }
+  .bar .url .path { color: var(--accent); }
+  .bar .cursor { display: inline-block; width: 10px; height: 21px; margin-left: 4px; vertical-align: -3px; background: var(--accent); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="card">
+    <div class="copy">
+      <p class="eyebrow" hidden></p>
+      <h1 class="title"></h1>
+      <p class="tag"></p>
+    </div>
+    <div class="context"></div>
+  </div>
+  <div class="bar">
+    <span class="url">btuckerc.dev<span class="path"></span><span class="cursor"></span></span>
+    <span class="hint"></span>
+  </div>
+</div>
+<script>
+  const el = (tag, className, text) => {
+    const node = document.createElement(tag)
+    if (className) node.className = className
+    if (text !== undefined) node.textContent = text
+    return node
+  }
+
+  window.renderCard = async (card) => {
+    const eyebrow = document.querySelector('.eyebrow')
+    eyebrow.hidden = !card.eyebrow
+    eyebrow.textContent = card.eyebrow || ''
+
+    document.querySelector('.title').textContent = card.title
+
+    const tag = document.querySelector('.tag')
+    tag.replaceChildren()
+    if (card.bracket) {
+      tag.className = 'tag bracketed'
+      tag.append(el('span', 'bracket', '[ '), card.bracket, el('span', 'bracket', ' ]'))
+    } else {
+      tag.className = 'tag'
+      tag.textContent = card.tag
+    }
+
+    const context = document.querySelector('.context')
+    context.replaceChildren()
+    for (const line of card.context || []) {
+      context.append(el('p', line.strong ? 'strong' : '', line.text))
+    }
+    if (card.list) {
+      const list = el('ul', 'list')
+      for (const item of card.list) list.append(el('li', item.more ? 'more' : '', item.text))
+      context.append(list)
+    }
+
+    document.querySelector('.path').textContent = card.path === '/' ? '' : card.path
+    document.querySelector('.hint').textContent = card.hint || ''
+
+    await document.fonts.ready
+    // Shrink long titles (e.g. product names) until they fit the left column.
+    const title = document.querySelector('.title')
+    const column = document.querySelector('.copy')
+    let size = 108
+    title.style.fontSize = `${size}px`
+    while (title.scrollWidth > column.clientWidth && size > 48) {
+      size -= 2
+      title.style.fontSize = `${size}px`
+    }
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    return document.fonts.check('700 108px "PP Neue Montreal"')
+  }
+</script>
+</body>
+</html>

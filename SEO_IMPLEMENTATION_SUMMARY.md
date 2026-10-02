@@ -178,10 +178,8 @@ The `index.html` references `/apple-touch-icon.png` (180x180), but this file doe
    - Generate 180x180 PNG
    - Save to `public/apple-touch-icon.png`
 
-2. **Create Open Graph Image**
-   - Generate 1200x630 image for social sharing
-   - Save to `public/og-image.jpg`
-   - Should include your name, title, and branding
+2. **Open Graph Images** (done)
+   - Per-route 1200x630 cards in `public/og/`; see README "Notes" to regenerate
 
 3. **Submit to Google Search Console**
    - Verify ownership of btuckerc.dev

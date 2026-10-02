@@ -7,8 +7,10 @@ const About = () => {
     <>
       <PageMeta
         title="About — Tucker Craig"
-        description="Tucker Craig's software and hardware projects, from handheld games to music tools."
+        description="Hello, world! I'm Tucker. I build apps for my AI usage, my own voice-to-text, and AI agents on my phone, plus firmware for omalo."
         url="https://btuckerc.dev/about"
+        image="https://btuckerc.dev/og/about.jpg"
+        imageAlt="Tucker Craig, about. Hello, world! I'm Tucker."
       />
       <div className="about-page tui-page-shell min-h-[calc(100svh-7.25rem)] px-4 pb-28">
         <div className="relative mx-auto w-full max-w-3xl">
