@@ -1,7 +1,7 @@
 {
   "name": "Tucker Craig",
   "role": "Software engineer",
-  "intro": "I'm Tucker, a software engineer. My projects include handheld games, a movie-seat finder, playlist tools, and a shared workspace setup for macOS and Linux.",
+  "intro": "Hello, world! I'm Tucker. A lot of what I build starts with something small that bugs me. I wanted to keep track of my AI usage, so I built a tracker. I didn't want to keep paying for voice-to-text, so I made my own. I wanted my AI agents with me, so now they're on my phone. Even something to help me get the right movie seat. There's a bunch more in my project page, feel free to check it out.",
   "personal": "I also sang acapella in The Nuances at Davidson.",
-  "currentWork": "I’m writing the firmware for omalo, a pocket companion running ichr. My current work brings Pokémon Emerald to the device, with an AI handoff for gameplay goals."
+  "currentWork": "I’m writing the firmware for an arduino I’m calling omalo, a pocket companion. My current work brings Pokémon Emerald to the device, with an AI handoff for gameplay goals."
 }

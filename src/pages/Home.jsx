@@ -36,7 +36,16 @@ const Home = () => {
             </div>
             <div className="home-personal-hero-context">
               <p>
-                I like building things that make everyday life a little easier. We can fix everything. Lately that&apos;s meant apps to track my AI usage, replace expensive voice-to-text, and bring AI agents to my phone, and I&apos;m excited to share more along the way.
+                I like building things that make everyday life a little easier.{' '}
+                <a
+                  href="https://wecanfixeverything.com"
+                  className="text-accent underline underline-offset-4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  We can fix everything
+                </a>
+                . I&apos;ve built an app to track my AI usage, replaced expensive voice-to-text, and brought AI agents to my phone, and I&apos;m excited to share more along the way.
               </p>
               <p className="mt-4 text-muted">
                 I also sang acapella in{' '}

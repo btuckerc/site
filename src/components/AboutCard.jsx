@@ -14,11 +14,27 @@ const AboutCard = () => (
     </div>
     <h1 className="text-2xl sm:text-3xl font-bold text-fg mt-5">{aboutData.name}</h1>
     <p className="text-accent mt-2">{aboutData.role}</p>
-    <p className="text-muted leading-relaxed mt-5">{aboutData.intro}</p>
+    <p className="text-muted leading-relaxed mt-5">
+      {aboutData.intro.split('project page')[0]}
+      <Link to="/projects" className="text-accent underline underline-offset-4">project page</Link>
+      {aboutData.intro.split('project page').slice(1).join('project page')}
+    </p>
     <p className="text-fg leading-relaxed mt-4">
       {aboutData.currentWork.split('omalo')[0]}
       <Link to="/projects/omalo" className="text-accent underline underline-offset-4">omalo</Link>
       {aboutData.currentWork.split('omalo').slice(1).join('omalo')}
+    </p>
+    <p className="text-muted leading-relaxed mt-4">
+      I stream on{' '}
+      <a
+        href="https://www.twitch.tv/itux"
+        className="text-accent underline underline-offset-4"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Twitch
+      </a>{' '}
+      from time to time. Hoping to do it more soon.
     </p>
     <p className="text-muted leading-relaxed mt-4">
       I also sang acapella in{' '}
