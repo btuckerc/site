@@ -72,6 +72,14 @@ const pages = [
     image: 'https://btuckerc.dev/og-image.jpg',
     imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
     type: 'website'
+  },
+  {
+    route: '/herdwick/support',
+    title: 'Support — Herdwick',
+    description: 'Help for Herdwick, the iPhone and iPad app for reading and answering coding agents on your own machines.',
+    image: 'https://btuckerc.dev/og-image.jpg',
+    imageAlt: 'Technical project card for s3-amoled, covering Pokémon, an AI handoff, and Grain.',
+    type: 'website'
   }
 ]
 

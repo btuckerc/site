@@ -9,6 +9,7 @@ export const routeLoaders = {
   '/contact': () => import('./pages/Contact'),
   '/privacy/flipping-seven-calculator': () => import('./pages/FlippingSevenPrivacy'),
   '/privacy/herdwick': () => import('./pages/HerdwickPrivacy'),
+  '/herdwick/support': () => import('./pages/HerdwickSupport'),
 }
 
 export const preloadRoute = (pathname) => {

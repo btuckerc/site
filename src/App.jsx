@@ -22,6 +22,7 @@ const S3Amoled = lazy(routeLoaders['/projects/s3-amoled'])
 const Contact = lazy(routeLoaders['/contact'])
 const FlippingSevenPrivacy = lazy(routeLoaders['/privacy/flipping-seven-calculator'])
 const HerdwickPrivacy = lazy(routeLoaders['/privacy/herdwick'])
+const HerdwickSupport = lazy(routeLoaders['/herdwick/support'])
 
 function AppContent() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
@@ -98,6 +99,7 @@ function AppContent() {
                     element={<FlippingSevenPrivacy />}
                   />
                   <Route path="/privacy/herdwick" element={<HerdwickPrivacy />} />
+                  <Route path="/herdwick/support" element={<HerdwickSupport />} />
                 </Routes>
               </AnimatePresence>
             </Suspense>
