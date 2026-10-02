@@ -45,7 +45,7 @@ export default function S3Amoled() {
           <p className="case-study-status mt-4 text-sm text-muted">Prototype · Waveshare ESP32-S3 touch AMOLED</p>
         </header>
         <details className="story-nav-mobile" ref={mobileNav}>
-          <summary>On this page</summary>
+          <summary className="tui-summary"><span className="tui-disclosure" aria-hidden="true" /><span>On this page</span></summary>
           <nav className="story-section-links" aria-label="Case study sections">{sectionLinks}</nav>
         </details>
         <div className="technical-readability-panel space-y-12">
@@ -56,14 +56,14 @@ export default function S3Amoled() {
             <div className="mt-6">
               {section.id === 'navigation' && <NavigationDemo copy={section.visual} />}
               {section.id === 'handoff' && <><ol className="story-steps" aria-label="Battle replay sequence"><li>1. My request</li><li>2. The battle</li><li>3. The result</li></ol><StarterSelectionCapture className="story-capture" /></>}
-              {section.id === 'grain' && <><GrainCapture className="story-capture" /><details className="story-detail"><summary>Look closer at the play area</summary><p className="text-sm text-muted my-3">Enlarged still from the same computer-rendered capture. Scroll to inspect the details.</p><div className="story-zoom"><img src="/media/s3-amoled/grain-bounce-off-on-catch-v4-poster.png" alt="Enlarged Grain capture, including the play area and its controls." /></div></details></>}
+              {section.id === 'grain' && <><GrainCapture className="story-capture" /><details className="story-detail"><summary className="tui-summary"><span className="tui-disclosure" aria-hidden="true" /><span>Look closer at the play area</span></summary><p className="text-sm text-muted my-3">Enlarged still from the same computer-rendered capture. Scroll to inspect the details.</p><div className="story-zoom"><img src="/media/s3-amoled/grain-bounce-off-on-catch-v4-poster.png" alt="Enlarged Grain capture, including the play area and its controls." /></div></details></>}
               {section.id === 'corners' ? <CornerDemo /> : <SectionVisual id={section.id} />}
             </div>
           </section>)}
           <footer className="case-study-section">
             <p className="case-study-copy">{copy.closing}</p>
             <Link className="tui-link-chip mt-5 inline-flex" to="/projects/omalo">explore omalo →</Link>
-            <details className="story-detail"><summary>Current limits and source</summary><p className="case-study-copy mt-3">Gameplay goals can fail. Full autonomous completion of Pokémon Emerald has not been established. The clips identify how they were captured; the diagrams explain the current design. A source release will be linked here when it is ready.</p></details>
+            <details className="story-detail"><summary className="tui-summary"><span className="tui-disclosure" aria-hidden="true" /><span>Current limits and source</span></summary><p className="case-study-copy mt-3">Gameplay goals can fail. Full autonomous completion of Pokémon Emerald has not been established. The clips identify how they were captured; the diagrams explain the current design. A source release will be linked here when it is ready.</p></details>
           </footer>
         </div>
       </article>

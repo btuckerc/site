@@ -53,7 +53,8 @@
 }
 
 .starter-capture-note { margin-top: .75rem; font-size: .68rem; line-height: 1.7; color: inherit; }
-.starter-capture-note summary { cursor: pointer; text-decoration: underline; text-underline-offset: .2em; }
+.starter-capture-note summary { cursor: pointer; }
+.starter-capture-note-label { text-decoration: underline; text-underline-offset: .2em; }
 .starter-capture-note p { margin-top: .5rem; max-width: 60ch; }
 
 .grain-capture .starter-capture-media { max-width: 15rem; margin-inline: auto; }

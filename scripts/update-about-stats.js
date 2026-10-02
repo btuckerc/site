@@ -11,7 +11,14 @@ for (const key of allowed) {
   if (typeof about[key] !== 'string' || !about[key].trim()) throw new Error(`Missing reviewed About field: ${key}`)
 }
 const projects = JSON.parse(readFileSync(new URL('../data/projects.json', import.meta.url), 'utf8'))
-if (projects.some(project => project.visibility !== 'public' || project.source !== 'GitHub public' || Object.hasOwn(project, 'verified'))) {
-  throw new Error('Project data must contain reviewed public records without raw verification notes.')
+// "GitHub public" records link to a public repository. "local" records describe
+// unpublished work by name, blurb and stack only; "SoundCloud" records link
+// published music. Neither may link a repository.
+const isReviewedRecord = project =>
+  project.visibility === 'public' &&
+  !Object.hasOwn(project, 'verified') &&
+  (project.source === 'GitHub public' || (['local', 'SoundCloud'].includes(project.source) && !project.links?.github))
+if (!projects.every(isReviewedRecord)) {
+  throw new Error('Project data must contain reviewed records without raw verification notes; only "GitHub public" records may link a repository.')
 }
 console.log('Reviewed public content structure validated. No statistics collected or files rewritten.')

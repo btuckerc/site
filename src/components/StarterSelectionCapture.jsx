@@ -33,6 +33,7 @@ export const GameCapture = ({
   title = 'Defeat the Zigzagoon',
   captureNote = 'The battle and Luna’s response are real. This replay shows them on a computer using the device’s actual interface. It doesn’t include a recording of the device or a voice command.',
   className = '',
+  showToggle = true,
 }) => {
   const captionId = useId()
   const videoRef = useRef(null)
@@ -276,26 +277,30 @@ export const GameCapture = ({
       </div>
       <figcaption id={captionId} className="starter-capture-caption">
         <span>{caption}</span>
-        <span className="starter-capture-actions">
-          <button
-            type="button"
-            className="starter-capture-toggle"
-            onClick={togglePlayback}
-            aria-label={`${isPlaying ? 'Pause' : 'Play'} ${title.toLowerCase()} capture`}
-            aria-pressed={isPlaying}
-          >
-            {isPlaying ? 'pause' : 'play'}
-          </button>
-          {downloadSrc && (
-            <a href={downloadSrc} download className="starter-capture-download">
-              {downloadLabel}
-            </a>
-          )}
-        </span>
+        {(showToggle || downloadSrc) && (
+          <span className="starter-capture-actions">
+            {showToggle && (
+              <button
+                type="button"
+                className="starter-capture-toggle"
+                onClick={togglePlayback}
+                aria-label={`${isPlaying ? 'Pause' : 'Play'} ${title.toLowerCase()} capture`}
+                aria-pressed={isPlaying}
+              >
+                {isPlaying ? 'pause' : 'play'}
+              </button>
+            )}
+            {downloadSrc && (
+              <a href={downloadSrc} download className="starter-capture-download">
+                {downloadLabel}
+              </a>
+            )}
+          </span>
+        )}
       </figcaption>
       {captureNote && (
         <details className="starter-capture-note">
-          <summary>about this capture</summary>
+          <summary className="tui-summary"><span className="tui-disclosure" aria-hidden="true" /><span className="starter-capture-note-label">about this capture</span></summary>
           <p>{captureNote}</p>
         </details>
       )}

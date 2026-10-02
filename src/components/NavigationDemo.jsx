@@ -63,6 +63,6 @@ export default function NavigationDemo({ copy }) {
     <div className="route-metrics" aria-label={copy.metricsLabel}><div><strong>{result.path.length ? result.path.length - 1 : '—'}</strong><span>{copy.steps}</span></div><div><strong>{result.path.length ? result.grass : '—'}</strong><span>{copy.grass}</span></div><div><strong>{result.path.length ? result.risk : '—'}</strong><span>{copy.risk}</span></div></div>
     <p role="status" className="navigation-result">{result.path.length ? result.battleFallback ? copy.battleResult : copy.explanations[task] : copy.blocked}</p>
     {result.path.length > 0 && <label className="story-slider route-scrubber">{copy.scrub}<input type="range" min="0" max={result.path.length - 1} value={progress} onChange={e => setProgress(Number(e.target.value))} /></label>}
-    <details className="story-detail"><summary>{copy.detailsTitle}</summary><p>{copy.caption}</p><p>{copy.limits}</p><a href={map.source} target="_blank" rel="noreferrer">{copy.credit}</a></details>
+    <details className="story-detail"><summary className="tui-summary"><span className="tui-disclosure" aria-hidden="true" /><span>{copy.detailsTitle}</span></summary><p>{copy.caption}</p><p>{copy.limits}</p><a href={map.source} target="_blank" rel="noreferrer">{copy.credit}</a></details>
   </figure>
 }

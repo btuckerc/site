@@ -17,7 +17,7 @@ Add only an authored, independently reviewed public project. Verify its destinat
 }
 ```
 
-Use the current records for the component schema. Omit unavailable demo, code and image links. State when source is upstream or work is historical. Do not include raw verification notes, internal/local inventory, private repository names, local paths, operational endpoints, credentials, device/save identifiers, inferred activity metrics or unapproved professional claims. Keep private source separately, outside every public build input. Validate both the rendered interface and downloaded output.
+Use the current records for the component schema. `source` is `"GitHub public"` (links a public repository), `"local"` (unpublished work shown with a `local` label; describe it by name, blurb, stack and features, with no repository link) or `"SoundCloud"` (published music). Omit unavailable demo, code and image links. State when source is upstream or work is historical. Do not include raw verification notes, internal/local inventory, private repository names, local paths, operational endpoints, credentials, device/save identifiers, inferred activity metrics or unapproved professional claims. Keep private source separately, outside every public build input. Validate both the rendered interface and downloaded output.
 
 Optional `media` shows a looping muted preview at the top of the expanded card. Convert GIFs to H.264 MP4 plus a PNG poster under `public/media/<project-id>/`:
 

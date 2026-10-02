@@ -12,37 +12,16 @@ import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import CloseButton from './components/CloseButton'
 import RouteErrorBoundary from './components/RouteErrorBoundary'
+import { routeLoaders } from './routeLoaders'
 
-// Lazy load pages for better performance
-const loadHomePage = () => import('./pages/Home')
-const loadAboutPage = () => import('./pages/About')
-const loadProjectsPage = () => import('./pages/Projects')
-const loadOmaloPage = () => import('./pages/Omalo')
-const loadS3AmoledPage = () => import('./pages/S3Amoled')
-const loadContactPage = () => import('./pages/Contact')
-const loadFlippingSevenPrivacyPage = () => import('./pages/FlippingSevenPrivacy')
-const loadHerdwickPrivacyPage = () => import('./pages/HerdwickPrivacy')
-
-const Home = lazy(loadHomePage)
-const About = lazy(loadAboutPage)
-const Projects = lazy(loadProjectsPage)
-const Omalo = lazy(loadOmaloPage)
-const S3Amoled = lazy(loadS3AmoledPage)
-const Contact = lazy(loadContactPage)
-const FlippingSevenPrivacy = lazy(loadFlippingSevenPrivacyPage)
-const HerdwickPrivacy = lazy(loadHerdwickPrivacyPage)
-
-const PageLoader = () => (
-  <div
-    className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6"
-    role="status"
-    aria-live="polite"
-  >
-    <span className="font-mono text-xs uppercase tracking-[0.16em] text-muted">
-      loading page…
-    </span>
-  </div>
-)
+const Home = lazy(routeLoaders['/'])
+const About = lazy(routeLoaders['/about'])
+const Projects = lazy(routeLoaders['/projects'])
+const Omalo = lazy(routeLoaders['/projects/omalo'])
+const S3Amoled = lazy(routeLoaders['/projects/s3-amoled'])
+const Contact = lazy(routeLoaders['/contact'])
+const FlippingSevenPrivacy = lazy(routeLoaders['/privacy/flipping-seven-calculator'])
+const HerdwickPrivacy = lazy(routeLoaders['/privacy/herdwick'])
 
 function AppContent() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
@@ -105,7 +84,7 @@ function AppContent() {
             </div>
           )}
           <RouteErrorBoundary resetKey={location.pathname}>
-            <Suspense fallback={<PageLoader />}>
+            <Suspense fallback={null}>
               <AnimatePresence mode="wait">
                 <Routes>
                   <Route path="/" element={<Home />} />

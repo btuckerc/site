@@ -39,14 +39,6 @@ const HighlightedText = ({ text, highlightConfig }) => {
 const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, searchTerms = [] }) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const metaBadges = useMemo(() => {
-    const badges = []
-    if (project.visibility) badges.push(project.visibility)
-    else if (project.source) badges.push(project.source)
-    if (project.activity) badges.push(project.activity)
-    return badges
-  }, [project.activity, project.source, project.visibility])
-
   const validLinks = useMemo(
     () => Object.entries(project.links || {}).filter(([, url]) => Boolean(url)),
     [project.links]
@@ -55,84 +47,47 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
   const matchedFields = searchMeta?.matchedFields?.filter(Boolean) || []
   const highlightConfig = useMemo(() => createHighlightConfig(searchTerms), [searchTerms])
 
-  // Show expandable arrow only if there's additional content
-  const hasExpandableContent = 
-    project.overview || 
+  const hasExpandableContent =
+    project.overview ||
     project.media ||
-    (project.stack && project.stack.length > 0) || 
-    (project.features && project.features.length > 0) || 
+    (project.stack && project.stack.length > 0) ||
+    (project.features && project.features.length > 0) ||
     validLinks.length > 0
 
   return (
-    <div className={`tui-panel tui-project-card border border-line bg-card-bg p-4 font-mono${isExpanded ? ' is-open' : ''}`}>
-      {/* Header - always visible */}
+    <li className={`tui-project-row font-mono${isExpanded ? ' is-open' : ''}`}>
       <button
         type="button"
         onClick={() => hasExpandableContent && setIsExpanded(!isExpanded)}
-        className="tui-project-trigger w-full min-w-0 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+        className="tui-project-trigger"
         disabled={!hasExpandableContent}
         aria-expanded={hasExpandableContent ? isExpanded : undefined}
         aria-controls={hasExpandableContent ? contentId : undefined}
         {...focusProps}
       >
-        <div className="flex min-w-0 flex-row items-start justify-between gap-3 mb-3">
-          <div className="min-w-0 flex-1 flex items-start gap-2">
-            {hasExpandableContent && (
-              <span className="tui-project-chevron text-sm leading-[1.35] mt-0.5" aria-hidden="true">
-                ▶
-              </span>
-            )}
-            <div className="min-w-0 flex-1">
-              <h3 className="tui-project-text text-base font-bold text-fg leading-snug sm:text-lg">
-                <HighlightedText text={project.title} highlightConfig={highlightConfig} />
-              </h3>
-              {project.fork && (
-                <span className="text-xs text-muted border border-line px-2 py-0.5 inline-block mt-1">forked</span>
-              )}
-              {metaBadges.length > 0 && (
-                <div className="flex flex-nowrap overflow-hidden gap-2 mt-2">
-                  {metaBadges.map((badge, index) => (
-                    <span
-                      key={`${badge}-${index}`}
-                      className="text-[0.7rem] leading-none text-muted border border-line px-2 py-1"
-                    >
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-          <span className="text-sm text-accent shrink-0">{project.year}</span>
-        </div>
+        {hasExpandableContent ? (
+          <span className="tui-disclosure tui-project-mark" aria-hidden="true" />
+        ) : (
+          <span className="tui-project-mark" aria-hidden="true" />
+        )}
+        <span className="tui-project-title">
+          <HighlightedText text={project.title} highlightConfig={highlightConfig} />
+          {project.fork && <span className="tui-project-label">fork</span>}
+          {project.source === 'local' && <span className="tui-project-label">local</span>}
+        </span>
         {project.blurb && (
-          <p className="tui-project-text text-xs text-muted leading-relaxed mb-3 line-clamp-2 sm:text-sm">
+          <span className="tui-project-blurb">
             <HighlightedText text={project.blurb} highlightConfig={highlightConfig} />
-          </p>
+          </span>
         )}
+        <span className="tui-project-year">{project.year}</span>
         {matchedFields.length > 0 && (
-          <div className="tui-result-meta mb-3 text-[0.72rem] leading-relaxed text-muted">
+          <span className="tui-project-match tui-result-meta">
             <span className="text-accent">match</span> {matchedFields.join(' · ')}
-          </div>
+          </span>
         )}
-        <div className="tui-project-text text-sm text-muted min-w-0">
-          {project.tags && project.tags.length > 0 ? (
-            <>
-              {project.tags.slice(0, 3).map((tag, index) => (
-                <Fragment key={tag}>
-                  {index > 0 && <span> · </span>}
-                  <HighlightedText text={tag} highlightConfig={highlightConfig} />
-                </Fragment>
-              ))}
-              {project.tags.length > 3 && ` · +${project.tags.length - 3}`}
-            </>
-          ) : (
-            <span className="text-muted/50">no tags</span>
-          )}
-        </div>
       </button>
 
-      {/* Expanded content */}
       <AnimatePresence initial={false}>
         {isExpanded && (
           <motion.div
@@ -142,84 +97,86 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -3 }}
             transition={{ duration: 0.14, ease: [0.4, 0, 0.2, 1] }}
-            className="mt-4 pt-4 border-t border-line space-y-4 text-sm"
+            className="tui-project-detail"
           >
-          {project.media && (
-            <GameCapture
-              className="project-capture"
-              src={project.media.video}
-              poster={project.media.poster}
-              downloadSrc={null}
-              width={project.media.width}
-              height={project.media.height}
-              label="preview"
-              title={project.media.title}
-              alt={project.media.alt}
-              caption={project.media.caption}
-              captureNote={null}
-            />
-          )}
+            {project.media && (
+              <GameCapture
+                className="project-capture"
+                src={project.media.video}
+                poster={project.media.poster}
+                downloadSrc={null}
+                width={project.media.width}
+                height={project.media.height}
+                label="preview"
+                title={project.media.title}
+                alt={project.media.alt}
+                caption={project.media.caption}
+                captureNote={null}
+              />
+            )}
 
-          {project.overview && (
-            <div>
-              <div className="text-accent mb-2 font-semibold">overview</div>
-              <div className="text-muted leading-relaxed">
-                <HighlightedText text={project.overview} highlightConfig={highlightConfig} />
-              </div>
-            </div>
-          )}
+            <dl className="tui-project-facts">
+              {project.overview && (
+                <div className="tui-project-fact">
+                  <dt>overview</dt>
+                  <dd>
+                    <HighlightedText text={project.overview} highlightConfig={highlightConfig} />
+                  </dd>
+                </div>
+              )}
 
-          {project.stack && project.stack.length > 0 && (
-            <div>
-              <div className="text-accent mb-2 font-semibold">stack</div>
-              <div className="text-muted">
-                {project.stack.map((tech, index) => (
-                  <Fragment key={tech}>
-                    {index > 0 && <span>, </span>}
-                    <HighlightedText text={tech} highlightConfig={highlightConfig} />
-                  </Fragment>
-                ))}
-              </div>
-            </div>
-          )}
+              {project.stack && project.stack.length > 0 && (
+                <div className="tui-project-fact">
+                  <dt>stack</dt>
+                  <dd>
+                    {project.stack.map((tech, index) => (
+                      <Fragment key={tech}>
+                        {index > 0 && ', '}
+                        <HighlightedText text={tech} highlightConfig={highlightConfig} />
+                      </Fragment>
+                    ))}
+                  </dd>
+                </div>
+              )}
 
-          {project.features && project.features.length > 0 && (
-            <div>
-              <div className="text-accent mb-2 font-semibold">features</div>
-              <div className="space-y-1">
-                {project.features.map((feature, idx) => (
-                  <div key={idx} className="text-muted">
-                    · <HighlightedText text={feature} highlightConfig={highlightConfig} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+              {project.features && project.features.length > 0 && (
+                <div className="tui-project-fact">
+                  <dt>features</dt>
+                  <dd>
+                    <ul className="tui-project-features">
+                      {project.features.map((feature) => (
+                        <li key={feature}>
+                          <HighlightedText text={feature} highlightConfig={highlightConfig} />
+                        </li>
+                      ))}
+                    </ul>
+                  </dd>
+                </div>
+              )}
 
-
-
-          {validLinks.length > 0 && (
-            <div className="border-t border-line pt-4 mt-4">
-              <div className="text-accent mb-3 font-semibold">links</div>
-              <div className="flex flex-wrap gap-3">
-                {validLinks.map(([key, url]) => (
-                  <a
-                    key={key}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="tui-link-chip"
-                  >
-                    {key} →
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
+              {validLinks.length > 0 && (
+                <div className="tui-project-fact">
+                  <dt>links</dt>
+                  <dd className="tui-project-links">
+                    {validLinks.map(([key, url]) => (
+                      <a
+                        key={key}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="tui-link-chip"
+                      >
+                        {key} →
+                      </a>
+                    ))}
+                  </dd>
+                </div>
+              )}
+            </dl>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </li>
   )
 }
 

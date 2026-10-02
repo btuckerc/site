@@ -1592,9 +1592,8 @@ input[type='search']::-webkit-search-results-decoration {
 
 .tui-result-count {
   display: inline-block;
-  margin-left: auto;
+  flex: 1 1 auto;
   min-width: 0;
-  max-width: min(46vw, 28rem);
   overflow: hidden;
   color: color-mix(in srgb, var(--muted) 88%, var(--fg) 12%);
   line-height: 1.35;
@@ -1602,7 +1601,13 @@ input[type='search']::-webkit-search-results-decoration {
   white-space: nowrap;
 }
 
-.tui-filter-button,
+.tui-sort-group {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  gap: 0.15rem;
+}
+
 .tui-filter-option,
 .tui-chip {
   appearance: none;
@@ -1610,45 +1615,8 @@ input[type='search']::-webkit-search-results-decoration {
   font: inherit;
 }
 
-.tui-filter-button {
-  display: inline-flex;
-  min-height: 2.25rem;
-  min-width: 6.15rem;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  border: 1px solid color-mix(in srgb, var(--line) 82%, var(--accent) 18%);
-  background: color-mix(in srgb, var(--bg-elev) 58%, var(--bg) 42%);
-  color: var(--fg);
-  line-height: 1;
-  padding: 0 0.7rem;
-  transition:
-    border-color var(--motion-fast) var(--motion-ease-standard),
-    background-color var(--motion-fast) var(--motion-ease-standard),
-    box-shadow var(--motion-fast) var(--motion-ease-standard),
-    color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.tui-filter-button:hover,
-.tui-filter-button:focus-visible {
-  border-color: color-mix(in srgb, var(--accent) 52%, var(--line));
-  background: color-mix(in srgb, var(--card-bg) 84%, var(--accent) 10%);
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent),
-    0 14px 32px -30px var(--accent);
-  color: var(--fg);
-}
-
-
-.tui-filter-button-icon {
-  color: var(--muted);
-  font-size: 0.86rem;
-  line-height: 1;
-}
-
 .tui-refine-label {
-  min-width: 3.3rem;
+  margin-right: 0.35rem;
   color: var(--muted);
   font-size: 0.78rem;
   line-height: 1;
@@ -1704,22 +1672,6 @@ input[type='search']::-webkit-search-results-decoration {
   outline: none;
 }
 
-.tui-refine-drawer {
-  animation: tui-refine-in var(--motion-fast) var(--motion-ease-standard);
-}
-
-@media (max-width: 640px) {
-  .tui-filter-bar {
-    align-items: flex-start;
-  }
-
-  .tui-result-count {
-    flex-basis: 100%;
-    margin-left: 0;
-    max-width: 100%;
-  }
-}
-
 .tui-search-mark {
   color: var(--fg);
   background: color-mix(in srgb, var(--accent) 18%, transparent);
@@ -1732,21 +1684,77 @@ input[type='search']::-webkit-search-results-decoration {
   padding-left: 0.65rem;
 }
 
-.tui-project-text {
-  overflow-wrap: anywhere;
-  word-break: break-word;
+/* Shared disclosure mark: a bracketed plus that folds into a minus. The sign is
+ * drawn with gradients so it stays centred whichever font is selected. */
+.tui-disclosure {
+  --tui-disclosure-sign: var(--accent);
+  display: inline-flex;
+  width: max-content;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.72em;
+  color: color-mix(in srgb, var(--muted) 82%, transparent);
+  line-height: 1;
+  white-space: nowrap;
+  background:
+    linear-gradient(var(--tui-disclosure-sign), var(--tui-disclosure-sign)) 50% 52% / 0.56em 2px no-repeat,
+    linear-gradient(var(--tui-disclosure-sign), var(--tui-disclosure-sign)) 50% 52% / 2px 0.56em no-repeat;
+  transition:
+    background-size var(--motion-fast) var(--motion-ease-standard),
+    color var(--motion-fast) var(--motion-ease-standard);
 }
 
-.tui-project-card {
+.tui-disclosure::before {
+  content: '[';
+}
+
+.tui-disclosure::after {
+  content: ']';
+}
+
+[aria-expanded='true'] .tui-disclosure,
+details[open] > summary .tui-disclosure {
+  color: color-mix(in srgb, var(--accent) 64%, var(--muted));
+  background-size: 0.56em 2px, 2px 0;
+}
+
+:is(button, summary):hover .tui-disclosure,
+:is(button, summary):focus-visible .tui-disclosure {
+  color: var(--fg);
+}
+
+.tui-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  list-style: none;
+}
+
+.tui-summary::-webkit-details-marker {
+  display: none;
+}
+
+.tui-project-list {
+  border: 1px solid var(--line);
+  background: var(--card-fill);
+  box-shadow: 0 18px 54px -48px rgba(0, 0, 0, 0.82);
+}
+
+.tui-project-row {
   position: relative;
+  transition: background-color var(--motion-fast) var(--motion-ease-standard);
 }
 
-.tui-project-card::before {
+.tui-project-row + .tui-project-row {
+  border-top: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.tui-project-row::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0.7rem;
-  bottom: 0.7rem;
+  left: -1px;
+  top: 0.4rem;
+  bottom: 0.4rem;
   width: 2px;
   background: var(--accent);
   opacity: 0;
@@ -1757,14 +1765,34 @@ input[type='search']::-webkit-search-results-decoration {
     transform var(--motion-fast) var(--motion-ease-standard);
 }
 
-.tui-project-card:hover::before,
-.tui-project-card:focus-within::before,
-.tui-project-card.is-open::before {
+.tui-project-row:hover,
+.tui-project-row:focus-within,
+.tui-project-row.is-open {
+  background: color-mix(in srgb, var(--card-fill) 92%, var(--accent) 4%);
+}
+
+.tui-project-row:hover::before,
+.tui-project-row:focus-within::before,
+.tui-project-row.is-open::before {
   opacity: 1;
   transform: scaleY(1);
 }
 
 .tui-project-trigger {
+  display: grid;
+  width: 100%;
+  min-height: 2.75rem;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  grid-template-areas:
+    'mark title year'
+    '. blurb blurb'
+    '. match match';
+  align-items: baseline;
+  gap: 0.15rem 0.6rem;
+  padding: 0.7rem 0.9rem 0.7rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-align: left;
   cursor: pointer;
 }
 
@@ -1772,18 +1800,149 @@ input[type='search']::-webkit-search-results-decoration {
   cursor: default;
 }
 
-.tui-project-chevron {
-  display: inline-flex;
-  flex-shrink: 0;
-  width: 0.9rem;
-  color: var(--accent);
-  transform: rotate(0deg);
-  transform-origin: 50% 55%;
-  transition: transform var(--motion-fast) var(--motion-ease-standard);
+.tui-project-trigger:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
 }
 
-.tui-project-trigger[aria-expanded='true'] .tui-project-chevron {
-  transform: rotate(90deg);
+.tui-project-mark {
+  grid-area: mark;
+  font-size: 0.8rem;
+}
+
+.tui-project-title {
+  grid-area: title;
+  min-width: 0;
+  color: var(--fg);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.tui-project-label {
+  margin-left: 0.5rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+.tui-project-blurb {
+  display: -webkit-box;
+  grid-area: blurb;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.8rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.tui-project-year {
+  grid-area: year;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tui-project-match {
+  grid-area: match;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.tui-project-row.is-open .tui-project-blurb {
+  display: block;
+}
+
+.tui-project-detail {
+  display: grid;
+  gap: 1rem;
+  padding: 0.35rem 0.9rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+.tui-project-facts {
+  display: grid;
+  max-width: 54rem;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.tui-project-fact {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.tui-project-fact dt {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tui-project-fact dd {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.tui-project-features {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tui-project-features li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.tui-project-features li::before {
+  content: '·';
+  position: absolute;
+  left: 0.3rem;
+  color: var(--accent);
+}
+
+.tui-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-top: 0.15rem;
+}
+
+@media (min-width: 640px) {
+  .tui-project-fact {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .tui-project-trigger {
+    grid-template-columns: 2rem minmax(9rem, 14rem) minmax(0, 1fr) auto;
+    grid-template-areas:
+      'mark title blurb year'
+      '. match match match';
+    column-gap: 1.1rem;
+  }
+
+  .tui-project-title,
+  .tui-project-blurb {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tui-project-row.is-open .tui-project-title,
+  .tui-project-row.is-open .tui-project-blurb {
+    white-space: normal;
+  }
+
+  .tui-project-detail {
+    padding-left: calc(0.75rem + 2rem + 1.1rem);
+  }
 }
 
 .tui-panel {
@@ -1849,21 +2008,9 @@ input[type='search']::-webkit-search-results-decoration {
   background: color-mix(in srgb, var(--bg-elev) 78%, var(--accent) 7%);
 }
 
-@keyframes tui-refine-in {
-  from {
-    opacity: 0;
-    transform: translateY(-0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .tui-action:focus-visible,
 .tui-menu-item:focus-visible,
 .tui-link-chip:focus-visible,
-.tui-filter-button:focus-visible,
 .tui-filter-option:focus-visible,
 .tui-chip:focus-visible {
   border-radius: 0;

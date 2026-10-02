@@ -118,7 +118,7 @@ const OmaloTableOfContents = ({ activeSection }) => {
       </aside>
 
       <details className="story-nav-mobile" ref={mobileNav}>
-        <summary>On this page</summary>
+        <summary className="tui-summary"><span className="tui-disclosure" aria-hidden="true" /><span>On this page</span></summary>
         <nav className="story-section-links" aria-label="Omalo sections">
           {links}
         </nav>

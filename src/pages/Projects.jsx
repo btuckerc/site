@@ -12,11 +12,6 @@ import {
 import projectsData from '../../data/projects.json'
 import PageMeta from '../components/PageMeta'
 
-const filterOptions = [
-  { id: 'all', label: 'all' },
-  { id: 'github', label: 'github' }
-]
-
 const sortOptions = [
   { id: 'featured', label: 'featured' },
   { id: 'recent', label: 'recent' },
@@ -26,16 +21,6 @@ const sortOptions = [
 const projectSearchIndex = createProjectSearchIndex(projectsData)
 
 const getProjectDate = (project, boundary = '12-31') => project.date || `${project.year}-${boundary}`
-
-const matchesSourceFilter = (project, sourceFilter) => {
-  const source = `${project.source || ''} ${project.visibility || ''}`.toLowerCase()
-  switch (sourceFilter) {
-    case 'github':
-      return source.includes('github') || source.includes('public')
-    default:
-      return true
-  }
-}
 
 const sortProjects = (projectResults, sortBy) =>
   [...projectResults].sort((a, b) => {
@@ -60,8 +45,6 @@ const sortProjects = (projectResults, sortBy) =>
 const Projects = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('featured')
-  const [sourceFilter, setSourceFilter] = useState('all')
-  const [areFiltersOpen, setAreFiltersOpen] = useState(false)
   const searchInputRef = useRef(null)
   const location = useLocation()
   const deferredSearchQuery = useDeferredValue(searchQuery)
@@ -83,19 +66,10 @@ const Projects = () => {
     [deferredSearchQuery, searchIndex]
   )
 
-  const filteredProjectResults = useMemo(() => {
-    const scopedResults = allSearchResults.filter(({ project }) => matchesSourceFilter(project, sourceFilter))
-    return isSearching ? scopedResults : sortProjects(scopedResults, sortBy)
-  }, [allSearchResults, isSearching, sortBy, sourceFilter])
-
-  const filterCounts = useMemo(() => {
-    const countSource = isSearching ? allSearchResults.map(({ project }) => project) : projectsData
-
-    return filterOptions.reduce((counts, option) => {
-      counts[option.id] = countSource.filter((project) => matchesSourceFilter(project, option.id)).length
-      return counts
-    }, {})
-  }, [allSearchResults, isSearching])
+  const sortedProjectResults = useMemo(
+    () => (isSearching ? allSearchResults : sortProjects(allSearchResults, sortBy)),
+    [allSearchResults, isSearching, sortBy]
+  )
 
   const suggestions = useMemo(
     () => getProjectSearchSuggestions(searchIndex, deferredSearchQuery, isSearching ? 6 : 8),
@@ -105,8 +79,8 @@ const Projects = () => {
   const searchTerms = useMemo(() => getSearchHighlightTerms(deferredSearchQuery), [deferredSearchQuery])
 
   const projectItems = useMemo(
-    () => filteredProjectResults.map(({ project }) => ({ id: project.id, ...project })),
-    [filteredProjectResults]
+    () => sortedProjectResults.map(({ project }) => ({ id: project.id, ...project })),
+    [sortedProjectResults]
   )
 
   const { getItemProps } = useRovingFocus('projects-list', projectItems)
@@ -137,33 +111,8 @@ const Projects = () => {
   }
 
   const resultSummary = isSearching
-    ? `${filteredProjectResults.length} result${filteredProjectResults.length === 1 ? '' : 's'} for "${deferredSearchQuery}"`
-    : `${filteredProjectResults.length} project${filteredProjectResults.length === 1 ? '' : 's'}`
-
-  const hasOtherScopeMatches =
-    isSearching && filteredProjectResults.length === 0 && allSearchResults.length > 0 && sourceFilter !== 'all'
-
-  const emptyMessage = isSearching
-    ? `No projects found for "${deferredSearchQuery}"${sourceFilter !== 'all' ? ` in ${sourceFilter}` : ''}.`
-    : `No projects found in ${sourceFilter}.`
-
-  const renderFilterButton = (option) => (
-    <button
-      key={option.id}
-      type="button"
-      onClick={() => setSourceFilter(option.id)}
-      aria-pressed={sourceFilter === option.id}
-      className={`tui-filter-option ${
-        sourceFilter === option.id
-          ? 'tui-filter-option-active'
-          : ''
-      }`}
-      aria-label={`${option.label}, ${filterCounts[option.id] || 0} projects`}
-    >
-      <span>{option.label}</span>
-      <span className="text-[0.68rem] text-muted">{filterCounts[option.id] || 0}</span>
-    </button>
-  )
+    ? `${sortedProjectResults.length} result${sortedProjectResults.length === 1 ? '' : 's'} for "${deferredSearchQuery}"`
+    : `${sortedProjectResults.length} project${sortedProjectResults.length === 1 ? '' : 's'}`
 
   const renderSortButton = (option) => (
     <button
@@ -171,13 +120,9 @@ const Projects = () => {
       type="button"
       onClick={() => setSortBy(option.id)}
       aria-pressed={sortBy === option.id}
-      className={`tui-filter-option ${
-        sortBy === option.id
-          ? 'tui-filter-option-active'
-          : ''
-      }`}
+      className={`tui-filter-option${sortBy === option.id ? ' tui-filter-option-active' : ''}`}
     >
-      <span>{option.label}</span>
+      {option.label}
     </button>
   )
 
@@ -191,17 +136,12 @@ const Projects = () => {
       <div className="projects-page tui-page-shell min-h-svh pb-28 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="tui-page-header mb-6">
-          <div className="min-w-0 text-center">
-            <h1 className="tui-page-title text-xl font-bold text-fg mb-2 font-mono">
-              <span className="text-accent">[</span> projects <span className="text-accent">]</span>
-            </h1>
-            <p className="mx-auto max-w-2xl text-pretty text-muted text-xs font-mono leading-relaxed">
-              A few projects to start with, followed by the rest of my public work.
-            </p>
-          </div>
+          <h1 className="tui-page-title text-center text-xl font-bold text-fg font-mono">
+            <span className="text-accent">[</span> projects <span className="text-accent">]</span>
+          </h1>
         </div>
 
-        <search className="tui-control-panel mb-6 block border border-line bg-card-bg p-3 font-mono" aria-label="Projects">
+        <search className="tui-control-panel mb-4 block border border-line bg-card-bg p-3 font-mono" aria-label="Projects">
           <div className="tui-search-field">
             <label htmlFor="project-search" className="sr-only">Find projects</label>
             <span className="tui-search-prefix" aria-hidden="true">/</span>
@@ -215,7 +155,7 @@ const Projects = () => {
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
               onKeyDown={handleSearchKeyDown}
-              placeholder="movie seats, dotfiles, Swift iOS..."
+              placeholder="macos, menu bar, python, agents…"
               data-search-input
               aria-describedby="projects-results-summary"
               autoComplete="off"
@@ -235,20 +175,6 @@ const Projects = () => {
           </div>
 
           <div className="tui-filter-bar mt-2 text-xs text-muted">
-            <button
-              type="button"
-              onClick={() => setAreFiltersOpen((isOpen) => !isOpen)}
-              aria-expanded={areFiltersOpen}
-              aria-controls="project-filter-panel"
-              aria-label={`${areFiltersOpen ? 'Hide' : 'Show'} project filters`}
-              className="tui-filter-button"
-            >
-              <span>filters</span>
-              <span className="tui-filter-button-icon" aria-hidden="true">
-                {areFiltersOpen ? '-' : '+'}
-              </span>
-            </button>
-
             <span
               id="projects-results-summary"
               className="tui-result-count"
@@ -257,6 +183,13 @@ const Projects = () => {
             >
               {resultSummary}
             </span>
+
+            {!isSearching && (
+              <div className="tui-sort-group" role="group" aria-label="Sort projects">
+                <span className="tui-refine-label" aria-hidden="true">sort</span>
+                {sortOptions.map(renderSortButton)}
+              </div>
+            )}
           </div>
 
           {isSearching && suggestions.length > 0 && (
@@ -274,33 +207,11 @@ const Projects = () => {
               ))}
             </div>
           )}
-
-          {areFiltersOpen && (
-            <div id="project-filter-panel" className="tui-refine-drawer mt-3 border-t border-line/80 pt-3">
-              <div className="flex flex-wrap items-center gap-2 text-sm">
-                <span className="tui-refine-label">source</span>
-                {filterOptions.map(renderFilterButton)}
-              </div>
-
-              {!isSearching && (
-                <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
-                  <span className="tui-refine-label">sort</span>
-                  {sortOptions.map(renderSortButton)}
-                </div>
-              )}
-
-              {isSearching && allSearchResults.length !== filteredProjectResults.length && sourceFilter !== 'all' && (
-                <div className="mt-2 text-xs text-muted">
-                  {allSearchResults.length} match{allSearchResults.length === 1 ? '' : 'es'} across all scopes.
-                </div>
-              )}
-            </div>
-          )}
         </search>
 
-        {filteredProjectResults.length > 0 ? (
-          <div className="space-y-3 mb-12">
-            {filteredProjectResults.map(({ project, searchMeta }, index) => (
+        {sortedProjectResults.length > 0 ? (
+          <ul className="tui-project-list mb-10" aria-label="Projects">
+            {sortedProjectResults.map(({ project, searchMeta }, index) => (
               <ProjectCard
                 key={project.id}
                 project={project}
@@ -309,7 +220,7 @@ const Projects = () => {
                 focusProps={getItemProps(project, index)}
               />
             ))}
-          </div>
+          </ul>
         ) : (
           <motion.div
             initial={{ opacity: 0 }}
@@ -318,19 +229,10 @@ const Projects = () => {
             className="tui-panel border border-line bg-card-bg px-5 py-10 text-center mb-12 font-mono"
           >
             <div className="text-muted">
-              <div className="text-sm">{emptyMessage}</div>
-              <div className="mt-2 text-xs">Try fewer words, a different stack, or the GitHub scope.</div>
-              <div className="mt-5 flex flex-wrap justify-center gap-2">
-                {hasOtherScopeMatches && (
-                  <button
-                    type="button"
-                    onClick={() => setSourceFilter('all')}
-                    className="tui-link-chip"
-                  >
-                    show all {allSearchResults.length} match{allSearchResults.length === 1 ? '' : 'es'}
-                  </button>
-                )}
-                {searchQuery && (
+              <div className="text-sm">No projects found for &quot;{deferredSearchQuery}&quot;.</div>
+              <div className="mt-2 text-xs">Try fewer words or a different stack.</div>
+              {searchQuery && (
+                <div className="mt-5 flex justify-center">
                   <button
                     type="button"
                     onClick={clearSearch}
@@ -338,13 +240,13 @@ const Projects = () => {
                   >
                     clear search
                   </button>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
 
-        {(!isSearching || filteredProjectResults.length > 0) && (
+        {(!isSearching || sortedProjectResults.length > 0) && (
           <div className="border-t border-line pt-6">
             <div className="text-xs font-mono text-muted">
               <div className="mb-2">

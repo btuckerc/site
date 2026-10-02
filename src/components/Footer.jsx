@@ -307,7 +307,7 @@ const Footer = ({ onCommandPaletteToggle, isCommandPaletteOpen = false }) => {
             >
               <span className="tui-action-content flex items-center gap-1">
                 <span>links</span>
-                <span className="text-accent">{isSocialMenuOpen ? '▼' : '▶'}</span>
+                <span className="tui-disclosure" aria-hidden="true" />
               </span>
             </button>
           </div>
