@@ -4,6 +4,9 @@ import { GameCapture } from './StarterSelectionCapture'
 
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
+// Links back into this site stay in the current tab; everything else opens a new one.
+const isSameSite = (url) => /^https:\/\/btuckerc\.dev(\/|$)/.test(url)
+
 const createHighlightConfig = (terms = []) => {
   const highlightTerms = terms
     .filter((term) => term && term.length >= 3)
@@ -162,11 +165,14 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
                       <a
                         key={key}
                         href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        {...(isSameSite(url) ? {} : {
+                          target: '_blank',
+                          rel: 'noopener noreferrer',
+                          'aria-describedby': 'new-tab-note'
+                        })}
                         className="tui-link-chip"
                       >
-                        {key} →
+                        {key}
                       </a>
                     ))}
                   </dd>

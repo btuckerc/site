@@ -121,7 +121,7 @@ const ContactForm = () => {
                 onClick={resetForm}
                 className="text-base text-accent hover:text-fg transition-colors"
               >
-                send another →
+                send another
               </button>
             </div>
           ) : submitStatus === 'error' ? (
@@ -135,7 +135,7 @@ const ContactForm = () => {
                 onClick={resetForm}
                 className="text-base text-accent hover:text-fg transition-colors"
               >
-                try again →
+                try again
               </button>
             </div>
           ) : (
@@ -227,7 +227,7 @@ const ContactForm = () => {
                   disabled={isSubmitting}
                   className="tui-contact-submit flex-1 px-4 py-3 border border-accent text-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-base font-medium"
                 >
-                  {isSubmitting ? 'sending...' : 'send →'}
+                  {isSubmitting ? 'sending...' : 'send'}
                 </button>
 
                 <button

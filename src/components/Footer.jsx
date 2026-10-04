@@ -193,6 +193,7 @@ const Footer = ({ onCommandPaletteToggle, isCommandPaletteOpen = false }) => {
                     rel="noopener noreferrer"
                     className="tui-menu-item gap-2"
                     aria-label={`Visit ${link.name} profile`}
+                    aria-describedby="new-tab-note"
                     onClick={() => closeSocialMenu(false)}
                   >
                     {showIcons ? (
@@ -262,6 +263,7 @@ const Footer = ({ onCommandPaletteToggle, isCommandPaletteOpen = false }) => {
                   rel="noopener noreferrer"
                   className="tui-action flex min-h-8 min-w-10 items-center justify-center px-3 py-1.5"
                   aria-label={`Visit ${link.name} profile`}
+                  aria-describedby="new-tab-note"
                 >
                   <span className="tui-action-content text-muted inline-flex items-center justify-center">
                     {showIcons ? (

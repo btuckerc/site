@@ -31,6 +31,7 @@ const AboutCard = () => (
         className="text-accent underline underline-offset-4"
         target="_blank"
         rel="noopener noreferrer"
+        aria-describedby="new-tab-note"
       >
         Twitch
       </a>{' '}
@@ -43,6 +44,7 @@ const AboutCard = () => (
         className="whitespace-nowrap text-accent underline underline-offset-4"
         target="_blank"
         rel="noopener noreferrer"
+        aria-describedby="new-tab-note"
       >
         The Nuances
       </a>{' '}

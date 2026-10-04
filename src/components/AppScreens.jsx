@@ -13,7 +13,7 @@ export default function AppScreens() {
       <div className="app-screens-grid">
         {screens.map(([file, title, alt]) => (
           <figure key={file}>
-            <a href={`/media/s3-amoled/${file}`} target="_blank" rel="noopener noreferrer" aria-label={`Open ${title.toLowerCase()} screen at full size`}>
+            <a href={`/media/s3-amoled/${file}`} target="_blank" rel="noopener noreferrer" aria-label={`Open ${title.toLowerCase()} screen at full size`} aria-describedby="new-tab-note">
               <img src={`/media/s3-amoled/${file}`} alt={alt} width="368" height="448" loading="lazy" decoding="async" />
             </a>
             <figcaption>{title}</figcaption>

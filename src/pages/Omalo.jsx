@@ -114,7 +114,7 @@ const OmaloTableOfContents = ({ activeSection }) => {
         <nav className="story-section-links" aria-label="Omalo sections">
           {links}
         </nav>
-        <Link to="/projects/s3-amoled" className="story-overview">technical notes ↗</Link>
+        <Link to="/projects/s3-amoled" className="story-overview">technical notes</Link>
       </aside>
 
       <details className="story-nav-mobile" ref={mobileNav}>
@@ -122,7 +122,7 @@ const OmaloTableOfContents = ({ activeSection }) => {
         <nav className="story-section-links" aria-label="Omalo sections">
           {links}
         </nav>
-        <Link to="/projects/s3-amoled" className="story-overview">technical notes ↗</Link>
+        <Link to="/projects/s3-amoled" className="story-overview">technical notes</Link>
       </details>
     </>
   )
@@ -202,7 +202,7 @@ const Omalo = () => {
               <span aria-hidden="true">●</span> Prototype
             </p>
             <div className="omalo-actions">
-              <a href="#pokemon" className="omalo-action omalo-action-primary">see Pokémon →</a>
+              <a href="#pokemon" className="omalo-action omalo-action-primary">see Pokémon</a>
               <Link to="/projects/s3-amoled" className="omalo-action">technical notes</Link>
             </div>
           </div>
@@ -264,13 +264,13 @@ const Omalo = () => {
                 <h2 id="omalo-name-title" className="omalo-section-title">How omalo got its name</h2>
                 <p className="omalo-copy">
                   I first wanted to call it talos, but that name was taken. Then came talo. I love oma projects like{' '}
-                  <a href="https://omarchy.org/" className="underline underline-offset-4" target="_blank" rel="noopener noreferrer">Omarchy</a>,
+                  <a href="https://omarchy.org/" className="underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Omarchy</a>,
                   {' '}so oma + talo became omalo.
                 </p>
                 <h3 className="mt-7 font-mono text-lg font-semibold">ichor → ichr</h3>
                 <p className="omalo-copy">
                   <code>ichr</code> is short for <em>ichor</em>. In the Greek story of Talos, ichor is the life fluid inside a bronze body. I use that idea as a metaphor for a soul: ichr is the software inside omalo that makes it respond.{' '}
-                  <a href="https://www.greekmythology.com/Myths/Elements/Ichor/ichor.html" className="underline underline-offset-4" target="_blank" rel="noopener noreferrer">A quick read on ichor ↗</a>
+                  <a href="https://www.greekmythology.com/Myths/Elements/Ichor/ichor.html" className="underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">A quick read on ichor</a>
                 </p>
               </div>
               <figure className="omalo-name-diagram" aria-label="The name blends oma with talo">
@@ -282,7 +282,7 @@ const Omalo = () => {
                   </div>
                   <div>
                     <span className="omalo-name-step">the influence</span>
-                    <a href="https://omarchy.org/" target="_blank" rel="noopener noreferrer" className="omalo-name-source">Omarchy ↗</a>
+                    <a href="https://omarchy.org/" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note" className="omalo-name-source">Omarchy</a>
                     <span className="omalo-name-change">→ oma</span>
                   </div>
                 </div>
@@ -300,7 +300,7 @@ const Omalo = () => {
               The detailed project page covers the handoff boundary, rounded tray, and catch-check explanation.
             </p>
           </div>
-          <Link to="/projects/s3-amoled" className="omalo-action omalo-action-primary">open s3-amoled →</Link>
+          <Link to="/projects/s3-amoled" className="omalo-action omalo-action-primary">open s3-amoled</Link>
             </section>
           </div>
         </div>

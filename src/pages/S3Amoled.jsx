@@ -34,14 +34,14 @@ export default function S3Amoled() {
         <aside className="story-nav-desktop" aria-label="On this page">
           <p className="case-study-kicker">On this page</p>
           <nav className="story-section-links" aria-label="Case study sections">{sectionLinks}</nav>
-          <Link className="story-overview" to="/projects/omalo">omalo overview →</Link>
+          <Link className="story-overview" to="/projects/omalo">omalo overview</Link>
         </aside>
       <article className="story-article">
         <header className="case-study-header mb-8">
           <p className="case-study-eyebrow">inside omalo / s3-amoled</p>
           <h1 className="tui-page-title mt-3 max-w-3xl text-3xl font-bold leading-tight sm:text-4xl">{copy.title}</h1>
           <p className="case-study-copy mt-5">{copy.intro}</p>
-          <a className="tui-link-chip mt-4 inline-flex" href="https://tuckercraig.com/DIG101/the-future-of-ai-is-openai/">read my 2017 post on AI and Dota ↗</a>
+          <a className="tui-link-chip mt-4 inline-flex" href="https://tuckercraig.com/DIG101/the-future-of-ai-is-openai/">read my 2017 post on AI and Dota</a>
           <p className="case-study-status mt-4 text-sm text-muted">Prototype · Waveshare ESP32-S3 touch AMOLED</p>
         </header>
         <details className="story-nav-mobile" ref={mobileNav}>
@@ -62,7 +62,7 @@ export default function S3Amoled() {
           </section>)}
           <footer className="case-study-section">
             <p className="case-study-copy">{copy.closing}</p>
-            <Link className="tui-link-chip mt-5 inline-flex" to="/projects/omalo">explore omalo →</Link>
+            <Link className="tui-link-chip mt-5 inline-flex" to="/projects/omalo">explore omalo</Link>
             <details className="story-detail"><summary className="tui-summary"><span className="tui-disclosure" aria-hidden="true" /><span>Current limits and source</span></summary><p className="case-study-copy mt-3">Gameplay goals can fail. Full autonomous completion of Pokémon Emerald has not been established. The clips identify how they were captured; the diagrams explain the current design. A source release will be linked here when it is ready.</p></details>
           </footer>
         </div>

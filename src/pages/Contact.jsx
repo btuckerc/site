@@ -48,33 +48,37 @@ const Contact = () => {
                         href="https://www.linkedin.com/in/tucker-craig/"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block tui-contact-link"
                       >
-                        linkedin →
+                        linkedin
                       </a>
                       <a
                         href="https://github.com/btuckerc"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block tui-contact-link"
                       >
-                        github →
+                        github
                       </a>
                       <a
                         href="https://x.com/btuckercdev"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block tui-contact-link"
                       >
-                        x →
+                        x
                       </a>
                       <a
                         href="https://www.instagram.com/btuckerc.dev/"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block tui-contact-link"
                       >
-                        instagram →
+                        instagram
                       </a>
                     </div>
                   </div>

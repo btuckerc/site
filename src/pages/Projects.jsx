@@ -252,7 +252,7 @@ const Projects = () => {
           <div className="border-t border-line pt-6">
             <div className="text-xs font-mono text-muted">
               <div className="mb-2">
-                <span className="text-accent">▸</span> more public work on <a href="https://github.com/btuckerc" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-fg transition-colors">github →</a>
+                <span className="text-accent">▸</span> more public work on <a href="https://github.com/btuckerc" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note" className="text-accent hover:text-fg transition-colors">github</a>
               </div>
             </div>
           </div>

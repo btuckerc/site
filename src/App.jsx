@@ -126,6 +126,7 @@ function AppContent() {
           aria-atomic="true"
           className="sr-only"
         />
+        <span id="new-tab-note" className="sr-only">Opens in a new tab.</span>
       </div>
     </div>
   )

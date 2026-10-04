@@ -71,6 +71,15 @@ scripts/         maintenance scripts
   `node scripts/render-share-cards.js` (headless Chrome; set `CHROME_BIN`, and
   `CHROME_NO_SANDBOX=1` where the Chrome sandbox is unavailable). Re-run it after
   changing card copy or the featured project list, then commit the JPGs.
+- Link and button labels carry no arrows (`→`, `↗`, `←`). Affordance comes from
+  shape: primary actions use `tui-action tui-home-primary` (accent border, fill),
+  secondary links use `tui-link-chip` (framed, with a `>` prompt that appears
+  in the left gutter on hover/focus), and links inside sentences are underlined
+  accent text. Name the action or destination in the label ("code", "download
+  for mac", "home"). Links that open a new tab add
+  `aria-describedby="new-tab-note"` (the shared screen-reader note in
+  `App.jsx`); links within btuckerc.dev stay in the same tab. Arrows remain
+  only as diagram content (e.g. "ichor → ichr").
 - Generated output under `dist/` is suitable for a static preview; deployment
   remains a separate action.
 

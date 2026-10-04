@@ -42,6 +42,7 @@ const Home = () => {
                   className="text-accent underline underline-offset-4"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-describedby="new-tab-note"
                 >
                   We can fix everything
                 </a>
@@ -54,12 +55,13 @@ const Home = () => {
                   className="whitespace-nowrap text-accent underline underline-offset-4"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-describedby="new-tab-note"
                 >
                   The Nuances
                 </a>{' '}
                 at Davidson.
               </p>
-              <Link to="/about" className="tui-link-chip mt-5 inline-flex">more about me →</Link>
+              <Link to="/about" className="tui-link-chip mt-5 inline-flex">more about me</Link>
             </div>
           </header>
 
@@ -77,7 +79,7 @@ const Home = () => {
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <Link to="/projects/omalo" className="tui-action tui-home-primary inline-flex min-h-11 items-center border border-accent/70 bg-card-bg px-4 py-2 font-mono text-sm text-fg">
-                <span className="tui-action-content">explore omalo →</span>
+                <span className="tui-action-content">explore omalo</span>
               </Link>
               <Link to="/projects/s3-amoled" className="tui-link-chip">technical notes</Link>
             </div>
@@ -123,10 +125,10 @@ const Home = () => {
                 />
               </div>
               <div className="flex flex-wrap items-center gap-3">
-                <a href={herdwick.links['app store']} className="home-app-store-badge" target="_blank" rel="noopener noreferrer">
+                <a href={herdwick.links['app store']} className="home-app-store-badge" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">
                   <img src="/media/app-store-badge.svg" alt="Download Herdwick on the App Store" width="120" height="40" />
                 </a>
-                <a href={herdwick.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer">code ↗</a>
+                <a href={herdwick.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code</a>
               </div>
             </article>
             <article className="home-support-card home-support-stack border border-line/70 bg-card-bg/70 p-5 sm:p-6">
@@ -152,8 +154,8 @@ const Home = () => {
                 showToggle={false}
               />
               <div className="flex flex-wrap items-center gap-3">
-                <a href={dictation.links.download} className="tui-link-chip" target="_blank" rel="noopener noreferrer">download for mac ↗</a>
-                <a href={dictation.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer">code ↗</a>
+                <a href={dictation.links.download} className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">download for mac</a>
+                <a href={dictation.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code</a>
               </div>
             </article>
           </section>
@@ -164,21 +166,21 @@ const Home = () => {
               <h2 className="mt-2 font-mono text-lg font-bold text-fg">Movie-seat ranking</h2>
               <p className="mt-3 text-sm leading-6 text-muted">Small personal tool to find the best seat for a movie every time.</p>
               <div className="mt-5 flex flex-wrap items-center gap-3">
-                <a href="https://movies.angl.gg" className="tui-link-chip" target="_blank" rel="noopener noreferrer">demo ↗</a>
-                <a href="https://github.com/btuckerc/center-seat" className="tui-link-chip" target="_blank" rel="noopener noreferrer">code and setup ↗</a>
+                <a href="https://movies.angl.gg" className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">demo</a>
+                <a href="https://github.com/btuckerc/center-seat" className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code and setup</a>
               </div>
             </article>
             <article className="home-support-card border border-line/70 bg-card-bg/70 p-5 sm:p-6">
               <p className="home-kicker font-mono text-xs text-accent">boilerplate</p>
               <h2 className="mt-2 font-mono text-lg font-bold text-fg">My opinionated config setup</h2>
               <p className="mt-3 text-sm leading-6 text-muted">My macOS and Linux workspace setup, managed with chezmoi and mise.</p>
-              <a href="https://github.com/btuckerc/boilerplate" className="tui-link-chip mt-5 inline-flex" target="_blank" rel="noopener noreferrer">browse the configuration ↗</a>
+              <a href="https://github.com/btuckerc/boilerplate" className="tui-link-chip mt-5 inline-flex" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">browse the configuration</a>
             </article>
           </section>
 
           <div className="mt-6 flex justify-center">
             <Link to="/projects" className="tui-action tui-home-primary inline-flex min-h-11 items-center border border-accent/70 bg-card-bg px-5 py-2 font-mono text-sm text-fg">
-              <span className="tui-action-content">more projects →</span>
+              <span className="tui-action-content">more projects</span>
             </Link>
           </div>
         </motion.div>
