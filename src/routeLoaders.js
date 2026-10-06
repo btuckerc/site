@@ -10,6 +10,8 @@ export const routeLoaders = {
   '/privacy/flipping-seven-calculator': () => import('./pages/FlippingSevenPrivacy'),
   '/privacy/herdwick': () => import('./pages/HerdwickPrivacy'),
   '/herdwick/support': () => import('./pages/HerdwickSupport'),
+  '/privacy/inkjoin': () => import('./pages/InkjoinPrivacy'),
+  '/inkjoin/support': () => import('./pages/InkjoinSupport'),
 }
 
 export const preloadRoute = (pathname) => {

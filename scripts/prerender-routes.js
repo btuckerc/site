@@ -80,6 +80,22 @@ const pages = [
     image: 'https://btuckerc.dev/og/herdwick-support.jpg',
     imageAlt: 'Herdwick support: coding agents on your phone.',
     type: 'website'
+  },
+  {
+    route: '/privacy/inkjoin',
+    title: 'Privacy Policy — Inkjoin',
+    description: 'Privacy policy for Inkjoin, a calm iPhone logic puzzle game.',
+    image: 'https://btuckerc.dev/og/inkjoin-privacy.jpg',
+    imageAlt: 'Inkjoin privacy policy.',
+    type: 'website'
+  },
+  {
+    route: '/inkjoin/support',
+    title: 'Support — Inkjoin',
+    description: 'Help for Inkjoin, a calm iPhone logic puzzle game.',
+    image: 'https://btuckerc.dev/og/inkjoin-support.jpg',
+    imageAlt: 'Inkjoin support.',
+    type: 'website'
   }
 ]
 

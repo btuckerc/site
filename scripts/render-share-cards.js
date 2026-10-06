@@ -108,6 +108,30 @@ const cards = [
     hint: 'read the policy →'
   },
   {
+    slug: 'inkjoin-support',
+    path: '/inkjoin/support',
+    eyebrow: 'Tucker Craig',
+    title: 'Inkjoin',
+    bracket: 'support',
+    context: [
+      { text: 'A little help with Inkjoin.', strong: true },
+      { text: 'How to play and answers to common questions.' }
+    ],
+    hint: 'get help →'
+  },
+  {
+    slug: 'inkjoin-privacy',
+    path: '/privacy/inkjoin',
+    eyebrow: 'Tucker Craig',
+    title: 'Inkjoin',
+    bracket: 'privacy',
+    context: [
+      { text: 'Your puzzles stay yours.', strong: true },
+      { text: 'Your progress stays on your device; optional anonymous analytics tune puzzle difficulty.' }
+    ],
+    hint: 'read the policy →'
+  },
+  {
     slug: 'flipping-seven-privacy',
     path: '/privacy/flipping-seven-calculator',
     eyebrow: 'Tucker Craig',

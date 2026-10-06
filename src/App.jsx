@@ -23,6 +23,8 @@ const Contact = lazy(routeLoaders['/contact'])
 const FlippingSevenPrivacy = lazy(routeLoaders['/privacy/flipping-seven-calculator'])
 const HerdwickPrivacy = lazy(routeLoaders['/privacy/herdwick'])
 const HerdwickSupport = lazy(routeLoaders['/herdwick/support'])
+const InkjoinPrivacy = lazy(routeLoaders['/privacy/inkjoin'])
+const InkjoinSupport = lazy(routeLoaders['/inkjoin/support'])
 
 function AppContent() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
@@ -100,6 +102,8 @@ function AppContent() {
                   />
                   <Route path="/privacy/herdwick" element={<HerdwickPrivacy />} />
                   <Route path="/herdwick/support" element={<HerdwickSupport />} />
+                  <Route path="/privacy/inkjoin" element={<InkjoinPrivacy />} />
+                  <Route path="/inkjoin/support" element={<InkjoinSupport />} />
                 </Routes>
               </AnimatePresence>
             </Suspense>
