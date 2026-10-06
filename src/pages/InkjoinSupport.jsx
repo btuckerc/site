@@ -21,6 +21,8 @@ const sections = [
       <div className="space-y-4">
         <p><strong className="text-fg">A daily puzzle won’t load.</strong> It needs a connection to download once. After that, you can play it offline.</p>
         <p><strong className="text-fg">Why are daily drawings covered?</strong> Finished drawings for daily puzzles stay covered until you choose to show them.</p>
+        <p><strong className="text-fg">What does Inkjoin Full unlock?</strong> One purchase unlocks all 1,600 practice puzzles and every past daily. Today’s daily, every chapter, hints and 10 practice puzzles per level are free.</p>
+        <p><strong className="text-fg">I bought Inkjoin Full on another device.</strong> In Settings, tap Restore Purchases. Family Sharing works too.</p>
         <p><strong className="text-fg">How do I turn analytics off?</strong> In Settings, turn off “Send anonymous analytics”.</p>
         <p><strong className="text-fg">Where is my progress?</strong> Progress lives only on this iPhone.</p>
       </div>

@@ -42,6 +42,16 @@ const policySections = [
     ),
   },
   {
+    title: 'Purchases',
+    content: (
+      <p>
+        Inkjoin Full is bought through Apple. Apple handles the payment; the developer receives
+        no payment or personal details. The app checks with the App Store whether the purchase
+        is active on your device.
+      </p>
+    ),
+  },
+  {
     title: 'Permissions',
     content: <p>Inkjoin requests no permissions, including photos, notifications, or location.</p>,
   },
