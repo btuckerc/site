@@ -5,6 +5,7 @@ import StarterSelectionCapture, { GameCapture } from '../components/StarterSelec
 import projectsData from '../../data/projects.json'
 import '../styles/home-media.css'
 
+const inkjoin = projectsData.find((project) => project.id === 'inkjoin')
 const herdwick = projectsData.find((project) => project.id === 'herdwick')
 const dictation = projectsData.find((project) => project.id === 'dictation')
 
@@ -101,6 +102,63 @@ const Home = () => {
                 <figcaption>Prototype with a gameplay goal queued.</figcaption>
               </figure>
               <StarterSelectionCapture className="home-media-card home-media-card-game home-game-capture" showToggle={false} downloadSrc={null} captureNote={null} />
+            </div>
+          </section>
+
+          <section className="home-support-card home-app-feature mt-6 border border-line/70 bg-card-bg/75 p-5 sm:p-7" aria-labelledby="inkjoin-title">
+            <div className="home-app-feature-copy">
+              <div className="home-app-heading">
+                <img src="/media/inkjoin/icon.png" alt="" width="256" height="256" loading="lazy" decoding="async" className="home-app-icon home-app-icon-large" />
+                <div>
+                  <p className="home-kicker font-mono text-xs text-accent">inkjoin</p>
+                  <h2 id="inkjoin-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl">Logic puzzles!</h2>
+                </div>
+              </div>
+              <p className="text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">{inkjoin.blurb}</p>
+            </div>
+            <div className="home-app-feature-media">
+              <GameCapture
+                className="home-support-capture home-phone-capture"
+                src={inkjoin.media.video}
+                poster={inkjoin.media.poster}
+                downloadSrc={null}
+                width={inkjoin.media.width}
+                height={inkjoin.media.height}
+                title="Solving a puzzle"
+                alt={inkjoin.media.alt}
+                caption="Solving with a hint"
+                captureNote={null}
+                showToggle={false}
+              />
+              <GameCapture
+                className="home-support-capture home-phone-capture"
+                src="/media/inkjoin/dark.mp4"
+                poster="/media/inkjoin/dark-poster.webp"
+                downloadSrc={null}
+                width={540}
+                height={1174}
+                title="Dark mode"
+                alt="Inkjoin in dark mode, from the home screen to a 6×6 puzzle. Squares are filled in to make one connected shape, then a red stamp is added."
+                caption="Dark mode"
+                captureNote={null}
+                showToggle={false}
+              />
+            </div>
+            <div className="home-app-screens home-app-feature-screens" tabIndex={0} role="region" aria-label="Inkjoin screenshots, scroll sideways for more">
+              <img
+                src="/media/inkjoin/screenshots-iphone.webp"
+                alt="Seven Inkjoin iPhone screenshots: a partly filled puzzle, the home screen with today’s puzzle, the chapter list, drawings from one chapter, the Drawings collection, practice difficulty levels, and a puzzle in dark mode."
+                width="2369"
+                height="702"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div className="home-app-feature-actions flex flex-wrap items-center gap-3">
+              <a href={inkjoin.links['app store']} className="home-app-store-badge" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">
+                <img src="/media/app-store-badge.svg" alt="Download Inkjoin on the App Store" width="120" height="40" />
+              </a>
+              <a href={inkjoin.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code</a>
             </div>
           </section>
 

@@ -34,6 +34,48 @@
     ]
   },
   {
+    "id": "inkjoin",
+    "title": "Inkjoin",
+    "year": "2026",
+    "date": "2026-10-06",
+    "featured": 19,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "blurb": "An iPhone game where you fill in squares to make one connected shape. The numbers tell you which squares to fill. Each solved puzzle becomes a drawing.",
+    "tags": [
+      "iOS",
+      "Swift",
+      "Puzzle",
+      "Game"
+    ],
+    "links": {
+      "app store": "https://apps.apple.com/app/id6819489546",
+      "github": "https://github.com/btuckerc/inkjoin"
+    },
+    "media": {
+      "video": "/media/inkjoin/solve.mp4",
+      "poster": "/media/inkjoin/solve-poster.webp",
+      "width": 540,
+      "height": 1174,
+      "title": "preview",
+      "alt": "An Inkjoin puzzle being solved with a hint. Empty squares are marked with dots, and the finished shape becomes a drawing with a red stamp.",
+      "caption": "Solving a 7×7 puzzle with one hint. The grid fades and the finished drawing gets a red stamp."
+    },
+    "overview": "Nine chapters introduce one idea at a time. There’s a new puzzle each day and practice at four difficulty levels. Every puzzle has exactly one answer and can be solved without guessing. Hints are unlimited, with no penalty. Works offline on iPhone; requires iOS 26.",
+    "stack": [
+      "Swift",
+      "SwiftUI",
+      "Cloudflare Workers"
+    ],
+    "features": [
+      "74 puzzles across nine chapters",
+      "Daily puzzles that get harder through the week",
+      "Hints that show where to look, explain a step and can fill it in",
+      "Solved puzzles saved as drawings"
+    ]
+  },
+  {
     "id": "herdwick",
     "title": "Herdwick",
     "year": "2026",

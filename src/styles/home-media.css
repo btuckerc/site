@@ -54,3 +54,34 @@
 .home-support-capture .starter-capture-label,
 .home-support-capture .starter-capture-title { display: none; }
 .home-support-capture .starter-capture-media { margin-top: 0; }
+
+/* Inkjoin: a full-width app card, between the omalo feature and the two-up cards.
+ * Copy, screenshots and actions on the left; two phone recordings on the right. */
+.home-app-feature {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-areas: "copy" "media" "screens" "actions";
+}
+.home-app-feature > * { min-width: 0; }
+.home-app-feature-copy { grid-area: copy; display: grid; gap: .9rem; align-content: start; }
+.home-app-feature-media { grid-area: media; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; align-items: start; }
+.home-app-feature-screens { grid-area: screens; }
+.home-app-feature-actions { grid-area: actions; }
+.home-app-icon-large { width: 4.25rem; height: 4.25rem; }
+.home-phone-capture .starter-capture-media {
+  width: 100%;
+  border-radius: 1.4rem;
+  border-color: color-mix(in srgb, var(--line) 70%, transparent);
+}
+.home-phone-capture .starter-capture-video { max-width: none; image-rendering: auto; }
+@media (min-width: 768px) {
+  .home-app-feature {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+    grid-template-areas: "copy media" "screens media" "actions media";
+    grid-template-rows: auto auto 1fr;
+    column-gap: 2rem;
+  }
+  .home-app-feature-screens { align-self: start; }
+  .home-app-feature-actions { align-self: start; }
+  .home-app-feature .home-app-screens img { height: 16rem; }
+}

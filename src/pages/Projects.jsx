@@ -130,10 +130,10 @@ const Projects = () => {
     <>
       <PageMeta
         title="Projects — Tucker Craig"
-        description="Things Tucker Craig has built, big and small: Pace Bar, Herdwick, Dictation, CenterSeat, and more."
+        description="Things Tucker Craig has built, big and small: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more."
         url="https://btuckerc.dev/projects"
         image="https://btuckerc.dev/og/projects.jpg"
-        imageAlt="Tucker Craig, projects: Pace Bar, Herdwick, Dictation, CenterSeat, earcandy, and more."
+        imageAlt="Tucker Craig, projects: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more."
       />
       <div className="projects-page tui-page-shell min-h-svh pb-28 px-4">
       <div className="container mx-auto max-w-6xl">

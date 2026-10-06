@@ -104,7 +104,7 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
           >
             {project.media && (
               <GameCapture
-                className="project-capture"
+                className={`project-capture${project.media.height > project.media.width ? ' project-capture-portrait' : ''}`}
                 src={project.media.video}
                 poster={project.media.poster}
                 downloadSrc={null}

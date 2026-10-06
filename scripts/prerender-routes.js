@@ -28,9 +28,9 @@ const pages = [
   {
     route: '/projects',
     title: 'Projects — Tucker Craig',
-    description: 'Things Tucker Craig has built, big and small: Pace Bar, Herdwick, Dictation, CenterSeat, and more.',
+    description: 'Things Tucker Craig has built, big and small: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more.',
     image: 'https://btuckerc.dev/og/projects.jpg',
-    imageAlt: 'Tucker Craig, projects: Pace Bar, Herdwick, Dictation, CenterSeat, earcandy, and more.',
+    imageAlt: 'Tucker Craig, projects: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more.',
     type: 'website'
   },
   {

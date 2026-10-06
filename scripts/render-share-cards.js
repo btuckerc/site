@@ -16,7 +16,7 @@ const outputDir = join(repoRoot, 'public', 'og')
 const templateUrl = pathToFileURL(join(repoRoot, 'scripts', 'share-cards', 'card.html')).href
 const projects = JSON.parse(readFileSync(join(repoRoot, 'data', 'projects.json'), 'utf8'))
 
-const featuredProjects = ['pace-bar', 'herdwick', 'dictation', 'center-seat', 'earcandy']
+const featuredProjects = ['inkjoin', 'pace-bar', 'herdwick', 'dictation', 'center-seat']
 const projectTitle = (id) => {
   const project = projects.find(entry => entry.id === id)
   if (!project) throw new Error(`Unknown featured project: ${id}`)
