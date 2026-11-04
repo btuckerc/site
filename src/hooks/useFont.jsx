@@ -17,6 +17,11 @@ const FONTS = [
     family: "'PP Neue Montreal', 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
   },
   {
+    id: 'obel-mono',
+    name: 'Obel Mono',
+    family: "'Obel Mono', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
+  },
+  {
     id: 'source-code',
     name: 'Source Code Pro',
     family: "'Source Code Pro Variable', 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace"
