@@ -6,6 +6,7 @@ import projectsData from '../../data/projects.json'
 import '../styles/home-media.css'
 
 const angl = projectsData.find((project) => project.id === 'angl-browser')
+const winstream = projectsData.find((project) => project.id === 'winstream')
 const paceBar = projectsData.find((project) => project.id === 'pace-bar')
 const inkjoin = projectsData.find((project) => project.id === 'inkjoin')
 const herdwick = projectsData.find((project) => project.id === 'herdwick')
@@ -16,7 +17,7 @@ const Home = () => {
     <>
       <PageMeta
         title="Tucker Craig - Software Engineer"
-        description="I build and ship everyday software with coding agents across macOS, iOS, web, and hardware: angl browser, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo."
+        description="I build and ship everyday software with coding agents across macOS, Windows, iOS, web, and hardware: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo."
         url="https://btuckerc.dev/"
         image="https://btuckerc.dev/og/home.jpg"
         imageAlt="Tucker Craig, software engineer. Building everyday software with coding agents."
@@ -49,7 +50,7 @@ const Home = () => {
                 >
                   we can fix everything
                 </a>
-                . With the right harness and real verification, one engineer can ship across macOS, iOS, web, and hardware without cutting corners. Everything below is something I actually use.
+                . With the right harness and real verification, one engineer can ship across macOS, Windows, iOS, web, and hardware without cutting corners. Everything below is something I actually use.
               </p>
               <p className="mt-4 text-muted">
                 I also sang a cappella in{' '}
@@ -143,6 +144,62 @@ const Home = () => {
               </a>
               <a href={angl.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code</a>
             </div>
+          </section>
+
+          <section className="home-support-card mt-6 border border-line/70 bg-card-bg/75 p-5 sm:p-7" aria-labelledby="winstream-title">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div className="min-w-0 flex-1 basis-72">
+                <p className="home-kicker font-mono text-xs text-accent">winstream · rust · d3d11 · nvenc</p>
+                <h2 id="winstream-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl">
+                  A lean Windows streaming studio
+                </h2>
+              </div>
+              <span className="home-status font-mono text-xs text-muted"><span className="text-accent" aria-hidden="true">●</span> Local build</span>
+            </div>
+            <p className="mt-3 text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">
+              {winstream.blurb} Built directly on Windows Graphics Capture, Direct3D 11 compositing, NVENC 13.0 bindings, WASAPI per-app audio with RNNoise and -14 LUFS loudness leveling, and a std-only FLV muxer.
+            </p>
+            <div className="home-bench-wrap mt-5" role="region" aria-label="winstream vs OBS 32.0.2 benchmarks">
+              <table className="home-bench-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Metric (1080p60 NVENC + overlays)</th>
+                    <th scope="col">winstream</th>
+                    <th scope="col">OBS 32.0.2</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Private RAM (active / dormant)</td>
+                    <td className="home-bench-win">262 MB / 67 MB</td>
+                    <td>788-931 MB</td>
+                  </tr>
+                  <tr>
+                    <td>VRAM footprint</td>
+                    <td className="home-bench-win">150 MB</td>
+                    <td>233-259 MB</td>
+                  </tr>
+                  <tr>
+                    <td>GPU-bound CPU overhead (1 core)</td>
+                    <td className="home-bench-win">+13%</td>
+                    <td>+37% (+25% no overlays)</td>
+                  </tr>
+                  <tr>
+                    <td>GPU-bound 1% / 0.1% low FPS</td>
+                    <td className="home-bench-win">205 / 201 fps</td>
+                    <td>201 / 185 fps</td>
+                  </tr>
+                  <tr>
+                    <td>Uncapped 1% / 0.1% low FPS</td>
+                    <td className="home-bench-win">802 / 748 fps</td>
+                    <td>680 / 621 fps</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-xs leading-6 text-muted sm:text-sm">
+              Measured on Windows 11 (Ryzen 9 9950X3D, RTX 4090) at 6000 kb/s H.264 P5 HQ across 3 x 60s synthetic game runs with camera, chat overlay, and 160 kb/s AAC audio. Average FPS stays within 1% of OBS across all loads, and A/V sync measured -7.9 ms median (within one 60 fps frame, zero discontinuities). Under a 599 Hz cap, 0.1% lows still trail OBS&apos;s DirectX game-capture hook due to WGC composition overhead (465-469 fps after idle-wakeup fixes vs. OBS&apos;s 563-570 fps). Not public on GitHub yet.
+            </p>
           </section>
 
           <section className="home-supporting home-support-media mt-6 grid grid-cols-1 gap-4 md:grid-cols-2" aria-label="AI workflow tools">

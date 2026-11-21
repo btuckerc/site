@@ -16,7 +16,7 @@ const outputDir = join(repoRoot, 'public', 'og')
 const templateUrl = pathToFileURL(join(repoRoot, 'scripts', 'share-cards', 'card.html')).href
 const projects = JSON.parse(readFileSync(join(repoRoot, 'data', 'projects.json'), 'utf8'))
 
-const featuredProjects = ['angl-browser', 'herdwick', 'inkjoin', 'pace-bar', 'dictation']
+const featuredProjects = ['angl-browser', 'winstream', 'herdwick', 'inkjoin', 'pace-bar']
 const projectTitle = (id) => {
   const project = projects.find(entry => entry.id === id)
   if (!project) throw new Error(`Unknown featured project: ${id}`)
@@ -31,7 +31,7 @@ const cards = [
     tag: 'Software Engineer',
     context: [
       { text: 'We can fix everything.', strong: true },
-      { text: 'Building everyday software with coding agents: angl browser, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.' }
+      { text: 'Building everyday software with coding agents: angl, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.' }
     ],
     hint: 'how i build →'
   },

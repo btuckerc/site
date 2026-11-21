@@ -45,7 +45,7 @@ export default function Workflow() {
     <>
       <PageMeta
         title="How I build with AI - Tucker Craig"
-        description="How I use coding agents to ship real software across macOS, iOS, web, and hardware: tight scope, clean harnesses, and real verification."
+        description="How I use coding agents to ship real software across macOS, Windows, iOS, web, and hardware: tight scope, clean harnesses, and real verification."
         url="https://btuckerc.dev/workflow"
         type="article"
         image="https://btuckerc.dev/og/workflow.jpg"
@@ -113,7 +113,7 @@ export default function Workflow() {
                   Most of what I build starts with something small that annoys me every day. Instead of living with a clunky tool or paying for something that almost fits, I&apos;d rather build a focused version and actually use it.
                 </p>
                 <p className="case-study-copy mt-4">
-                  In the last few months that has meant shipping across very different stacks: a Swift 6 and WebKit macOS browser (<a href="https://github.com/btuckerc/angl-browser" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">angl</a>) with tree tabs and plain-file config, an iPhone and iPad app (<a href="https://github.com/btuckerc/herdwick" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Herdwick</a>) to manage coding agents over SSH, a local Rust and Tauri voice-to-text app (<a href="https://github.com/btuckerc/dictation" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Dictation</a>), a Mac quota and local-inference monitor (<a href="https://github.com/btuckerc/pace-bar" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Pace Bar</a>), an iPhone puzzle game (<a href="https://github.com/btuckerc/inkjoin" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Inkjoin</a>), and ESP32 firmware (<Link to="/projects/omalo" className="text-accent underline underline-offset-4">omalo</Link>).
+                  In the last few months that has meant shipping across very different stacks: a Swift 6 and WebKit macOS browser (<a href="https://github.com/btuckerc/angl-browser" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">angl</a>) with tree tabs and plain-file config, a Rust Windows streaming studio (winstream) built on WGC, Direct3D 11, and NVENC that uses ~3x less RAM than OBS, an iPhone and iPad app (<a href="https://github.com/btuckerc/herdwick" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Herdwick</a>) to manage coding agents over SSH, a local Rust and Tauri voice-to-text app (<a href="https://github.com/btuckerc/dictation" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Dictation</a>), a Mac quota and local-inference monitor (<a href="https://github.com/btuckerc/pace-bar" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Pace Bar</a>), an iPhone puzzle game (<a href="https://github.com/btuckerc/inkjoin" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Inkjoin</a>), and ESP32 firmware (<Link to="/projects/omalo" className="text-accent underline underline-offset-4">omalo</Link>).
                 </p>
               </section>
 
@@ -136,7 +136,7 @@ export default function Workflow() {
                   , who treat verification loops, context boundaries, and test harnesses as the actual work of AI engineering.
                 </p>
                 <p className="case-study-copy mt-4">
-                  &quot;It compiles&quot; is never the finish line. Every change has to survive the real path a user hits: launching the signed app on macOS, exercising the iOS flows on a phone, measuring real memory footprint (like keeping angl at 227 MB vs. Safari&apos;s 287 MB on Wikipedia), or checking actual game RAM in{' '}
+                  &quot;It compiles&quot; is never the finish line. Every change has to survive the real path a user hits: launching the signed app on macOS, exercising the iOS flows on a phone, running synthetic game loads and PresentMon ablations against OBS on Windows (which caught 2 ms idle wake-ups delaying the game&apos;s frame limiter in winstream), measuring real browser RAM (angl at 227 MB vs. Safari&apos;s 287 MB), or checking actual game RAM in{' '}
                   <Link to="/projects/s3-amoled#catch-check" className="text-accent underline underline-offset-4">
                     omalo
                   </Link>{' '}

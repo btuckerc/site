@@ -156,3 +156,46 @@
     height: 20rem;
   }
 }
+
+/* Compact benchmark comparison table (winstream vs OBS). */
+.home-bench-wrap {
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+  background: color-mix(in srgb, var(--bg) 42%, transparent);
+}
+.home-bench-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-align: left;
+}
+.home-bench-table th,
+.home-bench-table td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  vertical-align: top;
+}
+.home-bench-table tr:last-child td {
+  border-bottom: 0;
+}
+.home-bench-table th {
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--bg-elev) 70%, transparent);
+}
+.home-bench-table td {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.home-bench-table td:first-child {
+  color: var(--fg);
+}
+.home-bench-table .home-bench-win {
+  color: var(--fg);
+  font-weight: 600;
+}

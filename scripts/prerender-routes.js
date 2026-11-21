@@ -12,7 +12,7 @@ const pages = [
   {
     route: '/',
     title: 'Tucker Craig - Software Engineer',
-    description: 'I build and ship everyday software with coding agents across macOS, iOS, web, and hardware: angl browser, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.',
+    description: 'I build and ship everyday software with coding agents across macOS, Windows, iOS, web, and hardware: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.',
     image: 'https://btuckerc.dev/og/home.jpg',
     imageAlt: 'Tucker Craig, software engineer. Building everyday software with coding agents.',
     type: 'website'
@@ -20,7 +20,7 @@ const pages = [
   {
     route: '/workflow',
     title: 'How I build with AI - Tucker Craig',
-    description: 'How I use coding agents to ship real software across macOS, iOS, web, and hardware: tight scope, clean harnesses, and real verification.',
+    description: 'How I use coding agents to ship real software across macOS, Windows, iOS, web, and hardware: tight scope, clean harnesses, and real verification.',
     image: 'https://btuckerc.dev/og/workflow.jpg',
     imageAlt: 'Tucker Craig, workflow: how I build with AI.',
     type: 'article'
@@ -36,9 +36,9 @@ const pages = [
   {
     route: '/projects',
     title: 'Projects - Tucker Craig',
-    description: "Things I've built, big and small: angl browser, Herdwick, Inkjoin, Pace Bar, Dictation, CenterSeat, and more.",
+    description: "Things I've built, big and small: angl browser, winstream, Herdwick, Inkjoin, Pace Bar, Dictation, CenterSeat, and more.",
     image: 'https://btuckerc.dev/og/projects.jpg',
-    imageAlt: 'Tucker Craig, projects: angl, Herdwick, Inkjoin, Pace Bar, Dictation, and more.',
+    imageAlt: 'Tucker Craig, projects: angl, winstream, Herdwick, Inkjoin, Pace Bar, and more.',
     type: 'website'
   },
   {
