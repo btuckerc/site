@@ -89,7 +89,7 @@ export default function Workflow() {
                 >
                   we can fix everything
                 </a>
-                . Every missing app, every weird incompatibility, every daily paper cut. Coding agents make it realistic for one person to actually live that way, as long as you treat them like an engineering harness instead of a slot machine.
+                . If an app is missing or annoying to use, fix it or replace it. Coding agents make it realistic for one person to actually work that way, as long as you treat them like an engineering harness instead of a slot machine.
               </p>
             </header>
 

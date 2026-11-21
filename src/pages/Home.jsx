@@ -17,10 +17,10 @@ const Home = () => {
     <>
       <PageMeta
         title="Tucker Craig - Software Engineer"
-        description="I build and ship everyday software with coding agents across macOS, Windows, iOS, web, and hardware: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo."
+        description="Software engineer building my own tools with coding agents across Mac, Windows, iOS, and hardware: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo."
         url="https://btuckerc.dev/"
         image="https://btuckerc.dev/og/home.jpg"
-        imageAlt="Tucker Craig, software engineer. Building everyday software with coding agents."
+        imageAlt="Tucker Craig, software engineer. Building my own tools with coding agents."
       />
 
       <div className="home-page tui-page-shell min-h-svh px-4 pt-16 pb-28 sm:pt-20">
@@ -35,12 +35,12 @@ const Home = () => {
               <h1 className="home-personal-hero-title font-mono font-bold leading-tight text-fg">TUCKER CRAIG</h1>
               <p className="home-personal-hero-role font-mono text-accent">Software Engineer</p>
               <p className="home-personal-hero-lede">
-                I build and ship everyday software with coding agents. Every missing app, every paper cut, every tool I wish existed.
+                If something I use every day bugs me, I&apos;d rather build my own. Lately that&apos;s meant a Mac browser, a Windows streaming engine, and an iPhone app for my coding agents.
               </p>
             </div>
             <div className="home-personal-hero-context">
               <p>
-                A big idea I&apos;ve borrowed from Omarchy is that{' '}
+                I borrow a lot from Omarchy&apos;s idea that{' '}
                 <a
                   href="https://wecanfixeverything.com"
                   className="text-accent underline underline-offset-4"
@@ -50,7 +50,7 @@ const Home = () => {
                 >
                   we can fix everything
                 </a>
-                . With the right harness and real verification, one engineer can ship across macOS, Windows, iOS, web, and hardware without cutting corners. Everything below is something I actually use.
+                . Coding agents make that practical if you treat them like an engineering harness and actually test what you build. Everything below is something I use myself.
               </p>
               <p className="mt-4 text-muted">
                 I also sang a cappella in{' '}

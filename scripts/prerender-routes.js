@@ -12,9 +12,9 @@ const pages = [
   {
     route: '/',
     title: 'Tucker Craig - Software Engineer',
-    description: 'I build and ship everyday software with coding agents across macOS, Windows, iOS, web, and hardware: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.',
+    description: 'Software engineer building my own tools with coding agents across Mac, Windows, iOS, and hardware: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.',
     image: 'https://btuckerc.dev/og/home.jpg',
-    imageAlt: 'Tucker Craig, software engineer. Building everyday software with coding agents.',
+    imageAlt: 'Tucker Craig, software engineer. Building my own tools with coding agents.',
     type: 'website'
   },
   {
