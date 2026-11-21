@@ -5,7 +5,7 @@ const defaultVideo = '/media/s3-amoled/pokemon-agent-battle.mp4'
 const defaultPoster = '/media/s3-amoled/pokemon-agent-battle-poster.png'
 const defaultDownload = '/media/s3-amoled/pokemon-agent-battle.gif'
 const defaultAlt = 'Full-panel replay showing manual Mudkip selection, a recorded Luna request in progress, the battle against Zigzagoon, and the completed result, with goal and status rails.'
-const defaultCaption = 'Host-rendered UI replay · real Luna request and battle · model wait retained.'
+const defaultCaption = 'Desktop UI replay of a real Luna request and battle (actual model wait time left in).'
 
 const readReducedMotionPreference = () => (
   typeof window !== 'undefined' &&
@@ -31,7 +31,7 @@ export const GameCapture = ({
   caption = defaultCaption,
   label = 'game capture',
   title = 'Defeat the Zigzagoon',
-  captureNote = 'The battle and Luna’s response are real. This replay shows them on a computer using the device’s actual interface. It doesn’t include a recording of the device or a voice command.',
+  captureNote = "The battle and Luna's response are real, replayed on a computer using the device's actual UI. It's not a camera recording of the hardware or a live mic recording.",
   className = '',
   showToggle = true,
 }) => {

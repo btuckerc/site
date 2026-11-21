@@ -6,7 +6,7 @@ const About = () => {
   return (
     <>
       <PageMeta
-        title="About — Tucker Craig"
+        title="About - Tucker Craig"
         description="Hello, world! I'm Tucker. I build apps for my AI usage, my own voice-to-text, and AI agents on my phone, plus firmware for omalo."
         url="https://btuckerc.dev/about"
         image="https://btuckerc.dev/og/about.jpg"

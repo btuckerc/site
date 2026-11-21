@@ -2,12 +2,12 @@ import PageMeta from '../components/PageMeta'
 
 const policySections = [
   {
-    title: 'Data we collect',
+    title: 'Data collected',
     content: (
       <>
         <p>
           <strong className="text-fg">None.</strong> Flipping Seven Calculator does not
-          collect data about you and does not send information to any server.
+          collect data about you and does not send anything to a server.
         </p>
       </>
     ),
@@ -17,19 +17,19 @@ const policySections = [
     content: (
       <>
         <p>
-          The app stores limited information locally on your device using Apple&apos;s
-          standard on-device storage to support core functionality, including:
+          The app saves a small amount of data locally on your device using Apple&apos;s
+          standard storage so your games and settings stick around:
         </p>
         <ul className="mt-3 space-y-2" role="list">
           <li>Player names and roster</li>
           <li>Current game state and round history</li>
           <li>Deck and score-profile settings</li>
-          <li>Preferences such as theme, haptics, and display options</li>
+          <li>Preferences like theme, haptics, and display options</li>
         </ul>
         <p className="mt-4">
-          This information stays on your device unless you choose to include it in an
-          Apple-managed device backup such as iCloud Backup. Removing the app also
-          removes its locally stored app data, subject to any device backup you control.
+          This stays on your device unless you include it in an Apple-managed backup like
+          iCloud Backup. Deleting the app removes its local data, aside from any device
+          backup you manage yourself.
         </p>
       </>
     ),
@@ -39,7 +39,7 @@ const policySections = [
     content: (
       <p>
         Flipping Seven Calculator does not track you across apps or websites and does
-        not use the App Tracking Transparency framework.
+        not use Apple&apos;s App Tracking Transparency framework.
       </p>
     ),
   },
@@ -47,7 +47,7 @@ const policySections = [
     title: 'Third-party services',
     content: (
       <p>
-        Flipping Seven Calculator does not use third-party analytics, advertising, or
+        Flipping Seven Calculator does not include any third-party analytics, ads, or
         crash-reporting SDKs.
       </p>
     ),
@@ -56,8 +56,8 @@ const policySections = [
     title: 'Permissions',
     content: (
       <p>
-        Flipping Seven Calculator does not require access to location, contacts, photos,
-        camera, microphone, Bluetooth, or similar sensitive device features.
+        Flipping Seven Calculator does not ask for location, contacts, photos,
+        camera, microphone, Bluetooth, or similar device permissions.
       </p>
     ),
   },
@@ -74,8 +74,8 @@ const policySections = [
     title: 'Changes to this policy',
     content: (
       <p>
-        If this policy changes, the effective date above will be updated and the revised
-        policy will be published at this same location.
+        If this policy changes, I&apos;ll update the effective date above and post the
+        new version right here.
       </p>
     ),
   },
@@ -91,8 +91,8 @@ const summaryItems = [
 const FlippingSevenPrivacy = () => (
   <>
     <PageMeta
-      title="Privacy Policy — Flipping Seven Calculator"
-      description="Privacy policy for Flipping Seven Calculator, an offline scorekeeping utility that does not collect personal data."
+      title="Privacy Policy - Flipping Seven Calculator"
+      description="Privacy policy for Flipping Seven Calculator, an offline scorekeeper that collects no personal data."
       url="https://btuckerc.dev/privacy/flipping-seven-calculator"
       openGraphDescription="Flipping Seven Calculator does not collect, transmit, sell, or share personal data."
       image="https://btuckerc.dev/og/flipping-seven-privacy.jpg"
@@ -115,7 +115,7 @@ const FlippingSevenPrivacy = () => (
             Simple app. Simple privacy.
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
-            Flipping Seven Calculator is an offline scorekeeping utility. We do not
+            Flipping Seven Calculator is an offline scorekeeper. We do not
             collect, transmit, sell, or share personal data.
           </p>
           <dl className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
@@ -187,7 +187,7 @@ const FlippingSevenPrivacy = () => (
         </div>
 
         <p className="mt-6 text-center text-xs leading-6 text-muted">
-          Independent scorekeeping utility. Not affiliated with or endorsed by any game
+          Independent scorekeeper. Not affiliated with or endorsed by any game
           publisher.
         </p>
       </article>

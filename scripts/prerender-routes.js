@@ -11,15 +11,15 @@ const template = readFileSync(templatePath, 'utf8')
 const pages = [
   {
     route: '/',
-    title: 'Tucker Craig — Software Engineer',
-    description: 'Software engineer who likes building things that make everyday life a little easier. Right now: omalo, a pocket companion with Pokémon and an AI handoff.',
+    title: 'Tucker Craig - Software Engineer',
+    description: "Software engineer who likes building things that make everyday life a little easier. Right now I'm building omalo, a pocket companion running Pokémon Emerald with an AI handoff.",
     image: 'https://btuckerc.dev/og/home.jpg',
     imageAlt: 'Tucker Craig, software engineer. I like building things that make everyday life a little easier.',
     type: 'website'
   },
   {
     route: '/about',
-    title: 'About — Tucker Craig',
+    title: 'About - Tucker Craig',
     description: "Hello, world! I'm Tucker. I build apps for my AI usage, my own voice-to-text, and AI agents on my phone, plus firmware for omalo.",
     image: 'https://btuckerc.dev/og/about.jpg',
     imageAlt: "Tucker Craig, about. Hello, world! I'm Tucker.",
@@ -27,16 +27,16 @@ const pages = [
   },
   {
     route: '/projects',
-    title: 'Projects — Tucker Craig',
-    description: 'Things Tucker Craig has built, big and small: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more.',
+    title: 'Projects - Tucker Craig',
+    description: "Things I've built, big and small: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more.",
     image: 'https://btuckerc.dev/og/projects.jpg',
     imageAlt: 'Tucker Craig, projects: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more.',
     type: 'website'
   },
   {
     route: '/projects/omalo',
-    title: 'omalo — a pocket companion running ichr',
-    description: 'omalo is a pocket companion running ichr. Pokémon Emerald runs on the device with an AI handoff for gameplay goals.',
+    title: 'omalo - a pocket companion running ichr',
+    description: 'omalo is a pocket companion running ichr. Play Pokémon Emerald yourself, or hand off goals to an AI.',
     image: 'https://btuckerc.dev/media/omalo/share.jpg',
     imageAlt: 'omalo, a pocket companion running ichr, with Pokémon Emerald on omalo.',
     type: 'article'
@@ -51,7 +51,7 @@ const pages = [
   },
   {
     route: '/contact',
-    title: 'Contact — Tucker Craig',
+    title: 'Contact - Tucker Craig',
     description: 'Get in touch with Tucker Craig via email, GitHub, LinkedIn, or the contact form.',
     image: 'https://btuckerc.dev/og/contact.jpg',
     imageAlt: 'Tucker Craig, contact. Say hello at btuckerc.dev@gmail.com.',
@@ -59,23 +59,23 @@ const pages = [
   },
   {
     route: '/privacy/flipping-seven-calculator',
-    title: 'Privacy Policy — Flipping Seven Calculator',
-    description: 'Privacy policy for Flipping Seven Calculator, an offline scorekeeping utility that does not collect personal data.',
+    title: 'Privacy Policy - Flipping Seven Calculator',
+    description: 'Privacy policy for Flipping Seven Calculator, an offline scorekeeper that collects no personal data.',
     image: 'https://btuckerc.dev/og/flipping-seven-privacy.jpg',
     imageAlt: 'Flipping Seven privacy: simple app, simple privacy.',
     type: 'website'
   },
   {
     route: '/privacy/herdwick',
-    title: 'Privacy Policy — Herdwick',
-    description: 'Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. The developer collects no data.',
+    title: 'Privacy Policy - Herdwick',
+    description: 'Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. I collect no data.',
     image: 'https://btuckerc.dev/og/herdwick-privacy.jpg',
     imageAlt: 'Herdwick privacy: your agents stay on your machines.',
     type: 'website'
   },
   {
     route: '/herdwick/support',
-    title: 'Support — Herdwick',
+    title: 'Support - Herdwick',
     description: 'Help for Herdwick, the iPhone and iPad app for reading and answering coding agents on your own machines.',
     image: 'https://btuckerc.dev/og/herdwick-support.jpg',
     imageAlt: 'Herdwick support: coding agents on your phone.',
@@ -83,16 +83,16 @@ const pages = [
   },
   {
     route: '/privacy/inkjoin',
-    title: 'Privacy Policy — Inkjoin',
-    description: 'Privacy policy for Inkjoin, a calm iPhone logic puzzle game.',
+    title: 'Privacy Policy - Inkjoin',
+    description: 'Privacy policy for Inkjoin, an iPhone logic puzzle game.',
     image: 'https://btuckerc.dev/og/inkjoin-privacy.jpg',
     imageAlt: 'Inkjoin privacy policy.',
     type: 'website'
   },
   {
     route: '/inkjoin/support',
-    title: 'Support — Inkjoin',
-    description: 'Help for Inkjoin, a calm iPhone logic puzzle game.',
+    title: 'Support - Inkjoin',
+    description: 'Help for Inkjoin, an iPhone logic puzzle game.',
     image: 'https://btuckerc.dev/og/inkjoin-support.jpg',
     imageAlt: 'Inkjoin support.',
     type: 'website'

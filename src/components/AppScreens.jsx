@@ -20,7 +20,7 @@ export default function AppScreens() {
           </figure>
         ))}
       </div>
-      <p className="app-screens-note">Firmware screens rendered on a computer, with sample content. Open a screen to see it at full size.</p>
+      <p className="app-screens-note">Firmware screens rendered on a computer with sample data. Click any screen to see it full size.</p>
     </div>
   )
 }

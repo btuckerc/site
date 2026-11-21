@@ -8,10 +8,10 @@ const sections = [
     title: 'How to play',
     content: (
       <ul className="list-disc space-y-1 pl-5">
-        <li>Fill squares to make one shape, joined side to side.</li>
-        <li>A number counts filled squares in the eight squares around it, split into separate groups. For example, “3 1” means a group of three and a group of one.</li>
-        <li>There must not be a filled 2×2 block.</li>
-        <li>The first teaching chapters introduce each rule.</li>
+        <li>Fill squares to make one connected shape, joined side to side.</li>
+        <li>A number counts filled squares in the eight squares around it, split into separate groups. For example, &quot;3 1&quot; means a group of three and a group of one.</li>
+        <li>You can&apos;t have a solid 2x2 block of filled squares.</li>
+        <li>The early chapters walk through each rule one at a time.</li>
       </ul>
     ),
   },
@@ -19,12 +19,12 @@ const sections = [
     title: 'Common questions',
     content: (
       <div className="space-y-4">
-        <p><strong className="text-fg">A daily puzzle won’t load.</strong> It needs a connection to download once. After that, you can play it offline.</p>
-        <p><strong className="text-fg">Why are daily drawings covered?</strong> Finished drawings for daily puzzles stay covered until you choose to show them.</p>
-        <p><strong className="text-fg">What does Inkjoin Full unlock?</strong> One purchase unlocks all 1,600 practice puzzles and every past daily. Today’s daily, every chapter, hints and 10 practice puzzles per level are free.</p>
-        <p><strong className="text-fg">I bought Inkjoin Full on another device.</strong> In Settings, tap Restore Purchases. Family Sharing works too.</p>
-        <p><strong className="text-fg">How do I turn analytics off?</strong> In Settings, turn off “Send anonymous analytics”.</p>
-        <p><strong className="text-fg">Where is my progress?</strong> Progress lives only on this iPhone.</p>
+        <p><strong className="text-fg">A daily puzzle won&apos;t load.</strong> It needs an internet connection the first time to download. After that, you can play it offline.</p>
+        <p><strong className="text-fg">Why are daily drawings covered?</strong> Finished drawings for daily puzzles stay hidden until you tap to reveal them.</p>
+        <p><strong className="text-fg">What does Inkjoin Full unlock?</strong> One purchase unlocks all 1,600 practice puzzles and every past daily. Today&apos;s daily, every chapter, unlimited hints, and 10 practice puzzles per level are free.</p>
+        <p><strong className="text-fg">I bought Inkjoin Full on another device.</strong> Open Settings and tap Restore Purchases. Family Sharing works too.</p>
+        <p><strong className="text-fg">How do I turn analytics off?</strong> Open Settings and turn off &quot;Send anonymous analytics&quot;.</p>
+        <p><strong className="text-fg">Where is my progress?</strong> Progress is saved only on this iPhone.</p>
       </div>
     ),
   },
@@ -33,10 +33,12 @@ const sections = [
 const InkjoinSupport = () => (
   <>
     <PageMeta
-      title="Support — Inkjoin"
-      description="Help for Inkjoin, a calm iPhone logic puzzle game."
+      title="Support - Inkjoin"
+      description="Help for Inkjoin, an iPhone logic puzzle game."
       url="https://btuckerc.dev/inkjoin/support"
       openGraphDescription="How to play Inkjoin and answers to common questions."
+      image="https://btuckerc.dev/og/inkjoin-support.jpg"
+      imageAlt="Inkjoin support."
     />
 
     <div className="tui-page-shell min-h-svh px-4 pb-28">

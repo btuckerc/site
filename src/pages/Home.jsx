@@ -13,8 +13,8 @@ const Home = () => {
   return (
     <>
       <PageMeta
-        title="Tucker Craig — Software Engineer"
-        description="Software engineer who likes building things that make everyday life a little easier. Right now: omalo, a pocket companion with Pokémon and an AI handoff."
+        title="Tucker Craig - Software Engineer"
+        description="Software engineer who likes building things that make everyday life a little easier. Right now I'm building omalo, a pocket companion running Pokémon Emerald with an AI handoff."
         url="https://btuckerc.dev/"
         image="https://btuckerc.dev/og/home.jpg"
         imageAlt="Tucker Craig, software engineer. I like building things that make everyday life a little easier."
@@ -47,10 +47,10 @@ const Home = () => {
                 >
                   We can fix everything
                 </a>
-                . I&apos;ve built an app to track my AI usage, replaced expensive voice-to-text, and brought AI agents to my phone, and I&apos;m excited to share more along the way.
+                . I&apos;ve built an app to track my AI usage, replaced expensive voice-to-text, and brought AI agents to my phone. I&apos;m excited to share more along the way.
               </p>
               <p className="mt-4 text-muted">
-                I also sang acapella in{' '}
+                I also sang a cappella in{' '}
                 <a
                   href="https://open.spotify.com/track/5CV2w2PIbKouRr2jNKjJIR"
                   className="whitespace-nowrap text-accent underline underline-offset-4"
@@ -69,10 +69,10 @@ const Home = () => {
           <section className="home-feature mt-6 border border-line/70 bg-card-bg/80 p-5 backdrop-blur-xl sm:p-8" aria-labelledby="featured-project-title">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="min-w-0 flex-1 basis-80">
-                <p className="home-kicker font-mono text-xs text-accent">featured product / omalo</p>
-                <h2 id="featured-project-title" className="mt-2 font-mono text-2xl font-bold text-fg sm:text-3xl">Pokémon Emerald on arduino</h2>
+                <p className="home-kicker font-mono text-xs text-accent">featured project / omalo</p>
+                <h2 id="featured-project-title" className="mt-2 font-mono text-2xl font-bold text-fg sm:text-3xl">Pokémon Emerald on Arduino</h2>
                 <p className="mt-3 text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">
-                  I&apos;m building firmware for an s3 amoled device to play Pokémon, including an AI handoff for gameplay goals.
+                  I&apos;m writing firmware for a small ESP32-S3 handheld that runs Pokémon Emerald, with an AI you can hand goals off to.
                 </p>
               </div>
               <span className="home-status font-mono text-xs text-muted"><span className="text-accent" aria-hidden="true">●</span> Prototype</span>
@@ -92,14 +92,14 @@ const Home = () => {
                 <div className="home-media-frame home-media-frame-device">
                   <img
                     src="/media/s3-amoled/device-in-hand-public.jpg"
-                    alt="A hand holds a small rounded device running Pokémon Emerald. The screen shows a queued ‘Beat the game’ goal and asks the player to continue, then say go."
+                    alt="A hand holds a small rounded device running Pokémon Emerald. The screen shows a queued 'Beat the game' goal and asks the player to continue, then say go."
                     width="756"
                     height="1008"
                     loading="eager"
                     decoding="async"
                   />
                 </div>
-                <figcaption>Prototype with a gameplay goal queued.</figcaption>
+                <figcaption>Early prototype with a goal queued up.</figcaption>
               </figure>
               <StarterSelectionCapture className="home-media-card home-media-card-game home-game-capture" showToggle={false} downloadSrc={null} captureNote={null} />
             </div>
@@ -147,7 +147,7 @@ const Home = () => {
             <div className="home-app-screens home-app-feature-screens" tabIndex={0} role="region" aria-label="Inkjoin screenshots, scroll sideways for more">
               <img
                 src="/media/inkjoin/screenshots-iphone.webp"
-                alt="Seven Inkjoin iPhone screenshots: a partly filled puzzle, the home screen with today’s puzzle, the chapter list, drawings from one chapter, the Drawings collection, practice difficulty levels, and a puzzle in dark mode."
+                alt="Seven Inkjoin iPhone screenshots: a partly filled puzzle, the home screen with today's puzzle, the chapter list, drawings from one chapter, the Drawings collection, practice difficulty levels, and a puzzle in dark mode."
                 width="2369"
                 height="702"
                 loading="lazy"
@@ -194,7 +194,7 @@ const Home = () => {
                 <img src="/media/dictation/icon.png" alt="" width="256" height="256" loading="lazy" decoding="async" className="home-app-icon" />
                 <div>
                   <p className="home-kicker font-mono text-xs text-accent">dictation</p>
-                  <h2 className="mt-1 font-mono text-lg font-bold text-fg">Local voice to text</h2>
+                  <h2 className="mt-1 font-mono text-lg font-bold text-fg">Local voice-to-text</h2>
                 </div>
               </div>
               <p className="text-sm leading-6 text-muted">{dictation.blurb}</p>
@@ -232,7 +232,7 @@ const Home = () => {
               <p className="home-kicker font-mono text-xs text-accent">boilerplate</p>
               <h2 className="mt-2 font-mono text-lg font-bold text-fg">My opinionated config setup</h2>
               <p className="mt-3 text-sm leading-6 text-muted">My macOS and Linux workspace setup, managed with chezmoi and mise.</p>
-              <a href="https://github.com/btuckerc/boilerplate" className="tui-link-chip mt-5 inline-flex" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">browse the configuration</a>
+              <a href="https://github.com/btuckerc/boilerplate" className="tui-link-chip mt-5 inline-flex" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">browse config</a>
             </article>
           </section>
 

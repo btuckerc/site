@@ -9,7 +9,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "Codex and Claude quotas, local inference, and OpenRouter credit in one quiet macOS menu bar.",
+    "blurb": "A macOS menu bar app for tracking Codex and Claude quotas, local inference, and OpenRouter credit.",
     "tags": [
       "macOS",
       "Menu Bar",
@@ -20,7 +20,7 @@
       "github": "https://github.com/btuckerc/pace-bar",
       "download": "https://github.com/btuckerc/pace-bar/releases/latest"
     },
-    "overview": "A focused fork of CodexBar by Peter Steinberger and contributors, built with SwiftUI and AppKit. The Apple Silicon download is signed and notarized and requires macOS 14 or later; Intel Macs build from source. Forecasts are estimates, not an account switcher.",
+    "overview": "A fork of CodexBar by Peter Steinberger and contributors, built with SwiftUI and AppKit. The Apple Silicon download is signed and notarized for macOS 14 and up (Intel Macs can build from source). Forecasts are rough estimates, and it doesn't switch accounts.",
     "stack": [
       "Swift",
       "SwiftUI",
@@ -30,7 +30,7 @@
       "One quota ring per Codex and Claude subscription",
       "Pooled Codex forecast that flags quota about to reset unused",
       "Local inference token counts and speed, with optional GPU readings",
-      "OpenRouter balance kept distinct from estimated API cost"
+      "OpenRouter balance kept separate from estimated API cost"
     ]
   },
   {
@@ -42,7 +42,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "An iPhone game where you fill in squares to make one connected shape. The numbers tell you which squares to fill. Each solved puzzle becomes a drawing.",
+    "blurb": "An iPhone puzzle game where you fill in squares to make one connected shape, using the numbers as clues. Every solved puzzle turns into a drawing.",
     "tags": [
       "iOS",
       "Swift",
@@ -60,9 +60,9 @@
       "height": 1174,
       "title": "preview",
       "alt": "An Inkjoin puzzle being solved with a hint. Empty squares are marked with dots, and the finished shape becomes a drawing with a red stamp.",
-      "caption": "Solving a 7×7 puzzle with one hint. The grid fades and the finished drawing gets a red stamp."
+      "caption": "Solving a 7x7 puzzle with one hint. The grid fades out and the finished drawing gets a red stamp."
     },
-    "overview": "Nine chapters introduce one idea at a time. There’s a new puzzle each day and practice at four difficulty levels. Every puzzle has exactly one answer and can be solved without guessing. Hints are unlimited, with no penalty. Works offline on iPhone; requires iOS 26.",
+    "overview": "Nine chapters introduce one idea at a time, plus a new puzzle each day and practice at four difficulty levels. Every puzzle has one solution and never asks you to guess. Hints are unlimited with no penalty. Works offline on iPhone (requires iOS 26).",
     "stack": [
       "Swift",
       "SwiftUI",
@@ -71,7 +71,7 @@
     "features": [
       "74 puzzles across nine chapters",
       "Daily puzzles that get harder through the week",
-      "Hints that show where to look, explain a step and can fill it in",
+      "Hints that show where to look, explain a step, and can fill it in",
       "Solved puzzles saved as drawings"
     ]
   },
@@ -84,7 +84,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "A native iPhone and iPad client for herdr: read and answer your coding agents over SSH.",
+    "blurb": "An iPhone and iPad app for herdr so you can check on and answer your coding agents over SSH.",
     "tags": [
       "iOS",
       "iPadOS",
@@ -96,7 +96,7 @@
       "github": "https://github.com/btuckerc/herdwick",
       "privacy": "https://btuckerc.dev/privacy/herdwick"
     },
-    "overview": "Herdwick connects to your own machine over SSH, shows every agent herdr tracks, and renders their transcripts as conversations, with a live terminal when you need it. Requires iOS 26 and a Mac or Linux host running herdr; build from source with Xcode. An independent project, not affiliated with herdr or Tailscale.",
+    "overview": "Connects to your own machine over SSH, lists every agent herdr is tracking, and renders their transcripts as chat threads, with a live terminal when you need it. Requires iOS 26 and a Mac or Linux host running herdr. Independent project, not affiliated with herdr or Tailscale.",
     "stack": [
       "Swift",
       "SwiftTerm",
@@ -104,10 +104,10 @@
       "TailscaleKit"
     ],
     "features": [
-      "Inbox of agents across hosts, with the ones that need you first",
-      "omp, Claude Code and Codex transcripts rendered as chat",
+      "Inbox of agents across hosts, with the ones waiting on you at the top",
+      "omp, Claude Code, and Codex transcripts shown as chat",
       "Native controls for questions and permission prompts",
-      "Plain SSH or an embedded Tailscale node; no account or analytics"
+      "Works over plain SSH or Tailscale, with no account or analytics"
     ]
   },
   {
@@ -119,7 +119,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "Mac-first technical dictation with local speech recognition and custom vocabulary, built on Handy.",
+    "blurb": "A local voice-to-text app for Mac with custom vocabulary for technical terms, built on Handy.",
     "tags": [
       "macOS",
       "Dictation",
@@ -137,9 +137,9 @@
       "height": 360,
       "title": "preview",
       "alt": "The Dynamic Orb recording overlay: a dark glass capsule appears, a rainbow light ripples as you speak, a cursor pulls a drop from its edge that melts back, and the light swirls while transcribing.",
-      "caption": "Dynamic Orb overlay · light ripples as you speak and swirls while transcribing."
+      "caption": "Dynamic Orb overlay: light ripples as you speak and swirls while transcribing."
     },
-    "overview": "An independent Handy-based app with Fast and Accurate speech-recognition presets. Plain dictation works offline after model downloads; optional text cleanup sends the transcript to an OpenAI-compatible endpoint you configure. The Apple Silicon download is signed and notarized.",
+    "overview": "Built on Handy, with Fast and Accurate speech-recognition presets. Plain dictation runs completely offline once the models download. If you want text cleanup, you can point it at any OpenAI-compatible endpoint. The Apple Silicon download is signed and notarized.",
     "stack": [
       "Rust",
       "Tauri",
@@ -147,7 +147,7 @@
       "Whisper"
     ],
     "features": [
-      "Local speech recognition with two presets",
+      "Local speech recognition with Fast and Accurate presets",
       "Custom vocabulary for the Accurate preset",
       "Configurable dictation shortcuts",
       "Optional transcript cleanup with a plain-text fallback"
@@ -162,7 +162,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "Record your screen or stream to Twitch from your Mac’s menu bar.",
+    "blurb": "Record your screen or stream to Twitch from your Mac's menu bar.",
     "tags": [
       "macOS",
       "Menu Bar",
@@ -173,16 +173,16 @@
       "github": "https://github.com/btuckerc/streamapp",
       "download": "https://github.com/btuckerc/streamapp/releases/latest"
     },
-    "overview": "A menu bar app for screen or window capture, webcam and audio controls, Twitch streaming, a notch teleprompter, and desktop annotation. The download is signed and notarized for Apple Silicon Macs on macOS 26 or newer; source builds need no signing certificate. GPL-3.0.",
+    "overview": "A Mac menu bar app for capturing your screen or windows, tweaking webcam and audio, streaming to Twitch, using a notch teleprompter, and drawing right on the desktop. Signed and notarized for Apple Silicon Macs on macOS 26 or newer (or build from source without a signing cert). Licensed under GPL-3.0.",
     "stack": [
       "Swift",
       "FFmpeg",
       "WebRTC"
     ],
     "features": [
-      "Crash-recoverable screen or window recording",
+      "Crash-recoverable screen and window recording",
       "Desktop and Full Camera layouts with webcam punch-in",
-      "Twitch streaming with explicit start confirmation",
+      "Twitch streaming with a confirmation step before going live",
       "Desktop drawing and live loudness meters"
     ]
   },
@@ -206,16 +206,16 @@
       "github": "https://github.com/btuckerc/tablet-companion",
       "download": "https://github.com/btuckerc/tablet-companion/releases/latest"
     },
-    "overview": "A setup companion for the Wacom Intuos BT S, tested with driver 6.4.14-1. It hands off the Wacom driver installer and assigns tablet-button shortcuts for StreamApp drawing while preserving other buttons. Other tablets are not supported yet. The download is signed and notarized for Apple Silicon Macs on macOS 26 or newer.",
+    "overview": "A small setup helper for the Wacom Intuos BT S (tested with driver 6.4.14-1). It walks through the Wacom driver install and maps tablet buttons to StreamApp drawing shortcuts without touching your other buttons. Only supports the Intuos BT S for now. Signed and notarized for Apple Silicon Macs on macOS 26 or newer.",
     "stack": [
       "Swift",
       "Wacom Driver"
     ],
     "features": [
       "Guided Wacom driver download and installer handoff",
-      "Suggested tablet-button layout for StreamApp",
-      "Restore prior button assignments",
-      "Local settings backups"
+      "Suggested button layout for StreamApp drawing",
+      "Restore previous button mappings anytime",
+      "Local backups of your tablet settings"
     ]
   },
   {
@@ -227,7 +227,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "A movie-seat ranking project that compares seats together across showtimes.",
+    "blurb": "A movie-seat finder that compares seat maps across showtimes to rank the best seats together.",
     "tags": [
       "Go",
       "TypeScript",
@@ -238,7 +238,7 @@
       "site": "https://movies.angl.gg",
       "github": "https://github.com/btuckerc/center-seat"
     },
-    "overview": "CenterSeat compares seats across nearby showtimes and ranks contiguous seats. Live searches require a configured data provider.",
+    "overview": "Compares open seats across nearby showtimes and ranks the best seats together so you don't have to click through every auditorium map yourself. Live searches need a configured data provider.",
     "stack": [
       "Go",
       "Node.js",
@@ -247,10 +247,9 @@
       "Atom"
     ],
     "features": [
-      "Compares seat maps across showtimes",
-      "Ranks contiguous seats by preference",
-      "Code and setup are available on GitHub",
-      "Live searches require a configured provider"
+      "Compares seat maps across nearby showtimes",
+      "Ranks contiguous seats based on where you like to sit",
+      "Pluggable data provider for live showtime searches"
     ]
   },
   {
@@ -272,7 +271,7 @@
     "links": {
       "github": "https://github.com/btuckerc/boilerplate"
     },
-    "overview": "Boilerplate is a cross-platform workspace setup managed with chezmoi and mise. The repository includes setup notes for macOS and Linux.",
+    "overview": "My shared dotfiles and workspace config for macOS and Linux, managed with chezmoi and mise. Includes bootstrap and recovery notes for bringing up a new machine.",
     "stack": [
       "Bash/Zsh",
       "Chezmoi",
@@ -289,14 +288,14 @@
   },
   {
     "id": "trivrdy",
-    "title": "Jeopardy study platform",
+    "title": "Jeopardy Study App",
     "year": "2024",
     "date": "2026-04-02",
     "featured": 14,
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "A Jeopardy study platform with search and practice tools.",
+    "blurb": "A Jeopardy study app for searching clues, drilling categories, and playing full boards.",
     "tags": [
       "Next.js",
       "TypeScript",
@@ -306,7 +305,7 @@
     "links": {
       "github": "https://github.com/btuckerc/jeopardy"
     },
-    "overview": "This study platform brings search, practice modes, full boards, answer validation, and progress tracking into one place.",
+    "overview": "Search past Jeopardy clues, drill specific categories, or play through full boards with answer checking and progress tracking.",
     "stack": [
       "Next.js",
       "TypeScript",
@@ -315,9 +314,9 @@
       "Prisma"
     ],
     "features": [
-      "Search and practice workflows",
+      "Clue search and category practice",
       "Full-board game mode",
-      "Answer validation",
+      "Answer checking",
       "Progress tracking"
     ]
   },
@@ -340,7 +339,7 @@
     "links": {
       "github": "https://github.com/btuckerc/opencode-menu"
     },
-    "overview": "OpenCode Monitor keeps server status, start and stop controls, logs, updates, and optional idle shutdown in a macOS menu bar app.",
+    "overview": "Puts OpenCode server status, start and stop controls, logs, updates, and optional idle shutdown right in your macOS menu bar.",
     "stack": [
       "Swift",
       "macOS",
@@ -348,7 +347,7 @@
       "Shell"
     ],
     "features": [
-      "Menu bar status and controls",
+      "Menu bar status and quick controls",
       "Start, stop, and restart actions",
       "Optional idle auto-stop",
       "Build and uninstall scripts"
@@ -363,7 +362,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "This site: a terminal-style portfolio with keyboard navigation, a command palette, and fuzzy project search.",
+    "blurb": "This website. A terminal-style portfolio with keyboard navigation, a command palette, and fuzzy project search.",
     "tags": [
       "React",
       "Vite",
@@ -374,7 +373,7 @@
       "site": "https://btuckerc.dev",
       "github": "https://github.com/btuckerc/site"
     },
-    "overview": "A React and Vite single-page app styled like a terminal. Project data lives in one JSON file, and every route is prerendered to static HTML at build time.",
+    "overview": "Built with React and Vite and styled like a terminal. All the project data lives in one JSON file, and every route prerenders to static HTML at build time.",
     "stack": [
       "React",
       "Vite",
@@ -384,7 +383,7 @@
     ],
     "features": [
       "Command palette on the colon key",
-      "Fuzzy project search that tolerates typos",
+      "Fuzzy project search that forgives typos",
       "Keyboard navigation across lists",
       "Theme and font switching"
     ]
@@ -398,7 +397,7 @@
     "source": "GitHub public",
     "activity": "maintained",
     "visibility": "public",
-    "blurb": "A local audiobook player with synchronized transcription captions.",
+    "blurb": "A local audiobook player with synced captions generated with Whisper.",
     "tags": [
       "Python",
       "Flask",
@@ -408,7 +407,7 @@
     "links": {
       "github": "https://github.com/btuckerc/audioreader"
     },
-    "overview": "AudioReader serves local audio in a browser and pairs playback with VTT captions generated from transcription.",
+    "overview": "Plays local audiobooks in the browser alongside synced VTT captions generated locally with Whisper.",
     "stack": [
       "Python",
       "Flask",
@@ -417,10 +416,10 @@
       "HTML5 Audio"
     ],
     "features": [
-      "Synchronized VTT captions",
+      "Synced VTT captions",
       "HTML5 audio playback",
       "Playlist support",
-      "Local transcription workflow"
+      "Local Whisper transcription"
     ]
   },
   {
@@ -432,7 +431,7 @@
     "source": "GitHub public",
     "activity": "recent",
     "visibility": "public",
-    "blurb": "An offline iOS Farkle scorer with tap-to-score dice and nearby multiplayer experiments.",
+    "blurb": "An offline iOS scorekeeper for Farkle with tap-to-score dice and some nearby multiplayer experiments.",
     "tags": [
       "Swift",
       "SwiftUI",
@@ -443,7 +442,7 @@
       "app store": "https://apps.apple.com/us/app/farkle-scorer/id6756927115",
       "github": "https://github.com/btuckerc/farkle"
     },
-    "overview": "Farkle Scorer handles visual dice selection, manual entry for physical dice, house rules, and optional nearby multiplayer exploration.",
+    "overview": "Tap the dice you rolled or enter scores manually if you're using physical dice. Supports custom house rules and an experimental nearby multiplayer mode.",
     "stack": [
       "Swift",
       "SwiftUI",
@@ -452,9 +451,9 @@
     ],
     "features": [
       "Tap-to-score dice",
-      "Manual score entry",
+      "Manual score entry for physical dice",
       "Configurable house rules",
-      "Offline-first data model"
+      "Works completely offline"
     ]
   },
   {
@@ -478,7 +477,7 @@
       "github": "https://github.com/btuckerc/flip7calculator",
       "privacy": "https://btuckerc.dev/privacy/flipping-seven-calculator"
     },
-    "overview": "Flipping Seven Calculator keeps score on iPhone and iPad with card taps, bonuses, round history, undo, and local persistence.",
+    "overview": "Keeps score for Flip 7 on iPhone and iPad. Tap cards to tally rounds and bonuses, check round history, undo mistakes, and pick up where you left off.",
     "stack": [
       "Swift",
       "SwiftUI",
@@ -487,8 +486,8 @@
     ],
     "features": [
       "Round history and undo",
-      "Local persistence",
-      "Post-game statistics",
+      "Saves games locally on your device",
+      "Post-game stats",
       "iPhone and iPad layouts"
     ]
   },
@@ -501,7 +500,7 @@
     "source": "GitHub public",
     "activity": "earlier experiment",
     "visibility": "public",
-    "blurb": "An earlier experiment in ordering playlists by BPM, key, and danceability.",
+    "blurb": "An older experiment that orders Spotify playlists by BPM, key, and danceability.",
     "tags": [
       "Python",
       "Spotify API",
@@ -511,7 +510,7 @@
     "links": {
       "github": "https://github.com/btuckerc/spotify-dj"
     },
-    "overview": "Spotify DJ analyzes playlist audio features and suggests an order based on BPM, key, danceability, and energy. Check the repository setup before running it.",
+    "overview": "Pulls audio features from Spotify and suggests a track order based on BPM, key, danceability, and energy. It's an older project, so check the repo setup notes before running it.",
     "stack": [
       "Python",
       "Spotipy",
@@ -527,14 +526,14 @@
   },
   {
     "id": "phys-comp-final",
-    "title": "Physical computing final",
+    "title": "Physical Computing Final",
     "year": "2018",
     "date": "2018-05-14",
     "featured": 4,
     "source": "GitHub public",
     "activity": "historical",
     "visibility": "public",
-    "blurb": "A college physical-computing project built around a garden owl.",
+    "blurb": "A college physical computing project: a plastic garden owl rigged with a Pi camera, mic, and light sensor.",
     "tags": [
       "Python",
       "OpenCV",
@@ -544,7 +543,7 @@
     "links": {
       "github": "https://github.com/btuckerc/phys-comp-final"
     },
-    "overview": "This college physical-computing project explored a garden owl with camera, light, and sound sensors, alongside a documented data flow.",
+    "overview": "Built for DIG333 at Davidson. A fake garden owl watches a walkway with a Raspberry Pi camera, microphone, and light sensor to count foot traffic, track noise levels, spot average shirt colors, and tweet updates about how busy it is.",
     "stack": [
       "Python",
       "OpenCV",
@@ -552,10 +551,10 @@
       "Sensors"
     ],
     "features": [
-      "Camera and sensor inputs",
-      "OpenCV exploration",
-      "Data-flow documentation",
-      "Historical project context"
+      "Pi camera with OpenCV people counting",
+      "Microphone for walkway noise levels",
+      "Light sensor to put the owl to sleep at night",
+      "Automated status tweets from the owl"
     ]
   },
   {
@@ -567,7 +566,7 @@
     "source": "GitHub public",
     "activity": "legacy",
     "visibility": "public",
-    "blurb": "An earlier comic-cataloging project with image matching and barcode scanning.",
+    "blurb": "My first take on a comic cataloging tool, using barcode scanning and image matching.",
     "tags": [
       "Python",
       "Computer Vision",
@@ -577,7 +576,7 @@
     "links": {
       "github": "https://github.com/btuckerc/ComicScanner"
     },
-    "overview": "ComicScanner is the earlier version of a comic-catalog idea, with barcode scanning, metadata lookup, image matching, and collection management.",
+    "overview": "An earlier Flask app for cataloging comics with barcode scanning, cover matching, metadata lookup, and collection import and export.",
     "stack": [
       "Python",
       "Flask",
@@ -586,7 +585,7 @@
     ],
     "features": [
       "Barcode scanning",
-      "Image-based identification",
+      "Cover image matching",
       "Metadata lookup",
       "Collection import and export"
     ]
@@ -600,7 +599,7 @@
     "source": "GitHub public",
     "activity": "legacy",
     "visibility": "public",
-    "blurb": "An RSS reader experiment that summarizes feeds in a small web interface.",
+    "blurb": "A small web app experiment that pulls RSS feeds and writes short summaries.",
     "tags": [
       "Python",
       "RSS",
@@ -610,7 +609,7 @@
     "links": {
       "github": "https://github.com/btuckerc/rss-summarizer"
     },
-    "overview": "RSS News Summarizer reads feeds, aggregates sources, and writes short summaries in a web interface.",
+    "overview": "Parses RSS feeds from multiple sources and generates short markdown summaries in a simple web UI.",
     "stack": [
       "Python",
       "RSS Parser",
@@ -618,7 +617,7 @@
     ],
     "features": [
       "RSS feed parsing",
-      "Source aggregation",
+      "Multi-source aggregation",
       "Automatic summaries",
       "Markdown output"
     ]
@@ -632,7 +631,7 @@
     "source": "GitHub public",
     "activity": "legacy",
     "visibility": "public",
-    "blurb": "A music-analysis project that maps listening preferences with audio features and distance math.",
+    "blurb": "An older Python project that uses Spotify audio features and Euclidean distance to map out music taste.",
     "tags": [
       "Python",
       "Linear Algebra",
@@ -642,7 +641,7 @@
     "links": {
       "github": "https://github.com/btuckerc/spotify-analyst"
     },
-    "overview": "Spotify Preference Analyst explores listening patterns with audio features, Euclidean distance, and visualizations.",
+    "overview": "Uses linear algebra (Euclidean distance on Spotify's audio features) to analyze listening history, chart genres, and experiment with track recommendations.",
     "stack": [
       "Python",
       "Spotipy",
@@ -651,8 +650,8 @@
     ],
     "features": [
       "Listening history analysis",
-      "Preference mapping",
-      "Genre visualization",
+      "Preference mapping with Euclidean distance",
+      "Genre charts",
       "Recommendation experiments"
     ]
   },
@@ -664,7 +663,7 @@
     "source": "local",
     "activity": "active",
     "visibility": "public",
-    "blurb": "Drop in a finished electronic track and get every distinct sound as its own stem, plus a Serum 2 patch that recreates it.",
+    "blurb": "Drop in a finished electronic track to pull out each distinct sound as its own stem, plus a matching Serum 2 patch.",
     "tags": [
       "Music Production",
       "Sound Design",
@@ -672,7 +671,7 @@
       "macOS"
     ],
     "links": {},
-    "overview": "A local macOS tool. It splits a song into sound families (plucks, basses, leads, chops, risers, drum hits), gives each one its own stem, and searches Serum 2's factory presets for a patch that matches. Separation runs on the Apple silicon GPU.",
+    "overview": "A local macOS tool that splits a song into sound families (plucks, basses, leads, chops, risers, drum hits), exports each one as a stem, and searches Serum 2's factory presets for a matching patch. Separation runs locally on Apple silicon.",
     "stack": [
       "Python",
       "Audio source separation",
@@ -680,9 +679,9 @@
     ],
     "features": [
       "One stem and one .SerumPreset per sound",
-      "A/B playback of the mix, the isolated sound and the Serum patch",
-      "A timeline of every place each sound occurs",
-      "Refine, hide and merge sound families"
+      "A/B playback of the mix, the isolated sound, and the Serum patch",
+      "Timeline showing every spot each sound appears",
+      "Refine, hide, and merge sound families"
     ]
   },
   {
@@ -693,7 +692,7 @@
     "source": "local",
     "activity": "active",
     "visibility": "public",
-    "blurb": "A small browser workspace for coding-agent sessions that run on my own server.",
+    "blurb": "A small browser workspace for coding-agent sessions running on my own server.",
     "tags": [
       "Coding Agents",
       "Self-hosted",
@@ -701,15 +700,15 @@
       "Bun"
     ],
     "links": {},
-    "overview": "A single-user web client for native OMP agent sessions. The agent process, files and commands stay on the server and the browser is only a client, reached over a private network. Nothing sits between the two: no extra router, planner call or copy of the conversation.",
+    "overview": "A single-user web client for OMP agent sessions running on my own server. The agent, files, and shell commands stay on the server, and the browser just connects over a private network with no extra middleware or copies of the conversation.",
     "stack": [
       "TypeScript",
       "Bun"
     ],
     "features": [
-      "Pick a project and a model, then start or resume a conversation",
+      "Pick a project and model, then start or resume a conversation",
       "Scratch conversations outside any project",
-      "A changes view for Git workspaces"
+      "Git changes view for workspaces"
     ]
   },
   {
@@ -720,7 +719,7 @@
     "source": "local",
     "activity": "recent",
     "visibility": "public",
-    "blurb": "An offline-first iPhone app for eating, training and sleep, without streaks or scores.",
+    "blurb": "An offline iPhone app for tracking food, workouts, and sleep, without streaks or scores.",
     "tags": [
       "iOS",
       "Health",
@@ -728,7 +727,7 @@
       "Offline-first"
     ],
     "links": {},
-    "overview": "A native iPhone app built around four tabs: Today, Eat, Move and Sleep. It deliberately skips habit-tracker mechanics like streaks, daily grades and confetti. Optional AI planning goes through a server broker, so no provider key ships in the app.",
+    "overview": "An iPhone app built around four tabs: Today, Eat, Move, and Sleep. No streaks, daily grades, or confetti. Optional AI planning goes through a server broker so no API keys ship in the app.",
     "stack": [
       "Swift",
       "SwiftUI",
@@ -736,9 +735,9 @@
       "HealthKit"
     ],
     "features": [
-      "Barcode, Nutrition Facts and menu scanning for fast meal logging",
-      "Bodyweight, walking and gym workouts with plain-language form cues",
-      "A workout Live Activity and Home Screen widgets",
+      "Barcode, nutrition label, and menu scanning for fast meal logging",
+      "Bodyweight, walking, and gym workouts with plain-English form cues",
+      "Workout Live Activity and Home Screen widgets",
       "Apple Health import for sleep and body measurements"
     ]
   },
@@ -750,7 +749,7 @@
     "source": "local",
     "activity": "prototype",
     "visibility": "public",
-    "blurb": "A DJ utility for library management, set planning and Rekordbox integration, run on a home server.",
+    "blurb": "A self-hosted DJ tool for managing my music library, planning sets, and syncing with Rekordbox.",
     "tags": [
       "DJ",
       "Music",
@@ -758,7 +757,7 @@
       "Self-hosted"
     ],
     "links": {},
-    "overview": "Early stage. A FastAPI backend, a background worker and a React frontend, with PostgreSQL, Redis and Qdrant vector search. The first milestone covers sign-in, a library dashboard and service health.",
+    "overview": "Still early. Built with a FastAPI backend, background worker, React frontend, PostgreSQL, Redis, and Qdrant vector search. So far it has sign-in, a library dashboard, and health checks.",
     "stack": [
       "Python",
       "FastAPI",
@@ -767,8 +766,8 @@
       "Qdrant"
     ],
     "features": [
-      "Library dashboard: audio files, recordings, analyzed tracks and crates",
-      "Health checks for the database, queue and vector search"
+      "Library dashboard for audio files, recordings, analyzed tracks, and crates",
+      "Health checks for the database, queue, and vector search"
     ]
   },
   {
@@ -779,7 +778,7 @@
     "source": "GitHub public",
     "activity": "earlier experiment",
     "visibility": "public",
-    "blurb": "An experimental ML trading stack: multi-horizon forecasts, regime-aware risk and paper trading.",
+    "blurb": "An experimental Python ML trading project with return forecasting, risk limits, and paper trading.",
     "tags": [
       "Python",
       "Trading",
@@ -789,7 +788,7 @@
     "links": {
       "github": "https://github.com/btuckerc/py-trading"
     },
-    "overview": "Builds multi-horizon return forecasts and turns them into portfolio weights, using point-in-time data so backtests avoid lookahead and survivorship bias. Market data lives in DuckDB and Parquet. An experiment, not investment advice.",
+    "overview": "Forecasts returns across multiple time horizons and turns them into portfolio weights, using point-in-time market data in DuckDB and Parquet so backtests don't cheat with future data. Strictly an experiment, not investment advice.",
     "stack": [
       "Python",
       "DuckDB",
@@ -798,7 +797,7 @@
     ],
     "features": [
       "Point-in-time, as-of data queries",
-      "Regime-aware risk with sector tilts and a drawdown throttle",
+      "Risk limits with sector tilts and a drawdown throttle",
       "Daily paper-trading loop with a dry-run mode"
     ]
   },
@@ -818,7 +817,7 @@
       "Offline"
     ],
     "links": {},
-    "overview": "An iOS app and a Python preprocessor, and the successor to my earlier comic scanner. The preprocessor turns a CLZ Comics collection export into a compressed bundle of cover thumbnails and image features. The app matches camera frames against it with Vision for a fast search, then OpenCV for verification.",
+    "overview": "The follow-up to my earlier comic scanner. A Python script packs a CLZ Comics export into a compressed bundle of cover thumbnails and image features, and the iOS app matches live camera frames on-device using Apple Vision first and OpenCV to double-check.",
     "stack": [
       "Swift",
       "SwiftUI",
@@ -826,8 +825,8 @@
       "Python"
     ],
     "features": [
-      "Matching runs entirely on the phone, with no network",
-      "Vision featureprint search plus A-KAZE and RANSAC verification",
+      "Runs completely on the phone with no network needed",
+      "Apple Vision search plus A-KAZE and RANSAC verification",
       "Collection bundles built from a CLZ Comics export"
     ]
   },

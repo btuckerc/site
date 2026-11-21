@@ -31,7 +31,7 @@ const cards = [
     tag: 'Software Engineer',
     context: [
       { text: 'I like building things that make everyday life a little easier.', strong: true },
-      { text: 'Right now: firmware for omalo, a pocket companion with Pokémon and an AI handoff.' }
+      { text: "Right now I'm writing firmware for omalo, a pocket companion running Pokémon Emerald with an AI handoff." }
     ],
     hint: 'say hi →'
   },
@@ -41,9 +41,9 @@ const cards = [
     title: 'Tucker Craig',
     bracket: 'about',
     context: [
-      { text: 'Hello, world! I’m Tucker.', strong: true },
+      { text: "Hello, world! I'm Tucker.", strong: true },
       { text: 'Apps for my AI usage, my own voice-to-text, and AI agents on my phone.' },
-      { text: 'I stream on Twitch and sang acapella at Davidson.' }
+      { text: 'I stream on Twitch and sang a cappella at Davidson.' }
     ],
     hint: 'more about me →'
   },
@@ -52,7 +52,7 @@ const cards = [
     path: '/projects',
     title: 'Tucker Craig',
     bracket: 'projects',
-    context: [{ text: 'Things I’ve built, big and small.', strong: true }],
+    context: [{ text: "Things I've built, big and small.", strong: true }],
     list: [
       ...featuredProjects.map(id => ({ text: projectTitle(id) })),
       { text: `+ ${projects.length - featuredProjects.length} more`, more: true }
@@ -79,7 +79,7 @@ const cards = [
     bracket: 's3-amoled',
     context: [
       { text: 'What happens when you hand Pokémon to an AI?', strong: true },
-      { text: 'A battle handoff, checking what the agent actually did, and a tiny motion-controlled game.' }
+      { text: 'A battle handoff, checking what the agent actually did, and a tiny motion game.' }
     ],
     hint: 'read →'
   },
@@ -103,7 +103,7 @@ const cards = [
     bracket: 'privacy',
     context: [
       { text: 'Your agents stay on your machines.', strong: true },
-      { text: 'Herdwick connects to them directly over SSH. The developer collects and stores no data.' }
+      { text: "Herdwick connects straight to them over SSH. I don't collect or store any of your data." }
     ],
     hint: 'read the policy →'
   },
@@ -127,7 +127,7 @@ const cards = [
     bracket: 'privacy',
     context: [
       { text: 'Your puzzles stay yours.', strong: true },
-      { text: 'Your progress stays on your device; optional anonymous analytics tune puzzle difficulty.' }
+      { text: 'Your progress stays on your device, and optional anonymous analytics help tune puzzle difficulty.' }
     ],
     hint: 'read the policy →'
   },

@@ -5,18 +5,17 @@ const linkClass =
 
 const policySections = [
   {
-    title: 'Data we collect',
+    title: 'Data collected',
     content: (
       <>
         <p>
-          Inkjoin does not use third-party SDKs, advertising, tracking, or crash-reporting tools.
-          Anonymous analytics are on by default and can be turned off in Settings → “Send anonymous analytics”.
+          Inkjoin has no third-party SDKs, ads, tracking, or crash-reporting tools.
+          Anonymous analytics are on by default and can be turned off anytime in Settings → &quot;Send anonymous analytics&quot;.
         </p>
         <p className="mt-4">
-          The first time you solve each daily puzzle, Inkjoin sends the puzzle date, the time taken
-          in whole seconds, and whether you used hints. There is no identifier or account, and this
-          information is not linked to you. The developer uses it only to tune puzzle difficulty.
-          It is stored in a Cloudflare D1 database.
+          The first time you solve each daily puzzle, Inkjoin sends the puzzle date, how long it took
+          in whole seconds, and whether you used hints. There&apos;s no account or identifier, so none of
+          it is tied to you. I only use it to tune puzzle difficulty, and it&apos;s stored in a Cloudflare D1 database.
         </p>
       </>
     ),
@@ -25,10 +24,9 @@ const policySections = [
     title: 'Daily puzzles',
     content: (
       <p>
-        Daily puzzles are downloaded from the developer’s server at inkjoin.btuckerc.dev, hosted
-        on Cloudflare. Downloaded puzzles work offline. The download sends ordinary HTTP request
-        information, including your IP address, to Cloudflare. The developer does not log or store
-        that information.
+        Daily puzzles download from my server at inkjoin.btuckerc.dev, hosted on Cloudflare. Once a
+        puzzle downloads, it works offline. The request sends standard HTTP info (including your IP
+        address) to Cloudflare, and I don&apos;t log or store any of it.
       </p>
     ),
   },
@@ -36,8 +34,8 @@ const policySections = [
     title: 'Data stored on your device',
     content: (
       <p>
-        Your progress, marks, and settings stay on your device in the app’s Documents. Deleting
-        Inkjoin deletes them. Settings includes an option to reset your progress.
+        Your progress, marks, and settings stay on your device in the app&apos;s Documents folder.
+        Deleting Inkjoin wipes them. You can also reset your progress anytime in Settings.
       </p>
     ),
   },
@@ -45,19 +43,19 @@ const policySections = [
     title: 'Purchases',
     content: (
       <p>
-        Inkjoin Full is bought through Apple. Apple handles the payment; the developer receives
-        no payment or personal details. The app checks with the App Store whether the purchase
+        Inkjoin Full is bought through Apple. Apple handles the payment, and I never receive any
+        payment or personal details. The app just checks with the App Store to see if the purchase
         is active on your device.
       </p>
     ),
   },
   {
     title: 'Permissions',
-    content: <p>Inkjoin requests no permissions, including photos, notifications, or location.</p>,
+    content: <p>Inkjoin doesn&apos;t ask for any permissions, including photos, notifications, or location.</p>,
   },
   {
     title: 'Tracking',
-    content: <p>Inkjoin does not track you and does not use App Tracking Transparency.</p>,
+    content: <p>Inkjoin does not track you and does not use Apple&apos;s App Tracking Transparency framework.</p>,
   },
   {
     title: "Children's privacy",
@@ -75,10 +73,12 @@ const summaryItems = [
 const InkjoinPrivacy = () => (
   <>
     <PageMeta
-      title="Privacy Policy — Inkjoin"
-      description="Privacy policy for Inkjoin, a calm iPhone logic puzzle game."
+      title="Privacy Policy - Inkjoin"
+      description="Privacy policy for Inkjoin, an iPhone logic puzzle game."
       url="https://btuckerc.dev/privacy/inkjoin"
       openGraphDescription="What Inkjoin keeps on your device and what its daily puzzles and optional anonymous analytics send."
+      image="https://btuckerc.dev/og/inkjoin-privacy.jpg"
+      imageAlt="Inkjoin privacy policy."
     />
 
     <div className="tui-page-shell min-h-svh px-4 pb-28">
@@ -95,8 +95,8 @@ const InkjoinPrivacy = () => (
             Your puzzles stay yours.
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
-            Inkjoin is a calm iPhone logic puzzle game. Your progress stays on your device; the
-            optional anonymous analytics help tune puzzle difficulty.
+            Inkjoin is an iPhone logic puzzle game. Your progress stays on your device, and the
+            optional anonymous analytics just help me tune puzzle difficulty.
           </p>
           <dl className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {summaryItems.map(([term, description]) => (

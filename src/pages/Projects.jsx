@@ -129,8 +129,8 @@ const Projects = () => {
   return (
     <>
       <PageMeta
-        title="Projects — Tucker Craig"
-        description="Things Tucker Craig has built, big and small: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more."
+        title="Projects - Tucker Craig"
+        description="Things I've built, big and small: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more."
         url="https://btuckerc.dev/projects"
         image="https://btuckerc.dev/og/projects.jpg"
         imageAlt="Tucker Craig, projects: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more."

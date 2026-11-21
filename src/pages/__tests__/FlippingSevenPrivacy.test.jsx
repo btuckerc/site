@@ -31,7 +31,7 @@ describe('FlippingSevenPrivacy', () => {
     renderPage()
 
     await waitFor(() => {
-      expect(document.title).toBe('Privacy Policy — Flipping Seven Calculator')
+      expect(document.title).toBe('Privacy Policy - Flipping Seven Calculator')
       expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(
         'href',
         'https://btuckerc.dev/privacy/flipping-seven-calculator',

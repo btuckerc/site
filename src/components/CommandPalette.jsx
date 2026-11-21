@@ -27,7 +27,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
     {
       id: 'about',
       title: 'go to about',
-      description: 'read the public about page',
+      description: 'a bit about me',
       action: () => navigate('/about'),
       focusTarget: '#main-content',
       keywords: ['about', 'profile', 'bio', 'background', 'info']
@@ -43,7 +43,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
     {
       id: 'omalo',
       title: 'explore omalo',
-      description: 'open the omalo product page',
+      description: 'about the omalo handheld',
       action: () => navigate('/projects/omalo'),
       focusTarget: '#main-content',
       keywords: ['omalo', 'ichr', 'pocket', 'companion', 'pokemon', 'device']
@@ -51,7 +51,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
     {
       id: 's3-amoled',
       title: 'open technical notes',
-      description: 'read the omalo implementation notes',
+      description: 'how omalo works under the hood',
       action: () => navigate('/projects/s3-amoled'),
       focusTarget: '#main-content',
       keywords: ['s3', 'amoled', 'pokemon', 'grain', 'handheld', 'firmware']

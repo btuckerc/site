@@ -15,9 +15,9 @@ const AboutCard = () => (
     <h1 className="text-2xl sm:text-3xl font-bold text-fg mt-5">{aboutData.name}</h1>
     <p className="text-accent mt-2">{aboutData.role}</p>
     <p className="text-muted leading-relaxed mt-5">
-      {aboutData.intro.split('project page')[0]}
-      <Link to="/projects" className="text-accent underline underline-offset-4">project page</Link>
-      {aboutData.intro.split('project page').slice(1).join('project page')}
+      {aboutData.intro.split('projects page')[0]}
+      <Link to="/projects" className="text-accent underline underline-offset-4">projects page</Link>
+      {aboutData.intro.split('projects page').slice(1).join('projects page')}
     </p>
     <p className="text-fg leading-relaxed mt-4">
       {aboutData.currentWork.split('omalo')[0]}
@@ -38,7 +38,7 @@ const AboutCard = () => (
       from time to time. Hoping to do it more soon.
     </p>
     <p className="text-muted leading-relaxed mt-4">
-      I also sang acapella in{' '}
+      I also sang a cappella in{' '}
       <a
         href="https://open.spotify.com/track/5CV2w2PIbKouRr2jNKjJIR"
         className="whitespace-nowrap text-accent underline underline-offset-4"

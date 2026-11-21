@@ -9,7 +9,7 @@ export default function GrainCapture({ className = '' }) {
     width={368} height={448}
     title="Grain" label="motion capture"
     alt="Grain gameplay with bounce off, then on, followed by a bubble pop and the score increasing from zero to one."
-    caption="Bounce off, then on · simulated taps and movement."
-    captureNote="This demo runs the device’s real settings screen and game code on a computer. Each run starts from the same position with the same simulated movement, first with bounce off and then on. The bubble pop and score change come from the game."
+    caption="Bounce off, then on (with simulated taps and tilt)."
+    captureNote="This demo runs the device's real settings screen and game code on a computer. Each run starts from the same spot with the same simulated tilt, first with bounce off and then on. The bubble pop and score change come straight from the game."
   />
 }

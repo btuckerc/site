@@ -5,13 +5,13 @@ const linkClass =
 
 const policySections = [
   {
-    title: 'Data we collect',
+    title: 'Data collected',
     content: (
       <p>
-        <strong className="text-fg">None.</strong> Herdwick has no analytics, advertising,
-        or crash-reporting SDKs. The developer stores nothing about you. The only
-        developer-run service is the optional push relay described below, which forwards
-        alerts without storing or logging them.
+        <strong className="text-fg">None.</strong> Herdwick has no analytics, ads, or
+        crash-reporting SDKs. I don&apos;t store anything about you. The only service I run
+        is the optional push relay described below, which forwards alerts without storing
+        or logging them.
       </p>
     ),
   },
@@ -20,25 +20,25 @@ const policySections = [
     content: (
       <>
         <p>
-          Herdwick connects over SSH to computers you add. The conversations, terminal output,
-          messages, and attachments you see and send travel directly between your device and
-          that computer, encrypted by SSH. They are not copied anywhere else.
+          Herdwick connects over SSH to the computers you add. The conversations, terminal
+          output, messages, and attachments you view and send travel straight between your
+          device and that computer, encrypted by SSH. Nothing is copied anywhere else.
         </p>
         <ul className="mt-3 space-y-2" role="list">
           <li>
-            Host names, addresses, and usernames are stored on your device.
+            Host names, addresses, and usernames stay on your device.
           </li>
           <li>
-            The device&apos;s SSH key is generated on the device, and its private key never leaves
-            it. The key, any saved passwords, and trusted host keys are kept in the iOS Keychain
-            for this device only, and are not included in backups.
+            Your device generates its own SSH key, and the private key never leaves it. The
+            key, any saved passwords, and trusted host keys live in the iOS Keychain for
+            this device only and aren&apos;t included in backups.
           </li>
           <li>
             Removing a host in Herdwick deletes its saved password and host key.
           </li>
           <li>
-            Images you attach are uploaded only to your computer&apos;s temporary folder. Herdwick
-            deletes them after the period you choose in Settings.
+            Images you attach upload only to your computer&apos;s temporary folder. Herdwick
+            cleans them up after the window you pick in Settings.
           </li>
         </ul>
       </>
@@ -49,13 +49,13 @@ const policySections = [
     content: (
       <>
         <p>
-          If you choose to sign in to Tailscale, Herdwick runs Tailscale&apos;s client inside the
-          app so it can reach your machines on your tailnet. Sign-in happens on Tailscale&apos;s
-          web page in a Safari view; Herdwick cannot see your credentials.
+          If you sign in to Tailscale, Herdwick runs Tailscale&apos;s client inside the app
+          so it can reach your machines on your tailnet. Sign-in happens on Tailscale&apos;s
+          web page in a Safari view, so Herdwick never sees your credentials.
         </p>
         <p className="mt-4">
-          While Tailscale is in use, Tailscale Inc. receives the information its client needs to
-          connect this device to your tailnet and to diagnose it:
+          While Tailscale is on, Tailscale Inc. receives what its client needs to connect
+          and troubleshoot this device:
         </p>
         <ul className="mt-3 space-y-2" role="list">
           <li>Device identity keys and a device name (herdwick-&lt;random&gt;)</li>
@@ -63,13 +63,13 @@ const policySections = [
           <li>Diagnostic logs from the Tailscale client</li>
         </ul>
         <p className="mt-4">
-          This is linked to your Tailscale account and governed by{' '}
+          That data is tied to your Tailscale account and covered by{' '}
           <a href="https://tailscale.com/privacy-policy" className={linkClass}>
             Tailscale&apos;s privacy policy
           </a>
-          . It is not used for tracking or advertising, and the developer does not receive it.
-          Signing out in Settings removes this device&apos;s tailnet identity from the app. If you
-          never sign in, none of this happens.
+          . It isn&apos;t used for tracking or ads, and I never receive it. Signing out in
+          Settings wipes this device&apos;s tailnet identity from the app. If you never sign
+          in, none of this runs.
         </p>
       </>
     ),
@@ -79,9 +79,9 @@ const policySections = [
     content: (
       <>
         <p>
-          If you turn on Alerts While Away, Herdwick starts a small watcher on each connected
-          computer over SSH when you leave the app. It stops when you come back, exits on its
-          own after a day, and installs nothing that lasts.
+          If you turn on Alerts While Away, Herdwick starts a tiny watcher over SSH on each
+          connected computer when you leave the app. It stops when you come back, exits on
+          its own after a day, and doesn&apos;t install anything permanent.
         </p>
         <p className="mt-4">
           When an agent needs you or finishes, your computer sends Herdwick&apos;s push relay:
@@ -89,17 +89,17 @@ const policySections = [
         <ul className="mt-3 space-y-2" role="list">
           <li>This device&apos;s Apple push notification token</li>
           <li>
-            Identifiers for the computer (a random ID Herdwick created), the herdr session,
+            Identifiers for the computer (a random ID Herdwick made), the herdr session,
             and the pane
           </li>
           <li>The agent&apos;s new state and a change number</li>
         </ul>
         <p className="mt-4">
-          It never sends names, paths, or anything an agent wrote. The relay, run by the
-          developer on Cloudflare Workers, passes this to Apple&apos;s push notification service
-          and keeps nothing: no storage and no request logs. The alert text is generic; your
-          device fills in names it already knows. Turn the option off in Settings at any time.
-          The relay&apos;s{' '}
+          It never sends names, paths, or anything an agent wrote. The relay (which I run on
+          Cloudflare Workers) passes that along to Apple&apos;s push service and keeps
+          nothing: no storage and no request logs. The alert text is generic, and your
+          device fills in the names it already knows. You can turn this off in Settings
+          anytime, and the relay&apos;s{' '}
           <a href="https://github.com/btuckerc/herdwick/blob/main/relay/src/index.js" className={linkClass}>
             source code
           </a>{' '}
@@ -112,14 +112,14 @@ const policySections = [
     title: 'Data stored on your device',
     content: (
       <>
-        <p>Herdwick stores the following on your device to work:</p>
+        <p>Herdwick keeps a few things locally on your device so it works:</p>
         <ul className="mt-3 space-y-2" role="list">
           <li>Your host list and connection settings</li>
-          <li>Preferences such as appearance, terminal theme, font, and notification choices</li>
-          <li>Which agents you have read, so the inbox can show what is new</li>
+          <li>Preferences like appearance, terminal theme, font, and notification choices</li>
+          <li>Which agents you&apos;ve read, so the inbox knows what&apos;s new</li>
         </ul>
         <p className="mt-4">
-          Deleting the app removes this data, subject to any device backup you control.
+          Deleting the app removes this data, aside from any device backup you manage yourself.
         </p>
       </>
     ),
@@ -129,17 +129,18 @@ const policySections = [
     content: (
       <ul className="space-y-2" role="list">
         <li>
-          <strong className="text-fg">Notifications</strong>: off until you turn them on. Alerts
-          are created on your device while Herdwick is open or refreshing in the background, or
-          arrive through Apple&apos;s push service if you turn on Alerts While Away.
+          <strong className="text-fg">Notifications</strong>: off until you turn them on.
+          Alerts happen on your device while Herdwick is open or refreshing in the
+          background, or come through Apple&apos;s push service if you enable Alerts While
+          Away.
         </li>
         <li>
-          <strong className="text-fg">Photos</strong>: Herdwick uses the system photo picker and
-          only receives the images you select.
+          <strong className="text-fg">Photos</strong>: Herdwick uses the system photo picker
+          and only sees the images you pick.
         </li>
         <li>
-          <strong className="text-fg">Network</strong>: used only to reach the machines you add
-          and, if you use them, Tailscale and Apple&apos;s push service.
+          <strong className="text-fg">Network</strong>: used only to reach the machines you
+          add, plus Tailscale and Apple&apos;s push service if you turn those on.
         </li>
       </ul>
     ),
@@ -148,8 +149,8 @@ const policySections = [
     title: 'Tracking',
     content: (
       <p>
-        Herdwick does not track you across apps or websites and does not use the App Tracking
-        Transparency framework.
+        Herdwick does not track you across apps or websites and does not use Apple&apos;s
+        App Tracking Transparency framework.
       </p>
     ),
   },
@@ -166,15 +167,15 @@ const policySections = [
     title: 'Changes to this policy',
     content: (
       <p>
-        If this policy changes, the effective date above will be updated and the revised policy
-        will be published at this same location.
+        If this policy changes, I&apos;ll update the effective date above and post the new
+        version right here.
       </p>
     ),
   },
 ]
 
 const summaryItems = [
-  ['data collected by us', 'none'],
+  ['data collected', 'none'],
   ['accounts', 'not required'],
   ['analytics & ads', 'none'],
   ['connections', 'direct over SSH'],
@@ -183,10 +184,10 @@ const summaryItems = [
 const HerdwickPrivacy = () => (
   <>
     <PageMeta
-      title="Privacy Policy — Herdwick"
-      description="Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. The developer collects no data."
+      title="Privacy Policy - Herdwick"
+      description="Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. I collect no data."
       url="https://btuckerc.dev/privacy/herdwick"
-      openGraphDescription="Herdwick connects directly to your own machines over SSH. The developer collects no data."
+      openGraphDescription="Herdwick connects directly to your own machines over SSH. No data is collected or stored."
       image="https://btuckerc.dev/og/herdwick-privacy.jpg"
       imageAlt="Herdwick privacy: your agents stay on your machines."
     />
@@ -207,8 +208,9 @@ const HerdwickPrivacy = () => (
             Your agents stay on your machines.
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
-            Herdwick is an iPhone and iPad client for coding agents running on your own computers.
-            It connects to them directly over SSH. The developer collects and stores no data.
+            Herdwick is an iPhone and iPad app for coding agents running on your own
+            computers. It connects straight to them over SSH, and I don&apos;t collect or
+            store any of your data.
           </p>
           <dl className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {summaryItems.map(([term, description]) => (

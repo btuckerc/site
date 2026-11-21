@@ -145,38 +145,38 @@ export const performSpamCheck = (formData, formStartTime) => {
   
   // Check honeypot field (should be empty)
   if (formData.website && formData.website.trim() !== '') {
-    errors.push('Spam detected: honeypot field filled')
+    errors.push('spam detected')
     return { isSpam: true, errors }
   }
   
   // Check rate limiting
   const rateLimit = checkRateLimit()
   if (!rateLimit.allowed) {
-    errors.push(`Rate limit exceeded. Please try again in ${rateLimit.minutesUntilReset} minute(s).`)
+    errors.push(`too many messages sent. try again in ${rateLimit.minutesUntilReset} minute${rateLimit.minutesUntilReset === 1 ? '' : 's'}.`)
     return { isSpam: true, errors }
   }
   
   // Check fill time (minimum 3 seconds)
   if (!checkFillTime(formStartTime, 3)) {
-    errors.push('Form filled too quickly. Please take your time.')
+    errors.push('that was a little fast. give it a few seconds and try again.')
     return { isSpam: true, errors }
   }
   
   // Check email
   if (isSuspiciousEmail(formData.email)) {
-    errors.push('Invalid email address')
+    errors.push("that email doesn't look right")
     return { isSpam: true, errors }
   }
   
   // Check message for spam keywords
   if (containsSpamKeywords(formData.message)) {
-    errors.push('Message contains inappropriate content')
+    errors.push('message got caught by the spam filter')
     return { isSpam: true, errors }
   }
   
   // Check name for spam keywords
   if (containsSpamKeywords(formData.name)) {
-    errors.push('Invalid name')
+    errors.push("that name doesn't look right")
     return { isSpam: true, errors }
   }
   

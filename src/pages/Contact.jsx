@@ -5,7 +5,7 @@ const Contact = () => {
   return (
     <>
       <PageMeta
-        title="Contact — Tucker Craig"
+        title="Contact - Tucker Craig"
         description="Get in touch with Tucker Craig via email, GitHub, LinkedIn, or the contact form."
         url="https://btuckerc.dev/contact"
         image="https://btuckerc.dev/og/contact.jpg"

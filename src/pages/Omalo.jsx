@@ -134,14 +134,14 @@ const OmaloDeviceCard = () => (
       <div className="omalo-device-photo-frame">
         <img
           src="/media/s3-amoled/device-in-hand-public.jpg"
-          alt="A hand holds a small rounded device running Pokémon Emerald. The screen shows a queued ‘Beat the game’ goal and asks the player to continue, then say go."
+          alt="A hand holds a small rounded device running Pokémon Emerald. The screen shows a queued 'Beat the game' goal and asks the player to continue, then say go."
           width="756"
           height="1008"
           loading="eager"
           decoding="async"
         />
       </div>
-      <figcaption>Prototype with a gameplay goal queued.</figcaption>
+      <figcaption>Early prototype with a goal queued up.</figcaption>
     </figure>
     <div
       className="omalo-identity-card"
@@ -170,8 +170,8 @@ const Omalo = () => {
 
   return <>
     <PageMeta
-      title="omalo — a pocket companion running ichr"
-      description="omalo is a pocket companion running ichr. Pokémon Emerald runs on the device with an AI handoff for gameplay goals."
+      title="omalo - a pocket companion running ichr"
+      description="omalo is a pocket companion running ichr. Play Pokémon Emerald yourself, or hand off goals to an AI."
       url={pageUrl}
       type="article"
       image={shareImage}
@@ -196,7 +196,7 @@ const Omalo = () => {
             <h1 id="omalo-title" className="omalo-title">omalo</h1>
             <p className="omalo-subtitle">a pocket companion running ichr</p>
             <p className="omalo-copy">
-              I&apos;m writing the firmware for it. You can play Pokémon Emerald yourself or give the AI a gameplay goal.
+              I&apos;m writing the firmware for it. You can play Pokémon Emerald yourself, or hand off a goal to the AI and let it take a turn.
             </p>
             <p className="omalo-status">
               <span aria-hidden="true">●</span> Prototype
@@ -221,10 +221,10 @@ const Omalo = () => {
             <p className="omalo-kicker">Pokémon Emerald</p>
             <h2 id="pokemon-title" className="omalo-section-title">Pokémon Emerald on omalo</h2>
             <p className="omalo-copy">
-              I chose Mudkip, then asked Luna to defeat the Zigzagoon. The local battle controller takes it from there. You can take over again with the device controls.
+              Here I picked Mudkip, then asked Luna to beat the Zigzagoon. The local battle controller takes over from there, and you can jump back in with the buttons at any time.
             </p>
             <p className="omalo-copy omalo-copy-muted">
-              Speech transcription and model requests use network services over Wi-Fi.
+              Voice transcription and model calls go out over Wi-Fi.
             </p>
             <div className="omalo-actions">
               <Link to="/projects/s3-amoled#handoff" className="omalo-action omalo-action-light">how the handoff works</Link>
@@ -238,7 +238,7 @@ const Omalo = () => {
             <p className="omalo-kicker">Grain</p>
             <h2 id="grain-title" className="omalo-section-title">A tiny game you play by moving it</h2>
             <p className="omalo-copy">
-              Move omalo to steer a fleck around a rounded play area. The capture compares what happens with bounce off and on.
+              Tilt omalo to roll a tiny fleck around a rounded play area. This clip compares how it feels with wall bounce off vs. on.
             </p>
             <div className="omalo-actions">
               <Link to="/projects/s3-amoled#grain" className="omalo-action">read the Grain notes</Link>
@@ -269,8 +269,8 @@ const Omalo = () => {
                 </p>
                 <h3 className="mt-7 font-mono text-lg font-semibold">ichor → ichr</h3>
                 <p className="omalo-copy">
-                  <code>ichr</code> is short for <em>ichor</em>. In the Greek story of Talos, ichor is the life fluid inside a bronze body. I use that idea as a metaphor for a soul: ichr is the software inside omalo that makes it respond.{' '}
-                  <a href="https://www.greekmythology.com/Myths/Elements/Ichor/ichor.html" className="underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">A quick read on ichor</a>
+                  <code>ichr</code> is short for <em>ichor</em>. In the Greek myth of Talos, ichor is the life fluid running through a bronze body. I liked that as a metaphor for a soul: ichr is the software inside omalo that brings it to life.{' '}
+                  <a href="https://www.greekmythology.com/Myths/Elements/Ichor/ichor.html" className="underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">More on ichor</a>.
                 </p>
               </div>
               <figure className="omalo-name-diagram" aria-label="The name blends oma with talo">
@@ -297,7 +297,7 @@ const Omalo = () => {
             <p className="omalo-kicker">s3-amoled</p>
             <h2 id="omalo-technical-title" className="omalo-section-title">How it works</h2>
             <p className="omalo-copy">
-              The detailed project page covers the handoff boundary, rounded tray, and catch-check explanation.
+              The technical notes walk through how the AI handoff works, how it checks whether a catch actually happened, and how Grain keeps the fleck out of hidden rounded corners.
             </p>
           </div>
           <Link to="/projects/s3-amoled" className="omalo-action omalo-action-primary">open s3-amoled</Link>
