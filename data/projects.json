@@ -1,14 +1,14 @@
 [
   {
     "id": "angl-browser",
-    "title": "angl",
+    "title": "angl browser",
     "year": "2026",
     "date": "2026-11-15",
     "featured": 21,
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "A small, keyboard-first macOS browser on the system WebKit, with tree tabs, isolated Containers, and plain-file config.",
+    "blurb": "Everything I've ever liked in browsers, packed into the lightest macOS browser that still has real features: tree tabs, Spaces with isolated Containers, per-site controls, and plain-file config on the system WebKit.",
     "tags": [
       "macOS",
       "Browser",

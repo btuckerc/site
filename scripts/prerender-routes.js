@@ -38,7 +38,7 @@ const pages = [
     title: 'Projects - Tucker Craig',
     description: "Things I've built, big and small: angl browser, winstream, Herdwick, Inkjoin, Pace Bar, Dictation, CenterSeat, and more.",
     image: 'https://btuckerc.dev/og/projects.jpg',
-    imageAlt: 'Tucker Craig, projects: angl, winstream, Herdwick, Inkjoin, Pace Bar, and more.',
+    imageAlt: 'Tucker Craig, projects: angl browser, winstream, Herdwick, Inkjoin, Pace Bar, and more.',
     type: 'website'
   },
   {

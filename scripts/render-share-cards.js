@@ -31,7 +31,7 @@ const cards = [
     tag: 'Software Engineer',
     context: [
       { text: 'We can fix everything.', strong: true },
-      { text: 'Building everyday software with coding agents: angl, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.' }
+      { text: 'Building everyday software with coding agents: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.' }
     ],
     hint: 'how i build →'
   },

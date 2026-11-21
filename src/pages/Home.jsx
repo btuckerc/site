@@ -116,8 +116,8 @@ const Home = () => {
               <div className="home-app-heading min-w-0 flex-1 basis-72">
                 <img src="/media/angl-browser/icon.png" alt="" width="128" height="128" loading="lazy" decoding="async" className="home-app-icon home-app-icon-large" />
                 <div>
-                  <p className="home-kicker font-mono text-xs text-accent">angl</p>
-                  <h2 id="angl-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl">A keyboard-first macOS browser</h2>
+                  <p className="home-kicker font-mono text-xs text-accent">angl browser</p>
+                  <h2 id="angl-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl">The lightest macOS browser that still has features</h2>
                 </div>
               </div>
               <span className="home-status font-mono text-xs text-muted"><span className="text-accent" aria-hidden="true">●</span> macOS · WebKit</span>
