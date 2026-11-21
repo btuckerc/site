@@ -20,7 +20,7 @@ const pages = [
   {
     route: '/workflow',
     title: 'How I build with AI - Tucker Craig',
-    description: 'How I use coding agents to ship real software across macOS, Windows, iOS, web, and hardware: tight scope, clean harnesses, and real verification.',
+    description: 'How I use coding agents to build and test my own apps across Mac, Windows, iOS, and hardware.',
     image: 'https://btuckerc.dev/og/workflow.jpg',
     imageAlt: 'Tucker Craig, workflow: how I build with AI.',
     type: 'article'

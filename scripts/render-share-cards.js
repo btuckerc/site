@@ -42,7 +42,7 @@ const cards = [
     bracket: 'workflow',
     context: [
       { text: 'How I build with AI.', strong: true },
-      { text: 'Tight scope, clean harnesses, and real verification across macOS, iOS, web, and hardware.' }
+      { text: 'Small tasks, real testing, and building the tools I actually want to use.' }
     ],
     hint: 'read →'
   },

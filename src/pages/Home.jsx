@@ -35,12 +35,12 @@ const Home = () => {
               <h1 className="home-personal-hero-title font-mono font-bold leading-tight text-fg">TUCKER CRAIG</h1>
               <p className="home-personal-hero-role font-mono text-accent">Software Engineer</p>
               <p className="home-personal-hero-lede">
-                If something I use every day bugs me, I&apos;d rather build my own. Lately that&apos;s meant a Mac browser, a Windows streaming engine, and an iPhone app for my coding agents.
+                If something I use every day bugs me, I&apos;d rather build my own. Lately that&apos;s meant a Mac browser, a Windows streaming app, and an iPhone app for my coding agents.
               </p>
             </div>
             <div className="home-personal-hero-context">
               <p>
-                I borrow a lot from Omarchy&apos;s idea that{' '}
+                I like Omarchy&apos;s idea that{' '}
                 <a
                   href="https://wecanfixeverything.com"
                   className="text-accent underline underline-offset-4"
@@ -50,7 +50,7 @@ const Home = () => {
                 >
                   we can fix everything
                 </a>
-                . Coding agents make that practical if you treat them like an engineering harness and actually test what you build. Everything below is something I use myself.
+                . Coding agents make that practical if you keep tasks focused and actually test what gets built. Everything below is something I use myself.
               </p>
               <p className="mt-4 text-muted">
                 I also sang a cappella in{' '}
@@ -77,10 +77,10 @@ const Home = () => {
               <div className="min-w-0 flex-1 basis-80">
                 <p className="home-kicker font-mono text-xs text-accent">workflow / how i build with ai</p>
                 <h2 id="workflow-title" className="mt-2 font-mono text-2xl font-bold text-fg sm:text-3xl">
-                  Treat coding agents like a harness, not a slot machine
+                  How I actually use coding agents
                 </h2>
                 <p className="mt-3 text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">
-                  Generating code is the easy part now. The real work is scoping the problem, keeping clean boundaries, and verifying on the real target so you don&apos;t ship slop.
+                  Writing code quickly is easy now; checking that it actually works well is the hard part. Most of my setup is about keeping work small, reviewing carefully, and testing the real app.
                 </p>
               </div>
             </div>
@@ -88,18 +88,18 @@ const Home = () => {
             <div className="home-workflow-pillars mt-6">
               <div className="home-workflow-pillar">
                 <p className="home-workflow-pillar-kicker">01 / scope</p>
-                <h3>Tight briefs, isolated worktrees</h3>
-                <p>Architecture, tradeoffs, and final integration stay in my hands. Scoped tasks run in isolated worktrees with explicit invariants.</p>
+                <h3>Small, separate tasks</h3>
+                <p>I handle the design and break work into clear pieces that run in separate copies of the repo so parallel work never collides.</p>
               </div>
               <div className="home-workflow-pillar">
-                <p className="home-workflow-pillar-kicker">02 / verify</p>
-                <h3>Real target, not &quot;it compiles&quot;</h3>
-                <p>Inspired by engineers like @poteto: run the signed Mac app, tap through iOS, measure real RAM, or diff game state instead of guessing.</p>
+                <p className="home-workflow-pillar-kicker">02 / check</p>
+                <h3>Test the real thing</h3>
+                <p>Following engineers like @poteto: launch the signed Mac app, tap through iOS, benchmark against OBS, or check actual game memory.</p>
               </div>
               <div className="home-workflow-pillar">
-                <p className="home-workflow-pillar-kicker">03 / harness</p>
-                <h3>Build around the friction</h3>
-                <p>When the workflow itself has paper cuts, I build the tool: a mobile agent inbox, quota telemetry, local voice-to-text, even my own browser.</p>
+                <p className="home-workflow-pillar-kicker">03 / tooling</p>
+                <h3>Build the missing tools</h3>
+                <p>When something in my workflow gets in the way, I build a tool for it: an iPhone agent app, a menu bar usage tracker, or local voice-to-text.</p>
               </div>
             </div>
 
@@ -135,7 +135,7 @@ const Home = () => {
                 />
               </div>
               <figcaption className="mt-2 text-xs leading-6 text-muted sm:text-sm">
-                Swift 6 and AppKit on the system WebKit, with a Rust Bitwarden bridge and 227 MB total footprint on Wikipedia (vs. Safari&apos;s 287 MB).
+                Built in Swift and AppKit on macOS&apos;s built-in WebKit, with a Rust bridge for Bitwarden. Uses 227 MB on Wikipedia compared to Safari&apos;s 287 MB.
               </figcaption>
             </figure>
             <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -149,15 +149,15 @@ const Home = () => {
           <section className="home-support-card mt-6 border border-line/70 bg-card-bg/75 p-5 sm:p-7" aria-labelledby="winstream-title">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="min-w-0 flex-1 basis-72">
-                <p className="home-kicker font-mono text-xs text-accent">winstream · rust · d3d11 · nvenc</p>
+                <p className="home-kicker font-mono text-xs text-accent">winstream · rust · windows</p>
                 <h2 id="winstream-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl">
-                  A lean Windows streaming studio
+                  A lighter Windows streaming app
                 </h2>
               </div>
               <span className="home-status font-mono text-xs text-muted"><span className="text-accent" aria-hidden="true">●</span> Local build</span>
             </div>
             <p className="mt-3 text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">
-              {winstream.blurb} Built directly on Windows Graphics Capture, Direct3D 11 compositing, NVENC 13.0 bindings, WASAPI per-app audio with RNNoise and -14 LUFS loudness leveling, and a std-only FLV muxer.
+              {winstream.blurb} Built directly on Windows Graphics Capture, Direct3D 11, and NVIDIA NVENC, with per-app audio, noise suppression, auto-leveling, and its own FLV muxer.
             </p>
             <div className="home-bench-wrap mt-5" role="region" aria-label="winstream vs OBS 32.0.2 benchmarks">
               <table className="home-bench-table">
@@ -170,7 +170,7 @@ const Home = () => {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Private RAM (active / dormant)</td>
+                    <td>Private RAM (active / idle)</td>
                     <td className="home-bench-win">262 MB / 67 MB</td>
                     <td>788-931 MB</td>
                   </tr>
@@ -198,7 +198,7 @@ const Home = () => {
               </table>
             </div>
             <p className="mt-3 text-xs leading-6 text-muted sm:text-sm">
-              Measured on Windows 11 (Ryzen 9 9950X3D, RTX 4090) at 6000 kb/s H.264 P5 HQ across 3 x 60s synthetic game runs with camera, chat overlay, and 160 kb/s AAC audio. Average FPS stays within 1% of OBS across all loads, and A/V sync measured -7.9 ms median (within one 60 fps frame, zero discontinuities). Under a 599 Hz cap, 0.1% lows still trail OBS&apos;s DirectX game-capture hook due to WGC composition overhead (465-469 fps after idle-wakeup fixes vs. OBS&apos;s 563-570 fps). Not public on GitHub yet.
+              Tested on Windows 11 (Ryzen 9 9950X3D, RTX 4090) at 6000 kb/s H.264 across three 60-second synthetic game runs with camera, chat overlay, and audio. Average FPS stays within 1% of OBS across every load, and A/V sync measured -7.9 ms median (within one 60 fps frame, zero discontinuities). Under a 599 Hz cap, 0.1% lows still trail OBS&apos;s DirectX game-capture hook because of Windows capture overhead (465-469 fps after idle-wakeup fixes vs. OBS&apos;s 563-570 fps). Not on GitHub yet.
             </p>
           </section>
 

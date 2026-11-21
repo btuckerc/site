@@ -8,7 +8,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "Everything I've ever liked in browsers, packed into the lightest macOS browser that still has real features: tree tabs, Spaces with isolated Containers, per-site controls, and plain-file config on the system WebKit.",
+    "blurb": "Everything I've ever liked in browsers, bundled into the lightest macOS browser that still has real features: tree tabs, Spaces with separate Containers, per-site controls, and plain config files.",
     "tags": [
       "macOS",
       "Browser",
@@ -20,7 +20,7 @@
       "github": "https://github.com/btuckerc/angl-browser",
       "download": "https://github.com/btuckerc/angl-browser/releases/latest"
     },
-    "overview": "Built in Swift 6 and AppKit on top of macOS's built-in WKWebView instead of bundling Electron or another engine. Includes a Rust Bitwarden SDK bridge, per-site JavaScript and ad-blocker controls, 120 Hz rendering on AC power, and out-of-process filter compilation so memory stays low (227 MB vs. Safari's 287 MB on Wikipedia). Signed and notarized for Apple Silicon Macs on macOS 15 or newer. GPL-3.0.",
+    "overview": "Built in Swift and AppKit on macOS's built-in WebKit engine instead of bundling Electron or another engine. Includes a Rust bridge for Bitwarden, per-site JavaScript and ad-blocker controls, 120 Hz rendering on AC power, and out-of-process filter compilation so memory stays low (227 MB vs. Safari's 287 MB on Wikipedia). Signed and notarized for Apple Silicon Macs on macOS 15 or newer. GPL-3.0.",
     "stack": [
       "Swift",
       "AppKit",
@@ -29,9 +29,9 @@
     ],
     "features": [
       "No URL bar by default, with floating tab switching and commands on Cmd+T and Cmd+K",
-      "Tree tabs, Spaces with isolated Containers, and live-reloaded JSON/CSS config",
+      "Tree tabs, Spaces with separate Containers, and live-reloaded JSON/CSS config",
       "Per-site JavaScript, content blocker, dark mode, and volume controls",
-      "Bitwarden passkeys and login autofill via a Rust SDK bridge, plus Apple Passwords"
+      "Bitwarden passkeys and login autofill via a Rust bridge, plus Apple Passwords"
     ]
   },
   {
@@ -43,7 +43,7 @@
     "source": "local",
     "activity": "active",
     "visibility": "public",
-    "blurb": "A lean Windows 11 streaming and recording studio written in Rust on WGC, Direct3D 11, and NVENC, using ~3x less RAM and far less CPU than OBS.",
+    "blurb": "A lightweight Windows 11 streaming and recording app written in Rust. Uses about a third as much memory as OBS and a lot less CPU.",
     "tags": [
       "Rust",
       "Windows",
@@ -52,7 +52,7 @@
       "Streaming"
     ],
     "links": {},
-    "overview": "StreamApp's Windows counterpart, built as a Rust workspace with Windows Graphics Capture, Direct3D 11 compositing, direct NVENC 13.0 bindings, WASAPI per-process audio with RNNoise and K-weighted -14 LUFS leveling, and a std-only FLV muxer. Benchmarked against OBS 32.0.2 at 1080p60 NVENC H.264 (6000 kb/s, Ryzen 9 9950X3D, RTX 4090) with overlays and audio: 262 MB private RAM vs. OBS's 788-931 MB, 150 MB VRAM vs. 233-259 MB, +13% single-core CPU overhead under GPU-bound load vs. +37% for OBS with overlays, and stronger 1% and 0.1% lows under GPU-bound and uncapped loads (with A/V sync at -7.9 ms median). Capped 599 Hz 0.1% lows still trail OBS's DX game capture hook because of WGC composition overhead. Not public on GitHub yet.",
+    "overview": "StreamApp's Windows counterpart, built in Rust on Windows Graphics Capture, Direct3D 11, direct NVIDIA NVENC 13.0 bindings, per-app WASAPI audio with RNNoise noise suppression and -14 LUFS loudness leveling, and its own FLV muxer. Tested against OBS 32.0.2 at 1080p60 NVENC H.264 (6000 kb/s, Ryzen 9 9950X3D, RTX 4090) with overlays and audio: 262 MB private RAM vs. OBS's 788-931 MB, 150 MB VRAM vs. 233-259 MB, +13% single-core CPU overhead under GPU-bound load vs. +37% for OBS with overlays, and stronger 1% and 0.1% lows under GPU-bound and uncapped loads (-7.9 ms median A/V sync). Under a 599 Hz cap, 0.1% lows still trail OBS's DirectX game-capture hook because of Windows capture overhead. Not on GitHub yet.",
     "stack": [
       "Rust",
       "Direct3D 11",
@@ -61,10 +61,10 @@
       "WASAPI"
     ],
     "features": [
-      "~262 MB active RAM (67 MB dormant) and 150 MB VRAM vs. OBS's 788-931 MB RAM and 233-259 MB VRAM",
+      "~262 MB active RAM (67 MB idle) and 150 MB VRAM vs. OBS's 788-931 MB RAM and 233-259 MB VRAM",
       "GPU-bound load: +13% single-core CPU and 205/201 fps (1%/0.1% low) vs. OBS + overlays at +37% CPU and 201/185 fps",
       "Uncapped load: 802/748 fps (1%/0.1% low) vs. OBS + overlays at 680/621 fps",
-      "WASAPI per-app audio capture, RNNoise mic cleanup, K-weighted -14 LUFS loudness leveling, and separate VOD track",
+      "Per-app audio capture, RNNoise mic cleanup, -14 LUFS loudness leveling, and a separate VOD track",
       "TOML scenes with cut/morph/wipe transitions, camera low-light shadow lift and denoise, and Twitch chat/alert overlays"
     ]
   },
@@ -78,7 +78,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "A macOS menu bar app for tracking Codex and Claude quotas, local inference, and OpenRouter credit.",
+    "blurb": "A macOS menu bar app for tracking Codex and Claude quotas, local model speed, and OpenRouter credit.",
     "tags": [
       "macOS",
       "Menu Bar",
@@ -153,7 +153,7 @@
     "source": "GitHub public",
     "activity": "active",
     "visibility": "public",
-    "blurb": "An iPhone and iPad app for herdr so you can check on and answer your coding agents over SSH.",
+    "blurb": "An iPhone and iPad app for checking on and answering coding agents running on your computer over SSH (built for herdr).",
     "tags": [
       "iOS",
       "iPadOS",

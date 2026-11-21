@@ -5,11 +5,11 @@ import '../styles/technical-readability.css'
 import '../styles/project-navigation.css'
 
 const sections = [
-  { id: 'paper-cuts', num: '01', nav: 'Fix paper cuts', title: 'Fix the paper cut' },
-  { id: 'verification', num: '02', nav: 'Verification', title: 'Verification is the real bottleneck' },
-  { id: 'boundaries', num: '03', nav: 'Scope & boundaries', title: 'Tight scope, clean boundaries' },
-  { id: 'harness', num: '04', nav: 'The harness', title: 'Build the harness around the models' },
-  { id: 'shipping', num: '05', nav: 'Shipping', title: 'Ship real artifacts, not demos' },
+  { id: 'annoyances', num: '01', nav: 'Why I build', title: 'Start with something annoying' },
+  { id: 'verification', num: '02', nav: 'Testing', title: 'Checking the work takes the most care' },
+  { id: 'scope', num: '03', nav: 'Small tasks', title: 'Keep tasks small and separate' },
+  { id: 'tooling', num: '04', nav: 'Tooling', title: 'Build the tools that save time' },
+  { id: 'finishing', num: '05', nav: 'Finishing', title: 'Finish the boring parts' },
 ]
 
 export default function Workflow() {
@@ -45,7 +45,7 @@ export default function Workflow() {
     <>
       <PageMeta
         title="How I build with AI - Tucker Craig"
-        description="How I use coding agents to ship real software across macOS, Windows, iOS, web, and hardware: tight scope, clean harnesses, and real verification."
+        description="How I use coding agents to build and test my own apps across Mac, Windows, iOS, and hardware."
         url="https://btuckerc.dev/workflow"
         type="article"
         image="https://btuckerc.dev/og/workflow.jpg"
@@ -69,7 +69,7 @@ export default function Workflow() {
                 How I build with AI
               </h1>
               <p className="case-study-copy mt-5">
-                The biggest idea I&apos;ve borrowed from{' '}
+                I really like{' '}
                 <a
                   href="https://omarchy.org/"
                   className="text-accent underline underline-offset-4"
@@ -77,9 +77,9 @@ export default function Workflow() {
                   rel="noopener noreferrer"
                   aria-describedby="new-tab-note"
                 >
-                  Omarchy
+                  Omarchy&apos;s
                 </a>{' '}
-                is simple:{' '}
+                line that{' '}
                 <a
                   href="https://wecanfixeverything.com"
                   className="text-accent underline underline-offset-4"
@@ -89,7 +89,7 @@ export default function Workflow() {
                 >
                   we can fix everything
                 </a>
-                . If an app is missing or annoying to use, fix it or replace it. Coding agents make it realistic for one person to actually work that way, as long as you treat them like an engineering harness instead of a slot machine.
+                . If an app I want doesn&apos;t exist, or an app I use every day drives me crazy, I&apos;d rather just build my own. Coding agents have made that practical for one person, as long as you stay pretty disciplined about how you use them.
               </p>
             </header>
 
@@ -104,26 +104,26 @@ export default function Workflow() {
             </details>
 
             <div className="technical-readability-panel space-y-12">
-              <section className="case-study-section scroll-mt-24" id="paper-cuts" aria-labelledby="paper-cuts-title">
+              <section className="case-study-section scroll-mt-24" id="annoyances" aria-labelledby="annoyances-title">
                 <p className="case-study-kicker">01</p>
-                <h2 className="case-study-section-title mt-2" id="paper-cuts-title">
-                  <a href="#paper-cuts">Fix the paper cut</a>
+                <h2 className="case-study-section-title mt-2" id="annoyances-title">
+                  <a href="#annoyances">Start with something annoying</a>
                 </h2>
                 <p className="case-study-copy mt-4">
-                  Most of what I build starts with something small that annoys me every day. Instead of living with a clunky tool or paying for something that almost fits, I&apos;d rather build a focused version and actually use it.
+                  Almost everything on this site started with something small that bugged me. Instead of living with a clunky tool or paying for something that mostly got in my way, I&apos;d rather spend a week building a smaller version that fits how I actually work.
                 </p>
                 <p className="case-study-copy mt-4">
-                  In the last few months that has meant shipping across very different stacks: a lightweight Swift 6 and WebKit macOS browser (<a href="https://github.com/btuckerc/angl-browser" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">angl browser</a>) with tree tabs, isolated Containers, and plain-file config, a Rust Windows streaming studio (winstream) built on WGC, Direct3D 11, and NVENC that uses ~3x less RAM than OBS, an iPhone and iPad app (<a href="https://github.com/btuckerc/herdwick" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Herdwick</a>) to manage coding agents over SSH, a local Rust and Tauri voice-to-text app (<a href="https://github.com/btuckerc/dictation" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Dictation</a>), a Mac quota and local-inference monitor (<a href="https://github.com/btuckerc/pace-bar" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Pace Bar</a>), an iPhone puzzle game (<a href="https://github.com/btuckerc/inkjoin" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Inkjoin</a>), and ESP32 firmware (<Link to="/projects/omalo" className="text-accent underline underline-offset-4">omalo</Link>).
+                  Lately that has bounced across a bunch of platforms: a lightweight Mac browser (<a href="https://github.com/btuckerc/angl-browser" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">angl browser</a>), a Rust streaming app for Windows (winstream) that uses about a third as much memory as OBS, an iPhone app (<a href="https://github.com/btuckerc/herdwick" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Herdwick</a>) for checking on coding agents over SSH, local voice-to-text on Mac (<a href="https://github.com/btuckerc/dictation" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Dictation</a>), a menu bar usage tracker (<a href="https://github.com/btuckerc/pace-bar" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Pace Bar</a>), an iPhone puzzle game (<a href="https://github.com/btuckerc/inkjoin" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Inkjoin</a>), and handheld firmware (<Link to="/projects/omalo" className="text-accent underline underline-offset-4">omalo</Link>).
                 </p>
               </section>
 
               <section className="case-study-section scroll-mt-24" id="verification" aria-labelledby="verification-title">
                 <p className="case-study-kicker">02</p>
                 <h2 className="case-study-section-title mt-2" id="verification-title">
-                  <a href="#verification">Verification is the real bottleneck</a>
+                  <a href="#verification">Checking the work takes the most care</a>
                 </h2>
                 <p className="case-study-copy mt-4">
-                  Generating code is the cheap part now. Knowing whether you can trust it is where the real engineering lives. A lot of how I think about this is inspired by engineers like{' '}
+                  Writing code quickly is easy now; trusting it is the hard part. I&apos;ve learned a lot from watching engineers like{' '}
                   <a
                     href="https://x.com/poteto"
                     className="text-accent underline underline-offset-4"
@@ -132,89 +132,86 @@ export default function Workflow() {
                     aria-describedby="new-tab-note"
                   >
                     Lauren Tan (@poteto)
-                  </a>
-                  , who treat verification loops, context boundaries, and test harnesses as the actual work of AI engineering.
+                  </a>{' '}
+                  put the focus on repeatable checks and real testing instead of just churning out diffs.
                 </p>
                 <p className="case-study-copy mt-4">
-                  &quot;It compiles&quot; is never the finish line. Every change has to survive the real path a user hits: launching the signed app on macOS, exercising the iOS flows on a phone, running synthetic game loads and PresentMon ablations against OBS on Windows (which caught 2 ms idle wake-ups delaying the game&apos;s frame limiter in winstream), measuring real browser RAM (angl browser at 227 MB vs. Safari&apos;s 287 MB), or checking actual game RAM in{' '}
+                  Before I consider something done, I want to run it the same way a user will. That means opening the signed Mac app, tapping through the phone app, running game benchmarks against OBS on Windows (which caught background timers waking up every 2 ms and throwing off the game&apos;s frame pacing in winstream), measuring real memory in angl browser (227 MB vs. Safari&apos;s 287 MB on Wikipedia), or checking actual game memory in{' '}
                   <Link to="/projects/s3-amoled#catch-check" className="text-accent underline underline-offset-4">
                     omalo
                   </Link>{' '}
-                  instead of taking a model&apos;s word that a catch worked.
+                  to see if a Pokémon was actually caught.
                 </p>
               </section>
 
-              <section className="case-study-section scroll-mt-24" id="boundaries" aria-labelledby="boundaries-title">
+              <section className="case-study-section scroll-mt-24" id="scope" aria-labelledby="scope-title">
                 <p className="case-study-kicker">03</p>
-                <h2 className="case-study-section-title mt-2" id="boundaries-title">
-                  <a href="#boundaries">Tight scope, clean boundaries</a>
+                <h2 className="case-study-section-title mt-2" id="scope-title">
+                  <a href="#scope">Keep tasks small and separate</a>
                 </h2>
                 <p className="case-study-copy mt-4">
-                  Agents write slop when you hand them a vague goal in a messy repo and hope for the best. They do surprisingly strong work when you own the architecture, write a tight brief with explicit invariants and an acceptance command, and run independent work in isolated Git worktrees so parallel tasks never step on each other.
+                  Coding agents get messy fast when you hand them a vague prompt in a crowded workspace. I get much better results when I handle the design myself, write a short clear brief with an exact check to run, and let each task run in its own Git worktree so parallel work never steps on itself.
                 </p>
                 <p className="case-study-copy mt-4">
-                  The same habit carries into agent-powered products themselves. In{' '}
+                  That same habit shows up in the software too. In{' '}
                   <Link to="/projects/s3-amoled#party" className="text-accent underline underline-offset-4">
-                    omalo&apos;s technical notes
+                    omalo
                   </Link>
-                  , read-only questions (&quot;Who&apos;s in my party?&quot;) stay strictly separated from actions that change game state (&quot;Win this battle&quot;), and deterministic local controllers sit between the model and the inputs. Clear boundaries beat prompt gymnastics every time.
+                  , asking a question (&quot;Who&apos;s in my party?&quot;) takes a completely separate path from asking the AI to change the game (&quot;Win this battle&quot;), and local code handles the actual button presses.
                 </p>
                 <div className="story-pair story-visual">
                   <div>
-                    <h3>What I keep</h3>
-                    <p>Problem framing, architecture, and tricky design tradeoffs.</p>
-                    <p className="text-muted">Final review, integration, and running the real user path end to end.</p>
+                    <h3>What I handle myself</h3>
+                    <p>Deciding what to build, working out the design, and making the tricky calls.</p>
+                    <p className="text-muted">Reviewing the patch, merging it, and testing the app myself.</p>
                   </div>
                   <div>
-                    <h3>What I delegate</h3>
-                    <p>Scoped implementation slices in isolated worktrees.</p>
-                    <p className="text-muted">Independent review passes to catch bugs before they land.</p>
+                    <h3>What I hand to agents</h3>
+                    <p>Well-scoped pieces of implementation in separate worktrees.</p>
+                    <p className="text-muted">Extra review passes to spot bugs before anything lands.</p>
                   </div>
                 </div>
               </section>
 
-              <section className="case-study-section scroll-mt-24" id="harness" aria-labelledby="harness-title">
+              <section className="case-study-section scroll-mt-24" id="tooling" aria-labelledby="tooling-title">
                 <p className="case-study-kicker">04</p>
-                <h2 className="case-study-section-title mt-2" id="harness-title">
-                  <a href="#harness">Build the harness around the models</a>
+                <h2 className="case-study-section-title mt-2" id="tooling-title">
+                  <a href="#tooling">Build the tools that save time</a>
                 </h2>
                 <p className="case-study-copy mt-4">
-                  A huge part of working well with AI is smoothing out the ergonomics around it. When something slows down my loop, I treat it like any other paper cut and build the missing piece:
+                  A lot of getting good mileage out of coding agents comes down to fixing small annoyances in your own setup:
                 </p>
                 <div className="story-visual">
                   <ul className="space-y-3 text-sm leading-7 text-muted sm:text-base">
                     <li>
-                      <strong className="text-fg">Herdwick</strong> keeps parallel coding agents reachable from my iPhone and iPad over SSH or Tailscale, with native permission prompts, diffs, and a zero-storage push relay so I only get nudged when an agent actually needs a decision.
+                      <strong className="text-fg">Herdwick</strong> lets me check on agents from my iPhone or iPad over SSH or Tailscale, answer prompts, read diffs, and get a push alert only when something actually needs me.
                     </li>
                     <li>
-                      <strong className="text-fg">Pace Bar</strong> sits in my macOS menu bar tracking Codex and Claude quotas alongside local llama-server token speed and GPU readings, so I can route bounded tasks locally and save frontier capacity for harder problems.
+                      <strong className="text-fg">Pace Bar</strong> sits in my Mac menu bar watching Codex and Claude limits next to local model speed and GPU usage, so I can send small tasks to local models and save cloud limits for harder stuff.
                     </li>
                     <li>
-                      <strong className="text-fg">Dictation</strong> gives me fast, offline technical speech-to-text with custom vocabulary so writing clear specs and reviews doesn&apos;t bottleneck on typing.
+                      <strong className="text-fg">Dictation</strong> gives me fast offline voice-to-text with custom technical vocabulary so explaining a task doesn&apos;t slow down on typing.
                     </li>
                     <li>
-                      <strong className="text-fg">Boilerplate</strong> keeps my macOS and Linux machines aligned with chezmoi and mise so the exact same tools, configs, and agent setup follow me everywhere.
+                      <strong className="text-fg">Boilerplate</strong> keeps my Mac and Linux setups synced with chezmoi and mise so my configs and tools stay the same everywhere.
                     </li>
                   </ul>
                 </div>
               </section>
 
-              <section className="case-study-section scroll-mt-24" id="shipping" aria-labelledby="shipping-title">
+              <section className="case-study-section scroll-mt-24" id="finishing" aria-labelledby="finishing-title">
                 <p className="case-study-kicker">05</p>
-                <h2 className="case-study-section-title mt-2" id="shipping-title">
-                  <a href="#shipping">Ship real artifacts, not demos</a>
+                <h2 className="case-study-section-title mt-2" id="finishing-title">
+                  <a href="#finishing">Finish the boring parts</a>
                 </h2>
                 <p className="case-study-copy mt-4">
-                  It&apos;s easy to stop at a neat screen recording. I try to push through the unglamorous last 20%: Developer ID signing and Apple notarization, App Store review and honest privacy pages, crash-recoverable screen recording in StreamApp, out-of-process filter list compilation in angl browser so memory spikes never land in the browser, and plain-English READMEs that list what doesn&apos;t work yet.
-                </p>
-                <p className="case-study-copy mt-4">
-                  That&apos;s what &quot;we can fix everything&quot; actually looks like in practice: not claiming to be a 100x anything, just steadily turning small frustrations into real software you can download and use.
+                  It&apos;s easy to stop once something works in a quick demo. I try to push through the boring stuff that makes an app actually usable: Apple signing and notarization, App Store privacy pages, crash-recoverable recordings in StreamApp, running ad-block list compilation in a short-lived helper process in angl browser so memory stays low, and writing down what doesn&apos;t work yet right in the README.
                 </p>
               </section>
 
               <footer className="case-study-section">
                 <p className="case-study-copy">
-                  If you&apos;re working on coding agents, evaluation harnesses, or developer tools, I&apos;d love to talk.
+                  If you&apos;re working on coding agents or developer tools and want to chat, feel free to reach out.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link className="tui-link-chip" to="/projects">browse all projects</Link>
