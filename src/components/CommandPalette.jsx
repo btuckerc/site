@@ -25,6 +25,14 @@ const CommandPalette = ({ isOpen, onClose }) => {
       keywords: ['home', 'landing', 'main', 'index']
     },
     {
+      id: 'workflow',
+      title: 'open workflow',
+      description: 'how i build with AI',
+      action: () => navigate('/workflow'),
+      focusTarget: '#main-content',
+      keywords: ['workflow', 'ai', 'agents', 'harness', 'verification', 'build']
+    },
+    {
       id: 'about',
       title: 'go to about',
       description: 'a bit about me',

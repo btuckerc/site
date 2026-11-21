@@ -16,7 +16,7 @@ const outputDir = join(repoRoot, 'public', 'og')
 const templateUrl = pathToFileURL(join(repoRoot, 'scripts', 'share-cards', 'card.html')).href
 const projects = JSON.parse(readFileSync(join(repoRoot, 'data', 'projects.json'), 'utf8'))
 
-const featuredProjects = ['inkjoin', 'pace-bar', 'herdwick', 'dictation', 'center-seat']
+const featuredProjects = ['angl-browser', 'herdwick', 'inkjoin', 'pace-bar', 'dictation']
 const projectTitle = (id) => {
   const project = projects.find(entry => entry.id === id)
   if (!project) throw new Error(`Unknown featured project: ${id}`)
@@ -30,10 +30,21 @@ const cards = [
     title: 'Tucker Craig',
     tag: 'Software Engineer',
     context: [
-      { text: 'I like building things that make everyday life a little easier.', strong: true },
-      { text: "Right now I'm writing firmware for omalo, a pocket companion running Pokémon Emerald with an AI handoff." }
+      { text: 'We can fix everything.', strong: true },
+      { text: 'Building everyday software with coding agents: angl browser, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.' }
     ],
-    hint: 'say hi →'
+    hint: 'how i build →'
+  },
+  {
+    slug: 'workflow',
+    path: '/workflow',
+    title: 'Tucker Craig',
+    bracket: 'workflow',
+    context: [
+      { text: 'How I build with AI.', strong: true },
+      { text: 'Tight scope, clean harnesses, and real verification across macOS, iOS, web, and hardware.' }
+    ],
+    hint: 'read →'
   },
   {
     slug: 'about',
@@ -42,7 +53,7 @@ const cards = [
     bracket: 'about',
     context: [
       { text: "Hello, world! I'm Tucker.", strong: true },
-      { text: 'Apps for my AI usage, my own voice-to-text, and AI agents on my phone.' },
+      { text: 'My own macOS browser, coding agents on iOS, local voice-to-text, and quota tools.' },
       { text: 'I stream on Twitch and sang a cappella at Davidson.' }
     ],
     hint: 'more about me →'

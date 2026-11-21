@@ -85,3 +85,74 @@
   .home-app-feature-actions { align-self: start; }
   .home-app-feature .home-app-screens img { height: 16rem; }
 }
+
+/* Workflow pillars on the home feature card. */
+.home-workflow-pillars {
+  display: grid;
+  gap: 0.75rem;
+}
+.home-workflow-pillar {
+  border: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+  background: color-mix(in srgb, var(--bg) 42%, transparent);
+  padding: 0.95rem 1rem;
+}
+.home-workflow-pillar-kicker {
+  color: var(--accent);
+  font-family: var(--font-family);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.home-workflow-pillar h3 {
+  margin-top: 0.35rem;
+  color: var(--fg);
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.home-workflow-pillar p {
+  margin-top: 0.45rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+@media (min-width: 768px) {
+  .home-workflow-pillars {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Wide desktop app screenshot frame (e.g. angl browser). */
+.home-desktop-frame {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+  background: color-mix(in srgb, var(--bg) 45%, transparent);
+}
+.home-desktop-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Portrait media preview inside 2-up supporting cards (Pace Bar + omalo). */
+.home-portrait-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  background: color-mix(in srgb, var(--bg) 35%, transparent);
+}
+.home-portrait-frame img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 18rem;
+  object-fit: contain;
+}
+@media (min-width: 768px) {
+  .home-portrait-frame img {
+    height: 20rem;
+  }
+}

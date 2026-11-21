@@ -1,5 +1,40 @@
 [
   {
+    "id": "angl-browser",
+    "title": "angl",
+    "year": "2026",
+    "date": "2026-11-15",
+    "featured": 20,
+    "source": "GitHub public",
+    "activity": "active",
+    "visibility": "public",
+    "blurb": "A small, keyboard-first macOS browser on the system WebKit, with tree tabs, isolated Containers, and plain-file config.",
+    "tags": [
+      "macOS",
+      "Browser",
+      "Swift",
+      "WebKit",
+      "Rust"
+    ],
+    "links": {
+      "github": "https://github.com/btuckerc/angl-browser",
+      "download": "https://github.com/btuckerc/angl-browser/releases/latest"
+    },
+    "overview": "Built in Swift 6 and AppKit on top of macOS's built-in WKWebView instead of bundling Electron or another engine. Includes a Rust Bitwarden SDK bridge, per-site JavaScript and ad-blocker controls, 120 Hz rendering on AC power, and out-of-process filter compilation so memory stays low (227 MB vs. Safari's 287 MB on Wikipedia). Signed and notarized for Apple Silicon Macs on macOS 15 or newer. GPL-3.0.",
+    "stack": [
+      "Swift",
+      "AppKit",
+      "WebKit",
+      "Rust"
+    ],
+    "features": [
+      "No URL bar by default, with floating tab switching and commands on Cmd+T and Cmd+K",
+      "Tree tabs, Spaces with isolated Containers, and live-reloaded JSON/CSS config",
+      "Per-site JavaScript, content blocker, dark mode, and volume controls",
+      "Bitwarden passkeys and login autofill via a Rust SDK bridge, plus Apple Passwords"
+    ]
+  },
+  {
     "id": "pace-bar",
     "title": "Pace Bar",
     "year": "2026",

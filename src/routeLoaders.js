@@ -2,6 +2,7 @@
 // first render so a reload never shows an empty Suspense fallback.
 export const routeLoaders = {
   '/': () => import('./pages/Home'),
+  '/workflow': () => import('./pages/Workflow'),
   '/about': () => import('./pages/About'),
   '/projects': () => import('./pages/Projects'),
   '/projects/omalo': () => import('./pages/Omalo'),

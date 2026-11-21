@@ -8,6 +8,7 @@ const StatusBar = () => {
   const { theme, cycleTheme } = useTheme()
 
   const routeLinks = [
+    { path: '/workflow', label: 'workflow' },
     { path: '/projects', label: 'projects' },
     { path: '/projects/omalo', label: 'omalo' },
     { path: '/about', label: 'about' },

@@ -51,8 +51,8 @@ const AboutCard = () => (
       at Davidson.
     </p>
     <nav aria-label="Explore Tucker's work" className="flex flex-wrap gap-4 mt-6 text-sm">
-      <Link className="text-accent underline underline-offset-4 min-h-11 inline-flex items-center" to="/projects/omalo">What I'm working on</Link>
-      <Link className="text-accent underline underline-offset-4 min-h-11 inline-flex items-center" to="/projects">More projects</Link>
+      <Link className="text-accent underline underline-offset-4 min-h-11 inline-flex items-center" to="/workflow">How I build</Link>
+      <Link className="text-accent underline underline-offset-4 min-h-11 inline-flex items-center" to="/projects">Projects</Link>
       <Link className="text-accent underline underline-offset-4 min-h-11 inline-flex items-center" to="/contact">Say hello</Link>
     </nav>
   </article>

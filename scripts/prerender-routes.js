@@ -12,15 +12,23 @@ const pages = [
   {
     route: '/',
     title: 'Tucker Craig - Software Engineer',
-    description: "Software engineer who likes building things that make everyday life a little easier. Right now I'm building omalo, a pocket companion running Pokémon Emerald with an AI handoff.",
+    description: 'I build and ship everyday software with coding agents across macOS, iOS, web, and hardware: angl browser, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.',
     image: 'https://btuckerc.dev/og/home.jpg',
-    imageAlt: 'Tucker Craig, software engineer. I like building things that make everyday life a little easier.',
+    imageAlt: 'Tucker Craig, software engineer. Building everyday software with coding agents.',
     type: 'website'
+  },
+  {
+    route: '/workflow',
+    title: 'How I build with AI - Tucker Craig',
+    description: 'How I use coding agents to ship real software across macOS, iOS, web, and hardware: tight scope, clean harnesses, and real verification.',
+    image: 'https://btuckerc.dev/og/workflow.jpg',
+    imageAlt: 'Tucker Craig, workflow: how I build with AI.',
+    type: 'article'
   },
   {
     route: '/about',
     title: 'About - Tucker Craig',
-    description: "Hello, world! I'm Tucker. I build apps for my AI usage, my own voice-to-text, and AI agents on my phone, plus firmware for omalo.",
+    description: "Hello, world! I'm Tucker. I build my own macOS browser, an iOS app for coding agents, local voice-to-text, quota tools, and firmware for omalo.",
     image: 'https://btuckerc.dev/og/about.jpg',
     imageAlt: "Tucker Craig, about. Hello, world! I'm Tucker.",
     type: 'website'
@@ -28,9 +36,9 @@ const pages = [
   {
     route: '/projects',
     title: 'Projects - Tucker Craig',
-    description: "Things I've built, big and small: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more.",
+    description: "Things I've built, big and small: angl browser, Herdwick, Inkjoin, Pace Bar, Dictation, CenterSeat, and more.",
     image: 'https://btuckerc.dev/og/projects.jpg',
-    imageAlt: 'Tucker Craig, projects: Inkjoin, Pace Bar, Herdwick, Dictation, CenterSeat, and more.',
+    imageAlt: 'Tucker Craig, projects: angl, Herdwick, Inkjoin, Pace Bar, Dictation, and more.',
     type: 'website'
   },
   {

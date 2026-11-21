@@ -15,6 +15,7 @@ import RouteErrorBoundary from './components/RouteErrorBoundary'
 import { routeLoaders } from './routeLoaders'
 
 const Home = lazy(routeLoaders['/'])
+const Workflow = lazy(routeLoaders['/workflow'])
 const About = lazy(routeLoaders['/about'])
 const Projects = lazy(routeLoaders['/projects'])
 const Omalo = lazy(routeLoaders['/projects/omalo'])
@@ -91,6 +92,7 @@ function AppContent() {
               <AnimatePresence mode="wait">
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/workflow" element={<Workflow />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/projects/omalo" element={<Omalo />} />

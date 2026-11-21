@@ -1,7 +1,7 @@
 {
   "name": "Tucker Craig",
   "role": "Software Engineer",
-  "intro": "Hello, world! I'm Tucker. A lot of what I build starts with something small that bugs me. I wanted to keep track of my AI usage, so I built a tracker. I didn't want to keep paying for voice-to-text, so I made my own. I wanted my AI agents with me, so now they're on my phone. Even something to help me get the right movie seat. There's a bunch more on my projects page. Feel free to check it out.",
+  "intro": "Hello, world! I'm Tucker. A lot of what I build starts with something small that bugs me. I wanted a keyboard-first browser without Electron bloat, so I built angl. I wanted to keep track of my AI quotas, so I built Pace Bar. I didn't want to keep paying for voice-to-text, so I made my own. I wanted my coding agents with me away from my desk, so now they're on my phone. Even something to help me get the right movie seat. There's a bunch more on my projects page. Feel free to check it out.",
   "personal": "I also sang a cappella in The Nuances at Davidson.",
-  "currentWork": "I'm writing the firmware for an Arduino I'm calling omalo, a pocket companion. Right now I'm getting Pokémon Emerald running on it, with an AI you can hand goals off to."
+  "currentWork": "Right now I'm focused on building real, everyday software with coding agents, plus firmware for an Arduino pocket companion called omalo."
 }
