@@ -36,7 +36,7 @@ const Home = () => {
 
             <p className="home-masthead-lede">
               <span className="home-masthead-line">If something I use every day bugs me,</span>{' '}
-              <span className="home-masthead-line">I&apos;d rather build my own.</span>
+              <span className="home-masthead-line">I&apos;ve started putting my free time into fixing it.</span>
             </p>
 
             <p className="home-masthead-note">
