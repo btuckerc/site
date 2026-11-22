@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react'
+import { safeGetItem, safeSetItem } from '../utils/safeStorage'
 
 const FontContext = createContext()
 
@@ -64,7 +65,7 @@ const getCanonicalFontId = (id) => FONT_ALIASES[id] || id
 const hasFont = (id) => FONTS.some(font => font.id === id)
 
 const getStoredFontId = () => {
-  const savedFontId = localStorage.getItem('font-family')
+  const savedFontId = safeGetItem('font-family')
   const canonicalFontId = getCanonicalFontId(savedFontId)
   return hasFont(canonicalFontId) ? canonicalFontId : 'neue-montreal'
 }
@@ -79,7 +80,7 @@ export const FontProvider = ({ children }) => {
 
   useEffect(() => {
     document.documentElement.style.setProperty('--font-family', currentFont.family)
-    localStorage.setItem('font-family', currentFont.id)
+    safeSetItem('font-family', currentFont.id)
     if (fontId !== currentFont.id) {
       setFontId(currentFont.id)
     }

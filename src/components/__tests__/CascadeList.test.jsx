@@ -1,16 +1,7 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import CascadeList from '../CascadeList'
-
-// Mock framer-motion to avoid animation complexities in tests
-vi.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, initial: _initial, animate: _animate, exit: _exit, transition: _transition, whileHover: _whileHover, whileTap: _whileTap, ...props }) => <div {...props}>{children}</div>,
-    button: ({ children, initial: _initial, animate: _animate, exit: _exit, transition: _transition, whileHover: _whileHover, whileTap: _whileTap, ...props }) => <button {...props}>{children}</button>,
-  },
-  AnimatePresence: ({ children }) => <div>{children}</div>,
-}))
 
 describe('CascadeList', () => {
   const mockItems = [

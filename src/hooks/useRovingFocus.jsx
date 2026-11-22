@@ -22,6 +22,7 @@ export const FocusProvider = ({ children }) => {
 
   const unregisterContainer = useCallback((containerId) => {
     itemsRef.current.delete(containerId)
+    setFocusedContainer((prev) => (prev === containerId ? null : prev))
   }, [])
 
   const registerItem = useCallback((itemId, element) => {
@@ -37,17 +38,24 @@ export const FocusProvider = ({ children }) => {
     if (element) {
       element.focus()
       setActiveId(itemId)
+      return true
     }
+    return false
+  }, [])
+
+  const syncFocus = useCallback((containerId, itemId) => {
+    setFocusedContainer(containerId)
+    setActiveId(itemId)
   }, [])
 
   const moveHorizontal = useCallback((direction) => {
-    if (!focusedContainer || !activeId) return
+    if (!focusedContainer || !activeId) return false
 
     const items = itemsRef.current.get(focusedContainer)
-    if (!items || items.length === 0) return
+    if (!items || items.length === 0) return false
 
     const currentIndex = items.findIndex(item => item.id === activeId)
-    if (currentIndex === -1) return
+    if (currentIndex === -1) return false
 
     let newIndex
     if (direction === 'left') {
@@ -56,20 +64,19 @@ export const FocusProvider = ({ children }) => {
       newIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0
     }
 
-    focusItem(items[newIndex].id)
+    return focusItem(items[newIndex].id)
   }, [focusedContainer, activeId, focusItem])
 
   const moveVertical = useCallback((direction) => {
-    if (!focusedContainer || !activeId) return
+    if (!focusedContainer || !activeId) return false
 
     const items = itemsRef.current.get(focusedContainer)
-    if (!items || items.length === 0) return
+    if (!items || items.length === 0) return false
 
     const currentIndex = items.findIndex(item => item.id === activeId)
-    if (currentIndex === -1) return
+    if (currentIndex === -1) return false
 
-    // For vertical movement, we can implement grid-like navigation
-    // For now, treat as linear for simplicity
+    // For vertical movement, treat as linear list navigation
     let newIndex
     if (direction === 'up') {
       newIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1
@@ -77,17 +84,18 @@ export const FocusProvider = ({ children }) => {
       newIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0
     }
 
-    focusItem(items[newIndex].id)
+    return focusItem(items[newIndex].id)
   }, [focusedContainer, activeId, focusItem])
 
   const activateItem = useCallback(() => {
-    if (!activeId) return
+    if (!activeId) return false
 
     const element = elementsRef.current.get(activeId)
     if (element) {
-      // Trigger click or enter event
       element.click()
+      return true
     }
+    return false
   }, [activeId])
 
   const setFocusContainer = useCallback((containerId, itemId = null) => {
@@ -111,6 +119,7 @@ export const FocusProvider = ({ children }) => {
       registerItem,
       unregisterItem,
       focusItem,
+      syncFocus,
       setFocusContainer,
       moveHorizontal,
       moveVertical,
@@ -122,43 +131,33 @@ export const FocusProvider = ({ children }) => {
 }
 
 export const useRovingFocus = (containerId, items) => {
-  const { 
-    activeId, 
+  const {
     focusedContainer,
-    registerContainer, 
+    registerContainer,
     unregisterContainer,
     registerItem,
-    unregisterItem
+    unregisterItem,
+    syncFocus
   } = useFocusContext()
   useEffect(() => {
     registerContainer(containerId, items)
     return () => unregisterContainer(containerId)
   }, [containerId, items, registerContainer, unregisterContainer])
 
-  const getItemProps = useCallback((item) => {
-    const isActive = activeId === item.id
-    const isInActiveContainer = focusedContainer === containerId
-
-    return {
-      ref: (element) => {
-        if (element) {
-          registerItem(item.id, element)
-        } else {
-          unregisterItem(item.id)
-        }
-      },
-      tabIndex: isActive && isInActiveContainer ? 0 : -1,
-      'data-focus-item': true,
-      'data-item-id': item.id,
-      'aria-selected': isActive,
-      onFocus: () => {
-        // When an item receives focus, update the active state
-        if (focusedContainer !== containerId) {
-          // Switched to this container
-        }
+  const getItemProps = useCallback((item) => ({
+    ref: (element) => {
+      if (element) {
+        registerItem(item.id, element)
+      } else {
+        unregisterItem(item.id)
       }
+    },
+    'data-focus-item': true,
+    'data-item-id': item.id,
+    onFocus: () => {
+      syncFocus(containerId, item.id)
     }
-  }, [activeId, focusedContainer, containerId, registerItem, unregisterItem])
+  }), [containerId, registerItem, unregisterItem, syncFocus])
 
   return { getItemProps, isActive: focusedContainer === containerId }
 }

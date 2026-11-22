@@ -1,6 +1,5 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { AnimatePresence, MotionConfig } from 'framer-motion'
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider } from './hooks/useTheme.jsx'
 import { FontProvider } from './hooks/useFont.jsx'
@@ -10,7 +9,6 @@ import StatusBar from './components/StatusBar'
 import CommandPalette from './components/CommandPalette'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
-import CloseButton from './components/CloseButton'
 import RouteErrorBoundary from './components/RouteErrorBoundary'
 import { routeLoaders } from './routeLoaders'
 
@@ -29,16 +27,47 @@ const InkjoinSupport = lazy(routeLoaders['/inkjoin/support'])
 
 function AppContent() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false)
-  const { topRef, bottomRef, scrollToTop, scrollToBottom } = useScrollTargets()
+  const backgroundRef = useRef(null)
+  const paletteOpenerRef = useRef(null)
+  const { scrollToTop, scrollToBottom } = useScrollTargets()
   const navigate = useNavigate()
   const location = useLocation()
 
+  const resolvePersistentOpener = (element) => {
+    if (!(element instanceof HTMLElement)) return null
+    const popover = element.closest('#footer-font-picker, #footer-social-links')
+    if (popover?.id) {
+      const trigger = document.querySelector(`[aria-controls="${popover.id}"]`)
+      if (trigger instanceof HTMLElement) return trigger
+    }
+    return element
+  }
 
-  // Set up global hotkeys
+  const openCommandPalette = useCallback(() => {
+    paletteOpenerRef.current = resolvePersistentOpener(document.activeElement)
+    setIsCommandPaletteOpen(true)
+  }, [])
+
+  const toggleCommandPalette = useCallback((openerElement = null) => {
+    setIsCommandPaletteOpen((open) => {
+      if (!open) {
+        const opener = openerElement instanceof HTMLElement ? openerElement : document.activeElement
+        paletteOpenerRef.current = resolvePersistentOpener(opener)
+      }
+      return !open
+    })
+  }, [])
+
+  useLayoutEffect(() => {
+    if (backgroundRef.current) {
+      backgroundRef.current.inert = isCommandPaletteOpen
+    }
+  }, [isCommandPaletteOpen])
+
   useHotkeys({
-    onCommandPalette: () => setIsCommandPaletteOpen(true),
+    disabled: isCommandPaletteOpen,
+    onCommandPalette: openCommandPalette,
     onSearch: () => {
-      // Focus search if on projects page, otherwise go to projects
       const searchInput = document.querySelector('[data-search-input]')
       if (searchInput) {
         searchInput.focus()
@@ -53,7 +82,6 @@ function AppContent() {
       if (isCommandPaletteOpen) {
         setIsCommandPaletteOpen(false)
       } else if (location.pathname !== '/') {
-        // Navigate back to home when ESC is pressed on modal pages
         navigate('/')
       }
     }
@@ -65,31 +93,18 @@ function AppContent() {
       <div aria-hidden="true" className="site-backdrop" />
 
       <div className="relative z-10">
-        {/* Skip to main content for accessibility */}
-        <a href="#main-content" className="skip-to-main">
-          Skip to main content
-        </a>
-        
-        {/* Top scroll target */}
-        <div ref={topRef} tabIndex={-1} className="absolute top-0" aria-hidden="true" />
-        
-        {/* Header/Banner landmark */}
-        <header role="banner">
-          <StatusBar />
-        </header>
-        
-        {/* Main content landmark */}
-        <main id="main-content" role="main" tabIndex={-1}>
-          {location.pathname !== '/' && (
-            <div className="tui-global-back-row">
-              <div className="tui-global-back-inner">
-                <CloseButton />
-              </div>
-            </div>
-          )}
-          <RouteErrorBoundary resetKey={location.pathname}>
-            <Suspense fallback={null}>
-              <AnimatePresence mode="wait">
+        <div ref={backgroundRef}>
+          <a href="#main-content" className="skip-to-main">
+            Skip to main content
+          </a>
+
+          <header role="banner" className="sticky top-0 z-40">
+            <StatusBar />
+          </header>
+
+          <main id="main-content" role="main" tabIndex={-1}>
+            <RouteErrorBoundary resetKey={location.pathname}>
+              <Suspense fallback={null}>
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/workflow" element={<Workflow />} />
@@ -107,28 +122,25 @@ function AppContent() {
                   <Route path="/privacy/inkjoin" element={<InkjoinPrivacy />} />
                   <Route path="/inkjoin/support" element={<InkjoinSupport />} />
                 </Routes>
-              </AnimatePresence>
-            </Suspense>
-          </RouteErrorBoundary>
-        </main>
-        
-        <Footer isCommandPaletteOpen={isCommandPaletteOpen} onCommandPaletteToggle={() => setIsCommandPaletteOpen(open => !open)} />
-        
-        {/* Bottom scroll target */}
-        <div ref={bottomRef} tabIndex={-1} className="absolute bottom-0" aria-hidden="true" />
-        
-        {/* Command Palette - complementary landmark */}
-        <aside role="complementary" aria-label="Command palette">
-          <CommandPalette 
-            isOpen={isCommandPaletteOpen}
-            onClose={() => setIsCommandPaletteOpen(false)}
+              </Suspense>
+            </RouteErrorBoundary>
+          </main>
+
+          <Footer
+            isCommandPaletteOpen={isCommandPaletteOpen}
+            onCommandPaletteToggle={toggleCommandPalette}
           />
-        </aside>
-        
-        {/* Live region for announcements */}
-        <div 
-          id="announcements" 
-          aria-live="polite" 
+        </div>
+
+        <CommandPalette
+          isOpen={isCommandPaletteOpen}
+          onClose={() => setIsCommandPaletteOpen(false)}
+          returnFocusRef={paletteOpenerRef}
+        />
+
+        <div
+          id="announcements"
+          aria-live="polite"
           aria-atomic="true"
           className="sr-only"
         />
@@ -144,9 +156,7 @@ function App() {
       <ThemeProvider>
         <FontProvider>
           <FocusProvider>
-            <MotionConfig reducedMotion="user">
-              <AppContent />
-            </MotionConfig>
+            <AppContent />
           </FocusProvider>
         </FontProvider>
       </ThemeProvider>

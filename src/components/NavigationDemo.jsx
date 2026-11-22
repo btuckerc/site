@@ -45,10 +45,16 @@ export default function NavigationDemo({ copy }) {
   useEffect(() => {
     if (!infoOpen) return undefined
     const dismiss = e => { if (!taskControls.current?.contains(e.target)) setInfoOpen(false) }
-    const escape = e => { if (e.key === 'Escape') { setInfoOpen(false); taskControls.current?.querySelector('button')?.focus() } }
+    const escape = e => {
+      if (e.key !== 'Escape' || e.isComposing || e.keyCode === 229 || e.metaKey || e.ctrlKey || e.altKey) return
+      if (document.querySelector('[role="dialog"][aria-modal="true"]')) return
+      e.preventDefault()
+      setInfoOpen(false)
+      taskControls.current?.querySelector('button')?.focus()
+    }
     document.addEventListener('pointerdown', dismiss)
-    document.addEventListener('keydown', escape)
-    return () => { document.removeEventListener('pointerdown', dismiss); document.removeEventListener('keydown', escape) }
+    document.addEventListener('keydown', escape, true)
+    return () => { document.removeEventListener('pointerdown', dismiss); document.removeEventListener('keydown', escape, true) }
   }, [infoOpen])
   const reset = () => { setProgress(0); setInfoOpen(false) }
   return <figure className="story-visual navigation-demo">
@@ -60,7 +66,7 @@ export default function NavigationDemo({ copy }) {
     <RouteMap route={result.path} progress={progress} overlays={overlays} copy={copy} trip={trip} battleFallback={result.battleFallback} />
     <div className="route-map-labels"><span>{copy.west}</span><span>{copy.east}</span></div>
     <p className="navigation-legend">{copy.legend}</p>
-    <div className="route-metrics" aria-label={copy.metricsLabel}><div><strong>{result.path.length ? result.path.length - 1 : '-'}</strong><span>{copy.steps}</span></div><div><strong>{result.path.length ? result.grass : '-'}</strong><span>{copy.grass}</span></div><div><strong>{result.path.length ? result.risk : '-'}</strong><span>{copy.risk}</span></div></div>
+    <div className="route-metrics" role="group" aria-label={copy.metricsLabel}><div><strong>{result.path.length ? result.path.length - 1 : '-'}</strong><span>{copy.steps}</span></div><div><strong>{result.path.length ? result.grass : '-'}</strong><span>{copy.grass}</span></div><div><strong>{result.path.length ? result.risk : '-'}</strong><span>{copy.risk}</span></div></div>
     <p role="status" className="navigation-result">{result.path.length ? result.battleFallback ? copy.battleResult : copy.explanations[task] : copy.blocked}</p>
     {result.path.length > 0 && <label className="story-slider route-scrubber">{copy.scrub}<input type="range" min="0" max={result.path.length - 1} value={progress} onChange={e => setProgress(Number(e.target.value))} /></label>}
     <details className="story-detail"><summary className="tui-summary"><span className="tui-disclosure" aria-hidden="true" /><span>{copy.detailsTitle}</span></summary><p>{copy.caption}</p><p>{copy.limits}</p><a href={map.source} target="_blank" rel="noreferrer" aria-describedby="new-tab-note">{copy.credit}</a></details>

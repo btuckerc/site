@@ -110,11 +110,20 @@
           'obel-mono': '/fonts/obel-mono-1.000-wght-normal.woff2',
           'neue-montreal': 'https://pangrampangram.com/cdn/shop/files/PPNeueMontreal-Variable_b3ebe68c-91e0-4337-a3bc-c2a15b5e395b.woff2?v=1182376259239852185'
         };
-        const savedFont = localStorage.getItem('font-family') || 'neue-montreal';
+        let savedFont = 'neue-montreal';
+        try {
+          savedFont = localStorage.getItem('font-family') || 'neue-montreal';
+        } catch {
+          // Storage can be blocked in strict browser privacy settings.
+        }
         const fontId = aliases[savedFont] || savedFont;
         document.documentElement.style.setProperty('--font-family', fonts[fontId] || fonts['neue-montreal']);
         if (fontId !== savedFont && fonts[fontId]) {
-          localStorage.setItem('font-family', fontId);
+          try {
+            localStorage.setItem('font-family', fontId);
+          } catch {
+            // Ignore write failures when storage is unavailable.
+          }
         }
         const fontHref = fontFiles[fontId];
         if (fontHref) {
@@ -128,10 +137,9 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-lRHfEsLk.js"></script>
+    <script type="module" crossorigin src="/assets/index-CHXkWkwU.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/vendor-CDaM45aE.js">
-    <link rel="modulepreload" crossorigin href="/assets/motion-C7b1aktH.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-to4WHAis.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-BgvOo1Dy.css">
   </head>
   <body>
     <div id="root"></div>

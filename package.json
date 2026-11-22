@@ -21,7 +21,6 @@
     "@fontsource-variable/martian-mono": "^5.2.7",
     "@fontsource-variable/source-code-pro": "^5.2.7",
     "@fontsource/ibm-plex-mono": "^5.2.7",
-    "framer-motion": "^11.11.0",
     "fuse.js": "^7.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

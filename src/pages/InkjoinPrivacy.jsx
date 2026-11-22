@@ -1,3 +1,4 @@
+import Breadcrumb from '../components/Breadcrumb'
 import PageMeta from '../components/PageMeta'
 
 const linkClass =
@@ -81,17 +82,14 @@ const InkjoinPrivacy = () => (
       imageAlt="Inkjoin privacy policy."
     />
 
-    <div className="tui-page-shell min-h-svh px-4 pb-28">
-      <article className="mx-auto max-w-4xl font-mono">
-        <div className="tui-page-header mb-8">
-          <p className="hidden text-center text-xs uppercase tracking-[0.18em] text-muted sm:block">
-            Inkjoin
-          </p>
-        </div>
+    <div className="tui-page-shell min-h-svh">
+      <div className="tui-rail">
+        <Breadcrumb items={[{ label: 'home', to: '/' }, { label: 'inkjoin' }, { label: 'privacy' }]} />
+        <article className="mx-auto max-w-4xl font-mono">
 
-        <header className="mb-6 border border-line bg-card-bg px-5 py-7 sm:px-8 sm:py-9">
-          <p className="mb-3 text-xs uppercase tracking-[0.18em] text-accent">Privacy policy</p>
-          <h1 className="tui-page-title text-2xl font-bold leading-tight text-fg sm:text-4xl">
+        <header className="tui-panel mb-6 p-5 sm:p-7">
+          <p className="case-study-eyebrow">Inkjoin / Privacy policy</p>
+          <h1 className="tui-page-title mt-3 text-2xl font-bold leading-tight text-fg sm:text-4xl">
             Your puzzles stay yours.
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
@@ -100,8 +98,8 @@ const InkjoinPrivacy = () => (
           </p>
           <dl className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {summaryItems.map(([term, description]) => (
-              <div key={term} className="bg-bg-elev px-4 py-3">
-                <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-muted">{term}</dt>
+              <div key={term} className="bg-bg px-4 py-3">
+                <dt className="text-xs uppercase tracking-[0.08em] text-muted">{term}</dt>
                 <dd className="mt-1 text-sm font-semibold text-fg">{description}</dd>
               </div>
             ))}
@@ -116,11 +114,11 @@ const InkjoinPrivacy = () => (
             <section
               key={section.title}
               aria-labelledby={`privacy-section-${index}`}
-              className="tui-panel border border-line bg-card-bg px-5 py-5 sm:px-7 sm:py-6"
+              className="tui-panel p-5 sm:p-7"
             >
               <h2
                 id={`privacy-section-${index}`}
-                className="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-accent sm:text-base"
+                className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-accent sm:text-base"
               >
                 <span aria-hidden="true" className="mr-2 text-muted">
                   {String(index + 1).padStart(2, '0')}
@@ -133,8 +131,8 @@ const InkjoinPrivacy = () => (
             </section>
           ))}
 
-          <section aria-labelledby="privacy-contact" className="border border-accent/40 bg-card-bg px-5 py-6 sm:px-7">
-            <h2 id="privacy-contact" className="text-sm font-semibold uppercase tracking-[0.12em] text-accent sm:text-base">
+          <section aria-labelledby="privacy-contact" className="tui-panel border-accent/40 p-5 sm:p-7">
+            <h2 id="privacy-contact" className="text-sm font-semibold uppercase tracking-[0.1em] text-accent sm:text-base">
               <span aria-hidden="true" className="mr-2 text-muted">{String(policySections.length + 1).padStart(2, '0')}</span>
               Contact
             </h2>
@@ -144,7 +142,8 @@ const InkjoinPrivacy = () => (
             </p>
           </section>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   </>
 )

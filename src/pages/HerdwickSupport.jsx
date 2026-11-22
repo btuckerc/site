@@ -1,3 +1,4 @@
+import Breadcrumb from '../components/Breadcrumb'
 import PageMeta from '../components/PageMeta'
 
 const linkClass =
@@ -7,11 +8,11 @@ const sections = [
   {
     title: 'What you need',
     content: (
-      <ul className="list-disc space-y-1 pl-5">
+      <ul className="space-y-2" role="list">
         <li>An iPhone or iPad on iOS 26 or later.</li>
         <li>
           A Mac or Linux machine running{' '}
-          <a href="https://herdr.dev" className={linkClass}>
+          <a href="https://herdr.dev" className={linkClass} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">
             herdr
           </a>
           , with your coding agents (omp, Claude Code, Codex) in its panes.
@@ -23,7 +24,7 @@ const sections = [
   {
     title: 'Connect a machine',
     content: (
-      <ul className="list-disc space-y-1 pl-5">
+      <ul className="space-y-2" role="list">
         <li>Open Herdwick and add a host by its address, or sign in to Tailscale and pick a machine.</li>
         <li>
           Sign in with a password, or with the key Herdwick makes on your device: copy it from
@@ -36,7 +37,7 @@ const sections = [
   {
     title: "If it won't connect",
     content: (
-      <ul className="list-disc space-y-1 pl-5">
+      <ul className="space-y-2" role="list">
         <li>Check that you can SSH to the machine from another device with the same user.</li>
         <li>Check that herdr is running on it. Herdwick shows only agents herdr tracks.</li>
         <li>For key sign-in, check that the whole key line is in <code>authorized_keys</code>.</li>
@@ -62,17 +63,14 @@ const HerdwickSupport = () => (
       imageAlt="Herdwick support: coding agents on your phone."
     />
 
-    <div className="tui-page-shell min-h-svh px-4 pb-28">
-      <article className="mx-auto max-w-4xl font-mono">
-        <div className="tui-page-header mb-8">
-          <p className="hidden text-center text-xs uppercase tracking-[0.18em] text-muted sm:block">
-            Herdwick
-          </p>
-        </div>
+    <div className="tui-page-shell min-h-svh">
+      <div className="tui-rail">
+        <Breadcrumb items={[{ label: 'home', to: '/' }, { label: 'herdwick' }, { label: 'support' }]} />
+        <article className="mx-auto max-w-4xl font-mono">
 
-        <header className="mb-6 border border-line bg-card-bg px-5 py-7 sm:px-8 sm:py-9">
-          <p className="mb-3 text-xs uppercase tracking-[0.18em] text-accent">Support</p>
-          <h1 className="tui-page-title text-2xl font-bold leading-tight text-fg sm:text-4xl">
+        <header className="tui-panel mb-6 p-5 sm:p-7">
+          <p className="case-study-eyebrow">Herdwick / Support</p>
+          <h1 className="tui-page-title mt-3 text-2xl font-bold leading-tight text-fg sm:text-4xl">
             Coding agents on your phone.
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
@@ -86,11 +84,11 @@ const HerdwickSupport = () => (
             <section
               key={section.title}
               aria-labelledby={`support-section-${index}`}
-              className="tui-panel border border-line bg-card-bg px-5 py-5 sm:px-7 sm:py-6"
+              className="tui-panel p-5 sm:p-7"
             >
               <h2
                 id={`support-section-${index}`}
-                className="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-accent sm:text-base"
+                className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-accent sm:text-base"
               >
                 <span aria-hidden="true" className="mr-2 text-muted">
                   {String(index + 1).padStart(2, '0')}
@@ -105,11 +103,11 @@ const HerdwickSupport = () => (
 
           <section
             aria-labelledby="support-contact"
-            className="border border-accent/40 bg-card-bg px-5 py-6 sm:px-7"
+            className="tui-panel border-accent/40 p-5 sm:p-7"
           >
             <h2
               id="support-contact"
-              className="text-sm font-semibold uppercase tracking-[0.12em] text-accent sm:text-base"
+              className="text-sm font-semibold uppercase tracking-[0.1em] text-accent sm:text-base"
             >
               <span aria-hidden="true" className="mr-2 text-muted">
                 {String(sections.length + 1).padStart(2, '0')}
@@ -134,7 +132,8 @@ const HerdwickSupport = () => (
           Independent project. Not affiliated with or endorsed by the herdr project or Tailscale
           Inc.
         </p>
-      </article>
+        </article>
+      </div>
     </div>
   </>
 )

@@ -8,11 +8,9 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          motion: ['framer-motion']
-        }
-      }
-    }
+        },
+      },
+    },
   },
-  // Ensure public assets are copied correctly
-  publicDir: 'public'
+  publicDir: 'public',
 })

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import PageMeta from '../components/PageMeta'
 import { GameCapture } from '../components/StarterSelectionCapture'
+import { WorkflowLoopDiagram } from '../components/WorkflowVisuals'
 import projectsData from '../../data/projects.json'
 import '../styles/home-media.css'
 
@@ -23,16 +23,11 @@ const Home = () => {
         imageAlt="Tucker Craig, software engineer. Building my own tools with coding agents."
       />
 
-      <div className="home-page tui-page-shell min-h-svh px-4 pt-16 pb-28 sm:pt-20">
-        <motion.div
-          initial={{ y: 6 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="mx-auto w-full max-w-5xl"
-        >
-          <header className="home-header home-personal-hero border border-line/70 bg-card-bg/70">
+      <div className="home-page tui-page-shell min-h-svh">
+        <div className="tui-rail tui-enter">
+          <header className="home-header home-personal-hero">
             <div className="home-personal-hero-copy">
-              <h1 className="home-personal-hero-title font-mono font-bold leading-tight text-fg">TUCKER CRAIG</h1>
+              <h1 className="home-personal-hero-title font-mono font-bold text-fg">TUCKER CRAIG</h1>
               <p className="home-personal-hero-role font-mono text-accent">Software Engineer</p>
               <p className="home-personal-hero-lede">
                 If something I use every day bugs me, I&apos;d rather build my own. Lately that&apos;s meant a Mac browser, a Windows streaming app, and an iPhone app for my coding agents.
@@ -50,7 +45,7 @@ const Home = () => {
                 >
                   we can fix everything
                 </a>
-                . Coding agents make that practical if you keep tasks focused and actually test what gets built. Everything below is something I use myself.
+                . Coding agents make that practical if you keep tasks focused and test what gets built. Everything below is something I use myself.
               </p>
               <p className="mt-4 text-muted">
                 I also sang a cappella in{' '}
@@ -72,52 +67,36 @@ const Home = () => {
             </div>
           </header>
 
-          <section className="home-feature mt-6 border border-line/70 bg-card-bg/80 p-5 backdrop-blur-xl sm:p-8" aria-labelledby="workflow-title">
+          <section className="home-feature mt-6 p-5 sm:p-7" aria-labelledby="workflow-title">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="min-w-0 flex-1 basis-80">
-                <p className="home-kicker font-mono text-xs text-accent">workflow / how i build with ai</p>
-                <h2 id="workflow-title" className="mt-2 font-mono text-2xl font-bold text-fg sm:text-3xl">
-                  How I actually use coding agents
+                <p className="home-kicker">workflow / how i build with ai</p>
+                <h2 id="workflow-title" className="mt-2 font-mono text-2xl font-bold text-fg sm:text-3xl leading-tight">
+                  How I use coding agents
                 </h2>
                 <p className="mt-3 text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">
-                  Writing code quickly is easy now; checking that it actually works well is the hard part. Most of my setup is about keeping work small, reviewing carefully, and testing the real app.
+                  Coding agents make it fast to write the first version. I spend most of my time keeping tasks small in separate Git worktrees, reading the patches, and testing the built app myself.
                 </p>
               </div>
             </div>
 
-            <div className="home-workflow-pillars mt-6">
-              <div className="home-workflow-pillar">
-                <p className="home-workflow-pillar-kicker">01 / scope</p>
-                <h3>Small, separate tasks</h3>
-                <p>I handle the design and break work into clear pieces that run in separate copies of the repo so parallel work never collides.</p>
-              </div>
-              <div className="home-workflow-pillar">
-                <p className="home-workflow-pillar-kicker">02 / check</p>
-                <h3>Test the real thing</h3>
-                <p>Following engineers like @poteto: launch the signed Mac app, tap through iOS, benchmark against OBS, or check actual game memory.</p>
-              </div>
-              <div className="home-workflow-pillar">
-                <p className="home-workflow-pillar-kicker">03 / tooling</p>
-                <h3>Build the missing tools</h3>
-                <p>When something in my workflow gets in the way, I build a tool for it: an iPhone agent app, a menu bar usage tracker, or local voice-to-text.</p>
-              </div>
-            </div>
+            <WorkflowLoopDiagram compact />
 
-            <div className="mt-5 flex flex-wrap items-center gap-3">
-              <Link to="/workflow" className="tui-action tui-home-primary inline-flex min-h-11 items-center border border-accent/70 bg-card-bg px-4 py-2 font-mono text-sm text-fg">
-                <span className="tui-action-content">read how i build</span>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Link to="/workflow" className="tui-action tui-home-primary inline-flex items-center px-4 py-2 font-mono text-sm">
+                read how i build
               </Link>
               <Link to="/projects/s3-amoled" className="tui-link-chip">omalo agent notes</Link>
             </div>
           </section>
 
-          <section className="home-support-card mt-6 border border-line/70 bg-card-bg/75 p-5 sm:p-7" aria-labelledby="angl-title">
+          <section className="home-support-card mt-6 p-5 sm:p-7" aria-labelledby="angl-title">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="home-app-heading min-w-0 flex-1 basis-72">
                 <img src="/media/angl-browser/icon.png" alt="" width="128" height="128" loading="lazy" decoding="async" className="home-app-icon home-app-icon-large" />
                 <div>
-                  <p className="home-kicker font-mono text-xs text-accent">angl browser</p>
-                  <h2 id="angl-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl">The lightest macOS browser that still has features</h2>
+                  <p className="home-kicker">angl browser</p>
+                  <h2 id="angl-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl leading-tight">The lightest macOS browser that still has features</h2>
                 </div>
               </div>
               <span className="home-status font-mono text-xs text-muted"><span className="text-accent" aria-hidden="true">●</span> macOS · WebKit</span>
@@ -134,23 +113,23 @@ const Home = () => {
                   decoding="async"
                 />
               </div>
-              <figcaption className="mt-2 text-xs leading-6 text-muted sm:text-sm">
+              <figcaption className="mt-2.5 text-sm leading-6 text-muted">
                 Built in Swift and AppKit on macOS&apos;s built-in WebKit, with a Rust bridge for Bitwarden. Uses 227 MB on Wikipedia compared to Safari&apos;s 287 MB.
               </figcaption>
             </figure>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
-              <a href={angl.links.download} className="tui-action tui-home-primary inline-flex min-h-11 items-center border border-accent/70 bg-card-bg px-4 py-2 font-mono text-sm text-fg" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">
-                <span className="tui-action-content">download for mac</span>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a href={angl.links.download} className="tui-action tui-home-primary inline-flex items-center px-4 py-2 font-mono text-sm" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">
+                download for mac
               </a>
               <a href={angl.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code</a>
             </div>
           </section>
 
-          <section className="home-support-card mt-6 border border-line/70 bg-card-bg/75 p-5 sm:p-7" aria-labelledby="winstream-title">
+          <section className="home-support-card mt-6 p-5 sm:p-7" aria-labelledby="winstream-title">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="min-w-0 flex-1 basis-72">
-                <p className="home-kicker font-mono text-xs text-accent">winstream · rust · windows</p>
-                <h2 id="winstream-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl">
+                <p className="home-kicker">winstream · rust · windows</p>
+                <h2 id="winstream-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl leading-tight">
                   A lighter Windows streaming app
                 </h2>
               </div>
@@ -197,22 +176,22 @@ const Home = () => {
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-xs leading-6 text-muted sm:text-sm">
+            <p className="mt-3 text-sm leading-6 text-muted">
               Tested on Windows 11 (Ryzen 9 9950X3D, RTX 4090) at 6000 kb/s H.264 across three 60-second synthetic game runs with camera, chat overlay, and audio. Average FPS stays within 1% of OBS across every load, and A/V sync measured -7.9 ms median (within one 60 fps frame, zero discontinuities). Under a 599 Hz cap, 0.1% lows still trail OBS&apos;s DirectX game-capture hook because of Windows capture overhead (465-469 fps after idle-wakeup fixes vs. OBS&apos;s 563-570 fps). Not on GitHub yet.
             </p>
           </section>
 
-          <section className="home-supporting home-support-media mt-6 grid grid-cols-1 gap-4 md:grid-cols-2" aria-label="AI workflow tools">
-            <article className="home-support-card home-support-stack border border-line/70 bg-card-bg/70 p-5 sm:p-6">
+          <section className="home-supporting home-support-media mt-6 grid grid-cols-1 gap-6 md:grid-cols-2" aria-label="AI workflow tools">
+            <article className="home-support-card home-support-stack p-5 sm:p-7">
               <div className="home-app-heading">
                 <img src="/media/herdwick/icon.png" alt="" width="256" height="256" loading="lazy" decoding="async" className="home-app-icon" />
                 <div>
-                  <p className="home-kicker font-mono text-xs text-accent">herdwick</p>
-                  <h2 className="mt-1 font-mono text-lg font-bold text-fg">Coding agents on your phone</h2>
+                  <p className="home-kicker">herdwick</p>
+                  <h2 className="mt-1 font-mono text-lg font-bold text-fg leading-snug">Coding agents on your phone</h2>
                 </div>
               </div>
               <p className="text-sm leading-6 text-muted">{herdwick.blurb}</p>
-              <div className="home-app-screens" tabIndex={0} role="region" aria-label="Herdwick screenshots, scroll sideways for more">
+              <div className="home-app-screens home-screens-matched" tabIndex={0} role="region" aria-label="Herdwick screenshots, scroll sideways for more">
                 <img
                   src="/media/herdwick/screenshots-iphone.webp"
                   alt="Seven Herdwick iPhone screenshots: the agent inbox, answering an agent, reading what it did, reviewing diffs, what's new since last time, connecting machines over SSH or Tailscale, and the live terminal."
@@ -229,12 +208,12 @@ const Home = () => {
                 <a href={herdwick.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code</a>
               </div>
             </article>
-            <article className="home-support-card home-support-stack border border-line/70 bg-card-bg/70 p-5 sm:p-6">
+            <article className="home-support-card home-support-stack p-5 sm:p-7">
               <div className="home-app-heading">
                 <img src="/media/dictation/icon.png" alt="" width="256" height="256" loading="lazy" decoding="async" className="home-app-icon" />
                 <div>
-                  <p className="home-kicker font-mono text-xs text-accent">dictation</p>
-                  <h2 className="mt-1 font-mono text-lg font-bold text-fg">Local voice-to-text</h2>
+                  <p className="home-kicker">dictation</p>
+                  <h2 className="mt-1 font-mono text-lg font-bold text-fg leading-snug">Local voice-to-text</h2>
                 </div>
               </div>
               <p className="text-sm leading-6 text-muted">{dictation.blurb}</p>
@@ -258,11 +237,11 @@ const Home = () => {
             </article>
           </section>
 
-          <section className="home-supporting home-support-media mt-4 grid grid-cols-1 gap-4 md:grid-cols-2" aria-label="Telemetry and hardware projects">
-            <article className="home-support-card home-support-stack border border-line/70 bg-card-bg/70 p-5 sm:p-6">
+          <section className="home-supporting home-support-media mt-6 grid grid-cols-1 gap-6 md:grid-cols-2" aria-label="Telemetry and hardware projects">
+            <article className="home-support-card home-support-stack p-5 sm:p-7">
               <div>
-                <p className="home-kicker font-mono text-xs text-accent">pace-bar</p>
-                <h2 className="mt-1 font-mono text-lg font-bold text-fg">AI quotas and local inference</h2>
+                <p className="home-kicker">pace-bar</p>
+                <h2 className="mt-1 font-mono text-lg font-bold text-fg leading-snug">AI quotas and local inference</h2>
               </div>
               <p className="text-sm leading-6 text-muted">{paceBar.blurb}</p>
               <div className="home-portrait-frame">
@@ -280,10 +259,10 @@ const Home = () => {
                 <a href={paceBar.links.github} className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code</a>
               </div>
             </article>
-            <article className="home-support-card home-support-stack border border-line/70 bg-card-bg/70 p-5 sm:p-6">
+            <article className="home-support-card home-support-stack p-5 sm:p-7">
               <div>
-                <p className="home-kicker font-mono text-xs text-accent">omalo · prototype</p>
-                <h2 className="mt-1 font-mono text-lg font-bold text-fg">Pokémon Emerald on Arduino</h2>
+                <p className="home-kicker">omalo · prototype</p>
+                <h2 className="mt-1 font-mono text-lg font-bold text-fg leading-snug">Pokémon Emerald on Arduino</h2>
               </div>
               <p className="text-sm leading-6 text-muted">
                 Firmware for a small ESP32-S3 handheld that runs Pokémon Emerald, with an AI you can hand goals off to.
@@ -305,13 +284,13 @@ const Home = () => {
             </article>
           </section>
 
-          <section className="home-support-card home-app-feature mt-4 border border-line/70 bg-card-bg/75 p-5 sm:p-7" aria-labelledby="inkjoin-title">
+          <section className="home-support-card home-app-feature mt-6 p-5 sm:p-7" aria-labelledby="inkjoin-title">
             <div className="home-app-feature-copy">
               <div className="home-app-heading">
                 <img src="/media/inkjoin/icon.png" alt="" width="256" height="256" loading="lazy" decoding="async" className="home-app-icon home-app-icon-large" />
                 <div>
-                  <p className="home-kicker font-mono text-xs text-accent">inkjoin</p>
-                  <h2 id="inkjoin-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl">Logic puzzles!</h2>
+                  <p className="home-kicker">inkjoin</p>
+                  <h2 id="inkjoin-title" className="mt-1 font-mono text-xl font-bold text-fg sm:text-2xl leading-tight">Logic puzzles!</h2>
                 </div>
               </div>
               <p className="text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">{inkjoin.blurb}</p>
@@ -362,30 +341,36 @@ const Home = () => {
             </div>
           </section>
 
-          <section className="home-supporting mt-4 grid grid-cols-1 gap-4 md:grid-cols-2" aria-label="Other projects">
-            <article className="home-support-card border border-line/70 bg-card-bg/70 p-5 sm:p-6">
-              <p className="home-kicker font-mono text-xs text-accent">center-seat</p>
-              <h2 className="mt-2 font-mono text-lg font-bold text-fg">Movie-seat ranking</h2>
-              <p className="mt-3 text-sm leading-6 text-muted">Small personal tool to find the best seat for a movie every time.</p>
-              <div className="mt-5 flex flex-wrap items-center gap-3">
+          <section className="home-supporting home-support-text mt-6 grid grid-cols-1 gap-6 md:grid-cols-2" aria-label="Other projects">
+            <article className="home-support-card home-support-stack p-5 sm:p-7">
+              <div>
+                <p className="home-kicker">center-seat</p>
+                <h2 className="mt-1 font-mono text-lg font-bold text-fg leading-snug">Movie-seat ranking</h2>
+              </div>
+              <p className="text-sm leading-6 text-muted">Small personal tool to find the best seat for a movie every time.</p>
+              <div className="flex flex-wrap items-center gap-3">
                 <a href="https://movies.angl.gg" className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">demo</a>
                 <a href="https://github.com/btuckerc/center-seat" className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">code and setup</a>
               </div>
             </article>
-            <article className="home-support-card border border-line/70 bg-card-bg/70 p-5 sm:p-6">
-              <p className="home-kicker font-mono text-xs text-accent">boilerplate</p>
-              <h2 className="mt-2 font-mono text-lg font-bold text-fg">My opinionated config setup</h2>
-              <p className="mt-3 text-sm leading-6 text-muted">My macOS and Linux workspace setup, managed with chezmoi and mise.</p>
-              <a href="https://github.com/btuckerc/boilerplate" className="tui-link-chip mt-5 inline-flex" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">browse config</a>
+            <article className="home-support-card home-support-stack p-5 sm:p-7">
+              <div>
+                <p className="home-kicker">boilerplate</p>
+                <h2 className="mt-1 font-mono text-lg font-bold text-fg leading-snug">My opinionated config setup</h2>
+              </div>
+              <p className="text-sm leading-6 text-muted">My macOS and Linux workspace setup, managed with chezmoi and mise.</p>
+              <div className="flex flex-wrap items-center gap-3">
+                <a href="https://github.com/btuckerc/boilerplate" className="tui-link-chip" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">browse config</a>
+              </div>
             </article>
           </section>
 
-          <div className="mt-6 flex justify-center">
-            <Link to="/projects" className="tui-action tui-home-primary inline-flex min-h-11 items-center border border-accent/70 bg-card-bg px-5 py-2 font-mono text-sm text-fg">
-              <span className="tui-action-content">more projects</span>
+          <div className="mt-8 flex justify-center">
+            <Link to="/projects" className="tui-action tui-home-primary inline-flex items-center px-5 py-2 font-mono text-sm">
+              more projects
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </>
   )

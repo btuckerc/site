@@ -16,7 +16,7 @@ const prefersReducedMotion = () => (
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 )
 
-export const scrollToHashTarget = (hash) => {
+export const scrollToHashTarget = (hash, { instant = false } = {}) => {
   const id = getHashId(hash)
   if (!id) return false
 
@@ -30,7 +30,7 @@ export const scrollToHashTarget = (hash) => {
   window.scrollTo({
     top: Math.max(0, targetTop),
     left: 0,
-    behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+    behavior: instant || prefersReducedMotion() ? 'instant' : 'smooth'
   })
 
   return true
@@ -40,8 +40,11 @@ const ScrollToTop = () => {
   const location = useLocation()
   const navigationType = useNavigationType()
   const previousPathname = useRef(location.pathname)
+  const hasMountedRef = useRef(false)
 
   useEffect(() => {
+    const isInitialLoad = !hasMountedRef.current
+    hasMountedRef.current = true
     const pathnameChanged = previousPathname.current !== location.pathname
     previousPathname.current = location.pathname
 
@@ -50,6 +53,11 @@ const ScrollToTop = () => {
       let frameId = null
       let timeoutId = null
       let observer = null
+      let resizeObserver = null
+      let scrolledOnce = false
+      // Jump directly on initial or cross-route hash navigation so deferred
+      // sections passed along the way are not needlessly triggered by smooth scroll.
+      const jumpImmediately = isInitialLoad || pathnameChanged
 
       const requestFrame = typeof window.requestAnimationFrame === 'function'
         ? (callback) => window.requestAnimationFrame(callback)
@@ -58,18 +66,47 @@ const ScrollToTop = () => {
         ? (id) => window.cancelAnimationFrame(id)
         : (id) => window.clearTimeout(id)
 
+      const onUserInteract = () => cleanup()
+
       const cleanup = () => {
         cancelled = true
         if (frameId !== null) cancelFrame(frameId)
         if (timeoutId !== null) window.clearTimeout(timeoutId)
         observer?.disconnect()
+        resizeObserver?.disconnect()
+        window.removeEventListener('wheel', onUserInteract)
+        window.removeEventListener('touchstart', onUserInteract)
+        window.removeEventListener('pointerdown', onUserInteract)
+        window.removeEventListener('keydown', onUserInteract)
       }
 
       const attempt = () => {
         frameId = null
         if (cancelled) return
-        if (scrollToHashTarget(location.hash)) {
-          cleanup()
+        if (scrollToHashTarget(location.hash, { instant: scrolledOnce || jumpImmediately })) {
+          if (!scrolledOnce) {
+            scrolledOnce = true
+            observer?.disconnect()
+            // Re-align if a lazy chunk above the hash target settles shortly after navigation.
+            if (typeof ResizeObserver === 'function' && document.body) {
+              let lastHeight = document.body.scrollHeight
+              resizeObserver = new ResizeObserver(() => {
+                if (cancelled) return
+                const nextHeight = document.body.scrollHeight
+                if (nextHeight !== lastHeight) {
+                  lastHeight = nextHeight
+                  scrollToHashTarget(location.hash, { instant: true })
+                }
+              })
+              resizeObserver.observe(document.body)
+              window.addEventListener('wheel', onUserInteract, { passive: true })
+              window.addEventListener('touchstart', onUserInteract, { passive: true })
+              window.addEventListener('pointerdown', onUserInteract, { passive: true })
+              window.addEventListener('keydown', onUserInteract, { passive: true })
+            } else {
+              cleanup()
+            }
+          }
           return
         }
         frameId = requestFrame(attempt)
@@ -77,7 +114,7 @@ const ScrollToTop = () => {
 
       observer = typeof MutationObserver === 'function'
         ? new MutationObserver(() => {
-            if (frameId === null) frameId = requestFrame(attempt)
+            if (!scrolledOnce && frameId === null) frameId = requestFrame(attempt)
           })
         : null
       observer?.observe(document.body, { childList: true, subtree: true })

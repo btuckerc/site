@@ -57,9 +57,9 @@ class RouteErrorBoundary extends Component {
         <button
           type="button"
           onClick={() => window.location.reload()}
-          className="tui-action mt-6 inline-flex min-h-11 items-center border border-line bg-card-bg px-4 py-2 font-mono text-sm text-muted"
+          className="tui-action mt-6 inline-flex min-h-10 items-center border border-line bg-card-bg px-4 py-2 font-mono text-sm text-muted"
         >
-          <span className="tui-action-content">reload page ↻</span>
+          reload page ↻
         </button>
       </section>
     )

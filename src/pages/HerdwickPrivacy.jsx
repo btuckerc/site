@@ -1,3 +1,4 @@
+import Breadcrumb from '../components/Breadcrumb'
 import PageMeta from '../components/PageMeta'
 
 const linkClass =
@@ -25,17 +26,13 @@ const policySections = [
           device and that computer, encrypted by SSH. Nothing is copied anywhere else.
         </p>
         <ul className="mt-3 space-y-2" role="list">
-          <li>
-            Host names, addresses, and usernames stay on your device.
-          </li>
+          <li>Host names, addresses, and usernames stay on your device.</li>
           <li>
             Your device generates its own SSH key, and the private key never leaves it. The
             key, any saved passwords, and trusted host keys live in the iOS Keychain for
             this device only and aren&apos;t included in backups.
           </li>
-          <li>
-            Removing a host in Herdwick deletes its saved password and host key.
-          </li>
+          <li>Removing a host in Herdwick deletes its saved password and host key.</li>
           <li>
             Images you attach upload only to your computer&apos;s temporary folder. Herdwick
             cleans them up after the window you pick in Settings.
@@ -64,7 +61,7 @@ const policySections = [
         </ul>
         <p className="mt-4">
           That data is tied to your Tailscale account and covered by{' '}
-          <a href="https://tailscale.com/privacy-policy" className={linkClass}>
+          <a href="https://tailscale.com/privacy-policy" className={linkClass} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">
             Tailscale&apos;s privacy policy
           </a>
           . It isn&apos;t used for tracking or ads, and I never receive it. Signing out in
@@ -100,7 +97,7 @@ const policySections = [
           nothing: no storage and no request logs. The alert text is generic, and your
           device fills in the names it already knows. You can turn this off in Settings
           anytime, and the relay&apos;s{' '}
-          <a href="https://github.com/btuckerc/herdwick/blob/main/relay/src/index.js" className={linkClass}>
+          <a href="https://github.com/btuckerc/herdwick/blob/main/relay/src/index.js" className={linkClass} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">
             source code
           </a>{' '}
           is public.
@@ -192,19 +189,14 @@ const HerdwickPrivacy = () => (
       imageAlt="Herdwick privacy: your agents stay on your machines."
     />
 
-    <div className="tui-page-shell min-h-svh px-4 pb-28">
-      <article className="mx-auto max-w-4xl font-mono">
-        <div className="tui-page-header mb-8">
-          <p className="hidden text-center text-xs uppercase tracking-[0.18em] text-muted sm:block">
-            Herdwick
-          </p>
-        </div>
+    <div className="tui-page-shell min-h-svh">
+      <div className="tui-rail">
+        <Breadcrumb items={[{ label: 'home', to: '/' }, { label: 'herdwick' }, { label: 'privacy' }]} />
+        <article className="mx-auto max-w-4xl font-mono">
 
-        <header className="mb-6 border border-line bg-card-bg px-5 py-7 sm:px-8 sm:py-9">
-          <p className="mb-3 text-xs uppercase tracking-[0.18em] text-accent">
-            Privacy policy
-          </p>
-          <h1 className="tui-page-title text-2xl font-bold leading-tight text-fg sm:text-4xl">
+        <header className="tui-panel mb-6 p-5 sm:p-7">
+          <p className="case-study-eyebrow">Herdwick / Privacy policy</p>
+          <h1 className="tui-page-title mt-3 text-2xl font-bold leading-tight text-fg sm:text-4xl">
             Your agents stay on your machines.
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
@@ -214,8 +206,8 @@ const HerdwickPrivacy = () => (
           </p>
           <dl className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {summaryItems.map(([term, description]) => (
-              <div key={term} className="bg-bg-elev px-4 py-3">
-                <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-muted">
+              <div key={term} className="bg-bg px-4 py-3">
+                <dt className="text-xs uppercase tracking-[0.08em] text-muted">
                   {term}
                 </dt>
                 <dd className="mt-1 text-sm font-semibold text-fg">{description}</dd>
@@ -237,11 +229,11 @@ const HerdwickPrivacy = () => (
             <section
               key={section.title}
               aria-labelledby={`privacy-section-${index}`}
-              className="tui-panel border border-line bg-card-bg px-5 py-5 sm:px-7 sm:py-6"
+              className="tui-panel p-5 sm:p-7"
             >
               <h2
                 id={`privacy-section-${index}`}
-                className="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-accent sm:text-base"
+                className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-accent sm:text-base"
               >
                 <span aria-hidden="true" className="mr-2 text-muted">
                   {String(index + 1).padStart(2, '0')}
@@ -256,11 +248,11 @@ const HerdwickPrivacy = () => (
 
           <section
             aria-labelledby="privacy-contact"
-            className="border border-accent/40 bg-card-bg px-5 py-6 sm:px-7"
+            className="tui-panel border-accent/40 p-5 sm:p-7"
           >
             <h2
               id="privacy-contact"
-              className="text-sm font-semibold uppercase tracking-[0.12em] text-accent sm:text-base"
+              className="text-sm font-semibold uppercase tracking-[0.1em] text-accent sm:text-base"
             >
               <span aria-hidden="true" className="mr-2 text-muted">
                 {String(policySections.length + 1).padStart(2, '0')}
@@ -281,7 +273,8 @@ const HerdwickPrivacy = () => (
           Independent project. Not affiliated with or endorsed by the herdr project or Tailscale
           Inc.
         </p>
-      </article>
+        </article>
+      </div>
     </div>
   </>
 )

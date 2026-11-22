@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react'
+import { safeGetItem, safeSetItem } from '../utils/safeStorage'
 
 const ThemeContext = createContext()
 
@@ -18,7 +19,7 @@ const THEME_COLORS = {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('theme-mode')
+    const saved = safeGetItem('theme-mode')
     return saved || 'dark' // Default to dark
   })
 
@@ -41,7 +42,7 @@ export const ThemeProvider = ({ children }) => {
     )
 
     // Persist to localStorage
-    localStorage.setItem('theme-mode', theme)
+    safeSetItem('theme-mode', theme)
   }, [theme])
 
   const cycleTheme = () => {

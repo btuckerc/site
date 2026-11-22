@@ -1,62 +1,85 @@
-/* ASCII Theme System - Neutral monochrome palette */
+/* ASCII Theme System — Neutral monochrome, paper light, and warm gruvbox amber.
+ * Each theme defines RGB channel triplets once; CSS color tokens derive from
+ * them via rgb(var(--*-rgb)), and Tailwind alpha modifiers (`border-line/70`)
+ * consume the same triplets directly. */
 
 :root {
-  /* Neutral theme - dark mode (default) */
-  --bg: #0f1115;
-  --bg-elev: #171a1f;
-  --fg: #e7e9ec;
-  --muted: #9aa3ad;
-  --accent: #c9cdd2;
-  --line: #2a2f36;
-  
+  color-scheme: dark;
+
+  /* Neutral theme — dark mode (default) */
+  --bg-rgb: 15 17 21;
+  --bg-elev-rgb: 23 26 31;
+  --fg-rgb: 231 233 236;
+  --muted-rgb: 154 163 173;
+  --accent-rgb: 201 205 210;
+  --line-rgb: 42 47 54;
+  --error: #f87171;
+
+  --bg: rgb(var(--bg-rgb));
+  --bg-elev: rgb(var(--bg-elev-rgb));
+  --fg: rgb(var(--fg-rgb));
+  --muted: rgb(var(--muted-rgb));
+  --accent: rgb(var(--accent-rgb));
+  --line: rgb(var(--line-rgb));
+
+  /* Three-tier surface hierarchy */
+  --panel: color-mix(in srgb, var(--bg-elev) 92%, transparent);
+  --chrome: color-mix(in srgb, var(--bg) 94%, transparent);
+  --line-strong: color-mix(in srgb, var(--line) 40%, var(--muted));
+
   /* Derived semantic tokens */
   --border: var(--line);
   --card-bg: var(--bg-elev);
-  --glass-bg: color-mix(in srgb, var(--bg-elev) 80%, transparent);
-  --button-bg: color-mix(in srgb, var(--bg-elev) 88%, #050608 12%);
-  --button-hover-bg: color-mix(in srgb, var(--bg-elev) 70%, var(--accent) 30%);
-  --button-active-bg: color-mix(in srgb, var(--bg-elev) 60%, var(--accent) 40%);
-  --button-border: color-mix(in srgb, var(--line) 70%, var(--accent) 30%);
-  --button-bracket: var(--fg);
-  --button-shine: color-mix(in srgb, var(--accent) 18%, transparent);
-  --card-fill: color-mix(in srgb, var(--card-bg) 52%, var(--bg) 48%);
-  
-  /* Focus and interaction */
+  --card-fill: var(--panel);
+  --glass-bg: var(--panel);
   --focus-ring: var(--accent);
-  --hover-bg: color-mix(in srgb, var(--accent) 15%, transparent);
-  --active-bg: color-mix(in srgb, var(--accent) 20%, transparent);
-  
+  --hover-bg: color-mix(in srgb, var(--accent) 12%, transparent);
+  --active-bg: color-mix(in srgb, var(--accent) 18%, transparent);
+
+  /* Layout rails, chrome heights, typography, and spacing scale */
+  --rail: 72rem;
+  --header-height: 2.75rem;
+  --tui-footer-bar-height: 2.75rem;
+  --card-pad: clamp(1.25rem, 3vw, 1.75rem);
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.25rem, 2.4vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 3vw, 2.125rem);
+  --text-display: clamp(2rem, 5vw, 3.5rem);
+
+  --motion-fast: 160ms;
+  --motion-medium: 220ms;
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-ease-out: cubic-bezier(0, 0, 0.2, 1);
 }
 
-/* Light mode - neutral theme light variant */
+/* Light mode — cool stone paper */
 .light {
-  --bg: #e8eaed;
-  --bg-elev: #f3f4f6;
-  --fg: #1c1f24;
-  --muted: #5c6570;
-  --accent: #2a3038;
-  --line: #c5cad1;
-  --button-bg: color-mix(in srgb, var(--bg-elev) 82%, #ffffff 18%);
-  --button-hover-bg: color-mix(in srgb, var(--bg-elev) 65%, var(--accent) 35%);
-  --button-active-bg: color-mix(in srgb, var(--bg-elev) 55%, var(--accent) 45%);
-  --button-border: color-mix(in srgb, var(--accent) 50%, transparent);
-  --button-bracket: var(--accent);
-  --button-shine: color-mix(in srgb, var(--accent) 24%, transparent);
+  color-scheme: light;
+
+  --bg-rgb: 232 234 237;
+  --bg-elev-rgb: 243 244 246;
+  --fg-rgb: 28 31 36;
+  --muted-rgb: 75 84 95;
+  --accent-rgb: 42 48 56;
+  --line-rgb: 180 186 194;
+  --error: #b91c1c;
+
+  --panel: color-mix(in srgb, var(--bg-elev) 94%, transparent);
 }
 
-/* Amber mode - gruvbox inspired warm theme */
+/* Amber mode — gruvbox inspired warm theme */
 .amber {
-  --bg: #1d2021;
-  --bg-elev: #282828;
-  --fg: #fbf1c7;
-  --muted: #a89984;
-  --accent: #fabd2f;
-  --line: #3c3836;
-  --button-bg: color-mix(in srgb, var(--bg-elev) 90%, #141414 10%);
-  --button-hover-bg: color-mix(in srgb, var(--bg-elev) 72%, var(--accent) 28%);
-  --button-active-bg: color-mix(in srgb, var(--bg-elev) 62%, var(--accent) 38%);
-  --button-border: color-mix(in srgb, var(--accent) 45%, transparent);
-  --button-bracket: var(--accent);
-  --button-shine: color-mix(in srgb, var(--accent) 20%, transparent);
-  
+  color-scheme: dark;
+
+  --bg-rgb: 29 32 33;
+  --bg-elev-rgb: 40 40 40;
+  --fg-rgb: 251 241 199;
+  --muted-rgb: 189 174 147;
+  --accent-rgb: 250 189 47;
+  --line-rgb: 60 56 54;
+  --error: #ff9a86;
 }

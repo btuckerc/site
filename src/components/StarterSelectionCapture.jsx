@@ -13,6 +13,17 @@ const readReducedMotionPreference = () => (
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 )
 
+const isSaveDataEnabled = () => (
+  typeof navigator !== 'undefined' &&
+  navigator.connection?.saveData === true
+)
+
+const isPrimaryTouch = () => (
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(hover: none) and (pointer: coarse)').matches
+)
+
 /**
  * A small, native video surface that can be reused for reviewed game captures.
  * The default export preserves the current starter-selection copy while the
@@ -49,12 +60,13 @@ export const GameCapture = ({
   )
   const [isPlaying, setIsPlaying] = useState(false)
   const [canHover, setCanHover] = useState(() => (
-    typeof window !== 'undefined' && window.matchMedia?.('(hover: hover) and (pointer: fine)').matches
+    typeof window !== 'undefined' && Boolean(window.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches)
   ))
   const [mediaHovered, setMediaHovered] = useState(false)
   const [mediaFocused, setMediaFocused] = useState(false)
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return undefined
     const query = window.matchMedia('(hover: hover) and (pointer: fine)')
     const update = () => setCanHover(query.matches)
     if (query.addEventListener) {
@@ -89,6 +101,8 @@ export const GameCapture = ({
         !inViewRef.current ||
         !pageVisibleRef.current ||
         reducedMotionRef.current ||
+        isSaveDataEnabled() ||
+        isPrimaryTouch() ||
         userPausedRef.current ||
         !video.paused
       ) {
@@ -111,7 +125,13 @@ export const GameCapture = ({
 
     const maybeResume = () => {
       if (!resumeAfterLifecycleRef.current) return
-      if (!inViewRef.current || !pageVisibleRef.current || reducedMotionRef.current) return
+      if (
+        !inViewRef.current ||
+        !pageVisibleRef.current ||
+        reducedMotionRef.current ||
+        isSaveDataEnabled() ||
+        isPrimaryTouch()
+      ) return
       if (userPausedRef.current) return
 
       resumeAfterLifecycleRef.current = false
@@ -199,9 +219,14 @@ export const GameCapture = ({
     }
 
     // Older browsers without IntersectionObserver still get a normal poster
-    // and native controls, with one visibility-gated playback attempt.
-    inViewRef.current = true
-    window.requestAnimationFrame(playIfAllowed)
+    // and native controls. On touch devices without IO, keep playback manual so
+    // offscreen clips do not start downloading eagerly.
+    const isFinePointer = typeof window.matchMedia === 'function' &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    if (isFinePointer) {
+      inViewRef.current = true
+      window.requestAnimationFrame(playIfAllowed)
+    }
     if (motionQuery?.addEventListener) {
       motionQuery.addEventListener('change', handleMotionChange)
     } else {
@@ -261,7 +286,7 @@ export const GameCapture = ({
           className="starter-capture-video"
           controls={!canHover || mediaHovered || mediaFocused}
           tabIndex={0}
-          preload="metadata"
+          preload="none"
           poster={poster}
           width={width}
           height={height}

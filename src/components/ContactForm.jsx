@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { performSpamCheck, recordSubmission } from '../utils/spamFilter'
 import { sendEmail } from '../utils/emailService'
 
@@ -7,12 +7,37 @@ const ContactForm = () => {
     name: '',
     email: '',
     message: '',
-    website: '' // Honeypot field
+    website: ''
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [validationTick, setValidationTick] = useState(0)
   const formStartTime = useRef(Date.now())
+  const nameInputRef = useRef(null)
+  const emailInputRef = useRef(null)
+  const messageInputRef = useRef(null)
+  const pendingFocusFieldRef = useRef(null)
+  const statusHeadingRef = useRef(null)
+  const previousStatusRef = useRef(null)
+
+  useEffect(() => {
+    if (!validationTick || !pendingFocusFieldRef.current) return
+    const field = pendingFocusFieldRef.current
+    pendingFocusFieldRef.current = null
+    if (field === 'name') nameInputRef.current?.focus()
+    else if (field === 'email') emailInputRef.current?.focus()
+    else if (field === 'message') messageInputRef.current?.focus()
+  }, [validationTick])
+
+  useEffect(() => {
+    if (submitStatus === 'success' || submitStatus === 'error') {
+      statusHeadingRef.current?.focus()
+    } else if (previousStatusRef.current !== null && submitStatus === null) {
+      nameInputRef.current?.focus()
+    }
+    previousStatusRef.current = submitStatus
+  }, [submitStatus])
 
   const validateForm = () => {
     const newErrors = {}
@@ -21,9 +46,11 @@ const ContactForm = () => {
       newErrors.name = 'name required'
     }
 
-    if (!formData.email.trim()) {
+    const emailValue = formData.email.trim()
+    const nativeEmailInvalid = Boolean(emailInputRef.current?.validity?.typeMismatch)
+    if (!emailValue) {
       newErrors.email = 'email required'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (nativeEmailInvalid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
       newErrors.email = "that email doesn't look right"
     }
 
@@ -34,60 +61,63 @@ const ContactForm = () => {
     }
 
     setErrors(newErrors)
+    if (newErrors.name) {
+      pendingFocusFieldRef.current = 'name'
+      setValidationTick((n) => n + 1)
+    } else if (newErrors.email) {
+      pendingFocusFieldRef.current = 'email'
+      setValidationTick((n) => n + 1)
+    } else if (newErrors.message) {
+      pendingFocusFieldRef.current = 'message'
+      setValidationTick((n) => n + 1)
+    }
     return Object.keys(newErrors).length === 0
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    
+    setFormData((prev) => ({ ...prev, [name]: value }))
+
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }))
+      setErrors((prev) => ({ ...prev, [name]: '' }))
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    // Clear previous errors
+
     setErrors({})
-    
-    // Basic validation
+
     if (!validateForm()) {
       return
     }
 
-    // Perform spam check
     const spamCheck = performSpamCheck(formData, formStartTime.current)
     if (spamCheck.isSpam) {
-      setErrors({ 
+      setErrors({
         general: spamCheck.errors[0] || 'spam detected'
       })
       return
     }
 
     setIsSubmitting(true)
-    
+
     try {
-      // Send email via configured service
       await sendEmail({
         name: formData.name.trim(),
         email: formData.email.trim(),
         message: formData.message.trim()
       })
-      
-      // Record submission for rate limiting
+
       recordSubmission()
-      
+
       setSubmitStatus('success')
       setFormData({ name: '', email: '', message: '', website: '' })
-      formStartTime.current = Date.now() // Reset for next submission
-      
-      setTimeout(() => setSubmitStatus(null), 5000)
+      formStartTime.current = Date.now()
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
-      setErrors({ 
+      setErrors({
         general: error.message || 'failed to send message. please try again.'
       })
     } finally {
@@ -102,144 +132,162 @@ const ContactForm = () => {
     formStartTime.current = Date.now()
   }
 
-  const fieldClassName = (hasError) => `tui-input tui-contact-field w-full px-3 py-2 border ${
-    hasError ? 'border-red-500' : 'border-line'
-  } focus:border-accent focus:outline-none transition-colors text-fg text-base`
+  const fieldClassName = (hasError) => `tui-input w-full px-3 py-2 text-sm text-fg ${
+    hasError ? 'tui-form-error-border' : ''
+  }`
 
   return (
-    <div className="tui-panel tui-contact-panel border border-line bg-card-bg p-5 font-mono">
-      <div className="mb-4">
-        <h2 className="text-accent text-base font-semibold">send message</h2>
+    <div className="tui-panel tui-contact-panel h-full p-5 sm:p-7 font-mono">
+      <div className="mb-5">
+        <h2 className="case-study-kicker font-semibold">send message</h2>
       </div>
 
-          {submitStatus === 'success' ? (
-            <div className="py-8 text-center">
-              <div className="text-accent text-3xl mb-3">✓</div>
-              <div className="text-fg text-base mb-2">message sent</div>
-              <div className="text-muted text-sm mb-4">i'll read it and get back to you</div>
-              <button
-                onClick={resetForm}
-                className="text-base text-accent hover:text-fg transition-colors"
-              >
-                send another
-              </button>
+      {submitStatus === 'success' ? (
+        <div className="py-8 text-center" role="status">
+          <div className="text-accent text-3xl mb-3" aria-hidden="true">✓</div>
+          <div ref={statusHeadingRef} tabIndex={-1} className="text-fg text-base mb-2">message sent</div>
+          <div className="text-muted text-sm mb-4">i&apos;ll read it and get back to you</div>
+          <button
+            type="button"
+            onClick={resetForm}
+            className="tui-link-chip"
+          >
+            send another
+          </button>
+        </div>
+      ) : submitStatus === 'error' ? (
+        <div className="py-8 text-center" role="alert">
+          <div className="tui-form-error text-3xl mb-3" aria-hidden="true">✗</div>
+          <div ref={statusHeadingRef} tabIndex={-1} className="text-fg text-base mb-2">send failed</div>
+          <div className="text-muted text-sm mb-4">
+            {errors.general || 'please try again later'}
+          </div>
+          <button
+            type="button"
+            onClick={() => setSubmitStatus(null)}
+            className="tui-link-chip"
+          >
+            try again
+          </button>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} noValidate className="space-y-4">
+          <input
+            type="text"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            tabIndex="-1"
+            autoComplete="off"
+            style={{
+              position: 'absolute',
+              left: '-9999px',
+              width: '1px',
+              height: '1px',
+              overflow: 'hidden'
+            }}
+            aria-hidden="true"
+          />
+
+          {errors.general && (
+            <div role="alert" className="tui-form-error-banner p-3 border text-sm">
+              {errors.general}
             </div>
-          ) : submitStatus === 'error' ? (
-            <div className="py-8 text-center">
-              <div className="text-red-500 text-3xl mb-3">✗</div>
-              <div className="text-fg text-base mb-2">send failed</div>
-              <div className="text-muted text-sm mb-4">
-                {errors.general || 'please try again later'}
-              </div>
-              <button
-                onClick={resetForm}
-                className="text-base text-accent hover:text-fg transition-colors"
-              >
-                try again
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Honeypot field - hidden from users, bots will fill it */}
-              <input
-                type="text"
-                name="website"
-                value={formData.website}
-                onChange={handleChange}
-                tabIndex="-1"
-                autoComplete="off"
-                style={{
-                  position: 'absolute',
-                  left: '-9999px',
-                  width: '1px',
-                  height: '1px',
-                  overflow: 'hidden'
-                }}
-                aria-hidden="true"
-              />
-              
-              {errors.general && (
-                <div className="p-3 bg-red-500/10 border border-red-500 text-red-500 text-sm">
-                  {errors.general}
-                </div>
-              )}
-              
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className="block text-base text-muted mb-2">
-                    name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={fieldClassName(errors.name)}
-                    placeholder="your name"
-                  />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-base text-muted mb-2">
-                    email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={fieldClassName(errors.email)}
-                    placeholder="you@example.com"
-                  />
-                  {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-base text-muted mb-2">
-                  message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={2}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={`${fieldClassName(errors.message)} resize-vertical`}
-                  placeholder="what are you working on?"
-                  style={{ minHeight: '5rem' }}
-                />
-                {errors.message && (
-                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
-                )}
-              </div>
-
-              <div className="flex gap-3 pt-2">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="tui-contact-submit flex-1 px-4 py-3 border border-accent text-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-base font-medium"
-                >
-                  {isSubmitting ? 'sending...' : 'send'}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="tui-action tui-contact-secondary px-4 py-3 border border-line text-muted hover:text-fg hover:border-accent transition-colors text-base"
-                >
-                  <span className="tui-action-content">reset</span>
-                </button>
-              </div>
-            </form>
           )}
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="name" className="block text-sm text-muted mb-2">
+                name *
+              </label>
+              <input
+                ref={nameInputRef}
+                type="text"
+                id="name"
+                name="name"
+                autoComplete="name"
+                required
+                aria-required="true"
+                aria-invalid={Boolean(errors.name)}
+                aria-describedby={errors.name ? 'contact-name-error' : undefined}
+                value={formData.name}
+                onChange={handleChange}
+                className={fieldClassName(errors.name)}
+                placeholder="your name"
+              />
+              {errors.name && (
+                <p id="contact-name-error" className="tui-form-error text-xs mt-1.5">{errors.name}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm text-muted mb-2">
+                email *
+              </label>
+              <input
+                ref={emailInputRef}
+                type="email"
+                id="email"
+                name="email"
+                autoComplete="email"
+                required
+                aria-required="true"
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? 'contact-email-error' : undefined}
+                value={formData.email}
+                onChange={handleChange}
+                className={fieldClassName(errors.email)}
+                placeholder="you@example.com"
+              />
+              {errors.email && (
+                <p id="contact-email-error" className="tui-form-error text-xs mt-1.5">{errors.email}</p>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="message" className="block text-sm text-muted mb-2">
+              message *
+            </label>
+            <textarea
+              ref={messageInputRef}
+              id="message"
+              name="message"
+              rows={4}
+              required
+              aria-required="true"
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? 'contact-message-error' : undefined}
+              value={formData.message}
+              onChange={handleChange}
+              className={`${fieldClassName(errors.message)} resize-y`}
+              placeholder="what are you working on?"
+              style={{ minHeight: '6.5rem' }}
+            />
+            {errors.message && (
+              <p id="contact-message-error" className="tui-form-error text-xs mt-1.5">{errors.message}</p>
+            )}
+          </div>
+
+          <div className="flex flex-wrap gap-3 pt-2">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="tui-action tui-contact-submit min-h-10 min-w-[10rem] px-5 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'sending...' : 'send'}
+            </button>
+
+            <button
+              type="button"
+              onClick={resetForm}
+              className="tui-action tui-contact-secondary min-h-10 px-4 py-2 text-sm"
+            >
+              reset
+            </button>
+          </div>
+        </form>
+      )}
     </div>
   )
 }

@@ -1,63 +1,144 @@
-/* One persistent control moves between the footer and floating home banner. */
-.tui-command-dock.is-floating,
-.tui-command-dock.is-compact {
-  z-index: 51;
-  transition: bottom 440ms cubic-bezier(.22, 1, .36, 1), width 440ms cubic-bezier(.22, 1, .36, 1);
-}
-.tui-command-dock.is-compact {
-  bottom: env(safe-area-inset-bottom);
-  width: 3.5rem;
-}
-.tui-command-dock .tui-command-dock-button {
+/* Persistent command-palette cue docked cleanly inside the fixed footer bar.
+ * Lives in the center track of .tui-footer-control-row's 3-column grid so it
+ * can never overlap the left social nav or right font/copyright group.
+ * `is-floating` marks the expanded home-page cue on wide desktop (>=960px);
+ * `is-compact` marks the square `:` keycap on interior routes and narrower widths. */
+
+.tui-command-dock {
   position: relative;
-  height: 2.75rem;
-  padding: 0;
-  transition: background-color 350ms ease, border-color 350ms ease, box-shadow 350ms ease, border-radius 350ms ease;
+  justify-self: center;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.is-compact .tui-command-dock-button {
-  background: transparent;
-  border-color: transparent;
+
+.tui-command-dock-button {
+  position: relative;
+  display: inline-flex;
+  min-height: var(--tui-footer-bar-height);
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.65rem;
+  border: 0;
   border-radius: 0;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-family);
+  font-size: var(--text-xs);
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    color var(--motion-fast) var(--motion-ease-standard),
+    background-color var(--motion-fast) var(--motion-ease-standard);
 }
-.is-compact .tui-command-dock-button:hover,
-.is-compact .tui-command-dock-button:focus-visible { background: color-mix(in srgb, var(--accent) 10%, transparent); }
-.command-dock-expanded { transition: opacity 160ms ease, transform 350ms ease; }
-.is-compact .command-dock-expanded { opacity: 0; transform: translateY(5px) scale(.82); pointer-events: none; }
-.command-dock-compact { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; font-size: .65rem; line-height: 1; letter-spacing: .05em; opacity: 0; transform: translateY(-5px); transition: opacity 200ms ease, transform 350ms ease; pointer-events: none; }
-.command-dock-colon { display: grid; place-items: center; width: 1.5rem; height: 1.625rem; border: 1px solid color-mix(in srgb, var(--fg) 48%, transparent); border-radius: 3px; background: color-mix(in srgb, var(--fg) 4%, transparent); font-family: monospace; font-size: 1.25rem; font-weight: 600; line-height: 1; letter-spacing: 0; }
-.is-compact .command-dock-compact { opacity: 1; transform: translateY(0); }
-.is-floating .command-dock-expanded { transition-delay: 100ms; }
-.command-dock-tooltip { position: absolute; bottom: calc(100% + .5rem); left: 50%; transform: translate(-50%, 4px); opacity: 0; visibility: hidden; pointer-events: none; white-space: nowrap; padding: .55rem .75rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font-size: .75rem; transition: opacity 140ms ease, transform 140ms ease, visibility 140ms; }
+
+.tui-command-dock-button:hover,
+.tui-command-dock-button:focus-visible {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.command-dock-expanded {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  opacity: 1;
+  transition: opacity var(--motion-fast) var(--motion-ease-standard);
+}
+
+.tui-command-dock-mark {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.tui-command-cue-key,
+.command-dock-colon {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.625rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.tui-command-dock-button:hover .tui-command-cue-key,
+.tui-command-dock-button:focus-visible .tui-command-cue-key,
+.tui-command-dock-button:hover .command-dock-colon,
+.tui-command-dock-button:focus-visible .command-dock-colon {
+  border-color: var(--accent);
+}
+
+.command-dock-compact {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.tui-command-dock.is-compact .command-dock-expanded {
+  display: none;
+}
+
+.tui-command-dock.is-compact .command-dock-compact {
+  display: inline-flex;
+}
+
+/* Collapse to compact `:` below 960px so wide mono fonts and tablet widths
+ * never crowd the desktop social bar. */
+@media (max-width: 959px) {
+  .tui-command-dock.is-floating .command-dock-expanded {
+    display: none;
+  }
+
+  .tui-command-dock.is-floating .command-dock-compact {
+    display: inline-flex;
+  }
+}
+
+.command-dock-tooltip {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elev);
+  color: var(--fg);
+  font-family: var(--font-family);
+  font-size: var(--text-xs);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease,
+    visibility 140ms;
+}
+
 .is-compact:hover .command-dock-tooltip,
-.is-compact:focus-within .command-dock-tooltip { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
-@media (hover: none), (pointer: coarse), (max-width: 700px) {
-  /* Safari can sample the uppermost fixed layer at the bottom edge. The dock
-   * sits above the footer, so its own surface must be opaque on a cold load,
-   * not merely look opaque because the footer is visible through it. */
-  .tui-command-dock.is-compact {
-    background-color: var(--bg);
-  }
-  .tui-command-dock.is-compact::before {
-    content: '';
-    position: absolute;
-    inset: 100% 0 auto;
-    height: env(safe-area-inset-bottom);
-    background-color: var(--bg);
-    pointer-events: none;
+.is-compact:focus-within .command-dock-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .is-compact:hover .command-dock-tooltip {
+    opacity: 0;
+    visibility: hidden;
   }
 }
-@media (min-width: 700px) and (max-width: 900px) {
-  .tui-footer-control-row nav > a { min-width: 2rem; padding-inline: .4rem; }
-  .tui-footer-control-row nav > span { margin-inline: .2rem; }
-}
+
 @media (prefers-reduced-motion: reduce) {
-  .tui-command-dock.is-floating,
-  .tui-command-dock.is-compact,
-  .tui-command-dock .tui-command-dock-button,
+  .tui-command-dock-button,
   .command-dock-expanded,
-  .command-dock-compact,
-  .command-dock-tooltip { transition: none; }
+  .command-dock-tooltip {
+    transition: none;
+  }
 }

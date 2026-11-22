@@ -1,3 +1,4 @@
+import Breadcrumb from '../components/Breadcrumb'
 import PageMeta from '../components/PageMeta'
 
 const linkClass =
@@ -7,7 +8,7 @@ const sections = [
   {
     title: 'How to play',
     content: (
-      <ul className="list-disc space-y-1 pl-5">
+      <ul className="space-y-2" role="list">
         <li>Fill squares to make one connected shape, joined side to side.</li>
         <li>A number counts filled squares in the eight squares around it, split into separate groups. For example, &quot;3 1&quot; means a group of three and a group of one.</li>
         <li>You can&apos;t have a solid 2x2 block of filled squares.</li>
@@ -41,15 +42,14 @@ const InkjoinSupport = () => (
       imageAlt="Inkjoin support."
     />
 
-    <div className="tui-page-shell min-h-svh px-4 pb-28">
-      <article className="mx-auto max-w-4xl font-mono">
-        <div className="tui-page-header mb-8">
-          <p className="hidden text-center text-xs uppercase tracking-[0.18em] text-muted sm:block">Inkjoin</p>
-        </div>
+    <div className="tui-page-shell min-h-svh">
+      <div className="tui-rail">
+        <Breadcrumb items={[{ label: 'home', to: '/' }, { label: 'inkjoin' }, { label: 'support' }]} />
+        <article className="mx-auto max-w-4xl font-mono">
 
-        <header className="mb-6 border border-line bg-card-bg px-5 py-7 sm:px-8 sm:py-9">
-          <p className="mb-3 text-xs uppercase tracking-[0.18em] text-accent">Support</p>
-          <h1 className="tui-page-title text-2xl font-bold leading-tight text-fg sm:text-4xl">A little help with Inkjoin.</h1>
+        <header className="tui-panel mb-6 p-5 sm:p-7">
+          <p className="case-study-eyebrow">Inkjoin / Support</p>
+          <h1 className="tui-page-title mt-3 text-2xl font-bold leading-tight text-fg sm:text-4xl">A little help with Inkjoin.</h1>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-muted sm:text-base">
             Fill squares to draw one connected shape. These notes explain the rules and answer a few common questions.
           </p>
@@ -60,11 +60,11 @@ const InkjoinSupport = () => (
             <section
               key={section.title}
               aria-labelledby={`support-section-${index}`}
-              className="tui-panel border border-line bg-card-bg px-5 py-5 sm:px-7 sm:py-6"
+              className="tui-panel p-5 sm:p-7"
             >
               <h2
                 id={`support-section-${index}`}
-                className="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-accent sm:text-base"
+                className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-accent sm:text-base"
               >
                 <span aria-hidden="true" className="mr-2 text-muted">{String(index + 1).padStart(2, '0')}</span>
                 {section.title}
@@ -73,8 +73,8 @@ const InkjoinSupport = () => (
             </section>
           ))}
 
-          <section aria-labelledby="support-contact" className="border border-accent/40 bg-card-bg px-5 py-6 sm:px-7">
-            <h2 id="support-contact" className="text-sm font-semibold uppercase tracking-[0.12em] text-accent sm:text-base">
+          <section aria-labelledby="support-contact" className="tui-panel border-accent/40 p-5 sm:p-7">
+            <h2 id="support-contact" className="text-sm font-semibold uppercase tracking-[0.1em] text-accent sm:text-base">
               <span aria-hidden="true" className="mr-2 text-muted">03</span>
               Contact
             </h2>
@@ -86,7 +86,8 @@ const InkjoinSupport = () => (
             </p>
           </section>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   </>
 )

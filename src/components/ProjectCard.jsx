@@ -1,5 +1,4 @@
 import { Fragment, memo, useId, useMemo, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { GameCapture } from './StarterSelectionCapture'
 
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -75,8 +74,8 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
         )}
         <span className="tui-project-title">
           <HighlightedText text={project.title} highlightConfig={highlightConfig} />
-          {project.fork && <span className="tui-project-label">fork</span>}
-          {project.source === 'local' && <span className="tui-project-label">local</span>}
+          {project.fork && <span className="tui-project-label">[fork]</span>}
+          {project.source === 'local' && <span className="tui-project-label">[local]</span>}
         </span>
         {project.blurb && (
           <span className="tui-project-blurb">
@@ -91,97 +90,87 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
         )}
       </button>
 
-      <AnimatePresence initial={false}>
-        {isExpanded && (
-          <motion.div
-            key="project-content"
-            id={contentId}
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -3 }}
-            transition={{ duration: 0.14, ease: [0.4, 0, 0.2, 1] }}
-            className="tui-project-detail"
-          >
-            {project.media && (
-              <GameCapture
-                className={`project-capture${project.media.height > project.media.width ? ' project-capture-portrait' : ''}`}
-                src={project.media.video}
-                poster={project.media.poster}
-                downloadSrc={null}
-                width={project.media.width}
-                height={project.media.height}
-                label="preview"
-                title={project.media.title}
-                alt={project.media.alt}
-                caption={project.media.caption}
-                captureNote={null}
-              />
+      {isExpanded && (
+        <div id={contentId} className="tui-project-detail tui-enter">
+          {project.media && (
+            <GameCapture
+              className={`project-capture${project.media.height > project.media.width ? ' project-capture-portrait' : ''}`}
+              src={project.media.video}
+              poster={project.media.poster}
+              downloadSrc={null}
+              width={project.media.width}
+              height={project.media.height}
+              label="preview"
+              title={project.media.title}
+              alt={project.media.alt}
+              caption={project.media.caption}
+              captureNote={null}
+            />
+          )}
+
+          <dl className="tui-project-facts">
+            {project.overview && (
+              <div className="tui-project-fact">
+                <dt>overview</dt>
+                <dd>
+                  <HighlightedText text={project.overview} highlightConfig={highlightConfig} />
+                </dd>
+              </div>
             )}
 
-            <dl className="tui-project-facts">
-              {project.overview && (
-                <div className="tui-project-fact">
-                  <dt>overview</dt>
-                  <dd>
-                    <HighlightedText text={project.overview} highlightConfig={highlightConfig} />
-                  </dd>
-                </div>
-              )}
+            {project.stack && project.stack.length > 0 && (
+              <div className="tui-project-fact">
+                <dt>stack</dt>
+                <dd>
+                  {project.stack.map((tech, index) => (
+                    <Fragment key={tech}>
+                      {index > 0 && ', '}
+                      <HighlightedText text={tech} highlightConfig={highlightConfig} />
+                    </Fragment>
+                  ))}
+                </dd>
+              </div>
+            )}
 
-              {project.stack && project.stack.length > 0 && (
-                <div className="tui-project-fact">
-                  <dt>stack</dt>
-                  <dd>
-                    {project.stack.map((tech, index) => (
-                      <Fragment key={tech}>
-                        {index > 0 && ', '}
-                        <HighlightedText text={tech} highlightConfig={highlightConfig} />
-                      </Fragment>
+            {project.features && project.features.length > 0 && (
+              <div className="tui-project-fact">
+                <dt>features</dt>
+                <dd>
+                  <ul className="tui-project-features">
+                    {project.features.map((feature) => (
+                      <li key={feature}>
+                        <HighlightedText text={feature} highlightConfig={highlightConfig} />
+                      </li>
                     ))}
-                  </dd>
-                </div>
-              )}
+                  </ul>
+                </dd>
+              </div>
+            )}
 
-              {project.features && project.features.length > 0 && (
-                <div className="tui-project-fact">
-                  <dt>features</dt>
-                  <dd>
-                    <ul className="tui-project-features">
-                      {project.features.map((feature) => (
-                        <li key={feature}>
-                          <HighlightedText text={feature} highlightConfig={highlightConfig} />
-                        </li>
-                      ))}
-                    </ul>
-                  </dd>
-                </div>
-              )}
-
-              {validLinks.length > 0 && (
-                <div className="tui-project-fact">
-                  <dt>links</dt>
-                  <dd className="tui-project-links">
-                    {validLinks.map(([key, url]) => (
-                      <a
-                        key={key}
-                        href={url}
-                        {...(isSameSite(url) ? {} : {
-                          target: '_blank',
-                          rel: 'noopener noreferrer',
-                          'aria-describedby': 'new-tab-note'
-                        })}
-                        className="tui-link-chip"
-                      >
-                        {key}
-                      </a>
-                    ))}
-                  </dd>
-                </div>
-              )}
-            </dl>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {validLinks.length > 0 && (
+              <div className="tui-project-fact">
+                <dt>links</dt>
+                <dd className="tui-project-links">
+                  {validLinks.map(([key, url]) => (
+                    <a
+                      key={key}
+                      href={url}
+                      {...(isSameSite(url) ? {} : {
+                        target: '_blank',
+                        rel: 'noopener noreferrer',
+                        'aria-describedby': 'new-tab-note'
+                      })}
+                      className="tui-link-chip"
+                    >
+                      {key}
+                    </a>
+                  ))}
+                </dd>
+              </div>
+            )}
+          </dl>
+        </div>
+      )}
     </li>
   )
 }
@@ -189,9 +178,7 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
 const ProjectCard = memo(ProjectCardComponent, (previous, next) => (
   previous.project === next.project &&
   previous.searchMeta === next.searchMeta &&
-  previous.searchTerms === next.searchTerms &&
-  previous.focusProps?.tabIndex === next.focusProps?.tabIndex &&
-  previous.focusProps?.['aria-selected'] === next.focusProps?.['aria-selected']
+  previous.searchTerms === next.searchTerms
 ))
 
 export default ProjectCard

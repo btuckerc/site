@@ -1,19 +1,75 @@
-import { motion } from 'framer-motion'
+import { useCallback, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme.jsx'
 import { LABELS, bracketed } from '../constants/symbols'
 
+const routeLinks = [
+  { path: '/workflow', label: 'workflow' },
+  { path: '/projects', label: 'projects' },
+  { path: '/projects/omalo', label: 'omalo' },
+  { path: '/about', label: 'about' },
+  { path: '/contact', label: 'contact' },
+]
+
 const StatusBar = () => {
   const location = useLocation()
   const { theme, cycleTheme } = useTheme()
+  const navRef = useRef(null)
+  const scrollRef = useRef(null)
 
-  const routeLinks = [
-    { path: '/workflow', label: 'workflow' },
-    { path: '/projects', label: 'projects' },
-    { path: '/projects/omalo', label: 'omalo' },
-    { path: '/about', label: 'about' },
-    { path: '/contact', label: 'contact' },
-  ]
+  const pathname = location.pathname.replace(/\/+$/, '') || '/'
+  const isOmaloSection = pathname === '/projects/omalo' || pathname === '/projects/s3-amoled'
+
+  const updateOverflowHints = useCallback(() => {
+    const nav = navRef.current
+    const scroller = scrollRef.current
+    if (!nav || !scroller) return
+    const overflowLeft = scroller.scrollLeft > 2
+    const overflowRight = scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 2
+    nav.dataset.overflowLeft = overflowLeft ? 'true' : 'false'
+    nav.dataset.overflowRight = overflowRight ? 'true' : 'false'
+  }, [])
+
+  const revealActiveLink = useCallback(() => {
+    const scroller = scrollRef.current
+    if (!scroller) return
+    const active = scroller.querySelector('.tui-header-link-active')
+    if (active instanceof HTMLElement && scroller.scrollWidth > scroller.clientWidth + 1) {
+      const targetLeft = active.offsetLeft - (scroller.clientWidth - active.offsetWidth) / 2
+      scroller.scrollLeft = Math.max(0, Math.min(targetLeft, scroller.scrollWidth - scroller.clientWidth))
+    }
+    updateOverflowHints()
+  }, [updateOverflowHints])
+
+  useEffect(() => {
+    const scroller = scrollRef.current
+    if (!scroller) return undefined
+
+    revealActiveLink()
+
+    const onScroll = () => updateOverflowHints()
+    scroller.addEventListener('scroll', onScroll, { passive: true })
+
+    let resizeObserver = null
+    if (typeof ResizeObserver === 'function') {
+      resizeObserver = new ResizeObserver(revealActiveLink)
+      resizeObserver.observe(scroller)
+      Array.from(scroller.children).forEach((child) => resizeObserver.observe(child))
+    }
+
+    let cancelled = false
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        if (!cancelled) revealActiveLink()
+      })
+    }
+
+    return () => {
+      cancelled = true
+      scroller.removeEventListener('scroll', onScroll)
+      resizeObserver?.disconnect()
+    }
+  }, [pathname, revealActiveLink, updateOverflowHints])
 
   const getThemeIcon = () => {
     switch (theme) {
@@ -28,10 +84,10 @@ const StatusBar = () => {
         return (
           <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
             <title>Amber theme - cycle to dark</title>
-            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 10.5C21 11.6 20.1 12.5 19 12.5C17.9 12.5 17 11.6 17 10.5C17 9.4 17.9 8.5 19 8.5C20.1 8.5 21 9.4 21 10.5M5 10.5C5 11.6 4.1 12.5 3 12.5C1.9 12.5 1 11.6 1 10.5C1 9.4 1.9 8.5 3 8.5C4.1 8.5 5 9.4 5 10.5M12 8C15.31 8 18 10.69 18 14S15.31 20 12 20S6 17.31 6 14S8.69 8 12 8M7.76 15.64L6.34 17.05L4.24 14.95L5.66 13.54L7.76 15.64M16.24 15.64L18.34 13.54L19.76 14.95L17.66 17.05L16.24 15.64M12 16C13.1 16 14 15.1 14 14S13.1 12 12 12S10 12.9 10 14S10.9 16 12 16Z"/>
+            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 10.5C21 11.6 20.1 12.5 19 12.5C17.9 12.5 17 11.6 17 10.5C17 9.4 17.9 8.5 19 8.5C20.1 8.5 21 9.4 21 10.5M5 10.5C5 11.6 4.1 12.5 3 12.5C1.9 12.5 1 11.6 1 10.5C1 9.4 1.9 8.5 3 8.5C4.1 8.5 5 9.4 5 10.5M12 8C15.31 8 18 10.69 18 14S15.31 20 12 20S6 17.31 6 14S8.69 8 12 8M7.76 15.64L6.34 17.05L4.24 14.95L5.66 13.54L7.76 15.64M16.24 15.64L18.34 13.54L19.76 14.95L17.66 17.05L16.24 15.64M12 16C13.1 16 14 15.1 14 14S13.1 12 12 12S10 12.9 10 14S10.9 16 12 16Z" />
           </svg>
         )
-      default: // dark
+      default:
         return (
           <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
             <title>Dark theme - cycle to light</title>
@@ -50,37 +106,35 @@ const StatusBar = () => {
     }
   }
 
-  const isProjectsArea = location.pathname === '/projects' || location.pathname === '/projects/s3-amoled'
-
   return (
     <nav
-      className="tui-site-chrome fixed top-0 left-0 right-0 z-40 border-b border-line"
+      className="tui-site-chrome border-b border-line"
       role="navigation"
       aria-label="Site header and theme controls"
     >
-      <div className="tui-header-inner flex items-center justify-between text-sm px-3 min-h-10">
-        {/* Site branding - top left */}
+      <div className="tui-header-inner">
         <Link
           to="/"
-          className="tui-action min-w-11 min-h-11 inline-flex items-center justify-center font-mono text-accent font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+          className="tui-brand-link"
           aria-label="Go to homepage"
-          aria-current={location.pathname === '/' ? 'page' : undefined}
+          aria-current={pathname === '/' ? 'page' : undefined}
           title="Return to homepage"
         >
-          <span className="tui-action-content">{bracketed(LABELS.SITE_INITIALS)}</span>
+          {bracketed(LABELS.SITE_INITIALS)}
         </Link>
 
-        <div className="tui-header-nav min-w-0 flex-1" aria-label="Site pages">
-          <div className="tui-header-nav-scroll">
+        <div className="tui-header-nav" ref={navRef}>
+          <div className="tui-header-nav-scroll" ref={scrollRef}>
             {routeLinks.map((item) => {
-              const isActive = (item.path === '/projects' && isProjectsArea) || location.pathname === item.path
+              const isCurrentPage = pathname === item.path
+              const isActive = isCurrentPage || (item.path === '/projects/omalo' && isOmaloSection)
 
               return (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`tui-header-link ${isActive ? 'tui-header-link-active' : ''}`}
-                  aria-current={isActive ? 'page' : undefined}
+                  className={`tui-header-link${isActive ? ' tui-header-link-active' : ''}`}
+                  aria-current={isCurrentPage ? 'page' : undefined}
                 >
                   {item.label}
                 </Link>
@@ -89,24 +143,16 @@ const StatusBar = () => {
           </div>
         </div>
 
-        {/* Theme controls - top right */}
         <button
+          type="button"
           onClick={cycleTheme}
-          className="tui-action min-w-11 min-h-11 inline-flex items-center justify-center text-muted
-            focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+          className="tui-theme-toggle"
           aria-label={`Switch to ${getNextThemeLabel()} theme`}
           title={`Switch to ${getNextThemeLabel()} theme`}
         >
-          <motion.div
-            className="tui-action-content w-4 h-4"
-            aria-hidden="true"
-            key={theme}
-            initial={{ rotate: -90, opacity: 0, scale: 0.8 }}
-            animate={{ rotate: 0, opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-          >
+          <span className="w-4 h-4 block" aria-hidden="true">
             {getThemeIcon()}
-          </motion.div>
+          </span>
         </button>
       </div>
     </nav>

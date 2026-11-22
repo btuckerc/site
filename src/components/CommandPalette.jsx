@@ -1,11 +1,23 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useId, useLayoutEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme.jsx'
+import { safeGetItem, safeSetItem } from '../utils/safeStorage'
 
-const CommandPalette = ({ isOpen, onClose }) => {
+const prefersReducedMotion = () => (
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+)
+
+const isComposingEvent = (event) => (
+  Boolean(event.isComposing || event.nativeEvent?.isComposing || event.keyCode === 229)
+)
+
+const CommandPalette = ({ isOpen, onClose, returnFocusRef = null }) => {
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const listboxId = useId()
+  const dialogRef = useRef(null)
   const inputRef = useRef()
   const selectedItemRef = useRef(null)
   const previousFocusRef = useRef(null)
@@ -13,9 +25,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
   const { cycleTheme, theme } = useTheme()
 
-  // Command definitions
   const commands = [
-    // Navigation
     {
       id: 'home',
       title: 'go home',
@@ -72,7 +82,6 @@ const CommandPalette = ({ isOpen, onClose }) => {
       focusTarget: '#main-content',
       keywords: ['contact', 'email', 'reach', 'message', 'form']
     },
-    // Actions
     {
       id: 'search',
       title: 'search projects',
@@ -87,31 +96,30 @@ const CommandPalette = ({ isOpen, onClose }) => {
       id: 'github',
       title: 'open github',
       description: 'visit github profile',
-      action: () => window.open('https://github.com/btuckerc', '_blank'),
+      action: () => window.open('https://github.com/btuckerc', '_blank', 'noopener,noreferrer'),
       keywords: ['github', 'code', 'repos', 'profile', 'social']
     },
     {
       id: 'linkedin',
       title: 'open linkedin',
       description: 'visit linkedin profile',
-      action: () => window.open('https://www.linkedin.com/in/tucker-craig/', '_blank'),
+      action: () => window.open('https://www.linkedin.com/in/tucker-craig/', '_blank', 'noopener,noreferrer'),
       keywords: ['linkedin', 'profile', 'professional', 'social']
     },
     {
       id: 'twitter',
       title: 'open x',
       description: 'visit x profile',
-      action: () => window.open('https://x.com/btuckercdev', '_blank'),
+      action: () => window.open('https://x.com/btuckercdev', '_blank', 'noopener,noreferrer'),
       keywords: ['twitter', 'x', 'social', 'profile']
     },
     {
       id: 'instagram',
       title: 'open instagram',
       description: 'visit instagram profile',
-      action: () => window.open('https://www.instagram.com/btuckerc.dev/', '_blank'),
+      action: () => window.open('https://www.instagram.com/btuckerc.dev/', '_blank', 'noopener,noreferrer'),
       keywords: ['instagram', 'ig', 'social', 'profile']
     },
-    // Theme
     {
       id: 'theme',
       title: 'cycle theme',
@@ -121,100 +129,133 @@ const CommandPalette = ({ isOpen, onClose }) => {
     }
   ]
 
-  // Fuzzy search implementation
-  const fuzzyMatch = (text, query) => {
-    if (!query) return true
-    
-    const queryLower = query.toLowerCase()
+  const fuzzyMatch = (text, q) => {
+    if (!q) return true
+
+    const queryLower = q.toLowerCase()
     const textLower = text.toLowerCase()
-    
+
     let queryIndex = 0
     let score = 0
-    
+
     for (let i = 0; i < textLower.length && queryIndex < queryLower.length; i++) {
       if (textLower[i] === queryLower[queryIndex]) {
         queryIndex++
         score += 1
       }
     }
-    
+
     return queryIndex === queryLower.length ? score : 0
   }
 
   const filteredCommands = commands
-    .map(cmd => ({
+    .map((cmd) => ({
       ...cmd,
       score: Math.max(
         fuzzyMatch(cmd.title, query),
         fuzzyMatch(cmd.description, query),
-        ...cmd.keywords.map(k => fuzzyMatch(k, query))
+        ...cmd.keywords.map((k) => fuzzyMatch(k, query))
       )
     }))
-    .filter(cmd => cmd.score > 0)
+    .filter((cmd) => cmd.score > 0)
     .sort((a, b) => b.score - a.score)
 
-  // Reset selection when results change
   useEffect(() => {
     setSelectedIndex(0)
   }, [query])
 
-  // Focus input when opened
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isOpen) {
+      const opener = returnFocusRef?.current
       const activeElement = document.activeElement
-      previousFocusRef.current = activeElement instanceof HTMLElement ? activeElement : null
+      previousFocusRef.current = opener instanceof HTMLElement
+        ? opener
+        : (activeElement instanceof HTMLElement ? activeElement : null)
       inputRef.current?.focus()
       return
     }
 
     const previousFocus = previousFocusRef.current
     previousFocusRef.current = null
+    if (returnFocusRef) returnFocusRef.current = null
     if (!skipFocusRestoreRef.current && previousFocus?.isConnected) {
       window.requestAnimationFrame(() => {
         if (previousFocus.isConnected) previousFocus.focus()
       })
     }
     skipFocusRestoreRef.current = false
-  }, [isOpen])
+  }, [isOpen, returnFocusRef])
 
-  // Scroll selected item into view
   useEffect(() => {
-    if (selectedItemRef.current) {
+    if (!isOpen) {
+      setSelectedIndex(0)
+      return
+    }
+    if (selectedItemRef.current && typeof selectedItemRef.current.scrollIntoView === 'function') {
       selectedItemRef.current.scrollIntoView({
-        behavior: 'smooth',
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         block: 'nearest'
       })
     }
-  }, [selectedIndex])
+  }, [selectedIndex, isOpen])
 
-  // Handle keyboard navigation
   const handleKeyDown = (e) => {
+    if (isComposingEvent(e) || e.metaKey || e.ctrlKey || e.altKey) return
+
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault()
-        setSelectedIndex(prev => 
+        if (filteredCommands.length === 0) return
+        setSelectedIndex((prev) =>
           prev < filteredCommands.length - 1 ? prev + 1 : 0
         )
         break
-      
+
       case 'ArrowUp':
         e.preventDefault()
-        setSelectedIndex(prev => 
+        if (filteredCommands.length === 0) return
+        setSelectedIndex((prev) =>
           prev > 0 ? prev - 1 : filteredCommands.length - 1
         )
         break
-      
+
       case 'Enter':
         e.preventDefault()
         if (filteredCommands[selectedIndex]) {
           executeCommand(filteredCommands[selectedIndex])
         }
         break
-      
-      case 'Escape':
+    }
+  }
+
+  const handleDialogKeyDown = (e) => {
+    if (isComposingEvent(e) || e.metaKey || e.ctrlKey || e.altKey) return
+
+    if (e.key === 'Escape') {
+      e.preventDefault()
+      e.stopPropagation()
+      closePalette()
+      return
+    }
+    if (e.key !== 'Tab' || !dialogRef.current) return
+
+    const focusable = Array.from(
+      dialogRef.current.querySelectorAll(
+        'input:not([disabled]), button:not([disabled]):not([tabindex="-1"]), [href], [tabindex]:not([tabindex="-1"])'
+      )
+    )
+    if (focusable.length === 0) return
+
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.shiftKey) {
+      if (document.activeElement === first || !dialogRef.current.contains(document.activeElement)) {
         e.preventDefault()
-        closePalette()
-        break
+        last.focus()
+      }
+    } else if (document.activeElement === last || !dialogRef.current.contains(document.activeElement)) {
+      e.preventDefault()
+      first.focus()
     }
   }
 
@@ -238,8 +279,9 @@ const CommandPalette = ({ isOpen, onClose }) => {
 
     const tryFocus = () => {
       const target = document.querySelector(selector)
-      if (!(target instanceof HTMLElement)) return false
+      if (!(target instanceof HTMLElement) || target.closest('[inert]')) return false
       target.focus()
+      if (document.activeElement !== target) return false
       cleanup()
       return true
     }
@@ -249,7 +291,6 @@ const CommandPalette = ({ isOpen, onClose }) => {
       frameId = window.requestAnimationFrame(retry)
     }
 
-    // Let the route commit before looking for its main landmark or search field.
     frameId = window.requestAnimationFrame(retry)
     if (typeof MutationObserver === 'function') {
       observer = new MutationObserver(tryFocus)
@@ -266,12 +307,11 @@ const CommandPalette = ({ isOpen, onClose }) => {
     } else {
       closePalette()
     }
-    setQuery('') // Clear query for next time
+    setQuery('')
   }
 
-  // Remember query in session storage
   useEffect(() => {
-    const saved = sessionStorage.getItem('command-palette-query')
+    const saved = safeGetItem('command-palette-query', 'session')
     if (saved) {
       setQuery(saved)
     }
@@ -279,106 +319,118 @@ const CommandPalette = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (query) {
-      sessionStorage.setItem('command-palette-query', query)
+      safeSetItem('command-palette-query', query, 'session')
     }
   }, [query])
 
+  if (!isOpen) return null
+
+  const activeCommand = filteredCommands[selectedIndex]
+  const activeOptionId = activeCommand ? `${listboxId}-option-${activeCommand.id}` : undefined
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            onClick={() => closePalette()}
-            className="fixed inset-0 tui-scrim backdrop-blur-sm z-50"
-          />
-          
-          {/* Palette */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
-              className="w-full max-w-lg pointer-events-auto"
-              role="dialog"
-              id="command-palette-dialog"
-              aria-modal="true"
-              aria-labelledby="command-palette-title"
+    <>
+      <div
+        onClick={() => closePalette()}
+        className="fixed inset-0 tui-scrim tui-enter z-50"
+        aria-hidden="true"
+      />
+
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+        <div
+          ref={dialogRef}
+          onKeyDown={handleDialogKeyDown}
+          className="w-full max-w-lg pointer-events-auto tui-panel-enter"
+          role="dialog"
+          id="command-palette-dialog"
+          aria-modal="true"
+          aria-labelledby="command-palette-title"
+        >
+          <div className="tui-palette-panel max-h-[calc(100svh-2rem)] flex flex-col overflow-hidden">
+            <div className="tui-palette-header shrink-0 px-4 py-3.5">
+              <h2 id="command-palette-title" className="sr-only">
+                Command Palette
+              </h2>
+              <input
+                ref={inputRef}
+                type="text"
+                role="combobox"
+                aria-expanded="true"
+                aria-autocomplete="list"
+                aria-controls={listboxId}
+                aria-activedescendant={activeOptionId}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                aria-label="Search commands"
+                placeholder="type command..."
+                className="tui-palette-input w-full bg-transparent border-none text-fg placeholder-muted text-base font-mono"
+              />
+            </div>
+
+            <div
+              id={listboxId}
+              role="listbox"
+              aria-label="Commands"
+              className="tui-palette-scroll min-h-0 flex-1 max-h-80 overflow-y-auto"
             >
-              <div className="tui-palette-panel border border-line shadow-2xl overflow-hidden">
-              <div className="p-4 border-b border-line">
-                <h2 id="command-palette-title" className="sr-only">
-                  Command Palette
-                </h2>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  aria-label="Search commands"
-                  placeholder="type command..."
-                  className="w-full bg-transparent border-none outline-none text-fg placeholder-muted text-base font-mono"
-                />
-              </div>
-              
-              <div className="max-h-80 overflow-y-auto">
-                {filteredCommands.length > 0 ? (
-                  filteredCommands.map((command, index) => (
-                    <button
-                      key={command.id}
-                      ref={index === selectedIndex ? selectedItemRef : null}
-                      onClick={() => executeCommand(command)}
-                      className={`
-                        w-full text-left px-4 py-3 border-none bg-transparent font-mono
-                        hover:bg-hover-bg transition-colors
-                        ${index === selectedIndex ? 'bg-active-bg' : ''}
-                      `}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="text-accent text-sm">
-                          {index === selectedIndex ? '▸' : ' '}
-                        </div>
-                        <div className="flex-1">
-                          <div className="text-fg font-medium text-sm">
-                            {command.title}
-                          </div>
-                          <div className="text-muted text-xs">
-                            {command.description}
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                  ))
-                ) : (
-                  <div className="px-4 py-8 text-center text-muted font-mono text-sm">
-                    no commands found
-                  </div>
-                )}
-              </div>
-              
-              <div className="px-4 py-3 border-t border-line text-xs text-muted flex gap-4 font-mono">
-                <span><kbd>↑↓</kbd> navigate</span>
-                <span><kbd>↵</kbd> select</span>
+              {filteredCommands.map((command, index) => (
                 <button
-                  onClick={() => closePalette()}
-                  className="ml-auto hover:text-accent transition-colors flex items-center gap-1"
-                  aria-label="Close command palette"
+                  key={command.id}
+                  id={`${listboxId}-option-${command.id}`}
+                  type="button"
+                  role="option"
+                  aria-selected={index === selectedIndex}
+                  tabIndex={-1}
+                  ref={index === selectedIndex ? selectedItemRef : null}
+                  onClick={() => executeCommand(command)}
+                  className={`w-full text-left px-4 py-3 border-none font-mono hover:bg-hover-bg transition-colors ${
+                    index === selectedIndex ? 'bg-active-bg' : 'bg-transparent'
+                  }`}
                 >
-                  <kbd>esc</kbd> close
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="inline-block w-3 shrink-0 text-center text-accent text-sm"
+                      aria-hidden="true"
+                    >
+                      {index === selectedIndex ? '>' : ''}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-fg font-medium text-sm">
+                        {command.title}
+                      </div>
+                      <div className="text-muted text-xs">
+                        {command.description}
+                      </div>
+                    </div>
+                  </div>
                 </button>
-              </div>
-              </div>
-            </motion.div>
+              ))}
+            </div>
+            <div
+              role="status"
+              aria-live="polite"
+              className={filteredCommands.length === 0 ? 'px-4 py-8 text-center text-muted font-mono text-sm' : 'sr-only'}
+            >
+              {filteredCommands.length === 0 ? 'no commands found' : ''}
+            </div>
+
+            <div className="shrink-0 px-4 py-3 border-t border-line text-xs text-muted flex items-center gap-4 font-mono">
+              <span><kbd>↑↓</kbd> navigate</span>
+              <span><kbd>↵</kbd> select</span>
+              <button
+                type="button"
+                onClick={() => closePalette()}
+                className="ml-auto hover:text-fg transition-colors flex items-center gap-1"
+                aria-label="Close command palette"
+              >
+                <kbd>esc</kbd> close
+              </button>
+            </div>
           </div>
-        </>
-      )}
-    </AnimatePresence>
+        </div>
+      </div>
+    </>
   )
 }
 

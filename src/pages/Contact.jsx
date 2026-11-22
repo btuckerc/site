@@ -1,5 +1,6 @@
-import ContactForm from "../components/ContactForm";
-import PageMeta from "../components/PageMeta";
+import Breadcrumb from '../components/Breadcrumb'
+import ContactForm from '../components/ContactForm'
+import PageMeta from '../components/PageMeta'
 
 const Contact = () => {
   return (
@@ -11,45 +12,39 @@ const Contact = () => {
         image="https://btuckerc.dev/og/contact.jpg"
         imageAlt="Tucker Craig, contact. Say hello at btuckerc.dev@gmail.com."
       />
-      <div className="tui-page-shell min-h-svh pb-28 px-4">
-        <div className="max-w-5xl mx-auto">
-          {/* Header */}
-          <div className="tui-page-header mb-6">
-            <div className="text-center">
-              <h1 className="tui-page-title text-xl font-bold text-fg font-mono">
-                <span className="text-accent">[</span> contact{" "}
-                <span className="text-accent">]</span>
-              </h1>
-            </div>
-          </div>
+      <div className="tui-page-shell min-h-svh">
+        <div className="tui-rail tui-enter">
+          <Breadcrumb items={[{ label: 'home', to: '/' }, { label: 'contact' }]} />
 
-          <div className="grid lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 lg:order-2">
-              <ContactForm />
-            </div>
+          <header className="mb-6">
+            <h1 className="tui-page-title text-3xl font-bold leading-tight text-fg sm:text-4xl">
+              Contact
+            </h1>
+          </header>
 
-            <div className="lg:col-span-1 lg:order-1">
-              <div className="tui-panel tui-contact-panel border border-line bg-card-bg p-5 font-mono">
-                <div className="space-y-4 text-base">
+          <div className="grid lg:grid-cols-3 gap-6 items-stretch">
+            <div className="lg:col-span-1">
+              <div className="tui-panel tui-contact-panel h-full p-5 sm:p-7 font-mono">
+                <div className="space-y-6">
                   <div>
-                    <div className="text-accent mb-2 font-semibold">email</div>
+                    <h2 className="case-study-kicker font-semibold mb-3">email</h2>
                     <a
                       href="mailto:btuckerc.dev@gmail.com"
-                      className="tui-link-chip tui-contact-link"
+                      className="tui-link-chip tui-link-chip-block"
                     >
                       btuckerc.dev@gmail.com
                     </a>
                   </div>
 
-                  <div className="border-t border-line pt-4">
-                    <div className="text-accent mb-3 font-semibold">links</div>
-                    <div className="space-y-2">
+                  <div className="border-t border-line pt-5">
+                    <h2 className="case-study-kicker font-semibold mb-3">links</h2>
+                    <div className="space-y-2.5">
                       <a
                         href="https://www.linkedin.com/in/tucker-craig/"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-describedby="new-tab-note"
-                        className="tui-link-chip tui-link-chip-block tui-contact-link"
+                        className="tui-link-chip tui-link-chip-block"
                       >
                         linkedin
                       </a>
@@ -58,7 +53,7 @@ const Contact = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-describedby="new-tab-note"
-                        className="tui-link-chip tui-link-chip-block tui-contact-link"
+                        className="tui-link-chip tui-link-chip-block"
                       >
                         github
                       </a>
@@ -67,7 +62,7 @@ const Contact = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-describedby="new-tab-note"
-                        className="tui-link-chip tui-link-chip-block tui-contact-link"
+                        className="tui-link-chip tui-link-chip-block"
                       >
                         x
                       </a>
@@ -76,7 +71,7 @@ const Contact = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-describedby="new-tab-note"
-                        className="tui-link-chip tui-link-chip-block tui-contact-link"
+                        className="tui-link-chip tui-link-chip-block"
                       >
                         instagram
                       </a>
@@ -85,11 +80,15 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+
+            <div className="lg:col-span-2">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact
