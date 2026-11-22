@@ -25,29 +25,35 @@ const Home = () => {
 
       <div className="home-page tui-page-shell min-h-svh">
         <div className="tui-rail tui-enter">
-          <header className="home-header home-personal-hero">
-            <div className="home-personal-hero-copy">
-              <h1 className="home-personal-hero-title font-mono font-bold text-fg">TUCKER CRAIG</h1>
-              <p className="home-personal-hero-role font-mono text-accent">Software Engineer</p>
-              <p className="home-personal-hero-lede">
-                If something I use every day bugs me, I&apos;d rather build my own. Lately that&apos;s meant a Mac browser, a Windows streaming app, and an iPhone app for my coding agents.
-              </p>
-            </div>
-            <div className="home-personal-hero-context">
-              <p>
-                I like Omarchy&apos;s idea that{' '}
-                <a
-                  href="https://wecanfixeverything.com"
-                  className="text-accent underline underline-offset-4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-describedby="new-tab-note"
-                >
-                  we can fix everything
-                </a>
-                . Coding agents make that practical if you keep tasks focused and test what gets built. Everything below is something I use myself.
-              </p>
-              <p className="mt-4 text-muted">
+          <header className="home-masthead">
+            <p className="home-masthead-role">Software Engineer</p>
+
+            <h1 className="home-masthead-title font-mono font-bold text-fg">
+              <span className="home-masthead-word">TUCKER</span>{' '}
+              <span className="home-masthead-word">CRAIG</span>
+            </h1>
+
+            <p className="home-masthead-lede">
+              <span className="home-masthead-line">If something I use every day bugs me,</span>{' '}
+              <span className="home-masthead-line">I&apos;d rather build my own.</span>
+            </p>
+
+            <p className="home-masthead-note">
+              Lately that&apos;s meant a Mac browser, a Windows streaming app, and an iPhone app for my coding agents. I like Omarchy&apos;s idea that{' '}
+              <a
+                href="https://wecanfixeverything.com"
+                className="text-accent underline underline-offset-4"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-describedby="new-tab-note"
+              >
+                we can fix everything
+              </a>
+              . Everything below is something I use myself.
+            </p>
+
+            <div className="home-masthead-foot">
+              <p className="home-masthead-aside">
                 I also sang a cappella in{' '}
                 <a
                   href="https://open.spotify.com/track/5CV2w2PIbKouRr2jNKjJIR"
@@ -60,22 +66,19 @@ const Home = () => {
                 </a>{' '}
                 at Davidson.
               </p>
-              <div className="mt-5 flex flex-wrap items-center gap-3">
-                <Link to="/workflow" className="tui-link-chip">how i build</Link>
-                <Link to="/about" className="tui-link-chip">more about me</Link>
-              </div>
+              <Link to="/about" className="tui-link-chip">more about me</Link>
             </div>
           </header>
 
-          <section className="home-feature mt-6 p-5 sm:p-7" aria-labelledby="workflow-title">
+          <section className="home-feature mt-7 p-5 sm:p-7" aria-labelledby="workflow-title">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="min-w-0 flex-1 basis-80">
-                <p className="home-kicker">workflow / how i build with ai</p>
+                <p className="home-kicker">how i build</p>
                 <h2 id="workflow-title" className="mt-2 font-mono text-2xl font-bold text-fg sm:text-3xl leading-tight">
                   How I use coding agents
                 </h2>
-                <p className="mt-3 text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">
-                  Coding agents make it fast to write the first version. I spend most of my time keeping tasks small in separate Git worktrees, reading the patches, and testing the built app myself.
+                <p className="mt-2.5 max-w-3xl text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">
+                  Agents write the first version fast. I keep tasks small in separate Git worktrees, read the patches, and test the built app myself.
                 </p>
               </div>
             </div>
@@ -187,7 +190,7 @@ const Home = () => {
                 <img src="/media/herdwick/icon.png" alt="" width="256" height="256" loading="lazy" decoding="async" className="home-app-icon" />
                 <div>
                   <p className="home-kicker">herdwick</p>
-                  <h2 className="mt-1 font-mono text-lg font-bold text-fg leading-snug">Coding agents on your phone</h2>
+                  <h2 id="herdwick-title" className="mt-1 font-mono text-lg font-bold text-fg leading-snug">Coding agents on your phone</h2>
                 </div>
               </div>
               <p className="text-sm leading-6 text-muted">{herdwick.blurb}</p>
