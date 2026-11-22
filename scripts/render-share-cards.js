@@ -225,6 +225,18 @@ const connect = (url) => new Promise((resolve, reject) => {
   }))
 })
 
+const stopChild = (child, timeoutMs = 2000) => new Promise((resolve) => {
+  if (!child || child.exitCode !== null || child.signalCode !== null) return resolve()
+  const timer = setTimeout(() => {
+    try { child.kill('SIGKILL') } catch { /* already exited */ }
+  }, timeoutMs)
+  child.once('exit', () => {
+    clearTimeout(timer)
+    resolve()
+  })
+  try { child.kill('SIGTERM') } catch { clearTimeout(timer); resolve() }
+})
+
 const profileDir = mkdtempSync(join(tmpdir(), 'share-cards-'))
 const chrome = spawn(findChrome(), [
   '--headless=new',
@@ -270,6 +282,6 @@ try {
   }
   cdp.close()
 } finally {
-  chrome.kill()
-  rmSync(profileDir, { recursive: true, force: true })
+  await stopChild(chrome)
+  rmSync(profileDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
 }
