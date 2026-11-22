@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import PageMeta from '../components/PageMeta'
+import AnglShowcase from '../components/AnglShowcase'
 import { GameCapture } from '../components/StarterSelectionCapture'
 import { WorkflowLoopDiagram } from '../components/WorkflowVisuals'
 import projectsData from '../../data/projects.json'
@@ -105,21 +106,7 @@ const Home = () => {
               <span className="home-status font-mono text-xs text-muted"><span className="text-accent" aria-hidden="true">●</span> macOS · WebKit</span>
             </div>
             <p className="mt-3 text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">{angl.blurb}</p>
-            <figure className="mt-5">
-              <div className="home-desktop-frame">
-                <img
-                  src="/media/angl-browser/angl.webp"
-                  alt="angl browser showing Wikipedia's WebKit article with a tree of child tabs in the sidebar and no URL bar."
-                  width="1600"
-                  height="1012"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <figcaption className="mt-2.5 text-sm leading-6 text-muted">
-                Built in Swift and AppKit on macOS&apos;s built-in WebKit, with a Rust bridge for Bitwarden. Uses 227 MB on Wikipedia compared to Safari&apos;s 287 MB.
-              </figcaption>
-            </figure>
+            <AnglShowcase />
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <a href={angl.links.download} className="tui-action tui-home-primary inline-flex items-center px-4 py-2 font-mono text-sm" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">
                 download for mac
