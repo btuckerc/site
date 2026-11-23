@@ -99,10 +99,20 @@ export default function Workflow() {
                     Most of the projects here started with a tool I use every day that didn&apos;t quite fit how I work. It&apos;s fast enough now to build a smaller, focused version instead of working around it.
                   </p>
                   <p className="case-study-copy mt-4">
-                    Everything is solvable, and right now it mostly comes down to pointing your tokens at it. People are making real progress on hard math, Linux distros, and everyday software simply by deciding to put some of their agentic bandwidth toward a problem.
+                    Everything is solvable. It&apos;s something that hit me while I was putting this together. Every single problem is solvable right now, all it takes is someone pointing their tokens in the right place. People are proving{' '}
+                    <a
+                      href="https://leanprover-community.github.io/blog/posts/riemann-hypothesis/"
+                      className="text-accent underline underline-offset-4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-describedby="new-tab-note"
+                    >
+                      the Riemann hypothesis
+                    </a>
+                    , building Linux distros, and shipping everyday software simply by deciding to put some of their agentic bandwidth toward a problem.
                   </p>
                   <p className="case-study-copy mt-4">
-                    Lately that&apos;s bounced across a bunch of platforms: a lightweight Mac browser (<a href="https://github.com/btuckerc/angl-browser" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">angl browser</a>), a Rust streaming app for Windows (winstream) that uses about a third as much memory as OBS, an iPhone app (<a href="https://github.com/btuckerc/herdwick" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Herdwick</a>) for checking on coding agents over SSH, local voice-to-text on Mac (<a href="https://github.com/btuckerc/dictation" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Dictation</a>), a menu bar usage tracker (<a href="https://github.com/btuckerc/pace-bar" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Pace Bar</a>), an iPhone puzzle game (<a href="https://github.com/btuckerc/inkjoin" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Inkjoin</a>), and handheld firmware (<Link to="/projects/omalo" className="text-accent underline underline-offset-4">omalo</Link>).
+                    Lately for me that&apos;s been a lightweight Mac browser (<a href="https://github.com/btuckerc/angl-browser" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">angl browser</a>), a Rust streaming app for Windows (winstream) that uses about a third as much memory as OBS, an iPhone app (<a href="https://github.com/btuckerc/herdwick" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Herdwick</a>) for checking on coding agents over SSH, local voice-to-text on Mac (<a href="https://github.com/btuckerc/dictation" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Dictation</a>), a menu bar usage tracker (<a href="https://github.com/btuckerc/pace-bar" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Pace Bar</a>), an iPhone puzzle game (<a href="https://github.com/btuckerc/inkjoin" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Inkjoin</a>), and handheld firmware (<Link to="/projects/omalo" className="text-accent underline underline-offset-4">omalo</Link>).
                   </p>
                 </section>
 

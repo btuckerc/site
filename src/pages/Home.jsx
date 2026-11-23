@@ -50,7 +50,7 @@ const Home = () => {
               >
                 we can fix everything
               </a>
-              . Everything is solvable, and all it takes right now is someone pointing their tokens at it. The tools below are all things I use myself.
+              . Everything is solvable. All it takes right now is someone pointing their tokens in the right place. The tools below are all things I use myself.
             </p>
 
             <div className="home-masthead-foot">
