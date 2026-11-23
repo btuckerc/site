@@ -15,7 +15,7 @@ import '../styles/technical-readability.css'
 import '../styles/project-navigation.css'
 
 const sections = [
-  { id: 'annoyances', num: '01', nav: 'Why I build', title: 'Start with something annoying' },
+  { id: 'annoyances', num: '01', nav: 'Why I build', title: 'Start with what you use' },
   { id: 'models', num: '02', nav: 'Model stack', title: 'Right model for the job' },
   { id: 'council', num: '03', nav: 'Full council', title: 'Five models, blind review' },
   { id: 'scope', num: '04', nav: 'Worktrees', title: 'Keep tasks small and separate' },
@@ -93,13 +93,13 @@ export default function Workflow() {
                 <section className="case-study-section scroll-mt-24" id="annoyances" aria-labelledby="annoyances-title">
                   <p className="case-study-kicker">01</p>
                   <h2 className="case-study-section-title mt-2" id="annoyances-title">
-                    <a href="#annoyances">Start with something annoying</a>
+                    <a href="#annoyances">Start with what you use</a>
                   </h2>
                   <p className="case-study-copy mt-4">
-                    Almost everything on this site started with something small that bugged me. Instead of living with a clunky tool or paying for software that mostly gets in my way, I&apos;d rather spend a week building a smaller version that fits how I work.
+                    Most of the projects here started with a tool I use every day that didn&apos;t quite fit how I work. It&apos;s fast enough now to build a smaller, focused version instead of working around it.
                   </p>
                   <p className="case-study-copy mt-4">
-                    Everything is solvable, and all it takes right now is someone pointing their tokens at it. We&apos;re seeing real progress on math, iOS keyboards, and plenty else just because someone decided to put some of their agentic bandwidth toward a problem.
+                    Everything is solvable, and right now it mostly comes down to pointing your tokens at it. People are making real progress on hard math, Linux distros, and everyday software simply by deciding to put some of their agentic bandwidth toward a problem.
                   </p>
                   <p className="case-study-copy mt-4">
                     Lately that&apos;s bounced across a bunch of platforms: a lightweight Mac browser (<a href="https://github.com/btuckerc/angl-browser" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">angl browser</a>), a Rust streaming app for Windows (winstream) that uses about a third as much memory as OBS, an iPhone app (<a href="https://github.com/btuckerc/herdwick" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Herdwick</a>) for checking on coding agents over SSH, local voice-to-text on Mac (<a href="https://github.com/btuckerc/dictation" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Dictation</a>), a menu bar usage tracker (<a href="https://github.com/btuckerc/pace-bar" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Pace Bar</a>), an iPhone puzzle game (<a href="https://github.com/btuckerc/inkjoin" className="text-accent underline underline-offset-4" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-note">Inkjoin</a>), and handheld firmware (<Link to="/projects/omalo" className="text-accent underline underline-offset-4">omalo</Link>).
