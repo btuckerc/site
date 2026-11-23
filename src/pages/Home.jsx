@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import PageMeta from '../components/PageMeta'
 import AnglShowcase from '../components/AnglShowcase'
 import { GameCapture } from '../components/StarterSelectionCapture'
-import { WorkflowLoopDiagram } from '../components/WorkflowVisuals'
+import { AgentWorkbench } from '../components/WorkflowVisuals'
 import projectsData from '../../data/projects.json'
 import '../styles/home-media.css'
 
@@ -79,16 +79,16 @@ const Home = () => {
                   How I use coding agents
                 </h2>
                 <p className="mt-2.5 max-w-3xl text-pretty text-sm leading-6 text-muted sm:text-base sm:leading-7">
-                  Agents write the first version fast. I keep tasks small in separate Git worktrees, read the patches, and test the built app myself.
+                  Instead of asking one chat window to do everything, I split the work across models. Gemini 4 Neon or Claude Opus 5.5 directs, GPT-6.2 Sol and a local Qwen 3.8 GPU worker write patches in isolated copies of the repo, and on big changes five models from three families review the same frozen snapshot blind before I run the built app myself.
                 </p>
               </div>
             </div>
 
-            <WorkflowLoopDiagram compact />
+            <AgentWorkbench />
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <Link to="/workflow" className="tui-action tui-home-primary inline-flex items-center px-4 py-2 font-mono text-sm">
-                read how i build
+                read the full workflow
               </Link>
               <Link to="/projects/s3-amoled" className="tui-link-chip">omalo agent notes</Link>
             </div>

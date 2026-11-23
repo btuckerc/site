@@ -3,68 +3,106 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import {
+  AgentStackDiagram,
+  AgentWorkbench,
   FinishingGap,
+  FullCouncilDiagram,
   RealCheckCases,
   ToolingSystemMap,
-  WorkflowLoopDiagram,
   WorktreeDiagram,
 } from '../WorkflowVisuals'
 
 describe('WorkflowVisuals', () => {
-  it('switches loop steps with click and keyboard arrows, Home, and End while exposing only the active artifact', async () => {
+  it('switches 3D isometric model stack layers with click and keyboard arrows while keeping inactive panels inert', async () => {
     const user = userEvent.setup()
-    const { container } = render(<WorkflowLoopDiagram />)
+    const { container } = render(<AgentStackDiagram />)
 
-    const briefTab = screen.getByRole('tab', { name: /write brief/i })
-    const worktreeTab = screen.getByRole('tab', { name: /worktree/i })
-    const testTab = screen.getByRole('tab', { name: /test build/i })
+    const directTab = screen.getByRole('tab', { name: /direct/i })
+    const buildTab = screen.getByRole('tab', { name: /build/i })
+    const gateTab = screen.getByRole('tab', { name: /council & audit/i })
 
-    expect(briefTab).toHaveAttribute('aria-selected', 'true')
+    expect(directTab).toHaveAttribute('aria-selected', 'true')
     const activePanel = screen.getByRole('tabpanel')
-    expect(activePanel).toHaveAttribute('aria-labelledby', briefTab.id)
-    expect(activePanel).toHaveAttribute('tabindex', '0')
-    expect(activePanel).toHaveTextContent(/design the change and name the check/i)
+    expect(activePanel).toHaveAttribute('aria-labelledby', directTab.id)
+    expect(activePanel).toHaveTextContent(/Gemini 4 Neon/)
+    expect(activePanel).toHaveTextContent(/Claude Opus 5.5/)
 
-    // Active artifact is accessible to assistive technology while inactive stacked panels stay inert.
-    expect(screen.getByRole('group', { name: /illustrative brief · angl browser/i })).toBeInTheDocument()
-    expect(screen.queryByRole('group', { name: /illustrative worktrees/i })).toBeNull()
-
-    const slots = container.querySelectorAll('.wf-detail-stack > .wf-panel-slot')
-    expect(slots).toHaveLength(4)
+    const slots = container.querySelectorAll('.wf-layer-panel-stack > .wf-panel-slot')
+    expect(slots).toHaveLength(3)
     expect(slots[0].hasAttribute('inert')).toBe(false)
     expect(slots[1].hasAttribute('inert')).toBe(true)
-    expect(slots[1]).toHaveAttribute('aria-hidden', 'true')
 
-    briefTab.focus()
+    directTab.focus()
     await user.keyboard('{ArrowRight}')
-    expect(worktreeTab).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', worktreeTab.id)
-    expect(screen.getByRole('group', { name: /illustrative worktrees/i })).toBeInTheDocument()
+    expect(buildTab).toHaveAttribute('aria-selected', 'true')
+    const buildPanel = screen.getByRole('tabpanel')
+    expect(buildPanel).toHaveTextContent(/GPT-6\.2 Sol/)
+    expect(buildPanel).toHaveTextContent(/Qwen 3\.8 27B/)
+    expect(buildPanel).toHaveTextContent(/model_ok: true/)
     expect(slots[0].hasAttribute('inert')).toBe(true)
     expect(slots[1].hasAttribute('inert')).toBe(false)
 
-    // Horizontal tablist leaves ArrowDown free for page scrolling instead of changing tabs.
-    await user.keyboard('{ArrowDown}')
-    expect(worktreeTab).toHaveAttribute('aria-selected', 'true')
-
-    await user.keyboard('{ArrowRight}')
-    expect(screen.getByRole('tab', { name: /review/i })).toHaveAttribute('aria-selected', 'true')
-
-    await user.keyboard('{ArrowLeft}')
-    expect(worktreeTab).toHaveAttribute('aria-selected', 'true')
-
     await user.keyboard('{End}')
-    expect(testTab).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByRole('tabpanel')).toHaveTextContent(/227 MB on Wikipedia/i)
+    expect(gateTab).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/Full Council/)
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/PASS \/ BLOCK \/ UNVERIFIED/)
 
     await user.keyboard('{Home}')
-    expect(briefTab).toHaveAttribute('aria-selected', 'true')
+    expect(directTab).toHaveAttribute('aria-selected', 'true')
   })
 
-  it('hides inline example prose in compact mode for Home while keeping the accessible mini-artifact', () => {
-    const { container } = render(<WorkflowLoopDiagram compact />)
-    expect(container.querySelector('.wf-detail-example-inline')).toBeNull()
-    expect(screen.getByRole('group', { name: /illustrative brief · angl browser/i })).toBeInTheDocument()
+  it('switches Full Council seats across all 5 blind reviewers and shows anti-gaming rules', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<FullCouncilDiagram />)
+
+    const solTab = screen.getByRole('tab', { name: /sol/i })
+    const opusTab = screen.getByRole('tab', { name: /opus/i })
+    const fableTab = screen.getByRole('tab', { name: /fable/i })
+    const astraTab = screen.getByRole('tab', { name: /astra/i })
+    const neonTab = screen.getByRole('tab', { name: /neon/i })
+
+    expect(solTab).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/GPT-6\.2 Sol/)
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/Breaker/)
+
+    solTab.focus()
+    await user.keyboard('{ArrowRight}')
+    expect(opusTab).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/Claude Opus 5\.5/)
+
+    await user.click(fableTab)
+    expect(fableTab).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/Claude Fable/)
+
+    await user.click(astraTab)
+    expect(astraTab).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/GPT-6\.2 Astra/)
+
+    await user.click(neonTab)
+    expect(neonTab).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/Gemini 4 Neon/)
+
+    const seatSlots = container.querySelectorAll('.wf-seat-panel-stack > .wf-panel-slot')
+    expect(seatSlots).toHaveLength(5)
+    expect(seatSlots[4].hasAttribute('inert')).toBe(false)
+    expect(seatSlots[0].hasAttribute('inert')).toBe(true)
+
+    expect(screen.getByText(/Blind Opus tiebreaker/i)).toBeInTheDocument()
+  })
+
+  it('switches the Home AgentWorkbench cleanly between Current model stack and Full council', async () => {
+    const user = userEvent.setup()
+    render(<AgentWorkbench />)
+
+    const stackTab = screen.getByRole('tab', { name: /current model stack/i })
+    const councilTab = screen.getByRole('tab', { name: /full council/i })
+
+    expect(stackTab).toHaveAttribute('aria-selected', 'true')
+    expect(councilTab).toHaveAttribute('aria-selected', 'false')
+
+    await user.click(councilTab)
+    expect(councilTab).toHaveAttribute('aria-selected', 'true')
+    expect(stackTab).toHaveAttribute('aria-selected', 'false')
   })
 
   it('switches verification cases with honest range bands, process diagram, memory grid, and SSH topology', async () => {
@@ -136,14 +174,13 @@ describe('WorkflowVisuals', () => {
     expect(stageSlots[1].hasAttribute('inert')).toBe(false)
   })
 
-  it('renders the four stage-wired tooling cards with accessible external links and grounded Pace Bar copy', () => {
+  it('renders the four stage-wired tooling cards with accessible external links and real stack copy', () => {
     render(<ToolingSystemMap />)
 
-    expect(screen.getByText(/coding session \(mac \+ linux\)/i)).toBeInTheDocument()
+    expect(screen.getByText(/coding session \(mac \+ nous linux gpu\)/i)).toBeInTheDocument()
     expect(screen.getByText(/needs input or finishes/i)).toBeInTheDocument()
-    expect(screen.getByText(/feeds 01 brief/i)).toBeInTheDocument()
-    expect(screen.getByText(/informs 02 worktree/i)).toBeInTheDocument()
-    expect(screen.getByText(/so i can send small jobs to local models/i)).toBeInTheDocument()
+    expect(screen.getByText(/feeds 01 direct/i)).toBeInTheDocument()
+    expect(screen.getByText(/local Qwen/i)).toBeInTheDocument()
 
     const externalLinks = screen.getAllByRole('link')
     expect(externalLinks).toHaveLength(7)
@@ -157,7 +194,8 @@ describe('WorkflowVisuals', () => {
   it('renders every visual figure with an explicit figcaption and paired finishing ledger', () => {
     const { container } = render(
       <MemoryRouter>
-        <WorkflowLoopDiagram />
+        <AgentStackDiagram />
+        <FullCouncilDiagram />
         <RealCheckCases />
         <WorktreeDiagram />
         <ToolingSystemMap />
@@ -165,7 +203,7 @@ describe('WorkflowVisuals', () => {
       </MemoryRouter>
     )
     const figures = container.querySelectorAll('figure')
-    expect(figures).toHaveLength(5)
+    expect(figures).toHaveLength(6)
     figures.forEach((figure) => {
       expect(figure.querySelector('figcaption')).not.toBeNull()
     })

@@ -1,18 +1,52 @@
 /* Visuals for the agentic workflow on / and /workflow.
- * Built on the site's theme tokens (--bg, --bg-elev, --fg, --muted, --accent, --line)
- * so Dark, Light, and Amber modes keep crisp contrast with 0px TUI geometry. */
+ * Layered dimensional geometry + subtle model-family color tokens that adapt
+ * cleanly across Dark, Light, and Amber themes with 0px layout shift. */
+
+:root {
+  --fam-google: #6aa9ff;
+  --fam-anthropic: #e69168;
+  --fam-openai: #5ec49b;
+  --fam-local: #b794f4;
+  --wf-surface-shadow: 0 12px 28px -18px rgb(0 0 0 / 0.65), inset 0 1px 0 color-mix(in srgb, var(--fg) 8%, transparent);
+  --wf-card-shadow: 0 6px 16px -12px rgb(0 0 0 / 0.55), inset 0 1px 0 color-mix(in srgb, var(--fg) 7%, transparent);
+  --wf-dot-color: color-mix(in srgb, var(--muted) 18%, transparent);
+}
+
+.light {
+  --fam-google: #2563eb;
+  --fam-anthropic: #c2410c;
+  --fam-openai: #0f766e;
+  --fam-local: #6d28d9;
+  --wf-surface-shadow: 0 10px 24px -16px rgb(28 31 36 / 0.2), inset 0 1px 0 rgb(255 255 255 / 0.7);
+  --wf-card-shadow: 0 6px 14px -10px rgb(28 31 36 / 0.16), inset 0 1px 0 rgb(255 255 255 / 0.75);
+  --wf-dot-color: color-mix(in srgb, var(--muted) 22%, transparent);
+}
+
+.amber {
+  --fam-google: #83a598;
+  --fam-anthropic: #fe8019;
+  --fam-openai: #8ec07c;
+  --fam-local: #d3869b;
+}
 
 .wf-visual {
-  margin-top: 1.5rem;
-  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
-  background: color-mix(in srgb, var(--bg-elev) 84%, var(--bg) 16%);
-  padding: clamp(0.9rem, 2.4vw, 1.3rem);
+  margin-top: 1.4rem;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 72%, var(--line));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg-elev) 92%, var(--fg) 3%) 0%,
+    color-mix(in srgb, var(--bg-elev) 82%, var(--bg) 18%) 100%
+  );
+  padding: clamp(0.95rem, 2.4vw, 1.35rem);
+}
+
+.wf-visual-elevated {
+  box-shadow: var(--wf-surface-shadow);
 }
 
 .wf-visual-compact {
-  margin-top: 1.15rem;
-  background: color-mix(in srgb, var(--bg) 48%, transparent);
-  padding: clamp(0.85rem, 2vw, 1.15rem);
+  margin-top: 0.9rem;
+  padding: clamp(0.85rem, 2vw, 1.2rem);
 }
 
 .wf-visual-head {
@@ -28,6 +62,7 @@
   color: var(--accent);
   font-family: var(--font-family);
   font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -35,13 +70,11 @@
 .wf-visual-hint {
   color: var(--muted);
   font-family: var(--font-family);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
 }
 
 /* ==========================================================================
  * Zero-Shift CSS Grid 1/1 Panel Stack
- * All variants live in one grid cell so intrinsic height locks to max(variants)
- * across every font and viewport with 0px layout shift.
  * ========================================================================== */
 
 .wf-panel-stack {
@@ -53,15 +86,664 @@
 .wf-panel-slot {
   grid-area: 1 / 1;
   min-width: 0;
-  visibility: visible;
 }
 
 .wf-panel-slot[data-active='false'] {
   visibility: hidden;
+  pointer-events: none;
+}
+
+.wf-full-tabs {
+  margin-bottom: 0.85rem;
 }
 
 /* ==========================================================================
- * Ownership Swatches (ME solid / AGENT dashed)
+ * Model Family Dots & Legend
+ * ========================================================================== */
+
+.wf-family-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  margin-bottom: 0.9rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  font-family: var(--font-family);
+  font-size: 0.71rem;
+  color: var(--muted);
+}
+
+.wf-family-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.wf-fam-dot {
+  display: inline-block;
+  width: 0.48rem;
+  height: 0.48rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}
+
+.wf-fam-google { background: var(--fam-google); }
+.wf-fam-anthropic { background: var(--fam-anthropic); }
+.wf-fam-openai { background: var(--fam-openai); }
+.wf-fam-local { background: var(--fam-local); }
+.wf-fam-mixed {
+  background: conic-gradient(
+    var(--fam-openai) 0deg 120deg,
+    var(--fam-anthropic) 120deg 240deg,
+    var(--fam-google) 240deg 360deg
+  );
+}
+
+/* ==========================================================================
+ * Home Workbench Switcher (Current Model Stack / Full Council)
+ * ========================================================================== */
+
+.wf-workbench {
+  margin-top: 1.25rem;
+}
+
+.wf-workbench-bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.wf-workbench-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.16rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 65%, var(--line));
+  background: color-mix(in srgb, var(--bg) 62%, var(--bg-elev) 38%);
+  text-align: left;
+  font-family: var(--font-family);
+  cursor: pointer;
+  box-shadow: var(--wf-card-shadow);
+  transition:
+    border-color var(--motion-fast) var(--motion-ease-standard),
+    background-color var(--motion-fast) var(--motion-ease-standard),
+    transform var(--motion-fast) var(--motion-ease-standard);
+}
+
+.wf-workbench-tab:hover {
+  border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+}
+
+.wf-workbench-tab[aria-selected='true'] {
+  border-color: var(--accent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 16%, var(--bg-elev)) 0%,
+    color-mix(in srgb, var(--accent) 8%, var(--bg)) 100%
+  );
+}
+
+.wf-workbench-tab-kicker {
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.wf-workbench-tab-title {
+  color: var(--fg);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+ * 3D Isometric Agent Stack Diagram
+ * ========================================================================== */
+
+.wf-stack-layout,
+.wf-council-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 1.05rem;
+  align-items: stretch;
+}
+
+.wf-iso-stage,
+.wf-council-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--line) 90%, transparent);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--accent) 7%, transparent) 0%, transparent 72%),
+    radial-gradient(var(--wf-dot-color) 1px, transparent 1px);
+  background-size: 100% 100%, 16px 16px;
+  padding: 0.75rem 0.5rem;
+  min-width: 0;
+  box-shadow: inset 0 2px 14px rgb(0 0 0 / 0.22);
+}
+
+.wf-iso-svg,
+.wf-council-svg {
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
+  display: block;
+  overflow: visible;
+  font-family: var(--font-family);
+}
+
+.wf-iso-ground-shadow {
+  fill: rgb(0 0 0 / 0.26);
+}
+
+.light .wf-iso-ground-shadow {
+  fill: rgb(28 31 36 / 0.11);
+}
+
+.wf-iso-layer {
+  cursor: pointer;
+  transition: transform 220ms var(--motion-ease-out), opacity 180ms var(--motion-ease-standard);
+}
+
+.wf-iso-layer.is-active {
+  transform: translateY(-7px);
+  opacity: 1;
+}
+
+.wf-iso-layer.is-dim {
+  opacity: 0.72;
+}
+
+.wf-iso-layer.is-dim:hover {
+  opacity: 0.92;
+  transform: translateY(-3px);
+}
+
+.wf-iso-face {
+  fill: color-mix(in srgb, var(--bg-elev) 90%, var(--fg) 5%);
+  stroke: color-mix(in srgb, var(--line-strong) 75%, var(--line));
+  stroke-width: 1.2;
+}
+
+.wf-iso-layer.is-active .wf-iso-face {
+  fill: color-mix(in srgb, var(--accent) 12%, var(--bg-elev));
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.wf-iso-edge-left {
+  fill: color-mix(in srgb, var(--bg) 55%, var(--line));
+  stroke: color-mix(in srgb, var(--line-strong) 65%, var(--line));
+  stroke-width: 1;
+}
+
+.wf-iso-edge-right {
+  fill: color-mix(in srgb, var(--bg) 78%, var(--line));
+  stroke: color-mix(in srgb, var(--line-strong) 65%, var(--line));
+  stroke-width: 1;
+}
+
+.wf-iso-layer.is-active .wf-iso-edge-left {
+  fill: color-mix(in srgb, var(--accent) 26%, var(--bg));
+  stroke: color-mix(in srgb, var(--accent) 70%, var(--line));
+}
+
+.wf-iso-layer.is-active .wf-iso-edge-right {
+  fill: color-mix(in srgb, var(--accent) 16%, var(--bg));
+  stroke: color-mix(in srgb, var(--accent) 60%, var(--line));
+}
+
+.wf-iso-gridline {
+  stroke: color-mix(in srgb, var(--line) 55%, transparent);
+  stroke-width: 0.8;
+}
+
+.wf-iso-divider {
+  stroke: color-mix(in srgb, var(--muted) 55%, var(--line));
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.wf-iso-pod-top {
+  fill: var(--bg);
+  stroke-width: 1.25;
+}
+
+.wf-iso-chip-base {
+  fill: color-mix(in srgb, var(--bg) 52%, var(--line-strong));
+  stroke: color-mix(in srgb, var(--line-strong) 65%, var(--line));
+  stroke-width: 0.9;
+}
+
+.wf-iso-pod-label {
+  fill: var(--fg);
+  font-size: 9.2px;
+  font-weight: 600;
+}
+
+.wf-iso-pod-sub {
+  fill: var(--muted);
+  font-size: 7.4px;
+}
+
+.wf-iso-council-ring {
+  fill: color-mix(in srgb, var(--bg) 75%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 45%, var(--line));
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+}
+
+.wf-iso-chip-bg {
+  fill: var(--bg);
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+
+.wf-iso-chip-text {
+  fill: var(--accent);
+  font-size: 8.2px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.wf-iso-plane-tag {
+  fill: var(--muted);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.wf-iso-layer.is-active .wf-iso-plane-tag {
+  fill: var(--accent);
+}
+
+.wf-iso-anchor {
+  fill: var(--accent);
+}
+
+/* ==========================================================================
+ * Stack Inspector + Model Cards + Receipt Plate
+ * ========================================================================== */
+
+.wf-stack-inspector,
+.wf-council-inspector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.wf-layer-panel,
+.wf-seat-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  background: color-mix(in srgb, var(--bg) 68%, var(--bg-elev) 32%);
+  padding: 0.85rem 0.95rem;
+  box-shadow: var(--wf-card-shadow);
+}
+
+.wf-detail-title {
+  color: var(--fg);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.32;
+}
+
+.wf-detail-copy {
+  color: var(--fg);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.wf-detail-note {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.52;
+  border-left: 2px solid color-mix(in srgb, var(--accent) 65%, var(--line));
+  padding-left: 0.65rem;
+}
+
+.wf-model-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.wf-model-row {
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  background: var(--bg);
+  padding: 0.52rem 0.68rem;
+}
+
+.wf-model-row-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 0.55rem;
+}
+
+.wf-model-name-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  flex-wrap: wrap;
+}
+
+.wf-model-name {
+  color: var(--fg);
+  font-family: var(--font-family);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.wf-model-effort {
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg-elev) 85%, transparent);
+  padding: 0.05rem 0.35rem;
+  color: var(--muted);
+  font-family: var(--font-family);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+}
+
+.wf-model-runner {
+  color: var(--accent);
+  font-family: var(--font-family);
+  font-size: 0.69rem;
+}
+
+.wf-model-role {
+  margin-top: 0.28rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.wf-receipt-plate {
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--line));
+  background: var(--bg);
+  padding: 0.6rem 0.72rem;
+  font-family: var(--font-family);
+  font-size: 0.74rem;
+  line-height: 1.45;
+  margin-top: auto;
+}
+
+.wf-receipt-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.45rem;
+  color: var(--muted);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.wf-receipt-badge,
+.wf-verdict-pill {
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 0.06rem 0.38rem;
+  color: var(--accent);
+  font-size: 0.66rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.wf-verdict-pill.is-approve {
+  border-color: var(--fam-openai);
+  color: var(--fam-openai);
+  background: color-mix(in srgb, var(--fam-openai) 12%, transparent);
+}
+
+.wf-artifact-kv {
+  margin: 0;
+  display: grid;
+  gap: 0.28rem;
+}
+
+.wf-artifact-kv-row {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.wf-artifact-kv-row dt {
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wf-artifact-kv-row dd {
+  margin: 0;
+  color: var(--fg);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
+ * Full Council Radial Roundtable SVG & Seat Inspector
+ * ========================================================================== */
+
+.wf-council-table-outer {
+  fill: color-mix(in srgb, var(--bg-elev) 48%, transparent);
+  stroke: color-mix(in srgb, var(--line-strong) 65%, var(--line));
+  stroke-width: 1.1;
+}
+
+.wf-council-table-inner {
+  fill: none;
+  stroke: color-mix(in srgb, var(--line) 80%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.wf-council-wall {
+  stroke: color-mix(in srgb, var(--muted) 42%, transparent);
+  stroke-width: 1.1;
+  stroke-dasharray: 3 4;
+}
+
+.wf-council-beam {
+  stroke: color-mix(in srgb, var(--muted) 45%, var(--line));
+  stroke-width: 1.25;
+  stroke-dasharray: 4 3;
+  transition: stroke 160ms var(--motion-ease-standard), stroke-width 160ms var(--motion-ease-standard);
+}
+
+.wf-council-beam.is-active {
+  stroke-width: 2.2;
+  stroke-dasharray: none;
+}
+
+.wf-council-sheet {
+  stroke-width: 1.1;
+}
+
+.wf-council-sheet-back {
+  fill: color-mix(in srgb, var(--bg) 75%, var(--line));
+  stroke: var(--line);
+}
+
+.wf-council-sheet-mid {
+  fill: color-mix(in srgb, var(--bg-elev) 88%, var(--bg));
+  stroke: color-mix(in srgb, var(--line-strong) 70%, var(--line));
+}
+
+.wf-council-sheet-top {
+  fill: color-mix(in srgb, var(--accent) 12%, var(--bg-elev));
+  stroke: var(--accent);
+}
+
+.wf-council-core-title {
+  fill: var(--fg);
+  font-size: 8.6px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.wf-council-core-sub {
+  fill: var(--muted);
+  font-size: 7.4px;
+}
+
+.wf-council-seat-node {
+  cursor: pointer;
+  transition: transform 180ms var(--motion-ease-out);
+}
+
+.wf-council-seat-node:hover .wf-council-seat-card {
+  stroke: var(--accent);
+}
+
+.wf-council-seat-card {
+  fill: var(--bg-elev);
+  stroke: color-mix(in srgb, var(--line-strong) 75%, var(--line));
+  stroke-width: 1.2;
+}
+
+.wf-council-seat-halo {
+  fill: none;
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+  opacity: 0.7;
+}
+
+.wf-council-seat-name {
+  fill: var(--fg);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.wf-council-seat-lens {
+  fill: var(--muted);
+  font-size: 8px;
+}
+
+.wf-council-tiebreak-line {
+  stroke: var(--fam-anthropic);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+  opacity: 0.75;
+}
+
+.wf-council-tiebreak-box {
+  fill: color-mix(in srgb, var(--bg-elev) 85%, var(--bg));
+  stroke: color-mix(in srgb, var(--fam-anthropic) 55%, var(--line));
+  stroke-width: 1.1;
+  stroke-dasharray: 4 3;
+}
+
+.wf-council-tiebreak-title {
+  fill: var(--fg);
+  font-size: 8.8px;
+  font-weight: 600;
+}
+
+.wf-council-tiebreak-sub {
+  fill: var(--muted);
+  font-size: 7.5px;
+}
+
+.wf-seat-tab {
+  padding: 0.45rem 0.5rem;
+}
+
+.wf-seat-tab-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+}
+
+.wf-seat-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem 0.65rem;
+}
+
+.wf-seat-lens-pill {
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  padding: 0.12rem 0.48rem;
+  color: var(--accent);
+  font-family: var(--font-family);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.wf-seat-catches {
+  color: var(--muted);
+  font-size: 0.81rem;
+  line-height: 1.5;
+}
+
+.wf-seat-catches strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.wf-council-rules {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.wf-council-rule-card {
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  background: color-mix(in srgb, var(--bg) 68%, var(--bg-elev) 32%);
+  padding: 0.72rem 0.82rem;
+  box-shadow: var(--wf-card-shadow);
+}
+
+.wf-council-rule-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  color: var(--fg);
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.wf-council-rule-body {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.wf-loop-step-num {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+ * Ownership Swatches
  * ========================================================================== */
 
 .wf-lane-swatch {
@@ -81,657 +763,25 @@
 }
 
 /* ==========================================================================
- * 4-Step Workflow Loop with 2-Track Ownership Swimlanes
- * ========================================================================== */
-
-.wf-loop-stage {
-  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
-  background: color-mix(in srgb, var(--bg) 72%, var(--bg-elev) 28%);
-  padding: 0.9rem 0.9rem 0.75rem;
-}
-
-.wf-swimlane-shell {
-  display: grid;
-  grid-template-columns: 3.1rem minmax(0, 1fr);
-  gap: 0.65rem;
-  align-items: stretch;
-}
-
-.wf-swimlane-rails {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 0.55rem;
-}
-
-.wf-swimlane-rail {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 0.55rem;
-  border-right: 2px solid var(--line);
-  font-family: var(--font-family);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.wf-swimlane-rail-me {
-  color: var(--accent);
-  border-right-color: var(--accent);
-}
-
-.wf-swimlane-rail-agent {
-  color: var(--muted);
-  border-right-style: dashed;
-  border-right-color: color-mix(in srgb, var(--muted) 75%, var(--line));
-}
-
-.wf-swimlane-grid {
-  display: grid;
-  grid-template-columns:
-    minmax(0, 1fr) 1.75rem minmax(0, 1fr) 1.75rem minmax(0, 1fr) 1.75rem minmax(0, 1fr);
-  grid-template-rows: 1fr 1fr;
-  row-gap: 0.55rem;
-  column-gap: 0;
-  align-items: stretch;
-}
-
-.wf-loop-step-brief {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.wf-loop-step-worktree {
-  grid-column: 3;
-  grid-row: 2;
-}
-
-.wf-loop-step-review {
-  grid-column: 5;
-  grid-row: 1 / 3;
-}
-
-.wf-loop-step-test {
-  grid-column: 7;
-  grid-row: 1;
-}
-
-.wf-lane-wire {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  color: var(--muted);
-  transition: color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-lane-wire::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-left: 6px solid currentColor;
-  transform: translateY(-50%);
-}
-
-.wf-lane-wire.is-active {
-  color: var(--accent);
-}
-
-.wf-lane-wire svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.wf-lane-wire-12 {
-  grid-column: 2;
-  grid-row: 1 / 3;
-}
-
-.wf-lane-wire-12::after {
-  top: 76%;
-}
-
-.wf-lane-wire-23 {
-  grid-column: 4;
-  grid-row: 1 / 3;
-}
-
-.wf-lane-wire-23::after {
-  top: 76%;
-}
-
-.wf-lane-wire-34 {
-  grid-column: 6;
-  grid-row: 1 / 3;
-}
-
-.wf-lane-wire-34::after {
-  top: 24%;
-}
-
-.wf-loop-test-drops {
-  grid-column: 7;
-  grid-row: 2;
-  position: relative;
-  margin-top: -0.55rem;
-  margin-bottom: -0.5rem;
-  pointer-events: none;
-}
-
-.wf-loop-drop-fail {
-  position: absolute;
-  left: 33.333%;
-  top: 0;
-  bottom: 0;
-  border-left: 1.5px dashed var(--muted);
-  transition: border-color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-drop-fail.is-active {
-  border-left-color: var(--accent);
-}
-
-.wf-loop-drop-pass {
-  position: absolute;
-  left: 75%;
-  transform: translateX(-50%);
-  top: 0;
-  bottom: 0;
-  width: 1.5px;
-  background: var(--muted);
-  transition: background-color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-drop-pass.is-active {
-  background: var(--accent);
-}
-
-.wf-loop-step {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0.2rem;
-  min-width: 0;
-  padding: 0.62rem 0.72rem 0.58rem;
-  border: 1px solid color-mix(in srgb, var(--line) 75%, var(--muted) 25%);
-  background: var(--bg-elev);
-  text-align: left;
-  font-family: var(--font-family);
-  overflow-wrap: anywhere;
-  cursor: pointer;
-  transition:
-    border-color var(--motion-fast) var(--motion-ease-standard),
-    background-color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-step::before {
-  content: '';
-  position: absolute;
-  left: -1px;
-  right: -1px;
-  top: -1px;
-  height: 2px;
-}
-
-.wf-owner-me::before {
-  background: var(--accent);
-}
-
-.wf-owner-agent::before {
-  border-top: 2px dashed color-mix(in srgb, var(--muted) 80%, var(--line));
-}
-
-.wf-owner-both::before {
-  background: linear-gradient(90deg, var(--accent) 50%, color-mix(in srgb, var(--muted) 75%, var(--line)) 50%);
-}
-
-.wf-loop-step:hover {
-  border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
-}
-
-.wf-loop-step:hover .wf-loop-step-sub {
-  color: var(--fg);
-}
-
-.wf-loop-step[aria-selected='true'] {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 16%, var(--bg));
-}
-
-.wf-loop-step-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.12rem 0.42rem;
-  width: 100%;
-  min-width: 0;
-}
-
-.wf-loop-step-num {
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.wf-loop-step-title {
-  color: var(--fg);
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.25;
-  overflow-wrap: break-word;
-  min-width: 0;
-}
-
-.wf-loop-step-sub {
-  color: var(--muted);
-  font-size: 0.75rem;
-  line-height: 1.3;
-  transition: color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-step[aria-selected='true'] .wf-loop-step-sub {
-  color: color-mix(in srgb, var(--fg) 84%, var(--muted));
-}
-
-.wf-loop-step-lane-tag {
-  display: none;
-  margin-top: 0.12rem;
-  color: var(--muted);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.wf-owner-me .wf-loop-step-lane-tag {
-  color: var(--accent);
-}
-
-/* Grid-locked return path and merge exit sitting directly under the 4-step grid. */
-.wf-loop-return-grid {
-  display: grid;
-  grid-template-columns:
-    3.1rem 0.65rem minmax(0, 1fr) 1.75rem minmax(0, 1fr) 1.75rem minmax(0, 1fr) 1.75rem minmax(0, 1fr);
-  align-items: start;
-  margin-top: 0.15rem;
-}
-
-.wf-loop-return-arc {
-  grid-column: 5 / 10;
-  grid-row: 1;
-  position: relative;
-  margin-left: calc((100% - 3.5rem) / 6);
-  margin-right: calc((100% - 3.5rem) * 2 / 9);
-  padding-top: 1.55rem;
-  text-align: center;
-}
-
-.wf-loop-return-wire {
-  position: absolute;
-  top: 0.35rem;
-  left: 0;
-  right: 0;
-  height: 1.15rem;
-  border-left: 1.5px dashed var(--muted);
-  border-right: 1.5px dashed var(--muted);
-  border-bottom: 1.5px dashed var(--muted);
-  transition: border-color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-return-wire::before {
-  content: '';
-  position: absolute;
-  left: -4.5px;
-  top: -5px;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 6px solid var(--muted);
-  transition: border-bottom-color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-return-arc.is-active .wf-loop-return-wire {
-  border-color: var(--accent);
-}
-
-.wf-loop-return-arc.is-active .wf-loop-return-wire::before {
-  border-bottom-color: var(--accent);
-}
-
-.wf-loop-return-label {
-  display: inline-block;
-  margin-top: 0.2rem;
-  color: var(--muted);
-  font-family: var(--font-family);
-  font-size: 0.73rem;
-  line-height: 1.35;
-}
-
-.wf-loop-return-arc.is-active .wf-loop-return-label {
-  color: var(--fg);
-}
-
-.wf-loop-pass-exit {
-  grid-column: 9;
-  grid-row: 1;
-  justify-self: end;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.wf-loop-pass-stem {
-  position: relative;
-  width: 1.5px;
-  height: 1.25rem;
-  background: var(--muted);
-  transition: background-color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-pass-stem::after {
-  content: '';
-  position: absolute;
-  left: -3.25px;
-  bottom: -4px;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 6px solid var(--muted);
-  transition: border-top-color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-pass-exit.is-active .wf-loop-pass-stem {
-  background: var(--accent);
-}
-
-.wf-loop-pass-exit.is-active .wf-loop-pass-stem::after {
-  border-top-color: var(--accent);
-}
-
-/* Constant font-weight prevents label reflow on active state toggle */
-.wf-loop-pass-label {
-  margin-top: 0.48rem;
-  color: var(--muted);
-  font-family: var(--font-family);
-  font-size: 0.73rem;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: color var(--motion-fast) var(--motion-ease-standard);
-}
-
-.wf-loop-pass-exit.is-active .wf-loop-pass-label {
-  color: var(--accent);
-}
-
-/* Visually hidden on desktop so screen readers always hear the loop-back/merge path,
- * shown visually on narrow screens where swimlanes collapse. */
-.wf-loop-summary {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* ==========================================================================
- * Loop Detail Inspector + TUI Mini-Artifacts
- * ========================================================================== */
-
-.wf-detail-stack {
-  margin-top: 0.85rem;
-  border-top: 1px solid var(--line);
-  padding-top: 0.85rem;
-}
-
-.wf-detail-bar {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  align-items: start;
-  gap: 0.9rem 1.25rem;
-}
-
-.wf-detail-prose {
-  min-width: 0;
-}
-
-.wf-detail-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem 0.6rem;
-  margin-bottom: 0.35rem;
-}
-
-.wf-owner-badge {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  padding: 0.1rem 0.45rem;
-  color: var(--accent);
-  font-family: var(--font-family);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.wf-owner-badge-agent {
-  border-style: dashed;
-  border-color: color-mix(in srgb, var(--muted) 75%, var(--line));
-  background: transparent;
-  color: var(--muted);
-}
-
-.wf-detail-title {
-  color: var(--fg);
-  font-weight: 600;
-  font-size: 0.95rem;
-  line-height: 1.3;
-}
-
-.wf-detail-copy {
-  color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.55;
-}
-
-.wf-detail-example-inline {
-  margin-top: 0.55rem;
-  border-left: 2px solid var(--accent);
-  padding-left: 0.65rem;
-  color: var(--fg);
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
-.wf-detail-example-tag {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-/* Concrete TUI mini-artifact plate */
-.wf-artifact {
-  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
-  background: var(--bg);
-  padding: 0.65rem 0.78rem;
-  font-family: var(--font-family);
-  font-size: 0.76rem;
-  line-height: 1.45;
-  min-width: 0;
-}
-
-.wf-artifact-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 0.35rem;
-  margin-bottom: 0.45rem;
-  color: var(--muted);
-  font-size: 0.67rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.wf-artifact-step-tag {
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-
-.wf-artifact-kv {
-  margin: 0;
-  display: grid;
-  gap: 0.32rem;
-}
-
-.wf-artifact-kv-row {
-  display: grid;
-  grid-template-columns: 3.4rem minmax(0, 1fr);
-  gap: 0.5rem;
-  align-items: baseline;
-}
-
-.wf-artifact-kv-row dt {
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.wf-artifact-kv-row dd {
-  margin: 0;
-  color: var(--fg);
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-.wf-artifact-tree {
-  display: grid;
-  gap: 0.28rem;
-}
-
-.wf-artifact-tree-root {
-  color: var(--fg);
-  font-weight: 600;
-}
-
-.wf-artifact-tree-branch {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.15rem 0.55rem;
-  border-left: 1px solid color-mix(in srgb, var(--accent) 60%, var(--line));
-  padding-left: 0.6rem;
-  margin-left: 0.25rem;
-}
-
-.wf-artifact-branch-name {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.wf-artifact-branch-meta {
-  color: var(--muted);
-}
-
-.wf-artifact-diff {
-  display: grid;
-  gap: 0.28rem;
-}
-
-.wf-artifact-diff-row {
-  display: grid;
-  grid-template-columns: 0.9rem minmax(0, 1fr);
-  gap: 0.35rem;
-  padding: 0.14rem 0.35rem;
-}
-
-.wf-artifact-diff-del {
-  background: color-mix(in srgb, var(--muted) 10%, transparent);
-  color: var(--muted);
-}
-
-.wf-artifact-diff-add {
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
-  color: var(--fg);
-}
-
-.wf-artifact-diff-trim {
-  border-left: 2px dashed var(--muted);
-  color: var(--muted);
-  text-decoration: line-through;
-}
-
-.wf-artifact-diff-mark {
-  font-weight: 600;
-}
-
-.wf-artifact-diff-add .wf-artifact-diff-mark {
-  color: var(--accent);
-}
-
-.wf-artifact-gate {
-  display: grid;
-  gap: 0.32rem;
-}
-
-.wf-artifact-gate-row {
-  display: grid;
-  grid-template-columns: auto 2.3rem minmax(0, 1fr);
-  gap: 0.4rem;
-  align-items: baseline;
-}
-
-.wf-artifact-check {
-  color: var(--accent);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.wf-artifact-gate-key {
-  color: var(--muted);
-  text-transform: uppercase;
-  font-size: 0.69rem;
-  letter-spacing: 0.05em;
-}
-
-.wf-artifact-gate-val {
-  color: var(--fg);
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-/* ==========================================================================
  * Segmented Controls (44px min touch height, paint-only active state)
  * ========================================================================== */
 
 .wf-tab-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.5rem;
+  gap: 0.48rem;
 }
 
 .wf-tab-row-two {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.wf-tab-row-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.wf-tab-row-five {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .wf-tab-btn {
@@ -739,18 +789,18 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 0.2rem;
+  gap: 0.16rem;
   min-width: 0;
   min-height: 2.85rem;
-  padding: 0.55rem 0.75rem;
+  padding: 0.5rem 0.65rem;
   border: 1px solid color-mix(in srgb, var(--line) 78%, var(--muted) 22%);
-  background: color-mix(in srgb, var(--bg) 56%, transparent);
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
   color: var(--muted);
   text-align: left;
   font-family: var(--font-family);
-  font-size: 0.8125rem;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
+  font-size: 0.8rem;
+  line-height: 1.28;
+  overflow-wrap: break-word;
   cursor: pointer;
   transition:
     border-color var(--motion-fast) var(--motion-ease-standard),
@@ -772,9 +822,9 @@
 
 .wf-tab-num {
   color: var(--accent);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -783,8 +833,14 @@
   color: inherit;
 }
 
+.wf-artifact-check {
+  color: var(--accent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ==========================================================================
- * Verification Cases (Section 02) — Balanced Diagnostic Bench
+ * Verification Cases (RealCheckCases)
  * ========================================================================== */
 
 .wf-check-stack {
@@ -804,7 +860,7 @@
   align-items: baseline;
   gap: 0.25rem 0.65rem;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg) 52%, transparent);
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
   padding: 0.58rem 0.88rem;
   font-size: 0.84rem;
   line-height: 1.45;
@@ -829,9 +885,10 @@
   flex-direction: column;
   gap: 0.75rem;
   height: 100%;
-  border: 1px solid color-mix(in srgb, var(--accent) 58%, var(--line));
-  background: color-mix(in srgb, var(--accent) 6%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg));
   padding: 0.9rem 1rem;
+  box-shadow: var(--wf-card-shadow);
 }
 
 .wf-check-label {
@@ -865,7 +922,6 @@
   padding-top: 0.75rem;
 }
 
-/* Proportional metric bars + honest range bands */
 .wf-bars {
   display: grid;
   gap: 0.42rem;
@@ -942,7 +998,7 @@
   font-weight: 600;
 }
 
-/* Process isolation schematic (angl) & SSH topology (Herdwick) */
+/* Process isolation schematic & SSH topology */
 .wf-proc-schematic,
 .wf-topo-row {
   display: grid;
@@ -959,6 +1015,7 @@
   background: var(--bg);
   padding: 0.65rem 0.78rem;
   min-width: 0;
+  box-shadow: var(--wf-card-shadow);
 }
 
 .wf-proc-main,
@@ -1177,15 +1234,18 @@
 }
 
 /* ==========================================================================
- * Worktree Diagram (Section 03)
+ * Worktree Diagram
  * ========================================================================== */
 
 .wf-wt-stage {
   margin-top: 0.85rem;
   align-items: center;
-  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
-  background: color-mix(in srgb, var(--bg) 72%, var(--bg-elev) 28%);
-  padding: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--wf-dot-color) 1px, transparent 1px);
+  background-size: 16px 16px;
+  padding: 0.95rem;
+  box-shadow: inset 0 2px 12px rgb(0 0 0 / 0.18);
 }
 
 .wf-wt-flow {
@@ -1218,6 +1278,7 @@
   padding: 0.62rem 0.75rem;
   min-width: 0;
   overflow-wrap: anywhere;
+  box-shadow: var(--wf-card-shadow);
 }
 
 .wf-wt-box-accent {
@@ -1225,8 +1286,8 @@
 }
 
 .wf-wt-box-branch {
-  border-color: color-mix(in srgb, var(--accent) 76%, var(--line));
-  background: color-mix(in srgb, var(--accent) 9%, var(--bg-elev));
+  border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-elev));
 }
 
 .wf-wt-box-warn {
@@ -1235,6 +1296,9 @@
 }
 
 .wf-wt-box-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--fg);
   font-family: var(--font-family);
   font-size: 0.82rem;
@@ -1350,7 +1414,7 @@
 }
 
 /* ==========================================================================
- * Stage-Wired Tooling Hub (Section 04)
+ * Stage-Wired Tooling Hub
  * ========================================================================== */
 
 .wf-hub-row {
@@ -1386,6 +1450,7 @@
   border: 1px solid var(--accent);
   background: color-mix(in srgb, var(--accent) 8%, var(--bg));
   padding: 0.7rem 0.9rem;
+  box-shadow: var(--wf-card-shadow);
 }
 
 .wf-hub-spine-head {
@@ -1453,8 +1518,9 @@
   justify-content: space-between;
   gap: 0.7rem;
   border: 1px solid color-mix(in srgb, var(--line) 80%, var(--muted) 20%);
-  background: color-mix(in srgb, var(--bg) 58%, transparent);
+  background: color-mix(in srgb, var(--bg) 62%, var(--bg-elev) 38%);
   padding: 0.85rem 0.95rem;
+  box-shadow: var(--wf-card-shadow);
   transition: border-color var(--motion-fast) var(--motion-ease-standard);
 }
 
@@ -1516,12 +1582,13 @@
 }
 
 /* ==========================================================================
- * Paired Finishing Ledger (Section 05)
+ * Paired Finishing Ledger
  * ========================================================================== */
 
 .wf-finish-ledger {
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--bg) 62%, transparent);
+  box-shadow: var(--wf-card-shadow);
 }
 
 .wf-finish-ledger-head {
@@ -1572,8 +1639,6 @@
   background: color-mix(in srgb, var(--accent) 5%, transparent);
 }
 
-/* Screen-reader accessible on desktop (where column headers are visible);
- * rendered visually on narrow screens where rows stack vertically. */
 .wf-finish-cell-kicker {
   position: absolute;
   width: 1px;
@@ -1599,11 +1664,11 @@
 .wf-finish-cell-demo p,
 .wf-finish-cell-ship p {
   display: grid;
-  grid-template-columns: 0.9rem minmax(0, 1fr);
-  gap: 0.4rem;
+  grid-template-columns: 0.85rem minmax(0, 1fr);
+  gap: 0.35rem;
   align-items: baseline;
-  font-size: 0.85rem;
-  line-height: 1.48;
+  font-size: 0.86rem;
+  line-height: 1.5;
 }
 
 .wf-finish-cell-demo p {
@@ -1617,7 +1682,7 @@
 .wf-finish-mark {
   color: var(--accent);
   font-family: var(--font-family);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .wf-finish-mark-dim {
@@ -1625,104 +1690,48 @@
 }
 
 .wf-finish-apps {
-  margin-top: 0.45rem;
-  padding-left: 1.3rem;
+  margin-top: 0.48rem;
+  padding-left: 1.2rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
 }
 
 .wf-finish-app-tag {
-  border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--line));
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
   background: var(--bg);
-  padding: 0.1rem 0.42rem;
+  padding: 0.1rem 0.44rem;
   color: var(--muted);
   font-family: var(--font-family);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
 }
 
 /* ==========================================================================
- * Responsive Breakpoints (720px, 520px, 420px)
+ * Responsive Breakpoints
  * ========================================================================== */
 
-@media (max-width: 720px) {
-  .wf-swimlane-shell {
+@media (max-width: 920px) {
+  .wf-stack-layout,
+  .wf-council-layout {
     grid-template-columns: 1fr;
   }
 
-  .wf-swimlane-rails,
-  .wf-lane-wire,
-  .wf-loop-test-drops,
-  .wf-loop-return-grid {
-    display: none;
+  .wf-council-rules {
+    grid-template-columns: 1fr;
   }
+}
 
-  .wf-swimlane-grid {
+@media (max-width: 780px) {
+  .wf-tab-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto;
-    gap: 0.5rem;
   }
 
-  .wf-loop-step-brief,
-  .wf-loop-step-worktree,
-  .wf-loop-step-review,
-  .wf-loop-step-test {
-    grid-column: auto;
-    grid-row: auto;
+  .wf-tab-row-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .wf-loop-step-lane-tag {
-    display: inline-block;
-  }
-
-  .wf-loop-summary {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 0.7rem 0 0;
-    padding-top: 0.6rem;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-    border-top: 1px dashed color-mix(in srgb, var(--muted) 55%, var(--line));
-    color: var(--muted);
-    font-family: var(--font-family);
-    font-size: 0.75rem;
-    line-height: 1.48;
-  }
-
-  .wf-detail-bar,
-  .wf-ownership-strip,
-  .wf-hub-row,
-  .wf-proc-schematic,
-  .wf-topo-row {
-    grid-template-columns: 1fr;
-  }
-
-  .wf-proc-link,
-  .wf-topo-tunnel {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.15rem 0;
-  }
-
-  .wf-proc-line {
-    min-width: 0;
-    width: 1.5px;
-    height: 1.35rem;
-  }
-
-  .wf-proc-line::after {
-    right: auto;
-    left: -3.25px;
-    top: auto;
-    bottom: -4px;
-    border-top: 6px solid var(--accent);
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 0;
+  .wf-tab-row-five {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .wf-wt-flow,
@@ -1739,17 +1748,45 @@
     display: flex;
   }
 
-  .wf-tab-row,
+  .wf-ownership-strip,
+  .wf-hub-row,
+  .wf-mem-diff,
+  .wf-topo-checks {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-hub-connectors {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-hub-stem:last-child {
+    display: none;
+  }
+
   .wf-hub-bus {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .wf-hub-connectors {
-    display: none;
+  .wf-proc-schematic,
+  .wf-topo-row {
+    grid-template-columns: 1fr;
   }
 
-  .wf-hub-spine {
-    margin: 0.65rem 0;
+  .wf-proc-line {
+    width: 1.5px;
+    min-width: 0;
+    height: 1.4rem;
+  }
+
+  .wf-proc-line::after {
+    right: auto;
+    left: -3.25px;
+    top: auto;
+    bottom: -4px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid var(--accent);
+    border-bottom: 0;
   }
 
   .wf-finish-ledger-head {
@@ -1770,7 +1807,7 @@
     display: block;
     width: auto;
     height: auto;
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.28rem;
     overflow: visible;
     clip: auto;
     white-space: normal;
@@ -1778,95 +1815,38 @@
 }
 
 @media (max-width: 520px) {
-  .wf-loop-step {
-    padding: 0.55rem 0.6rem;
-  }
-
-  .wf-loop-step-top {
-    flex-direction: column;
-    gap: 0.12rem;
-  }
-
-  .wf-loop-step-title {
-    font-size: 0.8125rem;
-  }
-
-  .wf-mem-diff,
-  .wf-topo-checks {
+  .wf-workbench-bar {
     grid-template-columns: 1fr;
   }
 
-  .wf-omalo-plate {
-    gap: 0.5rem;
+  .wf-tab-row-three,
+  .wf-tab-row-five {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .wf-mem-diff {
-    gap: 0.45rem;
-  }
-
-  .wf-mem-col {
-    padding: 0.5rem 0.62rem;
-  }
-
-  .wf-slot-grid {
-    gap: 0.22rem;
-    margin-bottom: 0.35rem;
-  }
-
-  .wf-slot-cell {
-    padding: 0.18rem 0.2rem;
-    font-size: 0.66rem;
-  }
-
-  /* Stack label + value above a full-width bar so bars never collapse at 320px. */
   .wf-bar-row {
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-      'name val'
-      'track track';
-    row-gap: 0.25rem;
-    column-gap: 0.5rem;
-    font-size: 0.74rem;
-  }
-
-  .wf-bar-name {
-    grid-area: name;
-  }
-
-  .wf-bar-val {
-    grid-area: val;
-  }
-
-  .wf-bar-track {
-    grid-area: track;
-    width: 100%;
+    grid-template-columns: 5.8rem minmax(3rem, 1fr) 5.8rem;
+    font-size: 0.7rem;
   }
 }
 
 @media (max-width: 420px) {
-  .wf-swimlane-grid,
   .wf-tab-row,
   .wf-tab-row-two,
-  .wf-hub-bus {
+  .wf-tab-row-three,
+  .wf-tab-row-five {
     grid-template-columns: 1fr;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wf-panel-slot,
-  .wf-loop-step,
-  .wf-loop-step-sub,
-  .wf-lane-wire,
-  .wf-loop-drop-fail,
-  .wf-loop-drop-pass,
-  .wf-loop-return-wire,
-  .wf-loop-return-wire::before,
-  .wf-loop-pass-stem,
-  .wf-loop-pass-stem::after,
-  .wf-loop-pass-label,
+  .wf-iso-layer,
+  .wf-workbench-tab,
+  .wf-council-beam,
+  .wf-council-seat-node,
   .wf-tab-btn,
-  .wf-hub-bus-node,
-  .wf-tool-card {
+  .wf-tool-card,
+  .wf-hub-bus-node {
     transition: none;
   }
 }

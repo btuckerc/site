@@ -20,7 +20,7 @@ const pages = [
   {
     route: '/workflow',
     title: 'How I build with AI - Tucker Craig',
-    description: 'How I use coding agents to build and test my own apps across Mac, Windows, iOS, and hardware.',
+    description: 'How I split work across Gemini 4 Neon, Claude Opus 5.5, GPT-6.2 Sol, local Qwen 3.8, and a five-model blind council to build and test my own apps.',
     image: 'https://btuckerc.dev/og/workflow.jpg',
     imageAlt: 'Tucker Craig, workflow: how I build with AI.',
     type: 'article'
