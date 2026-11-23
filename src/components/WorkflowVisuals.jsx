@@ -61,14 +61,14 @@ const STACK_LAYERS = [
         effort: 'high',
         family: 'google',
         runner: 'Antigravity (agy)',
-        role: 'Primary director for daily work, integration, and verification.',
+        role: 'Primary director for daily work, prose, design, and verification.',
       },
       {
         name: 'Claude Opus 5.5',
         effort: 'high',
         family: 'anthropic',
         runner: 'Claude Code',
-        role: 'Peer director sharing the same rules, hooks, and worker wrapper.',
+        role: 'Peer director for coordinating multi-step work and overall product quality.',
       },
     ],
     receiptTitle: 'Director rule',
@@ -93,7 +93,7 @@ const STACK_LAYERS = [
         effort: 'high',
         family: 'openai',
         runner: 'agent-run sol · worktree',
-        role: 'Hard implementation in an isolated Git worktree. Returns result.patch.',
+        role: 'Detail-oriented worker for hard changes in an isolated Git worktree. Returns result.patch.',
       },
       {
         name: 'Qwen 3.8 27B',
@@ -161,9 +161,9 @@ const COUNCIL_SEATS = [
     model: 'GPT-6.2 Sol',
     effort: 'xhigh',
     family: 'openai',
-    lens: 'Breaker',
-    plain: 'Tries to break the change with concrete inputs, edge states, and race conditions.',
-    catches: 'Boundary bugs, subtle state leaks, and checks that passed only on the happy path.',
+    familyLabel: 'OpenAI',
+    whyIUseIt: 'Detail-oriented. Good at catching small mistakes and edge cases that are easy to gloss over.',
+    briefPrompt: 'In council, its brief asks it to try to make the change fail with concrete inputs.',
     x: 68,
     y: 164,
     sample: {
@@ -180,9 +180,9 @@ const COUNCIL_SEATS = [
     model: 'Claude Opus 5.5',
     effort: 'high',
     family: 'anthropic',
-    lens: 'Skeptic',
-    plain: 'Attacks the premise and asks whether the evidence actually proves what the diff claims.',
-    catches: 'Unstated assumptions, mismatched contracts, and checks that never exercised the real path.',
+    familyLabel: 'Anthropic',
+    whyIUseIt: 'Strong at coordinating multi-step work and consistently high quality in the finished product.',
+    briefPrompt: 'In council, its brief asks it to question assumptions in the review packet.',
     x: 134,
     y: 78,
     sample: {
@@ -199,9 +199,9 @@ const COUNCIL_SEATS = [
     model: 'Claude Fable',
     effort: 'high',
     family: 'anthropic',
-    lens: 'Simplifier',
-    plain: 'Looks for extra layers, dead flags, and code that can be deleted without losing behavior.',
-    catches: 'Over-engineered helpers, premature abstractions, and patches that grew past the brief.',
+    familyLabel: 'Anthropic',
+    whyIUseIt: 'Strong eye for design and visual polish alongside Neon.',
+    briefPrompt: 'In council, its brief asks what can be simplified or cut.',
     x: 230,
     y: 50,
     sample: {
@@ -218,9 +218,9 @@ const COUNCIL_SEATS = [
     model: 'GPT-6.2 Astra',
     effort: 'high',
     family: 'openai',
-    lens: 'Scenario',
-    plain: 'Walks the real user flow from start to finish to see where the experience breaks down.',
-    catches: 'Broken keyboard focus, confusing error states, and rough handoffs between screens.',
+    familyLabel: 'OpenAI',
+    whyIUseIt: "I haven't been burning through my Codex subscription lately, so Astra puts those spare tokens to work as another independent review.",
+    briefPrompt: 'In council, its brief asks it to walk through real end-to-end use.',
     x: 326,
     y: 78,
     sample: {
@@ -237,9 +237,9 @@ const COUNCIL_SEATS = [
     model: 'Gemini 4 Neon',
     effort: 'read-only',
     family: 'google',
-    lens: 'Fresh lens',
-    plain: 'Starts fresh with zero prior chat history to spot blind spots and cleaner designs.',
-    catches: 'Naming drift, unclear structure, and simpler paths the author stopped noticing.',
+    familyLabel: 'Google',
+    whyIUseIt: 'My go-to for prose and design. Clean writing and a fresh perspective when it sits in on review.',
+    briefPrompt: 'In council, it starts fresh with no prior chat history and checks for blind spots and clarity.',
     x: 392,
     y: 164,
     sample: {
@@ -852,7 +852,7 @@ function CouncilRoundtableSvg({ activeIndex, onSelect, uid }) {
               {seat.name}
             </text>
             <text x={seat.x} y={seat.y + 12} textAnchor="middle" className="wf-council-seat-lens">
-              {seat.lens}
+              {seat.familyLabel}
             </text>
           </g>
         )
@@ -915,7 +915,7 @@ export function FullCouncilDiagram({ compact = false }) {
               <span className={`wf-fam-dot wf-fam-${seat.family}`} aria-hidden="true" />
               <span className="wf-tab-title">{seat.name}</span>
             </span>
-            <span className="wf-tab-num">{seat.lens}</span>
+            <span className="wf-tab-num">{seat.familyLabel}</span>
           </button>
         ))}
       </div>
@@ -947,12 +947,12 @@ export function FullCouncilDiagram({ compact = false }) {
                       <span className="wf-detail-title">{seat.model}</span>
                       <span className="wf-model-effort">{seat.effort}</span>
                     </span>
-                    <span className="wf-seat-lens-pill">{seat.lens}</span>
+                    <span className="wf-seat-lens-pill">{seat.familyLabel}</span>
                   </div>
 
-                  <p className="wf-detail-copy">{seat.plain}</p>
+                  <p className="wf-detail-copy">{seat.whyIUseIt}</p>
                   <p className="wf-seat-catches">
-                    <strong>What it catches:</strong> {seat.catches}
+                    <strong>Council prompt:</strong> {seat.briefPrompt}
                   </p>
 
                   <div className="wf-receipt-plate" role="group" aria-label={`Illustrative ${seat.name} JSON result`}>

@@ -129,7 +129,7 @@ export default function Workflow() {
                     <a href="#council">Five models, blind review</a>
                   </h2>
                   <p className="case-study-copy mt-4">
-                    The easiest mistake with coding agents is asking the model that wrote a diff whether the diff looks good. For big changes or tricky design calls, I run a full council (adapted from Theo Browne&apos;s <code>council</code> and <code>sol-loop</code>): five read-only seats across three model families, each with a different lens.
+                    The easiest mistake with coding agents is asking the model that wrote a diff whether the diff looks good. For big changes or tricky design calls, I run a full council (adapted from Theo Browne&apos;s <code>council</code> and <code>sol-loop</code>): five read-only seats across three model families, each given a slightly different review prompt.
                   </p>
                   <p className="case-study-copy mt-4">
                     Every seat reads the same frozen <code>git archive</code> snapshot and diff. Nobody sees another seat&apos;s findings, my reasoning, or whether I have a target score in mind. Independent first opinions carry most of the value, and reviewer precision is still low even with strong models, so agreement between seats is never proof. I check every claim against the code or write a test before fixing or declining it.

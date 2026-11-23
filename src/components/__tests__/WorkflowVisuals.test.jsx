@@ -63,7 +63,7 @@ describe('WorkflowVisuals', () => {
 
     expect(solTab).toHaveAttribute('aria-selected', 'true')
     expect(screen.getByRole('tabpanel')).toHaveTextContent(/GPT-6\.2 Sol/)
-    expect(screen.getByRole('tabpanel')).toHaveTextContent(/Breaker/)
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(/Detail-oriented/)
 
     solTab.focus()
     await user.keyboard('{ArrowRight}')
