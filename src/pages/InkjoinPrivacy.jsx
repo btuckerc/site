@@ -15,8 +15,17 @@ const policySections = [
         </p>
         <p className="mt-4">
           The first time you solve each daily puzzle, Inkjoin sends the puzzle date, how long it took
-          in whole seconds, and whether you used hints. There&apos;s no account or identifier, so none of
-          it is tied to you. I only use it to tune puzzle difficulty, and it&apos;s stored in a Cloudflare D1 database.
+          in whole seconds, and whether you used hints. Along with that report, the server records
+          the UTC receipt time, app build number, coarse country code, and local hour (0–23) derived
+          ephemerally at the Cloudflare edge. Your IP address is never logged or stored, and there&apos;s
+          no account or device identifier, so none of it is tied to you. I use it to tune puzzle
+          difficulty and understand how the daily board is played, and it&apos;s stored in a Cloudflare
+          D1 database.
+        </p>
+        <p className="mt-4">
+          Opening a public share link on inkjoin.btuckerc.dev also increments aggregate daily counters
+          (link-preview fetches by route, and browser visits by route and coarse country) without
+          storing shared puzzle tokens, URLs, or IP addresses.
         </p>
       </>
     ),
@@ -26,8 +35,9 @@ const policySections = [
     content: (
       <p>
         Daily puzzles download from my server at inkjoin.btuckerc.dev, hosted on Cloudflare. Once a
-        puzzle downloads, it works offline. The request sends standard HTTP info (including your IP
-        address) to Cloudflare, and I don&apos;t log or store any of it.
+        puzzle downloads, it works offline. Fetching daily puzzles sends standard HTTP info (including
+        your IP address) to Cloudflare, and I don&apos;t log or store anything from puzzle download
+        requests.
       </p>
     ),
   },
@@ -44,9 +54,9 @@ const policySections = [
     title: 'Purchases',
     content: (
       <p>
-        Inkjoin Full is bought through Apple. Apple handles the payment, and I never receive any
-        payment or personal details. The app just checks with the App Store to see if the purchase
-        is active on your device.
+        Optional in-app purchases (such as Inkjoin Full) are bought through Apple. Apple handles the
+        payment, and I never receive any payment or personal details. The app just checks with the
+        App Store to see which purchases are active on your device.
       </p>
     ),
   },
