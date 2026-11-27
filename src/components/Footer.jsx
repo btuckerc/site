@@ -9,8 +9,8 @@ const socialLinks = [
   { name: 'tuckercraig.com', url: 'https://tuckercraig.com/', key: 'tc', label: 'Visit tuckercraig.com' },
   { name: 'github', url: 'https://github.com/btuckerc', key: 'gh', label: 'Visit github profile' },
   { name: 'linkedin', url: 'https://www.linkedin.com/in/tucker-craig/', key: 'in', label: 'Visit linkedin profile' },
-  { name: 'twitter', url: 'https://x.com/btuckercdev', key: 'tw', label: 'Visit twitter profile' },
-  { name: 'instagram', url: 'https://www.instagram.com/btuckerc.dev/', key: 'ig', label: 'Visit instagram profile' },
+  { name: 'twitter', url: 'https://x.com/tuxmakes', key: 'tw', label: 'Visit twitter profile' },
+  { name: 'instagram', url: 'https://www.instagram.com/tuxmakes/', key: 'ig', label: 'Visit instagram profile' },
   { name: 'spotify', url: 'https://open.spotify.com/user/tuxedo7777', key: 'sp', label: 'Visit spotify profile' },
   { name: 'soundcloud', url: 'https://soundcloud.com/tuxix', key: 'sc', label: 'Visit soundcloud profile' },
 ]

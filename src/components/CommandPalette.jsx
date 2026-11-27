@@ -108,18 +108,25 @@ const CommandPalette = ({ isOpen, onClose, returnFocusRef = null }) => {
       keywords: ['linkedin', 'profile', 'professional', 'social']
     },
     {
+      id: 'tuxmakes',
+      title: 'open tuxmakes.dev',
+      description: 'streams, videos, and social links',
+      action: () => window.open('https://tuxmakes.dev/', '_blank', 'noopener,noreferrer'),
+      keywords: ['tuxmakes', 'tux', 'twitch', 'youtube', 'streams', 'videos', 'social']
+    },
+    {
       id: 'twitter',
       title: 'open x',
-      description: 'visit x profile',
-      action: () => window.open('https://x.com/btuckercdev', '_blank', 'noopener,noreferrer'),
-      keywords: ['twitter', 'x', 'social', 'profile']
+      description: 'visit x profile (@TuxMakes)',
+      action: () => window.open('https://x.com/tuxmakes', '_blank', 'noopener,noreferrer'),
+      keywords: ['twitter', 'x', 'tuxmakes', 'social', 'profile']
     },
     {
       id: 'instagram',
       title: 'open instagram',
-      description: 'visit instagram profile',
-      action: () => window.open('https://www.instagram.com/btuckerc.dev/', '_blank', 'noopener,noreferrer'),
-      keywords: ['instagram', 'ig', 'social', 'profile']
+      description: 'visit instagram profile (@tuxmakes)',
+      action: () => window.open('https://www.instagram.com/tuxmakes/', '_blank', 'noopener,noreferrer'),
+      keywords: ['instagram', 'ig', 'tuxmakes', 'social', 'profile']
     },
     {
       id: 'theme',

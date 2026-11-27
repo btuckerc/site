@@ -309,10 +309,11 @@ const buildLlmsTxt = () => {
   const lines = [
     '# Tucker Craig — btuckerc.dev',
     '',
-    '> Software engineering portfolio of Tucker Craig (Davidson College alumnus, GitHub @btuckerc, X @btuckercdev) featuring macOS, Windows, iOS, and ESP32-S3 hardware projects plus his multi-model coding-agent workflow.',
+    '> Software engineering portfolio of Tucker Craig (Tux, Davidson College alumnus, GitHub @btuckerc, @TuxMakes) featuring macOS, Windows, iOS, and ESP32-S3 hardware projects plus his multi-model coding-agent workflow.',
     '',
     '## Identity & Official Hub',
     `- [Tucker Craig Official Site & Bio](${HUB_URL}/): Canonical site, biography, verified profiles, and web archive (including /dino/ and /DIG101/).`,
+    '- [Tux Makes (tuxmakes.dev)](https://tuxmakes.dev/): Creator hub for live builds, streams, and short demos (@TuxMakes).',
     `- [tuckercraig.com llms.txt](${HUB_URL}/llms.txt): Agent index for tuckercraig.com.`,
     `- [Full Site Markdown Export](${SITE_URL}/llms-full.txt): Single-file Markdown corpus of all core pages and the complete ${projectCount}-project catalog.`,
     '',
@@ -336,9 +337,14 @@ const buildLlmsTxt = () => {
 
   lines.push('## Verified Profiles')
   lines.push(`- Official Site: ${HUB_URL}/`)
+  lines.push('- Creator Hub: https://tuxmakes.dev/')
   lines.push('- GitHub: https://github.com/btuckerc')
   lines.push('- LinkedIn: https://www.linkedin.com/in/tucker-craig/')
-  lines.push('- X: https://x.com/btuckercdev')
+  lines.push('- Twitch: https://www.twitch.tv/tuxmakes')
+  lines.push('- YouTube: https://www.youtube.com/@tuxmakes')
+  lines.push('- X: https://x.com/tuxmakes')
+  lines.push('- TikTok: https://www.tiktok.com/@tuxmakes')
+  lines.push('- Instagram: https://www.instagram.com/tuxmakes/')
   lines.push('- Email: hello@tuckercraig.com (primary), btuckerc.dev@gmail.com (projects)')
   lines.push('')
 

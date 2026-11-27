@@ -1,9 +1,10 @@
 # Tucker Craig — btuckerc.dev
 
-> Software engineering portfolio of Tucker Craig (Davidson College alumnus, GitHub @btuckerc, X @btuckercdev) featuring macOS, Windows, iOS, and ESP32-S3 hardware projects plus his multi-model coding-agent workflow.
+> Software engineering portfolio of Tucker Craig (Tux, Davidson College alumnus, GitHub @btuckerc, @TuxMakes) featuring macOS, Windows, iOS, and ESP32-S3 hardware projects plus his multi-model coding-agent workflow.
 
 ## Identity & Official Hub
 - [Tucker Craig Official Site & Bio](https://tuckercraig.com/): Canonical site, biography, verified profiles, and web archive (including /dino/ and /DIG101/).
+- [Tux Makes (tuxmakes.dev)](https://tuxmakes.dev/): Creator hub for live builds, streams, and short demos (@TuxMakes).
 - [tuckercraig.com llms.txt](https://tuckercraig.com/llms.txt): Agent index for tuckercraig.com.
 - [Full Site Markdown Export](https://btuckerc.dev/llms-full.txt): Single-file Markdown corpus of all core pages and the complete 29-project catalog.
 
@@ -27,7 +28,12 @@
 
 ## Verified Profiles
 - Official Site: https://tuckercraig.com/
+- Creator Hub: https://tuxmakes.dev/
 - GitHub: https://github.com/btuckerc
 - LinkedIn: https://www.linkedin.com/in/tucker-craig/
-- X: https://x.com/btuckercdev
+- Twitch: https://www.twitch.tv/tuxmakes
+- YouTube: https://www.youtube.com/@tuxmakes
+- X: https://x.com/tuxmakes
+- TikTok: https://www.tiktok.com/@tuxmakes
+- Instagram: https://www.instagram.com/tuxmakes/
 - Email: hello@tuckercraig.com (primary), btuckerc.dev@gmail.com (projects)

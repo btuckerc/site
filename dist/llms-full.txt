@@ -5,7 +5,7 @@
 - Official Site: https://tuckercraig.com/
 - Portfolio: https://btuckerc.dev/
 - Email: hello@tuckercraig.com (primary), btuckerc.dev@gmail.com (projects)
-- Verified Profiles: https://btuckerc.dev/, https://btuckerc.dev/about, https://github.com/btuckerc, https://www.linkedin.com/in/tucker-craig/, https://x.com/btuckercdev, https://www.instagram.com/btuckerc.dev/, https://www.twitch.tv/itux, https://open.spotify.com/user/tuxedo7777, https://soundcloud.com/tuxix
+- Verified Profiles: https://btuckerc.dev/, https://btuckerc.dev/about, https://tuxmakes.dev/, https://github.com/btuckerc, https://www.linkedin.com/in/tucker-craig/, https://www.twitch.tv/tuxmakes, https://www.youtube.com/@tuxmakes, https://x.com/tuxmakes, https://www.tiktok.com/@tuxmakes, https://www.instagram.com/tuxmakes/, https://open.spotify.com/user/tuxedo7777, https://soundcloud.com/tuxix
 
 ---
 
@@ -770,7 +770,7 @@ Hello, world! I'm Tucker. A lot of what I build starts with something small that
 
 Right now I'm building tools for myself across Mac, Windows, and iOS, plus writing firmware for a little Arduino handheld called [omalo](https://btuckerc.dev/projects/omalo). Most problems feel solvable lately if someone just decides to point their tokens at them.
 
-I stream on [Twitch](https://www.twitch.tv/itux) from time to time. Hoping to do it more soon.
+I stream builds on [Twitch](https://www.twitch.tv/tuxmakes) and share demos at [tuxmakes.dev](https://tuxmakes.dev/).
 
 I also sang a cappella in [The Nuances](https://open.spotify.com/track/5CV2w2PIbKouRr2jNKjJIR) at Davidson.
 
@@ -1436,13 +1436,15 @@ Canonical: https://btuckerc.dev/contact
 
 - [tuckercraig.com](https://tuckercraig.com/)
 
+- [tuxmakes.dev](https://tuxmakes.dev/)
+
 - [linkedin](https://www.linkedin.com/in/tucker-craig/)
 
 - [github](https://github.com/btuckerc)
 
-- [x](https://x.com/btuckercdev)
+- [x (@TuxMakes)](https://x.com/tuxmakes)
 
-- [instagram](https://www.instagram.com/btuckerc.dev/)
+- [instagram](https://www.instagram.com/tuxmakes/)
 
 ---
 

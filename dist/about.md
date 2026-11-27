@@ -14,7 +14,7 @@ Hello, world! I'm Tucker. A lot of what I build starts with something small that
 
 Right now I'm building tools for myself across Mac, Windows, and iOS, plus writing firmware for a little Arduino handheld called [omalo](https://btuckerc.dev/projects/omalo). Most problems feel solvable lately if someone just decides to point their tokens at them.
 
-I stream on [Twitch](https://www.twitch.tv/itux) from time to time. Hoping to do it more soon.
+I stream builds on [Twitch](https://www.twitch.tv/tuxmakes) and share demos at [tuxmakes.dev](https://tuxmakes.dev/).
 
 I also sang a cappella in [The Nuances](https://open.spotify.com/track/5CV2w2PIbKouRr2jNKjJIR) at Davidson.
 

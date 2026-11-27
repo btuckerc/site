@@ -25,17 +25,27 @@ const AboutCard = () => (
       {aboutData.currentWork.split('omalo').slice(1).join('omalo')}
     </p>
     <p className="text-muted leading-7 mt-4">
-      I stream on{' '}
+      I stream builds on{' '}
       <a
-        href="https://www.twitch.tv/itux"
+        href="https://www.twitch.tv/tuxmakes"
         className="text-accent underline underline-offset-4"
         target="_blank"
-        rel="noopener noreferrer"
+        rel="me noopener noreferrer"
         aria-describedby="new-tab-note"
       >
         Twitch
       </a>{' '}
-      from time to time. Hoping to do it more soon.
+      and share demos at{' '}
+      <a
+        href="https://tuxmakes.dev/"
+        className="whitespace-nowrap text-accent underline underline-offset-4"
+        target="_blank"
+        rel="me noopener noreferrer"
+        aria-describedby="new-tab-note"
+      >
+        tuxmakes.dev
+      </a>
+      .
     </p>
     <p className="text-muted leading-7 mt-4">
       I also sang a cappella in{' '}

@@ -43,6 +43,15 @@ const Contact = () => {
                         tuckercraig.com
                       </a>
                       <a
+                        href="https://tuxmakes.dev/"
+                        target="_blank"
+                        rel="me noopener noreferrer"
+                        aria-describedby="new-tab-note"
+                        className="tui-link-chip tui-link-chip-block"
+                      >
+                        tuxmakes.dev
+                      </a>
+                      <a
                         href="https://www.linkedin.com/in/tucker-craig/"
                         target="_blank"
                         rel="me noopener noreferrer"
@@ -61,16 +70,16 @@ const Contact = () => {
                         github
                       </a>
                       <a
-                        href="https://x.com/btuckercdev"
+                        href="https://x.com/tuxmakes"
                         target="_blank"
                         rel="me noopener noreferrer"
                         aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block"
                       >
-                        x
+                        x (@TuxMakes)
                       </a>
                       <a
-                        href="https://www.instagram.com/btuckerc.dev/"
+                        href="https://www.instagram.com/tuxmakes/"
                         target="_blank"
                         rel="me noopener noreferrer"
                         aria-describedby="new-tab-note"

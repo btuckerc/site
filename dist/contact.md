@@ -12,10 +12,12 @@ Canonical: https://btuckerc.dev/contact
 
 - [tuckercraig.com](https://tuckercraig.com/)
 
+- [tuxmakes.dev](https://tuxmakes.dev/)
+
 - [linkedin](https://www.linkedin.com/in/tucker-craig/)
 
 - [github](https://github.com/btuckerc)
 
-- [x](https://x.com/btuckercdev)
+- [x (@TuxMakes)](https://x.com/tuxmakes)
 
-- [instagram](https://www.instagram.com/btuckerc.dev/)
+- [instagram](https://www.instagram.com/tuxmakes/)
