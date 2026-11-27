@@ -11,6 +11,8 @@ export const useTheme = () => {
   return context
 }
 
+const VALID_THEMES = ['dark', 'light', 'amber']
+
 const THEME_COLORS = {
   dark: '#0f1115',
   light: '#e8eaed',
@@ -18,18 +20,23 @@ const THEME_COLORS = {
 }
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    const saved = safeGetItem('theme-mode')
-    return saved || 'dark' // Default to dark
-  })
+  // Always start on the SSR default so initial client render matches server HTML.
+  const [theme, setTheme] = useState('dark')
+  const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
+    const saved = safeGetItem('theme-mode')
+    if (saved && VALID_THEMES.includes(saved) && saved !== 'dark') {
+      setTheme(saved)
+    }
+    setHydrated(true)
+  }, [])
+
+  useEffect(() => {
+    if (!hydrated) return
     const root = document.documentElement
 
-    // Remove all theme classes
     root.classList.remove('light', 'amber')
-
-    // Apply theme class if not dark (dark is default)
     if (theme === 'light') {
       root.classList.add('light')
     } else if (theme === 'amber') {
@@ -41,33 +48,32 @@ export const ThemeProvider = ({ children }) => {
       THEME_COLORS[theme] || THEME_COLORS.dark
     )
 
-    // Persist to localStorage
     safeSetItem('theme-mode', theme)
-  }, [theme])
+  }, [theme, hydrated])
 
   const cycleTheme = () => {
-    const themes = ['dark', 'light', 'amber']
-    const currentIndex = themes.indexOf(theme)
-    const nextIndex = (currentIndex + 1) % themes.length
-    setTheme(themes[nextIndex])
+    const currentIndex = VALID_THEMES.indexOf(theme)
+    const nextIndex = (currentIndex + 1) % VALID_THEMES.length
+    setTheme(VALID_THEMES[nextIndex])
   }
 
   const setSpecificTheme = (newTheme) => {
-    setTheme(newTheme)
+    if (VALID_THEMES.includes(newTheme)) {
+      setTheme(newTheme)
+    }
   }
 
-  const themes = ['dark', 'light', 'amber']
-
   return (
-    <ThemeContext.Provider value={{
-      theme,
-      isDark: theme === 'dark',
-      cycleTheme,
-      setTheme: setSpecificTheme,
-      themes,
-      // Backwards compatibility
-      toggleMode: cycleTheme
-    }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        isDark: theme === 'dark',
+        cycleTheme,
+        setTheme: setSpecificTheme,
+        themes: VALID_THEMES,
+        toggleMode: cycleTheme,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   )

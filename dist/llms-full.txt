@@ -1,0 +1,1736 @@
+# Tucker Craig — Complete Site Corpus (https://btuckerc.dev)
+
+> Software engineer building everyday tools with coding agents across macOS, Windows, iOS, web, and embedded hardware, including angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo.
+
+- Official Site: https://tuckercraig.com/
+- Portfolio: https://btuckerc.dev/
+- Email: hello@tuckercraig.com (primary), btuckerc.dev@gmail.com (projects)
+- Verified Profiles: https://btuckerc.dev/, https://btuckerc.dev/about, https://github.com/btuckerc, https://www.linkedin.com/in/tucker-craig/, https://x.com/btuckercdev, https://www.instagram.com/btuckerc.dev/, https://www.twitch.tv/itux, https://open.spotify.com/user/tuxedo7777, https://soundcloud.com/tuxix
+
+---
+
+# Tucker Craig — Projects, Apps & AI Workflow (btuckerc.dev)
+
+> Software engineering portfolio of Tucker Craig: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, omalo, and how he builds with coding agents.
+
+Canonical: https://btuckerc.dev/
+
+Software Engineer
+
+## TUCKER CRAIG
+
+If something I use every day bugs me, I've started putting my free time into fixing it.
+
+Lately that's meant a Mac browser, a Windows streaming app, and an iPhone app for my coding agents. I like Omarchy's idea that [we can fix everything](https://wecanfixeverything.com). Everything is solvable. All it takes right now is someone pointing their tokens in the right place. The tools below are all things I use myself.
+
+I also sang a cappella in [The Nuances](https://open.spotify.com/track/5CV2w2PIbKouRr2jNKjJIR) at Davidson.
+
+- [more about me](https://btuckerc.dev/about)
+
+how i build
+
+## How I use coding agents
+
+Instead of asking one chat window to do everything, I split the work across models. Gemini 4 Neon or Claude Opus 5.5 directs, GPT-6.2 Sol and a local Qwen 3.8 GPU worker write patches in isolated copies of the repo, and on big changes five models from three families review the same frozen snapshot blind before I run the built app myself.
+
+current model stack 3 cloud families + 1 local GPU · click a plane
+
+Google (Neon) Anthropic (Opus, Fable) OpenAI (Sol, Astra, Luna) Local GPU (Qwen 3.8)
+
+Two peer directors own the plan and the final build
+
+One model sits with me as the lead. We decide how a feature should work, split it into small briefs, review every patch, and run the built app.
+
+- Gemini 4 Neon high Antigravity (agy) Primary director for daily work, prose, design, and verification.
+- Claude Opus 5.5 high Claude Code Peer director for coordinating multi-step work and overall product quality.
+
+Director rule verified
+
+- **owns**: Requirements, briefs, patch apply, real app check
+
+- **guard**: PreToolUse hook blocks nested or detached launches
+
+Isolated workers write patches in clean copies of the repo
+
+Each coding job runs in its own copy of the codebase so parallel work never collides. Hard tasks go to the cloud; small edits run on my home GPU.
+
+- GPT-6.2 Sol high agent-run sol · worktree Detail-oriented worker for hard changes in an isolated Git worktree. Returns result.patch.
+- Qwen 3.8 27B local GPU nous · Radeon R9700 · bwrap Bounded edits on my Linux box (vLLM + DFlash2). Read/edit only; I run checks.
+- GPT-6 Luna low agent-run ask --model luna Fast, cheap extraction and bounded summaries.
+
+Transcript receipt (~/.local/state/agent-runs) verified
+
+- **check**: model_ok: true · effort_ok: true · sandbox_ok: true
+
+- **note**: Local bwrap is runner-attested; cloud checks rollout/API log
+
+Five blind reviewers plus a strict release auditor
+
+Before big changes ship, five models from three companies inspect the exact same frozen snapshot without seeing each other. High-stakes commits also get a pass/fail audit.
+
+- Full Council 5 seats · 3 families Sol · Opus · Fable · Astra · Neon Read-only JSON review of a frozen git archive snapshot. Loops until done or plateau.
+- GPT-6.2 Sol xhigh · audit agent-run audit · read-only Strict PASS / BLOCK / UNVERIFIED gate on one exact commit. Stops at counterexamples.
+
+Merge gate verified
+
+- **blind**: Frozen git archive · no other seats, no score targets
+
+- **ship**: Real build run like a user clears merge, not test green alone
+
+full council · 5 seats, 3 families blind review · click a seat
+
+GPT-6.2 Sol xhigh OpenAI
+
+Detail-oriented. Good at catching small mistakes and edge cases that are easy to gloss over.
+
+**Council prompt:** In council, its brief asks it to try to make the change fail with concrete inputs.
+
+Illustrative round-1 JSON · Sol 8.4 · CHANGES
+
+- **risk**: Filter helper exits before flushing compiled rule cache on rapid reload.
+
+- **raise**: Atomic rename on the compiled rule file plus a reload race test.
+
+- **proof**: rollout · model_ok · effort_ok · sandbox_ok
+
+Claude Opus 5.5 high Anthropic
+
+Strong at coordinating multi-step work and consistently high quality in the finished product.
+
+**Council prompt:** In council, its brief asks it to question assumptions in the review packet.
+
+Illustrative round-1 JSON · Opus 8.6 · CHANGES
+
+- **risk**: Benchmark script measured idle process after cache warmup, not cold startup.
+
+- **raise**: Include cold-start capture output in the verification packet.
+
+- **proof**: api-log · model_ok · effort_ok · tool-allowlist
+
+Claude Fable high Anthropic
+
+Strong eye for design and visual polish alongside Neon.
+
+**Council prompt:** In council, its brief asks what can be simplified or cut.
+
+Illustrative round-1 JSON · Fable 9.1 · APPROVE
+
+- **risk**: Fallback queue wrapper adds 90 lines for a single caller.
+
+- **raise**: Inline the retry loop and drop the extra queue type.
+
+- **proof**: api-log · model_ok · effort_ok · tool-allowlist
+
+GPT-6.2 Astra high OpenAI
+
+I haven't been burning through my Codex subscription lately, so Astra puts those spare tokens to work as another independent review.
+
+**Council prompt:** In council, its brief asks it to walk through real end-to-end use.
+
+Illustrative round-1 JSON · Astra 8.8 · CHANGES
+
+- **risk**: SSH reconnect prompt loses draft reply when iOS wakes from background.
+
+- **raise**: Persist unsent draft per session before re-establishing the tunnel.
+
+- **proof**: rollout · model_ok · effort_ok · sandbox_ok
+
+Gemini 4 Neon read-only Google
+
+My go-to for prose and design. Clean writing and a fresh perspective when it sits in on review.
+
+**Council prompt:** In council, it starts fresh with no prior chat history and checks for blind spots and clarity.
+
+Illustrative round-1 JSON · Neon 9.0 · APPROVE
+
+- **risk**: Read-only status check shares retry code with mutating game actions.
+
+- **raise**: Keep read queries on a separate path with zero write side effects.
+
+- **proof**: fresh research subagent · strict JSON schema
+
+01 Blind frozen snapshots
+
+Every seat reads the same git archive export and diff. No seat sees another seat, my reasoning, or whether a score target exists.
+
+02 Agreement is not proof
+
+Reviewer precision is low even across three model families. I verify every finding in code or tests before fixing or declining it.
+
+03 Blind Opus tiebreaker
+
+If a seat still disagrees after counter-evidence, a fresh Opus session rules on the claim alone. I wrote the code, so I never rule on my own decline.
+
+- [read the full workflow](https://btuckerc.dev/workflow)
+
+- [omalo agent notes](https://btuckerc.dev/projects/s3-amoled)
+
+angl browser
+
+## The lightest macOS browser that still has features
+
+macOS · WebKit
+
+Everything I've ever liked in browsers, bundled into the lightest macOS browser that still has real features: tree tabs, Spaces with separate Containers, per-site controls, and plain config files.
+
+angl browser memory footprint (227 MB vs Safari 287 MB and Search.app 427 MB on Wikipedia), shared WebKit and ephemeral filter-compiler architecture, no-URL-bar tree-tab window layout, and built-in zero-extension capabilities.
+
+memory on wikipedia app + WebKit processes
+
+angl browser 227 MB ( −21% vs Safari )
+
+Safari 287 MB
+
+Search.app 427 MB
+
+- **bundled engines**: 0
+
+- **ProMotion on AC**: 120 Hz
+
+- **signed & notarized**: macOS 15+
+
+why it stays light no Electron · no bundled engine
+
+persistent browser few MB shell
+
+Swift 6 / AppKit shell
+
+System WKWebView (shared w/ macOS) In-process Rust Bitwarden SDK
+
+spawns angl --lists on list updates
+
+short-lived child process exits & frees RAM
+
+AdGuard rule compiler
+
+Compiles filter lists into WebKit content rules out of process so compile spikes never stay in browser memory.
+
+distinct layout no URL bar by default
+
+1 2 isolated cookies & proxy
+
+- WebKit
+- Content Rules
+- WKWebView
+- Release notes
+
+full-height page · no URL bar ⌘K palette / ⌘T tabs
+
+- > dark force site
+- > js off site
+- > container work space
+
+built in · zero extensions live-reloaded config
+
+~/.config/angl/ theme.json settings.json keys.json \<host\>.css
+
+- **Passwords**: Bitwarden Rust SDK + Touch ID passkeys & Apple Passwords
+
+- **Blocker**: AdGuard WebKit content rules + scriptlets
+
+- **Per-site**: JS, dark mode, volume, noJIT & Lockdown (⇧⌘I)
+
+- **Media**: Night audio compressor, instant fullscreen & YouTube stills
+
+- [download for mac](https://github.com/btuckerc/angl-browser/releases/latest)
+
+- [code](https://github.com/btuckerc/angl-browser)
+
+winstream · rust · windows
+
+## A lighter Windows streaming app
+
+Local build
+
+A lightweight Windows 11 streaming and recording app written in Rust. Uses about a third as much memory as OBS and a lot less CPU. Built directly on Windows Graphics Capture, Direct3D 11, and NVIDIA NVENC, with per-app audio, noise suppression, auto-leveling, and its own FLV muxer.
+
+| Metric (1080p60 NVENC + overlays) | winstream | OBS 32.0.2 |
+| --- | --- | --- |
+| Private RAM (active / idle) | 262 MB / 67 MB | 788-931 MB |
+| VRAM footprint | 150 MB | 233-259 MB |
+| GPU-bound CPU overhead (1 core) | +13% | +37% (+25% no overlays) |
+| GPU-bound 1% / 0.1% low FPS | 205 / 201 fps | 201 / 185 fps |
+| Uncapped 1% / 0.1% low FPS | 802 / 748 fps | 680 / 621 fps |
+
+Tested on Windows 11 (Ryzen 9 9950X3D, RTX 4090) at 6000 kb/s H.264 across three 60-second synthetic game runs with camera, chat overlay, and audio. Average FPS stays within 1% of OBS across every load, and A/V sync measured -7.9 ms median (within one 60 fps frame, zero discontinuities). Under a 599 Hz cap, 0.1% lows still trail OBS's DirectX game-capture hook because of Windows capture overhead (465-469 fps after idle-wakeup fixes vs. OBS's 563-570 fps). Not on GitHub yet.
+
+herdwick
+
+## Coding agents on your phone
+
+An iPhone and iPad app for checking on and answering coding agents running on your computer over SSH (built for herdr).
+
+![Seven Herdwick iPhone screenshots: the agent inbox, answering an agent, reading what it did, reviewing diffs, what's new since last time, connecting machines over SSH or Tailscale, and the live terminal.](https://btuckerc.dev/media/herdwick/screenshots-iphone.webp)
+
+- [![Download Herdwick on the App Store](https://btuckerc.dev/media/app-store-badge.svg)](https://apps.apple.com/app/id6815920496)
+
+- [code](https://github.com/btuckerc/herdwick)
+
+dictation
+
+## Local voice-to-text
+
+A local voice-to-text app for Mac with custom vocabulary for technical terms, built on Handy.
+
+Dictation overlay
+
+Dynamic Orb overlay: light ripples as you speak and swirls while transcribing.
+
+- [download for mac](https://github.com/btuckerc/dictation/releases/latest)
+
+- [code](https://github.com/btuckerc/dictation)
+
+pace-bar
+
+## AI quotas and local inference
+
+A macOS menu bar app for tracking Codex and Claude quotas, local model speed, and OpenRouter credit.
+
+![Pace Bar menu bar popover showing sample Codex and Claude quota rings, local llama-server token throughput and GPU usage, and OpenRouter credit balance.](https://btuckerc.dev/media/pace-bar/pace-bar.png)
+
+- [download for mac](https://github.com/btuckerc/pace-bar/releases/latest)
+
+- [code](https://github.com/btuckerc/pace-bar)
+
+omalo · prototype
+
+## Pokémon Emerald on Arduino
+
+Firmware for a small ESP32-S3 handheld that runs Pokémon Emerald, with an AI you can hand goals off to.
+
+![A hand holds a small rounded device running Pokémon Emerald. The screen shows a queued 'Beat the game' goal and asks the player to continue, then say go.](https://btuckerc.dev/media/s3-amoled/device-in-hand-public.jpg)
+
+- [explore omalo](https://btuckerc.dev/projects/omalo)
+
+- [technical notes](https://btuckerc.dev/projects/s3-amoled)
+
+inkjoin
+
+## Logic puzzles!
+
+An iPhone puzzle game where you fill in squares to make one connected shape, using the numbers as clues. Every solved puzzle turns into a drawing.
+
+Solving a puzzle
+
+Solving with a hint
+
+Dark mode
+
+![Seven Inkjoin iPhone screenshots: a partly filled puzzle, the home screen with today's puzzle, the chapter list, drawings from one chapter, the Drawings collection, practice difficulty levels, and a puzzle in dark mode.](https://btuckerc.dev/media/inkjoin/screenshots-iphone.webp)
+
+- [![Download Inkjoin on the App Store](https://btuckerc.dev/media/app-store-badge.svg)](https://apps.apple.com/app/id6819489546)
+
+- [code](https://github.com/btuckerc/inkjoin)
+
+center-seat
+
+## Movie-seat ranking
+
+Small personal tool to find the best seat for a movie every time.
+
+- [demo](https://movies.angl.gg)
+
+- [code and setup](https://github.com/btuckerc/center-seat)
+
+boilerplate
+
+## My opinionated config setup
+
+My macOS and Linux workspace setup, managed with chezmoi and mise.
+
+- [browse config](https://github.com/btuckerc/boilerplate)
+
+- [more projects](https://btuckerc.dev/projects)
+
+---
+
+# How I build with AI — Tucker Craig
+
+> How Tucker Craig splits work across Gemini 4 Neon, Claude Opus 5.5, GPT-6.2 Sol, local Qwen 3.8, and a five-model blind council to build and test his own apps.
+
+Canonical: https://btuckerc.dev/workflow
+
+## How I build with AI
+
+I split work across different models instead of asking one chat window to design, code, and grade its own work. One model directs, sandboxed workers write patches in separate copies of the repo, a five-model blind council checks big changes, and I test the built app myself.
+
+## Start with what you use
+
+Most of the projects here started with a tool I use every day that didn't quite fit how I work. It's fast enough now to build a smaller, focused version instead of working around it.
+
+Everything is solvable. It's something that hit me while I was putting this together. Every single problem is solvable right now, all it takes is someone pointing their tokens in the right place. People are proving [the Riemann hypothesis](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/), building Linux distros, and shipping everyday software simply by deciding to put some of their agentic bandwidth toward a problem.
+
+Lately for me that's been a lightweight Mac browser ([angl browser](https://github.com/btuckerc/angl-browser)), a Rust streaming app for Windows (winstream) that uses about a third as much memory as OBS, an iPhone app ([Herdwick](https://github.com/btuckerc/herdwick)) for checking on coding agents over SSH, local voice-to-text on Mac ([Dictation](https://github.com/btuckerc/dictation)), a menu bar usage tracker ([Pace Bar](https://github.com/btuckerc/pace-bar)), an iPhone puzzle game ([Inkjoin](https://github.com/btuckerc/inkjoin)), and handheld firmware ([omalo](https://btuckerc.dev/projects/omalo)).
+
+## Right model for the job
+
+I treat models like specialists with clear handoffs. Either Gemini 4 Neon (in Antigravity) or Claude Opus 5.5 (in Claude Code) sits at the top as the director. It works out the design with me, writes short briefs, applies the finished patches, and runs the final checks.
+
+Both directors share one ruleset from my [boilerplate](https://github.com/btuckerc/boilerplate) dotfiles and delegate through a small Python wrapper called `agent-run`. Hard changes go to GPT-6.2 Sol in its own Git worktree. Smaller bounded edits go to a local Qwen 3.8 27B model running on my Linux box (`nous`, Radeon AI PRO R9700 32 GB VRAM, vLLM with a DFlash2 drafter) inside a `bwrap` sandbox with read/edit tools only and no shell access. Quick summaries go to GPT-6 Luna.
+
+Every worker run writes a receipt that inspects the child's own transcript afterward (`model_ok`, `effort_ok`, `sandbox_ok`) so a silent model downgrade, wrong reasoning effort, or stray tool call fails the receipt instead of slipping by.
+
+current model stack 3 cloud families + 1 local GPU · click a plane
+
+Google (Neon) Anthropic (Opus, Fable) OpenAI (Sol, Astra, Luna) Local GPU (Qwen 3.8)
+
+Two peer directors own the plan and the final build
+
+One model sits with me as the lead. We decide how a feature should work, split it into small briefs, review every patch, and run the built app.
+
+Both directors share one ruleset from my dotfiles and delegate through one wrapper (agent-run), never loose subagents. They never grade their own big changes.
+
+- Gemini 4 Neon high Antigravity (agy) Primary director for daily work, prose, design, and verification.
+- Claude Opus 5.5 high Claude Code Peer director for coordinating multi-step work and overall product quality.
+
+Director rule verified
+
+- **owns**: Requirements, briefs, patch apply, real app check
+
+- **guard**: PreToolUse hook blocks nested or detached launches
+
+Isolated workers write patches in clean copies of the repo
+
+Each coding job runs in its own copy of the codebase so parallel work never collides. Hard tasks go to the cloud; small edits run on my home GPU.
+
+After every run, agent-run checks the worker transcript to confirm the exact model, effort, and sandbox actually ran. Local Qwen gets read/edit tools only, with no shell access.
+
+- GPT-6.2 Sol high agent-run sol · worktree Detail-oriented worker for hard changes in an isolated Git worktree. Returns result.patch.
+- Qwen 3.8 27B local GPU nous · Radeon R9700 · bwrap Bounded edits on my Linux box (vLLM + DFlash2). Read/edit only; I run checks.
+- GPT-6 Luna low agent-run ask --model luna Fast, cheap extraction and bounded summaries.
+
+Transcript receipt (~/.local/state/agent-runs) verified
+
+- **check**: model_ok: true · effort_ok: true · sandbox_ok: true
+
+- **note**: Local bwrap is runner-attested; cloud checks rollout/API log
+
+Five blind reviewers plus a strict release auditor
+
+Before big changes ship, five models from three companies inspect the exact same frozen snapshot without seeing each other. High-stakes commits also get a pass/fail audit.
+
+Agreement between models is not proof because reviewer precision is low. I verify every finding in code or tests, send disputed declines to a fresh Opus tiebreaker, and run the real app.
+
+- Full Council 5 seats · 3 families Sol · Opus · Fable · Astra · Neon Read-only JSON review of a frozen git archive snapshot. Loops until done or plateau.
+- GPT-6.2 Sol xhigh · audit agent-run audit · read-only Strict PASS / BLOCK / UNVERIFIED gate on one exact commit. Stops at counterexamples.
+
+Merge gate verified
+
+- **blind**: Frozen git archive · no other seats, no score targets
+
+- **ship**: Real build run like a user clears merge, not test green alone
+
+## Five models, blind review
+
+The easiest mistake with coding agents is asking the model that wrote a diff whether the diff looks good. For big changes or tricky design calls, I run a full council (adapted from Theo Browne's `council` and `sol-loop`): five read-only seats across three model families, each given a slightly different review prompt.
+
+Every seat reads the same frozen `git archive` snapshot and diff. Nobody sees another seat's findings, my reasoning, or whether I have a target score in mind. Independent first opinions carry most of the value, and reviewer precision is still low even with strong models, so agreement between seats is never proof. I check every claim against the code or write a test before fixing or declining it.
+
+If a seat still disagrees after I send back counter-evidence, a fresh Claude Opus 5.5 tiebreaker sees only the claim, evidence, and both sides. I wrote the code, so I don't get to rule on my own decline. On high-stakes commits, a strict read-only GPT-6.2 Sol (`xhigh`) audit also runs last and only clears the boundary on concrete evidence.
+
+full council · 5 seats, 3 families blind review · click a seat
+
+GPT-6.2 Sol xhigh OpenAI
+
+Detail-oriented. Good at catching small mistakes and edge cases that are easy to gloss over.
+
+**Council prompt:** In council, its brief asks it to try to make the change fail with concrete inputs.
+
+Illustrative round-1 JSON · Sol 8.4 · CHANGES
+
+- **risk**: Filter helper exits before flushing compiled rule cache on rapid reload.
+
+- **raise**: Atomic rename on the compiled rule file plus a reload race test.
+
+- **proof**: rollout · model_ok · effort_ok · sandbox_ok
+
+Claude Opus 5.5 high Anthropic
+
+Strong at coordinating multi-step work and consistently high quality in the finished product.
+
+**Council prompt:** In council, its brief asks it to question assumptions in the review packet.
+
+Illustrative round-1 JSON · Opus 8.6 · CHANGES
+
+- **risk**: Benchmark script measured idle process after cache warmup, not cold startup.
+
+- **raise**: Include cold-start capture output in the verification packet.
+
+- **proof**: api-log · model_ok · effort_ok · tool-allowlist
+
+Claude Fable high Anthropic
+
+Strong eye for design and visual polish alongside Neon.
+
+**Council prompt:** In council, its brief asks what can be simplified or cut.
+
+Illustrative round-1 JSON · Fable 9.1 · APPROVE
+
+- **risk**: Fallback queue wrapper adds 90 lines for a single caller.
+
+- **raise**: Inline the retry loop and drop the extra queue type.
+
+- **proof**: api-log · model_ok · effort_ok · tool-allowlist
+
+GPT-6.2 Astra high OpenAI
+
+I haven't been burning through my Codex subscription lately, so Astra puts those spare tokens to work as another independent review.
+
+**Council prompt:** In council, its brief asks it to walk through real end-to-end use.
+
+Illustrative round-1 JSON · Astra 8.8 · CHANGES
+
+- **risk**: SSH reconnect prompt loses draft reply when iOS wakes from background.
+
+- **raise**: Persist unsent draft per session before re-establishing the tunnel.
+
+- **proof**: rollout · model_ok · effort_ok · sandbox_ok
+
+Gemini 4 Neon read-only Google
+
+My go-to for prose and design. Clean writing and a fresh perspective when it sits in on review.
+
+**Council prompt:** In council, it starts fresh with no prior chat history and checks for blind spots and clarity.
+
+Illustrative round-1 JSON · Neon 9.0 · APPROVE
+
+- **risk**: Read-only status check shares retry code with mutating game actions.
+
+- **raise**: Keep read queries on a separate path with zero write side effects.
+
+- **proof**: fresh research subagent · strict JSON schema
+
+01 Blind frozen snapshots
+
+Every seat reads the same git archive export and diff. No seat sees another seat, my reasoning, or whether a score target exists.
+
+02 Agreement is not proof
+
+Reviewer precision is low even across three model families. I verify every finding in code or tests before fixing or declining it.
+
+03 Blind Opus tiebreaker
+
+If a seat still disagrees after counter-evidence, a fresh Opus session rules on the claim alone. I wrote the code, so I never rule on my own decline.
+
+## Keep tasks small and separate
+
+Coding agents get messy fast when you give them a vague prompt in a crowded workspace. Results get much better when I figure out the design first, write a short brief with an exact check to run, and put each worker in its own Git worktree.
+
+That same split shows up in the software too. In [omalo](https://btuckerc.dev/projects/s3-amoled#party), asking a question ("Who's in my party?") takes a separate read-only path from asking the AI to change the game ("Win this battle"), and local code handles the button presses.
+
+parallel work without collisions isolated vs. shared checkout
+
+main
+
+clean base
+
+wt/filter-helper
+
+GPT-6.2 Sol (high) · result.patch
+
+wt/tab-shortcuts
+
+Qwen 3.8 27B (nous) · bwrap, no shell
+
+frozen git archive
+
+Full council / Sol xhigh audit · read-only
+
+Director review & test
+
+git apply one patch at a time, run the built app
+
+merge once it passes
+
+Task A: filter helper
+
+writes directly to tree
+
+Task B: tab shortcuts
+
+writes directly to tree
+
+Task C: cleanup
+
+writes directly to tree
+
+One shared checkout
+
+- edits overwrite each other
+- git diff mixes all 3 tasks
+- build breaks mid-run
+
+Hard to untangle
+
+which task broke the build?
+
+Each task runs in its own directory with its own brief and check, so every patch is small enough to review and test before merging.
+
+**Directors + me:** design decisions, short briefs, applying patches, live testing, and merging.
+
+**Workers:** scoped worktrees (GPT-6.2 Sol for hard jobs, local Qwen 3.8 for small edits) and blind read-only reviews.
+
+## Checking the work is the hard part
+
+I've learned a lot from watching engineers like [Lauren Tan (@poteto)](https://x.com/poteto) put the focus on repeatable checks and hands-on testing instead of piling up diffs.
+
+Before I merge anything, I want to run it the same way a user will. Unit tests catch regressions, while running the built app catches timer wakeups, memory spikes, and signing problems.
+
+checks across my apps real runs vs. unit tests
+
+Looked fine Clean build + unit tests pass, hiding idle timer wakeups.
+
+What the real check verifies
+
+Three 60-second synthetic runs caught idle timer wakeups hurting frame pacing
+
+1080p60 NVENC vs. OBS 32.0.2 + overlays on Windows 11 (67 MB idle, -7.9 ms median A/V sync, GPU-bound 1%/0.1% lows 205/201 vs. 201/185 fps).
+
+Active private RAM (lower is better) winstream
+
+262 MB
+
+OBS 32.0.2
+
+788–931 MB
+
+VRAM footprint (lower is better) winstream
+
+150 MB
+
+OBS 32.0.2
+
+233–259 MB
+
+GPU-bound CPU overhead, 1 core winstream
+
++13%
+
+OBS + overlays
+
++37%
+
+Under a 599 Hz cap, 0.1% lows still trail OBS because of Windows Graphics Capture overhead (465–469 fps vs. 563–570 fps).
+
+Looked fine Pages load and block ads while filter compilation spikes browser RAM.
+
+What the real check verifies
+
+Moving filter compilation to a short-lived helper kept Wikipedia RAM below Safari
+
+Running ad-block compilation in a separate helper process that exits after compiling keeps memory out of the main Swift/AppKit/WebKit browser process.
+
+main process angl browser Swift · AppKit · WebKit · stays lean
+
+spawns
+
+short-lived helper ad-block compiler compiles filters · exits & frees RAM
+
+Memory on Wikipedia (lower is better) angl browser
+
+227 MB
+
+Safari
+
+287 MB
+
+Signed and notarized for Apple Silicon Macs on macOS 15 or newer.
+
+Looked fine Agent reports the battle ended and the catch succeeded.
+
+What the real check verifies
+
+Waiting for the game to settle and diffing party + PC memory verifies a catch
+
+Lets Pokémon Emerald settle and diffs party and PC boxes against the pre-battle snapshot, even for a species you already own.
+
+1. Battle ends 2. Wait to settle 3. Diff party + PC RAM
+
+Before battle · Party [4/6] + PC boxes
+
+slot 1 slot 2 slot 3 slot 4 empty empty
+
+PC boxes: existing Pokémon snapshot
+
+After settle · Party [5/6] + PC boxes
+
+slot 1 slot 2 slot 3 slot 4 +catch empty
+
++ New catch: shows up once (even duplicate species)
+
+Illustrative state diff (not a recorded catch).
+
+- [read the omalo catch check](https://btuckerc.dev/projects/s3-amoled#catch-check)
+
+Looked fine Local preview renders chat layout without a live SSH or Tailscale host.
+
+What the real check verifies
+
+Live iPhone / iPad session over plain SSH or Tailscale against herdr
+
+On-device check connects to a Mac or Linux host, lists tracked agents, reads transcripts as chat, answers a live permission prompt, reviews a diff, and checks optional push alerts.
+
+on device iPhone / iPad SSH keys stay in iOS Keychain
+
+SSH / Tailscale
+
+your machine Mac / Linux · herdr Claude Code · Antigravity · Codex
+
+Chat transcripts Permission prompts Patch diffs Optional push alerts
+
+No accounts or analytics; SSH keys stay in the iOS Keychain on the device.
+
+## Build the tools that save time
+
+Most of the gain from coding agents comes from fixing small annoyances in your own setup. Every tool below grew out of something that slowed me down while running parallel sessions across my Mac and Linux GPU box.
+
+four tools wired into the loop each tool serves a stage
+
+Voice in feeds 01 direct
+
+Dictation
+
+Offline Mac voice-to-text with custom technical vocabulary so talking through a brief beats typing.
+
+- [download for mac](https://github.com/btuckerc/dictation/releases/latest)
+
+- [code](https://github.com/btuckerc/dictation)
+
+Quota & local GPU informs 02 worktrees · 03 council
+
+Pace Bar
+
+Menu bar tracker for Codex/Claude quotas beside local token speed and GPU use on nous, so I can skip low pools or send small jobs to local Qwen.
+
+- [download for mac](https://github.com/btuckerc/pace-bar/releases/latest)
+
+- [code](https://github.com/btuckerc/pace-bar)
+
+Coding session (Mac + nous Linux GPU) agent-run · receipts · full council
+
+- 01 Direct
+- 02 Worktrees
+- 03 Council
+- 04 Test build
+
+Away from desk feeds 03 council · 04 test
+
+Herdwick
+
+iPhone and iPad app over SSH or Tailscale for answering prompts, reading diffs, and optional push alerts when a run needs input or finishes.
+
+- [app store](https://apps.apple.com/app/id6815920496)
+
+- [code](https://github.com/btuckerc/herdwick)
+
+Rules & agent-run underpins 01–04
+
+Boilerplate
+
+Shared Mac and Linux dotfiles managed with chezmoi and mise. Ships agent-run, the council skill, and one shared ruleset for Claude Code and Antigravity.
+
+- [browse config](https://github.com/btuckerc/boilerplate)
+
+## Finish the boring parts
+
+It's easy to stop once something works in a quick demo. Most of what makes an app pleasant to use happens in the "What makes it usable" list below.
+
+after the first working build demo trap vs. shipped work
+
+Easy place to stop What makes it usable
+
+- Easy place to stop Works once on my machine in debug mode What makes it usable Signed and notarized Apple Silicon Mac downloads angl browser Pace Bar Dictation StreamApp
+- Easy place to stop Needs manual setup steps nobody else will do What makes it usable App Store review, support pages, and plain privacy policies Herdwick Inkjoin
+- Easy place to stop Memory spikes or crashes lose what you were doing What makes it usable Crash-recoverable recordings in StreamApp and a short-lived ad-block helper in angl browser StreamApp angl browser
+- Easy place to stop Doesn't say what's still broken What makes it usable A section in the README listing what doesn't work yet
+
+If you're working on coding agents or developer tools, I'd like to hear about it.
+
+- [browse all projects](https://btuckerc.dev/projects)
+
+- [omalo technical notes](https://btuckerc.dev/projects/s3-amoled)
+
+- [say hello](https://btuckerc.dev/contact)
+
+---
+
+# About — Tucker Craig
+
+> About Tucker Craig: software engineer and Davidson College alumnus building a macOS browser, an iOS coding-agent client, local voice-to-text, quota tools, and omalo firmware.
+
+Canonical: https://btuckerc.dev/about
+
+![Tucker Craig](https://btuckerc.dev/avatar-courtyard.jpg)
+
+## Tucker Craig
+
+Software Engineer
+
+Hello, world! I'm Tucker. A lot of what I build starts with something small that bugs me. I wanted a browser with the features I like and none of the usual bloat, so I built angl browser. I wanted to keep track of my AI usage, so I built Pace Bar. I didn't want to keep paying for voice-to-text, so I made my own. I wanted my coding agents with me away from my desk, so now they're on my phone. Even something to help me get the right movie seat. There's a bunch more on my [projects page](https://btuckerc.dev/projects). Feel free to check it out.
+
+Right now I'm building tools for myself across Mac, Windows, and iOS, plus writing firmware for a little Arduino handheld called [omalo](https://btuckerc.dev/projects/omalo). Most problems feel solvable lately if someone just decides to point their tokens at them.
+
+I stream on [Twitch](https://www.twitch.tv/itux) from time to time. Hoping to do it more soon.
+
+I also sang a cappella in [The Nuances](https://open.spotify.com/track/5CV2w2PIbKouRr2jNKjJIR) at Davidson.
+
+My main site and older web archives live at [tuckercraig.com](https://tuckercraig.com/).
+
+- [How I build](https://btuckerc.dev/workflow)
+
+- [Projects](https://btuckerc.dev/projects)
+
+- [Say hello](https://btuckerc.dev/contact)
+
+---
+
+# Projects — Tucker Craig
+
+> Complete reviewed catalog of 29 software, systems, iOS, macOS, Windows, and hardware projects by Tucker Craig.
+
+Canonical: https://btuckerc.dev/projects
+
+## angl browser (2026)
+
+Everything I've ever liked in browsers, bundled into the lightest macOS browser that still has real features: tree tabs, Spaces with separate Containers, per-site controls, and plain config files.
+
+Built in Swift and AppKit on macOS's built-in WebKit engine instead of bundling Electron or another engine. Includes a Rust bridge for Bitwarden, per-site JavaScript and ad-blocker controls, 120 Hz rendering on AC power, and out-of-process filter compilation so memory stays low (227 MB vs. Safari's 287 MB on Wikipedia). Signed and notarized for Apple Silicon Macs on macOS 15 or newer. GPL-3.0.
+
+- **Stack**: Swift, AppKit, WebKit, Rust
+- **Highlights**:
+  - No URL bar by default, with floating tab switching and commands on Cmd+T and Cmd+K
+  - Tree tabs, Spaces with separate Containers, and live-reloaded JSON/CSS config
+  - Per-site JavaScript, content blocker, dark mode, and volume controls
+  - Bitwarden passkeys and login autofill via a Rust bridge, plus Apple Passwords
+- **Links**: [github](https://github.com/btuckerc/angl-browser) · [download](https://github.com/btuckerc/angl-browser/releases/latest)
+
+## winstream (2026)
+
+A lightweight Windows 11 streaming and recording app written in Rust. Uses about a third as much memory as OBS and a lot less CPU.
+
+StreamApp's Windows counterpart, built in Rust on Windows Graphics Capture, Direct3D 11, direct NVIDIA NVENC 13.0 bindings, per-app WASAPI audio with RNNoise noise suppression and -14 LUFS loudness leveling, and its own FLV muxer. Tested against OBS 32.0.2 at 1080p60 NVENC H.264 (6000 kb/s, Ryzen 9 9950X3D, RTX 4090) with overlays and audio: 262 MB private RAM vs. OBS's 788-931 MB, 150 MB VRAM vs. 233-259 MB, +13% single-core CPU overhead under GPU-bound load vs. +37% for OBS with overlays, and stronger 1% and 0.1% lows under GPU-bound and uncapped loads (-7.9 ms median A/V sync). Under a 599 Hz cap, 0.1% lows still trail OBS's DirectX game-capture hook because of Windows capture overhead. Not on GitHub yet.
+
+- **Stack**: Rust, Direct3D 11, WGC, NVENC, WASAPI
+- **Highlights**:
+  - ~262 MB active RAM (67 MB idle) and 150 MB VRAM vs. OBS's 788-931 MB RAM and 233-259 MB VRAM
+  - GPU-bound load: +13% single-core CPU and 205/201 fps (1%/0.1% low) vs. OBS + overlays at +37% CPU and 201/185 fps
+  - Uncapped load: 802/748 fps (1%/0.1% low) vs. OBS + overlays at 680/621 fps
+  - Per-app audio capture, RNNoise mic cleanup, -14 LUFS loudness leveling, and a separate VOD track
+  - TOML scenes with cut/morph/wipe transitions, camera low-light shadow lift and denoise, and Twitch chat/alert overlays
+
+## Inkjoin (2026)
+
+An iPhone puzzle game where you fill in squares to make one connected shape, using the numbers as clues. Every solved puzzle turns into a drawing.
+
+Nine chapters introduce one idea at a time, plus a new puzzle each day and practice at four difficulty levels. Every puzzle has one solution and never asks you to guess. Hints are unlimited with no penalty. Works offline on iPhone (requires iOS 26).
+
+- **Stack**: Swift, SwiftUI, Cloudflare Workers
+- **Highlights**:
+  - 74 puzzles across nine chapters
+  - Daily puzzles that get harder through the week
+  - Hints that show where to look, explain a step, and can fill it in
+  - Solved puzzles saved as drawings
+- **Links**: [app store](https://apps.apple.com/app/id6819489546) · [github](https://github.com/btuckerc/inkjoin)
+
+## Herdwick (2026)
+
+An iPhone and iPad app for checking on and answering coding agents running on your computer over SSH (built for herdr).
+
+Connects to your own machine over SSH, lists every agent herdr is tracking, and renders their transcripts as chat threads, with a live terminal when you need it. Requires iOS 26 and a Mac or Linux host running herdr. Independent project, not affiliated with herdr or Tailscale.
+
+- **Stack**: Swift, SwiftTerm, SSH, TailscaleKit
+- **Highlights**:
+  - Inbox of agents across hosts, with the ones waiting on you at the top
+  - omp, Claude Code, and Codex transcripts shown as chat
+  - Native controls for questions and permission prompts
+  - Works over plain SSH or Tailscale, with no account or analytics
+- **Links**: [app store](https://apps.apple.com/app/id6815920496) · [github](https://github.com/btuckerc/herdwick) · [privacy](https://btuckerc.dev/privacy/herdwick)
+
+## Dictation (2026)
+
+A local voice-to-text app for Mac with custom vocabulary for technical terms, built on Handy.
+
+Built on Handy, with Fast and Accurate speech-recognition presets. Plain dictation runs completely offline once the models download. If you want text cleanup, you can point it at any OpenAI-compatible endpoint. The Apple Silicon download is signed and notarized.
+
+- **Stack**: Rust, Tauri, Parakeet, Whisper
+- **Highlights**:
+  - Local speech recognition with Fast and Accurate presets
+  - Custom vocabulary for the Accurate preset
+  - Configurable dictation shortcuts
+  - Optional transcript cleanup with a plain-text fallback
+- **Links**: [github](https://github.com/btuckerc/dictation) · [download](https://github.com/btuckerc/dictation/releases/latest)
+
+## CenterSeat (2026)
+
+A movie-seat finder that compares seat maps across showtimes to rank the best seats together.
+
+Compares open seats across nearby showtimes and ranks the best seats together so you don't have to click through every auditorium map yourself. Live searches need a configured data provider.
+
+- **Stack**: Go, Node.js, Docker, OpenCinema, Atom
+- **Highlights**:
+  - Compares seat maps across nearby showtimes
+  - Ranks contiguous seats based on where you like to sit
+  - Pluggable data provider for live showtime searches
+- **Links**: [site](https://movies.angl.gg) · [github](https://github.com/btuckerc/center-seat)
+
+## Flipping Seven Calculator (2025)
+
+An iOS scorekeeper for Flip 7 with round history and undo.
+
+Keeps score for Flip 7 on iPhone and iPad. Tap cards to tally rounds and bonuses, check round history, undo mistakes, and pick up where you left off.
+
+- **Stack**: Swift, SwiftUI, XCTest, iOS
+- **Highlights**:
+  - Round history and undo
+  - Saves games locally on your device
+  - Post-game stats
+  - iPhone and iPad layouts
+- **Links**: [app store](https://apps.apple.com/us/app/flipping-seven-calculator/id6756905042) · [github](https://github.com/btuckerc/flip7calculator) · [privacy](https://btuckerc.dev/privacy/flipping-seven-calculator)
+
+## Jeopardy Study App (2024)
+
+A Jeopardy study app for searching clues, drilling categories, and playing full boards.
+
+Search past Jeopardy clues, drill specific categories, or play through full boards with answer checking and progress tracking.
+
+- **Stack**: Next.js, TypeScript, Tailwind CSS, PostgreSQL, Prisma
+- **Highlights**:
+  - Clue search and category practice
+  - Full-board game mode
+  - Answer checking
+  - Progress tracking
+- **Links**: [github](https://github.com/btuckerc/jeopardy)
+
+## Pace Bar (2026)
+
+A macOS menu bar app for tracking Codex and Claude quotas, local model speed, and OpenRouter credit.
+
+A fork of CodexBar by Peter Steinberger and contributors, built with SwiftUI and AppKit. The Apple Silicon download is signed and notarized for macOS 14 and up (Intel Macs can build from source). Forecasts are rough estimates, and it doesn't switch accounts.
+
+- **Stack**: Swift, SwiftUI, AppKit
+- **Highlights**:
+  - One quota ring per Codex and Claude subscription
+  - Pooled Codex forecast that flags quota about to reset unused
+  - Local inference token counts and speed, with optional GPU readings
+  - OpenRouter balance kept separate from estimated API cost
+- **Links**: [github](https://github.com/btuckerc/pace-bar) · [download](https://github.com/btuckerc/pace-bar/releases/latest)
+
+## StreamApp (2026)
+
+Record your screen or stream to Twitch from your Mac's menu bar.
+
+A Mac menu bar app for capturing your screen or windows, tweaking webcam and audio, streaming to Twitch, using a notch teleprompter, and drawing right on the desktop. Signed and notarized for Apple Silicon Macs on macOS 26 or newer (or build from source without a signing cert). Licensed under GPL-3.0.
+
+- **Stack**: Swift, FFmpeg, WebRTC
+- **Highlights**:
+  - Crash-recoverable screen and window recording
+  - Desktop and Full Camera layouts with webcam punch-in
+  - Twitch streaming with a confirmation step before going live
+  - Desktop drawing and live loudness meters
+- **Links**: [github](https://github.com/btuckerc/streamapp) · [download](https://github.com/btuckerc/streamapp/releases/latest)
+
+## Tablet Companion (2026)
+
+Set up a Wacom tablet and its drawing shortcuts on your Mac.
+
+A small setup helper for the Wacom Intuos BT S (tested with driver 6.4.14-1). It walks through the Wacom driver install and maps tablet buttons to StreamApp drawing shortcuts without touching your other buttons. Only supports the Intuos BT S for now. Signed and notarized for Apple Silicon Macs on macOS 26 or newer.
+
+- **Stack**: Swift, Wacom Driver
+- **Highlights**:
+  - Guided Wacom driver download and installer handoff
+  - Suggested button layout for StreamApp drawing
+  - Restore previous button mappings anytime
+  - Local backups of your tablet settings
+- **Links**: [github](https://github.com/btuckerc/tablet-companion) · [download](https://github.com/btuckerc/tablet-companion/releases/latest)
+
+## Boilerplate (2019)
+
+My macOS and Linux workspace setup, managed with chezmoi and mise.
+
+My shared dotfiles and workspace config for macOS and Linux, managed with chezmoi and mise. Includes bootstrap and recovery notes for bringing up a new machine.
+
+- **Stack**: Bash/Zsh, Chezmoi, Mise, Lua, Tmux
+- **Highlights**:
+  - Shared macOS and Linux configuration
+  - Tool version management with mise
+  - Machine-aware templates
+  - Bootstrap and recovery notes
+- **Links**: [github](https://github.com/btuckerc/boilerplate)
+
+## OpenCode Monitor (2026)
+
+A small macOS menu bar app for keeping an OpenCode server under control.
+
+Puts OpenCode server status, start and stop controls, logs, updates, and optional idle shutdown right in your macOS menu bar.
+
+- **Stack**: Swift, macOS, LaunchAgent, Shell
+- **Highlights**:
+  - Menu bar status and quick controls
+  - Start, stop, and restart actions
+  - Optional idle auto-stop
+  - Build and uninstall scripts
+- **Links**: [github](https://github.com/btuckerc/opencode-menu)
+
+## btuckerc.dev (2025)
+
+This website. A terminal-style portfolio with keyboard navigation, a command palette, and fuzzy project search.
+
+Built with React and Vite and styled like a terminal. All the project data lives in one JSON file, and every route prerenders to static HTML at build time.
+
+- **Stack**: React, Vite, Tailwind CSS, Framer Motion, Fuse.js
+- **Highlights**:
+  - Command palette on the colon key
+  - Fuzzy project search that forgives typos
+  - Keyboard navigation across lists
+  - Theme and font switching
+- **Links**: [site](https://btuckerc.dev) · [github](https://github.com/btuckerc/site)
+
+## AudioReader (2025)
+
+A local audiobook player with synced captions generated with Whisper.
+
+Plays local audiobooks in the browser alongside synced VTT captions generated locally with Whisper.
+
+- **Stack**: Python, Flask, Whisper, FFmpeg, HTML5 Audio
+- **Highlights**:
+  - Synced VTT captions
+  - HTML5 audio playback
+  - Playlist support
+  - Local Whisper transcription
+- **Links**: [github](https://github.com/btuckerc/audioreader)
+
+## Farkle Scorer (2025)
+
+An offline iOS scorekeeper for Farkle with tap-to-score dice and some nearby multiplayer experiments.
+
+Tap the dice you rolled or enter scores manually if you're using physical dice. Supports custom house rules and an experimental nearby multiplayer mode.
+
+- **Stack**: Swift, SwiftUI, XCTest, Multipeer Connectivity
+- **Highlights**:
+  - Tap-to-score dice
+  - Manual score entry for physical dice
+  - Configurable house rules
+  - Works completely offline
+- **Links**: [app store](https://apps.apple.com/us/app/farkle-scorer/id6756927115) · [github](https://github.com/btuckerc/farkle)
+
+## Spotify DJ (2019)
+
+An older experiment that orders Spotify playlists by BPM, key, and danceability.
+
+Pulls audio features from Spotify and suggests a track order based on BPM, key, danceability, and energy. It's an older project, so check the repo setup notes before running it.
+
+- **Stack**: Python, Spotipy, Spotify Web API, OAuth2
+- **Highlights**:
+  - Audio feature analysis
+  - Song-ordering algorithm
+  - Playlist and track-library support
+  - Configurable weighting
+- **Links**: [github](https://github.com/btuckerc/spotify-dj)
+
+## Physical Computing Final (2018)
+
+A college physical computing project: a plastic garden owl rigged with a Pi camera, mic, and light sensor.
+
+Built for DIG333 at Davidson. A fake garden owl watches a walkway with a Raspberry Pi camera, microphone, and light sensor to count foot traffic, track noise levels, spot average shirt colors, and tweet updates about how busy it is.
+
+- **Stack**: Python, OpenCV, NumPy, Sensors
+- **Highlights**:
+  - Pi camera with OpenCV people counting
+  - Microphone for walkway noise levels
+  - Light sensor to put the owl to sleep at night
+  - Automated status tweets from the owl
+- **Links**: [github](https://github.com/btuckerc/phys-comp-final)
+
+## ComicScanner (2024)
+
+My first take on a comic cataloging tool, using barcode scanning and image matching.
+
+An earlier Flask app for cataloging comics with barcode scanning, cover matching, metadata lookup, and collection import and export.
+
+- **Stack**: Python, Flask, JavaScript, Computer Vision APIs
+- **Highlights**:
+  - Barcode scanning
+  - Cover image matching
+  - Metadata lookup
+  - Collection import and export
+- **Links**: [github](https://github.com/btuckerc/ComicScanner)
+
+## RSS News Summarizer (2024)
+
+A small web app experiment that pulls RSS feeds and writes short summaries.
+
+Parses RSS feeds from multiple sources and generates short markdown summaries in a simple web UI.
+
+- **Stack**: Python, RSS Parser, HTML/CSS
+- **Highlights**:
+  - RSS feed parsing
+  - Multi-source aggregation
+  - Automatic summaries
+  - Markdown output
+- **Links**: [github](https://github.com/btuckerc/rss-summarizer)
+
+## Spotify Preference Analyst (2019)
+
+An older Python project that uses Spotify audio features and Euclidean distance to map out music taste.
+
+Uses linear algebra (Euclidean distance on Spotify's audio features) to analyze listening history, chart genres, and experiment with track recommendations.
+
+- **Stack**: Python, Spotipy, NumPy, Spotify Web API
+- **Highlights**:
+  - Listening history analysis
+  - Preference mapping with Euclidean distance
+  - Genre charts
+  - Recommendation experiments
+- **Links**: [github](https://github.com/btuckerc/spotify-analyst)
+
+## earcandy (2026)
+
+Drop in a finished electronic track to pull out each distinct sound as its own stem, plus a matching Serum 2 patch.
+
+A local macOS tool that splits a song into sound families (plucks, basses, leads, chops, risers, drum hits), exports each one as a stem, and searches Serum 2's factory presets for a matching patch. Separation runs locally on Apple silicon.
+
+- **Stack**: Python, Audio source separation, Serum 2 (VST3)
+- **Highlights**:
+  - One stem and one .SerumPreset per sound
+  - A/B playback of the mix, the isolated sound, and the Serum patch
+  - Timeline showing every spot each sound appears
+  - Refine, hide, and merge sound families
+
+## Music (2026)
+
+I make music too. My tracks are on SoundCloud.
+
+Original tracks and experiments, published on SoundCloud as tux.
+- **Links**: [soundcloud](https://soundcloud.com/tuxix)
+
+## OMP Serve (2026)
+
+A small browser workspace for coding-agent sessions running on my own server.
+
+A single-user web client for OMP agent sessions running on my own server. The agent, files, and shell commands stay on the server, and the browser just connects over a private network with no extra middleware or copies of the conversation.
+
+- **Stack**: TypeScript, Bun
+- **Highlights**:
+  - Pick a project and model, then start or resume a conversation
+  - Scratch conversations outside any project
+  - Git changes view for workspaces
+
+## Tempo (2026)
+
+An offline iPhone app for tracking food, workouts, and sleep, without streaks or scores.
+
+An iPhone app built around four tabs: Today, Eat, Move, and Sleep. No streaks, daily grades, or confetti. Optional AI planning goes through a server broker so no API keys ship in the app.
+
+- **Stack**: Swift, SwiftUI, WidgetKit, HealthKit
+- **Highlights**:
+  - Barcode, nutrition label, and menu scanning for fast meal logging
+  - Bodyweight, walking, and gym workouts with plain-English form cues
+  - Workout Live Activity and Home Screen widgets
+  - Apple Health import for sleep and body measurements
+
+## angl-dj (2026)
+
+A self-hosted DJ tool for managing my music library, planning sets, and syncing with Rekordbox.
+
+Still early. Built with a FastAPI backend, background worker, React frontend, PostgreSQL, Redis, and Qdrant vector search. So far it has sign-in, a library dashboard, and health checks.
+
+- **Stack**: Python, FastAPI, React, PostgreSQL, Qdrant
+- **Highlights**:
+  - Library dashboard for audio files, recordings, analyzed tracks, and crates
+  - Health checks for the database, queue, and vector search
+
+## py-trading (2025)
+
+An experimental Python ML trading project with return forecasting, risk limits, and paper trading.
+
+Forecasts returns across multiple time horizons and turns them into portfolio weights, using point-in-time market data in DuckDB and Parquet so backtests don't cheat with future data. Strictly an experiment, not investment advice.
+
+- **Stack**: Python, DuckDB, XGBoost, LightGBM
+- **Highlights**:
+  - Point-in-time, as-of data queries
+  - Risk limits with sector tilts and a drawdown throttle
+  - Daily paper-trading loop with a dry-run mode
+- **Links**: [github](https://github.com/btuckerc/py-trading)
+
+## ANGL Comic Scanner (2025)
+
+Point an iPhone at a comic cover to identify the series and issue, on-device and offline.
+
+The follow-up to my earlier comic scanner. A Python script packs a CLZ Comics export into a compressed bundle of cover thumbnails and image features, and the iOS app matches live camera frames on-device using Apple Vision first and OpenCV to double-check.
+
+- **Stack**: Swift, SwiftUI, OpenCV, Python
+- **Highlights**:
+  - Runs completely on the phone with no network needed
+  - Apple Vision search plus A-KAZE and RANSAC verification
+  - Collection bundles built from a CLZ Comics export
+
+## JustBobThoughts (2019)
+
+A Twitter bot that posted clips of the quiet, ambient moments from Bob Ross's painting shows.
+
+A weekend Python bot built on Tweepy that uploaded short clips of the ambient sections of Bob Ross's episodes to Twitter.
+
+- **Stack**: Python, Tweepy
+- **Links**: [github](https://github.com/btuckerc/JustBobThoughts)
+
+---
+
+# omalo: Pocket Companion Running ichr — Tucker Craig
+
+> omalo is a pocket ESP32-S3 hardware companion by Tucker Craig running ichr. Play Pokémon Emerald yourself, or hand off goals to an AI.
+
+Canonical: https://btuckerc.dev/projects/omalo
+
+## omalo
+
+a pocket companion running ichr
+
+I'm writing the firmware for it. You can play Pokémon Emerald yourself, or hand off a goal to the AI and let it take a turn.
+
+Prototype
+
+- [technical notes](https://btuckerc.dev/projects/s3-amoled)
+
+![A hand holds a small rounded device running Pokémon Emerald. The screen shows a queued 'Beat the game' goal and asks the player to continue, then say go.](https://btuckerc.dev/media/s3-amoled/device-in-hand-public.jpg)
+
+Early prototype with a goal queued up.
+
+omalo a pocket companion
+
+ichr the life inside
+
+omalo / ichr
+
+## Pokémon Emerald on omalo
+
+Here I picked Mudkip, then asked Luna to beat the Zigzagoon. The local battle controller takes over from there, and you can jump back in with the buttons at any time.
+
+Voice transcription and model calls go out over Wi-Fi.
+
+- [how the handoff works](https://btuckerc.dev/projects/s3-amoled#handoff)
+
+Defeat the Zigzagoon
+
+Desktop UI replay of a real Luna request and battle (actual model wait time left in). [download GIF](https://btuckerc.dev/media/s3-amoled/pokemon-agent-battle.gif)
+
+about this capture
+
+The battle and Luna's response are real, replayed on a computer using the device's actual UI. It's not a camera recording of the hardware or a live mic recording.
+
+## A tiny game you play by moving it
+
+Tilt omalo to roll a tiny fleck around a rounded play area. This clip compares how it feels with wall bounce off vs. on.
+
+- [read the Grain notes](https://btuckerc.dev/projects/s3-amoled#grain)
+
+Grain
+
+Bounce off, then on (with simulated taps and tilt). [download GIF](https://btuckerc.dev/media/s3-amoled/grain-bounce-off-on-catch-v4.gif)
+
+about this capture
+
+This demo runs the device's real settings screen and game code on a computer. Each run starts from the same spot with the same simulated tilt, first with bounce off and then on. The bubble pop and score change come straight from the game.
+
+## Built to be extended
+
+ichr is the software inside omalo. I'm building it with open source in mind, so people can modify it, extend it, and adapt it to their own hardware.
+
+- [![App launcher showing chat, profile, list, and remind.](https://btuckerc.dev/media/s3-amoled/app-launcher.png)](https://btuckerc.dev/media/s3-amoled/app-launcher.png)
+
+Launcher
+
+- [![Grain settings for bounce, surface, tilt, and calibration.](https://btuckerc.dev/media/s3-amoled/app-grain-controls.png)](https://btuckerc.dev/media/s3-amoled/app-grain-controls.png)
+
+Grain controls
+
+- [![A sample list item, milk, with remove and cancel controls.](https://btuckerc.dev/media/s3-amoled/app-list.png)](https://btuckerc.dev/media/s3-amoled/app-list.png)
+
+Lists
+
+- [![A sample chat reply demonstrating text layout on the small screen.](https://btuckerc.dev/media/s3-amoled/app-chat.png)](https://btuckerc.dev/media/s3-amoled/app-chat.png)
+
+Chat
+
+Firmware screens rendered on a computer with sample data. Click any screen to see it full size.
+
+## How omalo got its name
+
+I first wanted to call it talos, but that name was taken. Then came talo. I love oma projects like [Omarchy](https://omarchy.org/), so oma + talo became omalo.
+
+### ichor → ichr
+
+`ichr` is short for *ichor*. In the Greek myth of Talos, ichor is the life fluid running through a bronze body. I liked that as a metaphor for a soul: ichr is the software inside omalo that brings it to life. [More on ichor](https://www.greekmythology.com/Myths/Elements/Ichor/ichor.html).
+
+first idea talo s → talo
+
+the influence
+- [Omarchy](https://omarchy.org/)
+→ oma
+
+oma talo
+
+oma lo
+
+## How it works
+
+The technical notes walk through how the AI handoff works, how it checks whether a catch actually happened, and how Grain keeps the fleck out of hidden rounded corners.
+
+- [open s3-amoled](https://btuckerc.dev/projects/s3-amoled)
+
+---
+
+# What happens when you hand Pokémon to an AI? — Tucker Craig
+
+> Technical notes inside omalo by Tucker Craig: a Pokémon Emerald battle handoff, verifying what an agent actually did, Route 102 navigation, and Grain corner physics.
+
+Canonical: https://btuckerc.dev/projects/s3-amoled
+
+## What happens when you hand Pokémon to an AI?
+
+Back in 2017, I wrote a college post about OpenAI's bot learning to play Dota. Now I'm building a pocket companion that lets me play Pokémon Emerald and hand off goals to an AI. It's a totally different setup, but it keeps pulling me back to the same question: how does a computer turn what it knows about a game into actions it can actually pull off?
+
+- [read my 2017 post on AI and Dota](https://tuckercraig.com/DIG101/the-future-of-ai-is-openai/)
+
+Prototype · Waveshare ESP32-S3 touch AMOLED
+
+## I asked it to win a battle
+
+I picked Mudkip, then asked Luna to beat the Zigzagoon. From there, the local battle controller took over. The replay below shows the whole loop, from my request through the fight to the result.
+
+You can also play normally and grab control back with the device buttons whenever you want. The handoff lives right inside the game instead of in some separate demo you can only watch.
+
+- 1. My request
+- 2. The battle
+- 3. The result
+
+Defeat the Zigzagoon
+
+Desktop UI replay of a real Luna request and battle (actual model wait time left in). [download GIF](https://btuckerc.dev/media/s3-amoled/pokemon-agent-battle.gif)
+
+about this capture
+
+The battle and Luna's response are real, replayed on a computer using the device's actual UI. It's not a camera recording of the hardware or a live mic recording.
+
+## What does the AI actually control?
+
+Here's how that request splits up. Pokémon Emerald runs directly on the handheld, while speech transcription and model calls go out over Wi-Fi. The AI gets a structured summary of what's happening in the game, and local code on the device handles the actual movement and battle buttons.
+
+The model isn't running locally on the chip, and asking it for a goal doesn't guarantee it will finish every time.
+
+### On the device
+
+Pokémon Emerald Game state and local controllers
+
+### Over Wi-Fi
+
+Speech transcription Model calls
+
+Game state → agent Supported actions → local controllers → game
+
+Game state goes out over Wi-Fi. Local controllers handle the actual inputs.
+
+## Getting there is part of the goal
+
+Walking from one town to the next sounds easy until there's a trainer looking right at the path and tall grass in the way.
+
+I can ask for fewer steps, less tall grass, or a route that dodges trainers, and those don't always line up. The pathfinder can cut down on grass tiles first and break ties by distance, or skip trainer sightlines altogether.
+
+Try switching the task below. The map is Route 102 from Pokémon Emerald. The overlay just shows how those tradeoffs change the route, not a live recording of Luna playing.
+
+Interactive Route 102 map loads as you scroll here.
+
+## Did it actually catch anything?
+
+Before the controller reports a catch, it has to show up in the actual game state. Once the game settles, it diffs your party and PC storage boxes against how they looked before, looking for one new Pokémon that wasn't there earlier.
+
+Just checking the species name wouldn't cut it. If you already had a Zigzagoon sitting in storage, seeing a Zigzagoon afterward wouldn't prove this attempt was the one that caught it.
+
+### Before
+
+Party + PC boxes
+
+Existing Pokémon
+
+New target: not there yet
+
+### After the game settles
+
+Party + PC boxes
+
+Existing Pokémon
+
++ New target: shows up once
+
+Example state diff, not a recording of an actual catch.
+
+## Sometimes I just want to ask a question
+
+Asking 'Who's in my party?' is a different kind of request from 'Win this battle.' To answer a question, the app just reads the current party state without sending any movement or battle inputs.
+
+Keeping read-only questions separate from actions that change the game keeps things predictable.
+
+### "Who's in my party?"
+
+Reads the current game state.
+
+No movement or battle inputs.
+
+### "Win this battle."
+
+Hands off to the local controllers.
+
+Actually changes the game.
+
+## The other game starts when you move it
+
+Grain is a tiny motion game on the same handheld. You tilt the device to steer a little fleck around a rounded play area. Because the fleck is only seven pixels wide, tiny tweaks to how it moves make a big difference in how it feels.
+
+The motion simulation ticks at 240 Hz under the hood. That's the internal physics rate, separate from how fast the screen refreshes.
+
+Grain
+
+Bounce off, then on (with simulated taps and tilt). [download GIF](https://btuckerc.dev/media/s3-amoled/grain-bounce-off-on-catch-v4.gif)
+
+about this capture
+
+This demo runs the device's real settings screen and game code on a computer. Each run starts from the same spot with the same simulated tilt, first with bounce off and then on. The bubble pop and score change come straight from the game.
+
+Look closer at the play area
+
+Zoomed-in still from the same desktop capture. Scroll around to inspect the pixels.
+
+![Enlarged Grain capture, including the play area and its controls.](https://btuckerc.dev/media/s3-amoled/grain-bounce-off-on-catch-v4-poster.png)
+
+## Where does it go when it hits a corner?
+
+The screen has rounded corners, but the image buffer underneath is still a rectangle. That leaves a small problem: the game can draw into corners you can't actually see.
+
+Grain uses a rounded collision tray to keep the fleck inside the visible screen. The drawing area and the collision boundary have to agree, or the fleck can slide right into a clipped corner and vanish.
+
+Explore the layers Framebuffer Visible screen Collision boundary Move toward the corner
+
+Slide the fleck farther toward the corner, then try turning off the collision boundary.
+
+Interactive diagram to show the idea, not exact hardware measurements or physics.
+
+That's what I've been working through inside omalo. The main omalo page shows the whole device, including Grain, Pokémon, and the other firmware screens.
+
+- [explore omalo](https://btuckerc.dev/projects/omalo)
+Current limits and source
+
+Goals can still fail, and I haven't proven out a full autonomous run of Pokémon Emerald. Each clip notes how it was captured, and the diagrams show the current design. I'll link the source here once it's ready to share.
+
+---
+
+# Contact — Tucker Craig
+
+> Get in touch with Tucker Craig via email, GitHub, LinkedIn, X, tuckercraig.com, or the contact form.
+
+Canonical: https://btuckerc.dev/contact
+
+## email
+
+- [btuckerc.dev@gmail.com](mailto:btuckerc.dev@gmail.com)
+
+## links
+
+- [tuckercraig.com](https://tuckercraig.com/)
+
+- [linkedin](https://www.linkedin.com/in/tucker-craig/)
+
+- [github](https://github.com/btuckerc)
+
+- [x](https://x.com/btuckercdev)
+
+- [instagram](https://www.instagram.com/btuckerc.dev/)
+
+---
+
+# Privacy Policy - Flipping Seven Calculator
+
+> Privacy policy for Flipping Seven Calculator, an offline iOS scorekeeper by Tucker Craig that collects no personal data.
+
+Canonical: https://btuckerc.dev/privacy/flipping-seven-calculator
+
+## Simple app. Simple privacy.
+
+Flipping Seven Calculator is an offline scorekeeper. We do not collect, transmit, sell, or share personal data.
+
+- **data collected**: none
+
+- **accounts**: not required
+
+- **analytics & ads**: none
+
+- **app data**: stored on device
+
+effective July 28, 2026 developer Tucker Craig
+
+## Data collected
+
+**None.** Flipping Seven Calculator does not collect data about you and does not send anything to a server.
+
+## Data stored on your device
+
+The app saves a small amount of data locally on your device using Apple's standard storage so your games and settings stick around:
+
+- Player names and roster
+- Current game state and round history
+- Deck and score-profile settings
+- Preferences like theme, haptics, and display options
+
+This stays on your device unless you include it in an Apple-managed backup like iCloud Backup. Deleting the app removes its local data, aside from any device backup you manage yourself.
+
+## Tracking
+
+Flipping Seven Calculator does not track you across apps or websites and does not use Apple's App Tracking Transparency framework.
+
+## Third-party services
+
+Flipping Seven Calculator does not include any third-party analytics, ads, or crash-reporting SDKs.
+
+## Permissions
+
+Flipping Seven Calculator does not ask for location, contacts, photos, camera, microphone, Bluetooth, or similar device permissions.
+
+## Children's privacy
+
+Because Flipping Seven Calculator does not collect personal information, there is no user data to sell, profile, or share for children or adults.
+
+## Changes to this policy
+
+If this policy changes, I'll update the effective date above and post the new version right here.
+
+## Contact
+
+For privacy questions, email [btuckerc.dev@gmail.com](mailto:btuckerc.dev@gmail.com).
+
+Independent scorekeeper. Not affiliated with or endorsed by any game publisher.
+
+---
+
+# Privacy Policy - Herdwick
+
+> Privacy policy for Herdwick, an iOS coding-agent client by Tucker Craig that connects directly over SSH to your own machines.
+
+Canonical: https://btuckerc.dev/privacy/herdwick
+
+## Your agents stay on your machines.
+
+Herdwick is an iPhone and iPad app for coding agents running on your own computers. It connects straight to them over SSH, and I don't collect or store any of your data.
+
+- **data collected**: none
+
+- **accounts**: not required
+
+- **analytics & ads**: none
+
+- **connections**: direct over SSH
+
+effective September 26, 2026 developer Tucker Craig
+
+## Data collected
+
+**None.** Herdwick has no analytics, ads, or crash-reporting SDKs. I don't store anything about you. The only service I run is the optional push relay described below, which forwards alerts without storing or logging them.
+
+## Your machines and connections
+
+Herdwick connects over SSH to the computers you add. The conversations, terminal output, messages, and attachments you view and send travel straight between your device and that computer, encrypted by SSH. Nothing is copied anywhere else.
+
+- Host names, addresses, and usernames stay on your device.
+- Your device generates its own SSH key, and the private key never leaves it. The key, any saved passwords, and trusted host keys live in the iOS Keychain for this device only and aren't included in backups.
+- Removing a host in Herdwick deletes its saved password and host key.
+- Images you attach upload only to your computer's temporary folder. Herdwick cleans them up after the window you pick in Settings.
+
+## Tailscale (optional)
+
+If you sign in to Tailscale, Herdwick runs Tailscale's client inside the app so it can reach your machines on your tailnet. Sign-in happens on Tailscale's web page in a Safari view, so Herdwick never sees your credentials.
+
+While Tailscale is on, Tailscale Inc. receives what its client needs to connect and troubleshoot this device:
+
+- Device identity keys and a device name (`herdwick-<random>`)
+- Operating system version, device model, and network addresses
+- Diagnostic logs from the Tailscale client
+
+That data is tied to your Tailscale account and covered by [Tailscale's privacy policy](https://tailscale.com/privacy-policy). It isn't used for tracking or ads, and I never receive it. Signing out in Settings wipes this device's tailnet identity from the app. If you never sign in, none of this runs.
+
+## Alerts while away (optional)
+
+If you turn on Alerts While Away, Herdwick starts a tiny watcher over SSH on each connected computer when you leave the app. It stops when you come back, exits on its own after a day, and doesn't install anything permanent.
+
+When an agent needs you or finishes, your computer sends Herdwick's push relay:
+
+- This device's Apple push notification token
+- Identifiers for the computer (a random ID Herdwick made), the herdr session, and the pane
+- The agent's new state and a change number
+
+It never sends names, paths, or anything an agent wrote. The relay (which I run on Cloudflare Workers) passes that along to Apple's push service and keeps nothing: no storage and no request logs. The alert text is generic, and your device fills in the names it already knows. You can turn this off in Settings anytime, and the relay's [source code](https://github.com/btuckerc/herdwick/blob/main/relay/src/index.js) is public.
+
+## Data stored on your device
+
+Herdwick keeps a few things locally on your device so it works:
+
+- Your host list and connection settings
+- Preferences like appearance, terminal theme, font, and notification choices
+- Which agents you've read, so the inbox knows what's new
+
+Deleting the app removes this data, aside from any device backup you manage yourself.
+
+## Permissions
+
+- **Notifications**: off until you turn them on. Alerts happen on your device while Herdwick is open or refreshing in the background, or come through Apple's push service if you enable Alerts While Away.
+- **Photos**: Herdwick uses the system photo picker and only sees the images you pick.
+- **Network**: used only to reach the machines you add, plus Tailscale and Apple's push service if you turn those on.
+
+## Tracking
+
+Herdwick does not track you across apps or websites and does not use Apple's App Tracking Transparency framework.
+
+## Children's privacy
+
+Herdwick does not collect personal information, so there is no user data to sell, profile, or share for children or adults.
+
+## Changes to this policy
+
+If this policy changes, I'll update the effective date above and post the new version right here.
+
+## Contact
+
+For privacy questions, email [btuckerc.dev@gmail.com](mailto:btuckerc.dev@gmail.com).
+
+Independent project. Not affiliated with or endorsed by the herdr project or Tailscale Inc.
+
+---
+
+# Support - Herdwick
+
+> Help and setup guide for Herdwick, the iPhone and iPad app by Tucker Craig for reading and answering coding agents on your own machines.
+
+Canonical: https://btuckerc.dev/herdwick/support
+
+## Coding agents on your phone.
+
+Herdwick shows the coding agents on your own machines as conversations. Read what they did and answer them from your iPhone or iPad.
+
+## What you need
+
+- An iPhone or iPad on iOS 26 or later.
+- A Mac or Linux machine running [herdr](https://herdr.dev), with your coding agents (omp, Claude Code, Codex) in its panes.
+- SSH access to that machine, directly or through Tailscale.
+
+## Connect a machine
+
+- Open Herdwick and add a host by its address, or sign in to Tailscale and pick a machine.
+- Sign in with a password, or with the key Herdwick makes on your device: copy it from Settings into `~/.ssh/authorized_keys` on the machine.
+- Your agents appear in the inbox. Nothing is installed on the machine.
+
+## If it won't connect
+
+- Check that you can SSH to the machine from another device with the same user.
+- Check that herdr is running on it. Herdwick shows only agents herdr tracks.
+- For key sign-in, check that the whole key line is in `authorized_keys`.
+
+## Try it without a machine
+
+On the first screen, tap "Explore a demo host". You can exit demo mode anytime from the Hosts screen.
+
+## Contact
+
+Email [btuckerc.dev@gmail.com](mailto:btuckerc.dev@gmail.com). Read the [privacy policy](https://btuckerc.dev/privacy/herdwick).
+
+Independent project. Not affiliated with or endorsed by the herdr project or Tailscale Inc.
+
+---
+
+# Privacy Policy - Inkjoin
+
+> Privacy policy for Inkjoin, an iPhone logic puzzle game by Tucker Craig.
+
+Canonical: https://btuckerc.dev/privacy/inkjoin
+
+## Your puzzles stay yours.
+
+Inkjoin is an iPhone logic puzzle game. Your progress stays on your device, and the optional anonymous analytics just help me tune puzzle difficulty.
+
+- **data linked to you**: none
+
+- **account**: not required
+
+- **analytics**: optional to send
+
+- **ads & tracking**: none
+
+developer Tucker Craig
+
+## Data collected
+
+Inkjoin has no third-party SDKs, ads, tracking, or crash-reporting tools. Anonymous analytics are on by default and can be turned off anytime in Settings → "Send anonymous analytics".
+
+The first time you solve each daily puzzle, Inkjoin sends the puzzle date, how long it took in whole seconds, and whether you used hints. Along with that report, the server records the UTC receipt time, app build number, coarse country code, and local hour (0–23) derived ephemerally at the Cloudflare edge. Your IP address is never logged or stored, and there's no account or device identifier, so none of it is tied to you. I use it to tune puzzle difficulty and understand how the daily board is played, and it's stored in a Cloudflare D1 database.
+
+Opening a public share link on inkjoin.btuckerc.dev also increments aggregate daily counters (link-preview fetches by route, and browser visits by route and coarse country) without storing shared puzzle tokens, URLs, or IP addresses.
+
+## Daily puzzles
+
+Daily puzzles download from my server at inkjoin.btuckerc.dev, hosted on Cloudflare. Once a puzzle downloads, it works offline. Fetching daily puzzles sends standard HTTP info (including your IP address) to Cloudflare, and I don't log or store anything from puzzle download requests.
+
+## Data stored on your device
+
+Your progress, marks, and settings stay on your device in the app's Documents folder. Deleting Inkjoin wipes them. You can also reset your progress anytime in Settings.
+
+## Purchases
+
+Optional in-app purchases (such as Inkjoin Full) are bought through Apple. Apple handles the payment, and I never receive any payment or personal details. The app just checks with the App Store to see which purchases are active on your device.
+
+## Permissions
+
+Inkjoin doesn't ask for any permissions, including photos, notifications, or location.
+
+## Tracking
+
+Inkjoin does not track you and does not use Apple's App Tracking Transparency framework.
+
+## Children's privacy
+
+Inkjoin collects no personal information from children.
+
+## Contact
+
+For privacy questions, email [btuckerc.dev@gmail.com](mailto:btuckerc.dev@gmail.com).
+
+---
+
+# Support - Inkjoin
+
+> Help, rules, and common questions for Inkjoin, an iPhone logic puzzle game by Tucker Craig.
+
+Canonical: https://btuckerc.dev/inkjoin/support
+
+## A little help with Inkjoin.
+
+Fill squares to draw one connected shape. These notes explain the rules and answer a few common questions.
+
+## How to play
+
+- Fill squares to make one connected shape, joined side to side.
+- A number counts filled squares in the eight squares around it, split into separate groups. For example, "3 1" means a group of three and a group of one.
+- You can't have a solid 2x2 block of filled squares.
+- The early chapters walk through each rule one at a time.
+
+## Common questions
+
+**A daily puzzle won't load.** It needs an internet connection the first time to download. After that, you can play it offline.
+
+**Why are daily drawings covered?** Finished drawings for daily puzzles stay hidden until you tap to reveal them.
+
+**What does Inkjoin Full unlock?** One purchase unlocks all 1,600 practice puzzles and every past daily. Today's daily, every chapter, unlimited hints, and 10 practice puzzles per level are free.
+
+**I bought Inkjoin Full on another device.** Open Settings and tap Restore Purchases. Family Sharing works too.
+
+**How do I turn analytics off?** Open Settings and turn off "Send anonymous analytics".
+
+**Where is my progress?** Progress is saved only on this iPhone.
+
+## Contact
+
+Email [btuckerc.dev@gmail.com](mailto:btuckerc.dev@gmail.com). Read the [privacy policy](https://btuckerc.dev/privacy/inkjoin).

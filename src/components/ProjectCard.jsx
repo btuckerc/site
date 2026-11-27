@@ -90,9 +90,13 @@ const ProjectCardComponent = ({ project, focusProps = {}, searchMeta = null, sea
         )}
       </button>
 
-      {isExpanded && (
-        <div id={contentId} className="tui-project-detail tui-enter">
-          {project.media && (
+      {hasExpandableContent && (
+        <div
+          id={contentId}
+          hidden={!isExpanded}
+          className={`tui-project-detail${isExpanded ? ' tui-enter' : ''}`}
+        >
+          {isExpanded && project.media && (
             <GameCapture
               className={`project-capture${project.media.height > project.media.width ? ' project-capture-portrait' : ''}`}
               src={project.media.video}

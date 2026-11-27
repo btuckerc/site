@@ -1197,6 +1197,10 @@ details[open] > summary .tui-disclosure {
   font-size: var(--text-sm);
 }
 
+.tui-project-detail[hidden] {
+  display: none;
+}
+
 .tui-project-facts {
   display: grid;
   max-width: 54rem;

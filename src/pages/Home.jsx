@@ -16,13 +16,7 @@ const dictation = projectsData.find((project) => project.id === 'dictation')
 const Home = () => {
   return (
     <>
-      <PageMeta
-        title="Tucker Craig - Software Engineer"
-        description="Software engineer building my own tools with coding agents across Mac, Windows, iOS, and hardware: angl browser, winstream, Herdwick, Pace Bar, Dictation, Inkjoin, and omalo."
-        url="https://btuckerc.dev/"
-        image="https://btuckerc.dev/og/home.jpg"
-        imageAlt="Tucker Craig, software engineer. Building my own tools with coding agents."
-      />
+      <PageMeta route="/" />
 
       <div className="home-page tui-page-shell min-h-svh">
         <div className="tui-rail tui-enter">

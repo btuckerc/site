@@ -1,10 +1,11 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { lazy, Suspense, useCallback, useLayoutEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useRef, useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider } from './hooks/useTheme.jsx'
 import { FontProvider } from './hooks/useFont.jsx'
 import { FocusProvider } from './hooks/useRovingFocus.jsx'
 import { useHotkeys, useScrollTargets } from './hooks/useHotkeys'
+import { useIsomorphicLayoutEffect } from './hooks/useIsomorphicLayoutEffect'
 import StatusBar from './components/StatusBar'
 import CommandPalette from './components/CommandPalette'
 import Footer from './components/Footer'
@@ -58,7 +59,7 @@ function AppContent() {
     })
   }, [])
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (backgroundRef.current) {
       backgroundRef.current.inert = isCommandPaletteOpen
     }
@@ -150,9 +151,9 @@ function AppContent() {
   )
 }
 
-function App() {
+function App({ helmetContext } = {}) {
   return (
-    <HelmetProvider>
+    <HelmetProvider context={helmetContext}>
       <ThemeProvider>
         <FontProvider>
           <FocusProvider>

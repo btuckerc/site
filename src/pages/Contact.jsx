@@ -5,13 +5,7 @@ import PageMeta from '../components/PageMeta'
 const Contact = () => {
   return (
     <>
-      <PageMeta
-        title="Contact - Tucker Craig"
-        description="Get in touch with Tucker Craig via email, GitHub, LinkedIn, or the contact form."
-        url="https://btuckerc.dev/contact"
-        image="https://btuckerc.dev/og/contact.jpg"
-        imageAlt="Tucker Craig, contact. Say hello at btuckerc.dev@gmail.com."
-      />
+      <PageMeta route="/contact" />
       <div className="tui-page-shell min-h-svh">
         <div className="tui-rail tui-enter">
           <Breadcrumb items={[{ label: 'home', to: '/' }, { label: 'contact' }]} />
@@ -40,9 +34,18 @@ const Contact = () => {
                     <h2 className="case-study-kicker font-semibold mb-3">links</h2>
                     <div className="space-y-2.5">
                       <a
+                        href="https://tuckercraig.com/"
+                        target="_blank"
+                        rel="me noopener noreferrer"
+                        aria-describedby="new-tab-note"
+                        className="tui-link-chip tui-link-chip-block"
+                      >
+                        tuckercraig.com
+                      </a>
+                      <a
                         href="https://www.linkedin.com/in/tucker-craig/"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="me noopener noreferrer"
                         aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block"
                       >
@@ -51,7 +54,7 @@ const Contact = () => {
                       <a
                         href="https://github.com/btuckerc"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="me noopener noreferrer"
                         aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block"
                       >
@@ -60,7 +63,7 @@ const Contact = () => {
                       <a
                         href="https://x.com/btuckercdev"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="me noopener noreferrer"
                         aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block"
                       >
@@ -69,7 +72,7 @@ const Contact = () => {
                       <a
                         href="https://www.instagram.com/btuckerc.dev/"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="me noopener noreferrer"
                         aria-describedby="new-tab-note"
                         className="tui-link-chip tui-link-chip-block"
                       >

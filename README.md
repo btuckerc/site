@@ -61,10 +61,7 @@ scripts/         maintenance scripts
 
 - `npm run stats:about` validates the reviewed public content structure and
   does not collect or write runtime statistics.
-- `npm run build` also creates initial HTML metadata for each route through
-  `scripts/prerender-routes.js`. Each non-root route is emitted as both a
-  directory index and an extensionless `.html` artifact so static hosting and
-  the Vite preview resolve `/route` and `/route/` consistently.
+- `npm run build` compiles both the client bundle and an SSR bundle (`src/entry-server.jsx`), then runs `scripts/prerender-routes.js` to render full HTML, per-route CSS links, JSON-LD, sibling `.md` twins, `llms.txt`, `llms-full.txt`, and `sitemap.xml`. Each non-root route is emitted as a single canonical `dist/<route>.html` artifact so Cloudflare Pages redirects trailing-slash variants cleanly to the canonical URL.
 - Share previews (`og:image` / `twitter:image`) live in `public/og/`, one
   1200×630 JPG per route except omalo, which keeps `public/media/omalo/share.jpg`.
   They are rendered from `scripts/share-cards/card.html` by

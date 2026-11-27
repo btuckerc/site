@@ -55,7 +55,7 @@ const policySections = [
           and troubleshoot this device:
         </p>
         <ul className="mt-3 space-y-2" role="list">
-          <li>Device identity keys and a device name (herdwick-&lt;random&gt;)</li>
+          <li>Device identity keys and a device name (<code>herdwick-&lt;random&gt;</code>)</li>
           <li>Operating system version, device model, and network addresses</li>
           <li>Diagnostic logs from the Tailscale client</li>
         </ul>
@@ -180,14 +180,7 @@ const summaryItems = [
 
 const HerdwickPrivacy = () => (
   <>
-    <PageMeta
-      title="Privacy Policy - Herdwick"
-      description="Privacy policy for Herdwick, an iOS client that connects over SSH to your own machines. I collect no data."
-      url="https://btuckerc.dev/privacy/herdwick"
-      openGraphDescription="Herdwick connects directly to your own machines over SSH. No data is collected or stored."
-      image="https://btuckerc.dev/og/herdwick-privacy.jpg"
-      imageAlt="Herdwick privacy: your agents stay on your machines."
-    />
+    <PageMeta route="/privacy/herdwick" />
 
     <div className="tui-page-shell min-h-svh">
       <div className="tui-rail">

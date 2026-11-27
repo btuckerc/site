@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/update-about-stats.js",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr",
     "postbuild": "node scripts/prerender-routes.js",
     "lint": "eslint .",
     "preview": "vite preview",

@@ -1,5 +1,56 @@
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
 /assets/*
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: public, max-age=31536000, immutable
 
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+/llms.txt
+  Content-Type: text/markdown; charset=utf-8
+
+/llms-full.txt
+  Content-Type: text/markdown; charset=utf-8
+
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+
+/index.md
+  Link: <https://btuckerc.dev/>; rel="canonical"
+
+/workflow.md
+  Link: <https://btuckerc.dev/workflow>; rel="canonical"
+
+/about.md
+  Link: <https://btuckerc.dev/about>; rel="canonical"
+
+/projects.md
+  Link: <https://btuckerc.dev/projects>; rel="canonical"
+
+/projects/omalo.md
+  Link: <https://btuckerc.dev/projects/omalo>; rel="canonical"
+
+/projects/s3-amoled.md
+  Link: <https://btuckerc.dev/projects/s3-amoled>; rel="canonical"
+
+/contact.md
+  Link: <https://btuckerc.dev/contact>; rel="canonical"
+
+/privacy/flipping-seven-calculator.md
+  Link: <https://btuckerc.dev/privacy/flipping-seven-calculator>; rel="canonical"
+
+/privacy/herdwick.md
+  Link: <https://btuckerc.dev/privacy/herdwick>; rel="canonical"
+
+/herdwick/support.md
+  Link: <https://btuckerc.dev/herdwick/support>; rel="canonical"
+
+/privacy/inkjoin.md
+  Link: <https://btuckerc.dev/privacy/inkjoin>; rel="canonical"
+
+/inkjoin/support.md
+  Link: <https://btuckerc.dev/inkjoin/support>; rel="canonical"

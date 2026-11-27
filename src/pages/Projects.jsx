@@ -11,6 +11,7 @@ import {
 } from '../utils/projectSearch'
 import projectsData from '../../data/projects.json'
 import PageMeta from '../components/PageMeta'
+import { compareFeaturedProjects, getProjectDate } from '../seo/routesMeta'
 
 const sortOptions = [
   { id: 'featured', label: 'featured' },
@@ -20,19 +21,14 @@ const sortOptions = [
 
 const projectSearchIndex = createProjectSearchIndex(projectsData)
 
-const getProjectDate = (project, boundary = '12-31') => project.date || `${project.year}-${boundary}`
-
 const sortProjects = (projectResults, sortBy) =>
   [...projectResults].sort((a, b) => {
     const aProject = a.project
     const bProject = b.project
 
     switch (sortBy) {
-      case 'featured': {
-        const featuredDelta = (bProject.featured || 0) - (aProject.featured || 0)
-        if (featuredDelta !== 0) return featuredDelta
-        return new Date(getProjectDate(bProject)) - new Date(getProjectDate(aProject))
-      }
+      case 'featured':
+        return compareFeaturedProjects(aProject, bProject)
       case 'recent':
         return new Date(getProjectDate(bProject)) - new Date(getProjectDate(aProject))
       case 'oldest':
@@ -138,13 +134,7 @@ const Projects = () => {
 
   return (
     <>
-      <PageMeta
-        title="Projects - Tucker Craig"
-        description="Things I've built, big and small: angl browser, winstream, Herdwick, Inkjoin, Pace Bar, Dictation, CenterSeat, and more."
-        url="https://btuckerc.dev/projects"
-        image="https://btuckerc.dev/og/projects.jpg"
-        imageAlt="Tucker Craig, projects: angl browser, winstream, Herdwick, Inkjoin, Pace Bar, and more."
-      />
+      <PageMeta route="/projects" />
       <div className="projects-page tui-page-shell min-h-svh">
         <div className="tui-rail">
           <Breadcrumb items={[{ label: 'home', to: '/' }, { label: 'projects' }]} />

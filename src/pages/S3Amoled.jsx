@@ -51,9 +51,7 @@ const DeferredNavigationDemo = ({ copy: visualCopy }) => {
   const location = useLocation()
   const hostRef = useRef(null)
   const pendingFocusRef = useRef(false)
-  const [shouldLoad, setShouldLoad] = useState(
-    () => location.hash === '#navigation' || typeof IntersectionObserver !== 'function'
-  )
+  const [shouldLoad, setShouldLoad] = useState(false)
 
   const focusSettledContent = () => {
     if (!pendingFocusRef.current) return
@@ -105,12 +103,12 @@ const DeferredNavigationDemo = ({ copy: visualCopy }) => {
 
   useEffect(() => {
     if (shouldLoad) return undefined
-    if (location.hash === '#navigation') {
+    if (location.hash === '#navigation' || typeof IntersectionObserver !== 'function') {
       setShouldLoad(true)
       return undefined
     }
     const target = hostRef.current
-    if (!target || typeof IntersectionObserver !== 'function') return undefined
+    if (!target) return undefined
 
     let observer = null
     let timerId = null
@@ -219,14 +217,7 @@ export default function S3Amoled() {
 
   return (
     <>
-      <PageMeta
-        title={copy.title}
-        description="Inside omalo: a Pokémon battle handoff, checking what an agent actually did, and a tiny motion-controlled game."
-        url="https://btuckerc.dev/projects/s3-amoled"
-        type="article"
-        image="https://btuckerc.dev/og/s3-amoled.jpg"
-        imageAlt="omalo notes, s3-amoled: what happens when you hand Pokémon to an AI?"
-      />
+      <PageMeta route="/projects/s3-amoled" />
       <div className="case-study-page technical-readability-page tui-page-shell min-h-svh">
         <div className="tui-rail">
           <Breadcrumb

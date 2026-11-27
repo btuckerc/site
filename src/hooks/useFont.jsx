@@ -71,20 +71,29 @@ const getStoredFontId = () => {
 }
 
 export const FontProvider = ({ children }) => {
-  const [fontId, setFontId] = useState(() => {
-    return getStoredFontId()
-  })
+  // Always start on the SSR default so initial client render matches server HTML.
+  const [fontId, setFontId] = useState('neue-montreal')
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    const stored = getStoredFontId()
+    if (stored !== 'neue-montreal') {
+      setFontId(stored)
+    }
+    setHydrated(true)
+  }, [])
 
   const canonicalFontId = getCanonicalFontId(fontId)
   const currentFont = FONTS.find(f => f.id === canonicalFontId) || FONTS[0]
 
   useEffect(() => {
+    if (!hydrated) return
     document.documentElement.style.setProperty('--font-family', currentFont.family)
     safeSetItem('font-family', currentFont.id)
     if (fontId !== currentFont.id) {
       setFontId(currentFont.id)
     }
-  }, [fontId, currentFont])
+  }, [fontId, currentFont, hydrated])
 
   const cycleFont = () => {
     const currentIndex = FONTS.findIndex(f => f.id === currentFont.id)

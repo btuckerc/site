@@ -6,12 +6,13 @@ import BrandIcon from './BrandIcon'
 import '../styles/command-dock.css'
 
 const socialLinks = [
-  { name: 'github', url: 'https://github.com/btuckerc', key: 'gh' },
-  { name: 'linkedin', url: 'https://www.linkedin.com/in/tucker-craig/', key: 'in' },
-  { name: 'twitter', url: 'https://x.com/btuckercdev', key: 'tw' },
-  { name: 'instagram', url: 'https://www.instagram.com/btuckerc.dev/', key: 'ig' },
-  { name: 'spotify', url: 'https://open.spotify.com/user/tuxedo7777?si=ed756fe16e924916', key: 'sp' },
-  { name: 'soundcloud', url: 'https://soundcloud.com/tuxix', key: 'sc' },
+  { name: 'tuckercraig.com', url: 'https://tuckercraig.com/', key: 'tc', label: 'Visit tuckercraig.com' },
+  { name: 'github', url: 'https://github.com/btuckerc', key: 'gh', label: 'Visit github profile' },
+  { name: 'linkedin', url: 'https://www.linkedin.com/in/tucker-craig/', key: 'in', label: 'Visit linkedin profile' },
+  { name: 'twitter', url: 'https://x.com/btuckercdev', key: 'tw', label: 'Visit twitter profile' },
+  { name: 'instagram', url: 'https://www.instagram.com/btuckerc.dev/', key: 'ig', label: 'Visit instagram profile' },
+  { name: 'spotify', url: 'https://open.spotify.com/user/tuxedo7777', key: 'sp', label: 'Visit spotify profile' },
+  { name: 'soundcloud', url: 'https://soundcloud.com/tuxix', key: 'sc', label: 'Visit soundcloud profile' },
 ]
 
 const Footer = ({ onCommandPaletteToggle, isCommandPaletteOpen = false }) => {
@@ -224,9 +225,10 @@ const Footer = ({ onCommandPaletteToggle, isCommandPaletteOpen = false }) => {
                   key={link.name}
                   href={link.url}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="me noopener noreferrer"
                   className="tui-menu-item gap-2"
-                  aria-label={`Visit ${link.name} profile`}
+                  aria-label={link.label}
+                  title={link.name}
                   aria-describedby="new-tab-note"
                   onClick={() => closeSocialMenu(false)}
                 >
@@ -268,9 +270,10 @@ const Footer = ({ onCommandPaletteToggle, isCommandPaletteOpen = false }) => {
                 <a
                   href={link.url}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="me noopener noreferrer"
                   className="tui-footer-link"
-                  aria-label={`Visit ${link.name} profile`}
+                  aria-label={link.label}
+                  title={link.name}
                   aria-describedby="new-tab-note"
                 >
                   {showIcons ? (

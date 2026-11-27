@@ -50,6 +50,19 @@ const AboutCard = () => (
       </a>{' '}
       at Davidson.
     </p>
+    <p className="text-muted leading-7 mt-4">
+      My main site and older web archives live at{' '}
+      <a
+        href="https://tuckercraig.com/"
+        className="whitespace-nowrap text-accent underline underline-offset-4"
+        target="_blank"
+        rel="me noopener noreferrer"
+        aria-describedby="new-tab-note"
+      >
+        tuckercraig.com
+      </a>
+      .
+    </p>
     <nav aria-label="Explore Tucker's work" className="flex flex-wrap gap-3 mt-6">
       <Link className="tui-link-chip" to="/workflow">How I build</Link>
       <Link className="tui-link-chip" to="/projects">Projects</Link>

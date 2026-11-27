@@ -46,14 +46,7 @@ export default function Workflow() {
 
   return (
     <>
-      <PageMeta
-        title="How I build with AI - Tucker Craig"
-        description="How I split work across Gemini 4 Neon, Claude Opus 5.5, GPT-6.2 Sol, local Qwen 3.8, and a five-model blind council to build and test my own apps."
-        url="https://btuckerc.dev/workflow"
-        type="article"
-        image="https://btuckerc.dev/og/workflow.jpg"
-        imageAlt="Tucker Craig, workflow: how I build with AI."
-      />
+      <PageMeta route="/workflow" />
 
       <div className="case-study-page technical-readability-page tui-page-shell min-h-svh">
         <div className="tui-rail">

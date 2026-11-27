@@ -54,14 +54,7 @@ const sections = [
 
 const HerdwickSupport = () => (
   <>
-    <PageMeta
-      title="Support - Herdwick"
-      description="Help for Herdwick, the iPhone and iPad app for reading and answering coding agents on your own machines."
-      url="https://btuckerc.dev/herdwick/support"
-      openGraphDescription="Help for Herdwick: setup, connecting a machine, and contact."
-      image="https://btuckerc.dev/og/herdwick-support.jpg"
-      imageAlt="Herdwick support: coding agents on your phone."
-    />
+    <PageMeta route="/herdwick/support" />
 
     <div className="tui-page-shell min-h-svh">
       <div className="tui-rail">

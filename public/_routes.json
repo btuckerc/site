@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "include": [
+    "/",
+    "/workflow",
+    "/about",
+    "/projects",
+    "/projects/omalo",
+    "/projects/s3-amoled",
+    "/contact",
+    "/privacy/flipping-seven-calculator",
+    "/privacy/herdwick",
+    "/herdwick/support",
+    "/privacy/inkjoin",
+    "/inkjoin/support"
+  ],
+  "exclude": []
+}

@@ -89,14 +89,7 @@ const summaryItems = [
 
 const FlippingSevenPrivacy = () => (
   <>
-    <PageMeta
-      title="Privacy Policy - Flipping Seven Calculator"
-      description="Privacy policy for Flipping Seven Calculator, an offline scorekeeper that collects no personal data."
-      url="https://btuckerc.dev/privacy/flipping-seven-calculator"
-      openGraphDescription="Flipping Seven Calculator does not collect, transmit, sell, or share personal data."
-      image="https://btuckerc.dev/og/flipping-seven-privacy.jpg"
-      imageAlt="Flipping Seven privacy: simple app, simple privacy."
-    />
+    <PageMeta route="/privacy/flipping-seven-calculator" />
 
     <div className="tui-page-shell min-h-svh">
       <div className="tui-rail">

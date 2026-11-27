@@ -33,14 +33,7 @@ const sections = [
 
 const InkjoinSupport = () => (
   <>
-    <PageMeta
-      title="Support - Inkjoin"
-      description="Help for Inkjoin, an iPhone logic puzzle game."
-      url="https://btuckerc.dev/inkjoin/support"
-      openGraphDescription="How to play Inkjoin and answers to common questions."
-      image="https://btuckerc.dev/og/inkjoin-support.jpg"
-      imageAlt="Inkjoin support."
-    />
+    <PageMeta route="/inkjoin/support" />
 
     <div className="tui-page-shell min-h-svh">
       <div className="tui-rail">

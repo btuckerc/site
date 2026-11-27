@@ -8,9 +8,6 @@ import StarterSelectionCapture from '../components/StarterSelectionCapture'
 import { useActiveSection } from '../hooks/useActiveSection'
 import '../styles/project-navigation.css'
 
-const shareImage = 'https://btuckerc.dev/media/omalo/share.jpg'
-const pageUrl = 'https://btuckerc.dev/projects/omalo'
-
 const sectionLinks = [
   { id: 'device', label: 'The device' },
   { id: 'pokemon', label: 'Pokémon' },
@@ -101,14 +98,7 @@ const Omalo = () => {
 
   return (
     <>
-      <PageMeta
-        title="omalo - a pocket companion running ichr"
-        description="omalo is a pocket companion running ichr. Play Pokémon Emerald yourself, or hand off goals to an AI."
-        url={pageUrl}
-        type="article"
-        image={shareImage}
-        imageAlt="omalo, a pocket companion running ichr, with Pokémon Emerald on omalo."
-      />
+      <PageMeta route="/projects/omalo" />
 
       <div className="omalo-page tui-page-shell min-h-svh">
         <div className="tui-rail">

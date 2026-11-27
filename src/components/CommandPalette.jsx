@@ -1,6 +1,7 @@
-import { useState, useEffect, useId, useLayoutEffect, useRef } from 'react'
+import { useState, useEffect, useId, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme.jsx'
+import { useIsomorphicLayoutEffect } from '../hooks/useIsomorphicLayoutEffect'
 import { safeGetItem, safeSetItem } from '../utils/safeStorage'
 
 const prefersReducedMotion = () => (
@@ -164,7 +165,7 @@ const CommandPalette = ({ isOpen, onClose, returnFocusRef = null }) => {
     setSelectedIndex(0)
   }, [query])
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (isOpen) {
       const opener = returnFocusRef?.current
       const activeElement = document.activeElement

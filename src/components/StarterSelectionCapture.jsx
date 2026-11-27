@@ -48,38 +48,43 @@ export const GameCapture = ({
 }) => {
   const captionId = useId()
   const videoRef = useRef(null)
-  const reducedMotionRef = useRef(readReducedMotionPreference())
+  const reducedMotionRef = useRef(false)
   const userPausedRef = useRef(false)
   const lifecyclePauseRef = useRef(false)
   const resumeAfterLifecycleRef = useRef(false)
   const inViewRef = useRef(false)
-  const pageVisibleRef = useRef(typeof document === 'undefined' || !document.hidden)
+  const pageVisibleRef = useRef(true)
   const hasStartedRef = useRef(false)
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    reducedMotionRef.current,
-  )
+  // Match SSR defaults on first client render, then sync media queries on mount.
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [canHover, setCanHover] = useState(() => (
-    typeof window !== 'undefined' && Boolean(window.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches)
-  ))
+  const [canHover, setCanHover] = useState(false)
   const [mediaHovered, setMediaHovered] = useState(false)
   const [mediaFocused, setMediaFocused] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return undefined
-    const query = window.matchMedia('(hover: hover) and (pointer: fine)')
-    const update = () => setCanHover(query.matches)
-    if (query.addEventListener) {
-      query.addEventListener('change', update)
+    const hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setCanHover(hoverQuery.matches)
+    reducedMotionRef.current = motionQuery.matches
+    setPrefersReducedMotion(motionQuery.matches)
+    if (typeof document !== 'undefined') {
+      pageVisibleRef.current = !document.hidden
+    }
+
+    const updateHover = () => setCanHover(hoverQuery.matches)
+    if (hoverQuery.addEventListener) {
+      hoverQuery.addEventListener('change', updateHover)
     } else {
-      query.addListener?.(update)
+      hoverQuery.addListener?.(updateHover)
     }
 
     return () => {
-      if (query.removeEventListener) {
-        query.removeEventListener('change', update)
+      if (hoverQuery.removeEventListener) {
+        hoverQuery.removeEventListener('change', updateHover)
       } else {
-        query.removeListener?.(update)
+        hoverQuery.removeListener?.(updateHover)
       }
     }
   }, [])
@@ -91,6 +96,11 @@ export const GameCapture = ({
   useEffect(() => {
     const video = videoRef.current
     if (!video) return undefined
+
+    reducedMotionRef.current = readReducedMotionPreference()
+    if (typeof document !== 'undefined') {
+      pageVisibleRef.current = !document.hidden
+    }
 
     video.muted = true
     video.playsInline = true

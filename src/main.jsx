@@ -1,11 +1,11 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import { preloadRoute } from './routeLoaders'
 import './index.css'
 
-const root = createRoot(document.getElementById('root'))
+const container = document.getElementById('root')
 
 // Wait briefly on desktop so cached reloads paint in the chosen font without
 // visibly jumping, while slow/cold networks still render promptly and swap.
@@ -25,14 +25,34 @@ const waitForFont = () => {
   ])
 }
 
-Promise.all([preloadRoute(window.location.pathname), waitForFont()])
-  .catch(() => {})
-  .finally(() => {
-    root.render(
-      <StrictMode>
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <App />
-        </BrowserRouter>
-      </StrictMode>,
-    )
-  })
+const appTree = (
+  <StrictMode>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+)
+
+const preloadPromise = preloadRoute(window.location.pathname)
+  .then(() => true)
+  .catch(() => false)
+
+Promise.all([preloadPromise, waitForFont().catch(() => {})]).then(([routeLoaded]) => {
+  if (container.hasChildNodes()) {
+    if (!routeLoaded) {
+      const retryKey = `route-preload-retry:${window.location.pathname}`
+      try {
+        if (!sessionStorage.getItem(retryKey)) {
+          sessionStorage.setItem(retryKey, '1')
+          window.location.reload()
+        }
+      } catch {
+        // Storage unavailable; keep static SSR HTML intact.
+      }
+      return
+    }
+    hydrateRoot(container, appTree)
+  } else {
+    createRoot(container).render(appTree)
+  }
+})

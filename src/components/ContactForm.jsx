@@ -11,7 +11,12 @@ const ContactForm = () => {
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isInteractive, setIsInteractive] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+
+  useEffect(() => {
+    setIsInteractive(true)
+  }, [])
   const [validationTick, setValidationTick] = useState(0)
   const formStartTime = useRef(Date.now())
   const nameInputRef = useRef(null)
@@ -171,7 +176,7 @@ const ContactForm = () => {
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        <form method="post" onSubmit={handleSubmit} noValidate className="space-y-4">
           <input
             type="text"
             name="website"
@@ -207,6 +212,7 @@ const ContactForm = () => {
                 name="name"
                 autoComplete="name"
                 required
+                disabled={isSubmitting || !isInteractive}
                 aria-required="true"
                 aria-invalid={Boolean(errors.name)}
                 aria-describedby={errors.name ? 'contact-name-error' : undefined}
@@ -231,6 +237,7 @@ const ContactForm = () => {
                 name="email"
                 autoComplete="email"
                 required
+                disabled={isSubmitting || !isInteractive}
                 aria-required="true"
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? 'contact-email-error' : undefined}
@@ -255,6 +262,7 @@ const ContactForm = () => {
               name="message"
               rows={4}
               required
+              disabled={isSubmitting || !isInteractive}
               aria-required="true"
               aria-invalid={Boolean(errors.message)}
               aria-describedby={errors.message ? 'contact-message-error' : undefined}
@@ -272,7 +280,7 @@ const ContactForm = () => {
           <div className="flex flex-wrap gap-3 pt-2">
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isInteractive}
               className="tui-action tui-contact-submit min-h-10 min-w-[10rem] px-5 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'sending...' : 'send'}
@@ -281,11 +289,21 @@ const ContactForm = () => {
             <button
               type="button"
               onClick={resetForm}
-              className="tui-action tui-contact-secondary min-h-10 px-4 py-2 text-sm"
+              disabled={isSubmitting || !isInteractive}
+              className="tui-action tui-contact-secondary min-h-10 px-4 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               reset
             </button>
           </div>
+          <noscript>
+            <p className="text-xs text-muted pt-1">
+              JavaScript is required to use this form. Email{' '}
+              <a href="mailto:btuckerc.dev@gmail.com" className="text-accent underline underline-offset-4">
+                btuckerc.dev@gmail.com
+              </a>{' '}
+              directly.
+            </p>
+          </noscript>
         </form>
       )}
     </div>

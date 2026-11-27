@@ -1,0 +1,33 @@
+# Tucker Craig — btuckerc.dev
+
+> Software engineering portfolio of Tucker Craig (Davidson College alumnus, GitHub @btuckerc, X @btuckercdev) featuring macOS, Windows, iOS, and ESP32-S3 hardware projects plus his multi-model coding-agent workflow.
+
+## Identity & Official Hub
+- [Tucker Craig Official Site & Bio](https://tuckercraig.com/): Canonical site, biography, verified profiles, and web archive (including /dino/ and /DIG101/).
+- [tuckercraig.com llms.txt](https://tuckercraig.com/llms.txt): Agent index for tuckercraig.com.
+- [Full Site Markdown Export](https://btuckerc.dev/llms-full.txt): Single-file Markdown corpus of all core pages and the complete 29-project catalog.
+
+## Core Pages
+- [Tucker Craig — Projects, Apps & AI Workflow (btuckerc.dev)](https://btuckerc.dev/) ([Markdown](https://btuckerc.dev/index.md)): Engineering portfolio homepage highlighting flagship macOS, Windows, iOS, and ESP32-S3 hardware projects plus winstream vs OBS benchmarks.
+- [How I build with AI — Tucker Craig](https://btuckerc.dev/workflow) ([Markdown](https://btuckerc.dev/workflow.md)): Technical essay on multi-model director/worker coding-agent orchestration, isolated Git worktrees, blind five-model council reviews, and real-target verification.
+- [About — Tucker Craig](https://btuckerc.dev/about) ([Markdown](https://btuckerc.dev/about.md)): Biography, background (Davidson College, The Nuances), current engineering focus, and verified cross-domain identity links.
+- [Projects — Tucker Craig](https://btuckerc.dev/projects) ([Markdown](https://btuckerc.dev/projects.md)): Reviewed catalog of 29 software, systems, iOS, macOS, Windows, and music/hardware projects (open-source repos and local builds).
+- [Contact — Tucker Craig](https://btuckerc.dev/contact) ([Markdown](https://btuckerc.dev/contact.md)): Direct email, contact form, and verified social/developer profiles for Tucker Craig.
+
+## Case Studies
+- [omalo: Pocket Companion Running ichr — Tucker Craig](https://btuckerc.dev/projects/omalo) ([Markdown](https://btuckerc.dev/projects/omalo.md)): Product introduction for omalo (pocket ESP32-S3 companion) and ichr firmware, including Pokémon Emerald AI handoffs and Grain.
+- [What happens when you hand Pokémon to an AI? — Tucker Craig](https://btuckerc.dev/projects/s3-amoled) ([Markdown](https://btuckerc.dev/projects/s3-amoled.md)): Deep technical case study on ESP32-S3 AMOLED firmware, deterministic local battle controllers, state verification, and rounded-screen geometry.
+
+## App Support & Privacy
+- [Privacy Policy - Flipping Seven Calculator](https://btuckerc.dev/privacy/flipping-seven-calculator) ([Markdown](https://btuckerc.dev/privacy/flipping-seven-calculator.md)): Offline zero-data-collection privacy policy for Flipping Seven Calculator.
+- [Privacy Policy - Herdwick](https://btuckerc.dev/privacy/herdwick) ([Markdown](https://btuckerc.dev/privacy/herdwick.md)): Privacy policy for Herdwick iOS/iPadOS SSH coding-agent client.
+- [Support - Herdwick](https://btuckerc.dev/herdwick/support) ([Markdown](https://btuckerc.dev/herdwick/support.md)): Setup, SSH/Tailscale connection guide, and troubleshooting for Herdwick.
+- [Privacy Policy - Inkjoin](https://btuckerc.dev/privacy/inkjoin) ([Markdown](https://btuckerc.dev/privacy/inkjoin.md)): Privacy policy for Inkjoin iOS logic puzzle game.
+- [Support - Inkjoin](https://btuckerc.dev/inkjoin/support) ([Markdown](https://btuckerc.dev/inkjoin/support.md)): Rules, daily puzzles, and common questions for Inkjoin.
+
+## Verified Profiles
+- Official Site: https://tuckercraig.com/
+- GitHub: https://github.com/btuckerc
+- LinkedIn: https://www.linkedin.com/in/tucker-craig/
+- X: https://x.com/btuckercdev
+- Email: hello@tuckercraig.com (primary), btuckerc.dev@gmail.com (projects)

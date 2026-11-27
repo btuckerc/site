@@ -83,14 +83,7 @@ const summaryItems = [
 
 const InkjoinPrivacy = () => (
   <>
-    <PageMeta
-      title="Privacy Policy - Inkjoin"
-      description="Privacy policy for Inkjoin, an iPhone logic puzzle game."
-      url="https://btuckerc.dev/privacy/inkjoin"
-      openGraphDescription="What Inkjoin keeps on your device and what its daily puzzles and optional anonymous analytics send."
-      image="https://btuckerc.dev/og/inkjoin-privacy.jpg"
-      imageAlt="Inkjoin privacy policy."
-    />
+    <PageMeta route="/privacy/inkjoin" />
 
     <div className="tui-page-shell min-h-svh">
       <div className="tui-rail">
